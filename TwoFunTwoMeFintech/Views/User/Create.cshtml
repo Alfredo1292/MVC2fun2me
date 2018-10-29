@@ -1,0 +1,83 @@
+﻿@model TwoFunTwoMeFintech.Models.dto_login
+@{
+	ViewBag.Title = "Crear";
+	Layout = null;
+}
+<h2>Crear Usuario</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <head>
+            @*<meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                <meta name="description" content="">
+                <meta name="author" content="">
+                <link rel="icon" href="../../../../favicon.ico">
+
+                <title>Signin Template for Bootstrap</title>*@
+            <!-- Bootstrap core CSS -->
+            @*<link href="~/Content/bootstrap-4.0.0/dist/css/bootstrap.min.css" rel="stylesheet">*@
+        </head>
+		<form>
+			<script type="text/javascript">
+				$(document).ready(function () {
+					$('input[type="text"]').val('');
+				});
+			</script>
+
+
+            <div class="form-group row">
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.nombre)
+                    @Html.TextBox("nombre", "", new { @class = "form-control", @placeholder = "nombre", required = "required" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.cod_agente)
+                    @Html.TextBox("cod_agente", "", new { @class = "form-control", @placeholder = "Cédula", required = "required" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.correo)
+                    @Html.TextBox("correo", "", new { @class = "form-control", @placeholder = "name@example.com", required = "required" })
+                    @*	<label for="exampleFormControlInput1">Email address</label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">*@
+                </div>
+            </div>
+            <div class="form-group row">
+				<div class="form-group col-md-4">
+					@Html.LabelFor(model => model.ROLID)
+					@Html.DropDownListFor(model => model.ROLID, new SelectList(Model.ListRoles, "ID", "ROLES"), htmlAttributes: new { @class = "form-control", id = "ID" })
+					@Html.ValidationMessageFor(model => model.ROLID, "", new { @class = "text-danger" })
+					@*@Html.TextBox("ROLID", "", new { @class = "form-control", @placeholder = "ROLID", required = "required" })*@
+				</div>
+            </div>
+            <div class="form-group row">
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.pass)
+                    @Html.TextBox("pass", "", new { @class = "form-control", @placeholder = "Password", required = "required" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.ConfirmPassword)
+                    @Html.TextBox("ConfirmPassword", "", new { @class = "form-control", @placeholder = "ConfirmPassword", required = "required" })
+                </div>
+            </div>
+            <div class="form-label-group">
+                <div class="form-group col-md-2">
+                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Crear" />
+
+                </div>
+            </div>
+        </form>
+    </fieldset>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

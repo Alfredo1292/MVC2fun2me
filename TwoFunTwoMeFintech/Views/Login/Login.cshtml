@@ -1,0 +1,117 @@
+﻿@model TwoFunTwoMeFintech.Models.LoginModels
+
+@{
+    ViewBag.Title = "Login";
+}
+
+
+
+
+
+
+<head>
+    @*<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="../../../../favicon.ico">
+
+        <title>Signin Template for Bootstrap</title>*@
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/bootstrap-4.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="~/Content/bootstrap-4.0.0/signin.css" rel="stylesheet">
+    <style>
+        .navbar {
+            display: none;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div>
+
+        <div>
+
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary(true)
+
+
+
+
+                <section>
+
+                    <div class="form-signin">
+
+                        <div class="text-center mb-4">
+                            <img class="mb-4" src="~/Content/bootstrap-4.0.0/4.ico" alt="" width="72" height="72">
+                            <h1 class="h3 mb-3 font-weight-normal">FinTech</h1>
+                        </div>
+
+
+                        <div class="form-label-group">
+
+                            @*@Html.EditorFor(model => model.Cedula, new { htmlAttributes = new { @data_minlength = "3", @class = "form-control", @placeholder = "Name", @required = "required", @id = "txtName" } })*@
+
+
+                            @*@Html.TextBox(model => model.Cedula, new { maxlength = 8, style = "width: 100px; text-align: right;" })*@
+
+                            @Html.TextBox("Cedula", "", new { @class = "form-control", @placeholder = "Usuario", required = "required" })
+
+
+                            @*<span asp-validation-for="Input.Cedula" class="text-danger"></span>*@
+
+                            @*<input asp-for="model => model.Cedula" class="form-control" placeholder="Email address" required autofocus />*@
+                            @*<label asp-for="Input.Email">Email address</label>*@
+                            @*<span asp-validation-for="Input.Email" class="text-danger"></span>*@
+
+                        </div>
+
+
+
+                        <div class="form-label-group">
+
+                            @*@Html.LabelFor(model => model.Password)
+
+                                @Html.EditorFor(model => model.Password)
+                                @Html.ValidationMessageFor(model => model.Password)
+                                <span style="color:Red">@ViewBag.ErrorMsg</span>
+                                <br />*@
+
+
+                            @Html.Password("Password", "", new { @class = "form-control", @placeholder = "Password", required = "required" })
+
+                        </div>
+
+                        <p />
+
+                        <div class="form-label-group">
+                            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Login" />
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+            }
+
+        </div>
+
+    </div>
+
+</body>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            $('#UserName').addClass('form-control');
+            $('#Password').addClass('form-control');
+        });
+    </script>
+}
+

@@ -1,0 +1,150 @@
+﻿@model TwoFunTwoMeFintech.Models.dto_login
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>dto_login</legend>
+
+        @Html.HiddenFor(model => model.cod_agente)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.nombre)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.nombre)
+            @Html.ValidationMessageFor(model => model.nombre)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.pass)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.pass)
+            @Html.ValidationMessageFor(model => model.pass)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.vendedor)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.vendedor)
+            @Html.ValidationMessageFor(model => model.vendedor)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.fecha_cambiopassword)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.fecha_cambiopassword)
+            @Html.ValidationMessageFor(model => model.fecha_cambiopassword)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.STR_USUARIO_AD)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.STR_USUARIO_AD)
+            @Html.ValidationMessageFor(model => model.STR_USUARIO_AD)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.STR_COD_AGENTE_PADRE)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.STR_COD_AGENTE_PADRE)
+            @Html.ValidationMessageFor(model => model.STR_COD_AGENTE_PADRE)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BIT_DISPONIBLE)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BIT_DISPONIBLE)
+            @Html.ValidationMessageFor(model => model.BIT_DISPONIBLE)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.INT_COD_AREA)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.INT_COD_AREA)
+            @Html.ValidationMessageFor(model => model.INT_COD_AREA)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FEC_CREACION)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FEC_CREACION)
+            @Html.ValidationMessageFor(model => model.FEC_CREACION)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FEC_MODIFICACION)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FEC_MODIFICACION)
+            @Html.ValidationMessageFor(model => model.FEC_MODIFICACION)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.estado)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.estado)
+            @Html.ValidationMessageFor(model => model.estado)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.correo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.correo)
+            @Html.ValidationMessageFor(model => model.correo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ROLID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ROLID)
+            @Html.ValidationMessageFor(model => model.ROLID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ConfirmPassword)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ConfirmPassword)
+            @Html.ValidationMessageFor(model => model.ConfirmPassword)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ConfiguracionBucket)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ConfiguracionBucket)
+            @Html.ValidationMessageFor(model => model.ConfiguracionBucket)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

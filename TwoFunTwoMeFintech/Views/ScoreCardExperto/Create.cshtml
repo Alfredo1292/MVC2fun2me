@@ -1,0 +1,71 @@
+﻿@model TwoFunTwoMeFintech.Models.DTO.ScoreCardExperto
+
+@{
+    ViewBag.Title = "Create";
+}
+<script type="text/javascript">
+$(document).ready(function () {
+$('input[type="text"]').val('');
+    });
+  
+
+</script>
+
+<script type="text/javascript">
+
+    function Callback() {
+        alert('Sorry, we could not process your order.');
+    }
+
+</script>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Score Card Experto</legend>
+        <div class="row">
+            <div class="input-group col-sm-3">
+                @Html.LabelFor(model => model.NombreModelo)
+            </div>
+            <div class="input-group col-sm-3">
+                @Html.TextBox("NombreModelo", "", new { @class = "form-control", @placeholder = "Nombre", required = "required" })
+                @Html.ValidationMessageFor(model => model.NombreModelo)
+            </div>
+
+            <div class="input-group col-sm-3">
+                @Html.LabelFor(model => model.RangoInicial)
+            </div>
+            <div class="input-group col-sm-3">
+                @Html.TextBox("RangoInicial", "", new { @class = "form-control", @placeholder = "Rango Inicial", required = "required" })
+                @Html.ValidationMessageFor(model => model.RangoInicial)
+            </div>
+
+            <div class="input-group col-sm-3">
+                @Html.LabelFor(model => model.RangoFinal)
+            </div>
+            <div class="input-group col-sm-3">
+                @Html.TextBox("RangoFinal", "", new { @class = "form-control", @placeholder = "Rango Final", required = "required" })
+                @Html.ValidationMessageFor(model => model.RangoFinal)
+            </div>
+
+            <div class="input-group col-sm-3">
+                @Html.LabelFor(model => model.Puntaje)
+            </div>
+            <div class="input-group col-sm-3">
+                @Html.TextBox("Puntaje", "", new { @class = "form-control", @placeholder = "Puntaje", required = "required" })
+
+                @Html.ValidationMessageFor(model => model.Puntaje)
+            </div>
+            <br />
+            <p>
+                <input type="submit" class="btn btn-primary" value="Guardar" />
+            </p>
+        </div>
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

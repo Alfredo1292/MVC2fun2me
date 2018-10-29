@@ -1,0 +1,34 @@
+﻿@*@model IEnumerable<TwoFunTwoMeFintech.Models.DTO.ScoreCardExperto>*@
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    /*.container-fluid {
+        display: none;
+    }
+
+    .navbar {
+        display: none;
+    }
+
+    .navbar-inverse {
+        display: none;
+    }*/
+    .tab-content .navbar-inverse {
+        display: none;
+    }
+</style>
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#fisrtTab">Usuarios</a></li>
+    <li><a data-toggle="tab" href="#secondTab">Nuevo</a></li>
+</ul>
+<div class="tab-content">
+    <div id="fisrtTab" class="tab-pane fade in active">
+        @Html.Action("Details")
+    </div>
+    <div id="secondTab" class="tab-pane fade in">
+        @Html.Action("Create")
+    </div>
+</div>
+<link href="~/Styles/Site.css" rel="stylesheet" />

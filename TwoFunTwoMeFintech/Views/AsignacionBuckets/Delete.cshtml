@@ -1,0 +1,75 @@
+﻿@model TwoFunTwoMeFintech.Models.DTO.AsignacionBuckets
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>AsignacionBuckets</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BucketInicial)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BucketInicial)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BucketFinal)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BucketFinal)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PRPRotas)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PRPRotas)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CeroPagos)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CeroPagos)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SaldoAlto)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SaldoAlto)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SaldoMedio)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SaldoMedio)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SaldoBajo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SaldoBajo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Estado)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Estado)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
