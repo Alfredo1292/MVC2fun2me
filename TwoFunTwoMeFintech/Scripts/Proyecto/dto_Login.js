@@ -15,10 +15,17 @@ $(document).ready(function () {
 });
 //Load Data function
 function loadData() {
-    $.ajax({
+	$(document).ready(function () {
+		$('#TableUsuarios').DataTable();
+	});
+	$.ajax({
+		processing: true, // for show progress bar
+		serverSide: true, // for process server side
+		filter: true, // this is for disable filter (search box)
+		orderMulti: false, // for disable multiple column at once
         url: "/User/Detalle",
         type: "GET",
-        contentType: "application/json;charset=utf-8",
+		contentType: "application/json;charset=utf-8",
         dataType: "json",
         success: function (result) {
             var html = '';
@@ -33,12 +40,14 @@ function loadData() {
                 html += '</tr>';
             });
             $('.tbody').html(html);
-        },
+		},
+
         error: function (errormessage) {
             alert(errormessage.responseText);
         }
     });
 
+	
 }
 
 //Function for getting the Data Based upon Employee ID

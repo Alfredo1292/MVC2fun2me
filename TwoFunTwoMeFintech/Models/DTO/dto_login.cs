@@ -15,7 +15,8 @@ namespace TwoFunTwoMeFintech.Models
         [DisplayName("Nombre Cliente:")]
         public string nombre { get; set; }
 
-        public string Mensaje { get; set; }
+		[DisplayName("Contraseña:")]
+		public string Mensaje { get; set; }
 
         public string pass { get; set; }
 
@@ -44,6 +45,7 @@ namespace TwoFunTwoMeFintech.Models
         public int? ROLID { get; set; }
 
 		public string ROLES { get; set; }
+		[DisplayName("Confirmar Contraseña:")]
 		public int ConfirmPassword { get; set; }
         public string ConfiguracionBucket { get; set; }
 		public List<dto_login> listadoDto_login { get; set; }
