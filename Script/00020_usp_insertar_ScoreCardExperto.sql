@@ -18,7 +18,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-ALTER PROCEDURE usp_insertar_ScoreCardExperto
+create PROCEDURE usp_insertar_ScoreCardExperto
            (@NombreModelo varchar(25)
            ,@RangoInicial varchar(25)
            ,@RangoFinal varchar(25)

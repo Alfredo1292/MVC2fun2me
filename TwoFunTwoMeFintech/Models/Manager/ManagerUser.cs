@@ -91,6 +91,32 @@ namespace TwoFunTwoMe.Models.Manager
         }
 
 
+        public List<dto_CantidadBuckets> DetalleBucket()
+        {
+            var dto = new DynamicDto
+            {
+                ParameterList = new List<SpParameter>
+                {
+                    new SpParameter
+                    {
+                        Name = "Bandera",
+                        Value = "1"
+                    }
+                },
+                Result = null,
+                SPName = "usp_CargaBuckets"
+            };
+
+
+            //var dto = new DynamicDto();
+            //dto.ParameterList = new List<SpParameter>();
+            //dto.Result = null;
+            //dto.SPName = "usp_CargaBuckets";
+
+            DynamicDto ds = DynamicSqlDAO.ExecuterSp(dto, GlobalClass.connectionString.Where(a => a.Key == infDto.STR_COD_PAIS).FirstOrDefault().Value);
+
+            return JsonConvert.DeserializeObject<List<dto_CantidadBuckets>>(JsonConvert.SerializeObject(ds.Result.Tables[0]));
+        }
         public int Registrar(dto_login login)
         {
             var dto = new DynamicDto

@@ -513,11 +513,15 @@
     <Content Include="Content\bootstrap-4.0.0\dist\css\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap-4.0.0\dist\css\bootstrap.css" />
     <Content Include="Content\bootstrap-4.0.0\dist\css\bootstrap.min.css" />
+    <Content Include="Content\bootstrap-4.0.0\dist\css\dataTables.bootstrap.min.css" />
+    <Content Include="Content\bootstrap-4.0.0\dist\css\dataTables.bootstrap4.min.css" />
     <Content Include="Content\bootstrap-4.0.0\dist\css\font-awesome.min.css" />
     <Content Include="Content\bootstrap-4.0.0\dist\js\bootstrap.bundle.js" />
     <Content Include="Content\bootstrap-4.0.0\dist\js\bootstrap.bundle.min.js" />
     <Content Include="Content\bootstrap-4.0.0\dist\js\bootstrap.js" />
     <Content Include="Content\bootstrap-4.0.0\dist\js\bootstrap.min.js" />
+    <Content Include="Content\bootstrap-4.0.0\dist\js\jquery-3.3.1.js" />
+    <Content Include="Content\bootstrap-4.0.0\dist\js\jquery.min.js" />
     <Content Include="Content\bootstrap-4.0.0\docs\4.0\examples\album\album.css" />
     <Content Include="Content\bootstrap-4.0.0\docs\4.0\examples\album\index.html" />
     <Content Include="Content\bootstrap-4.0.0\docs\4.0\examples\blog\blog.css" />
@@ -996,6 +1000,7 @@
     <Content Include="Content\bootstrap-4.0.0\_plugins\markdown-block.rb" />
     <Content Include="Content\awesome-bootstrap-checkbox.scss" />
     <Content Include="Content\awesome-bootstrap-checkbox.less" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
@@ -1063,7 +1068,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Web.config" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />

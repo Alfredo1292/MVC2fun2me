@@ -18,7 +18,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE usp_actualizar_uScoreCardExperto
+alter PROCEDURE usp_actualizar_uScoreCardExperto
 	-- Add the parameters for the stored procedure here
 @Id INT,
 @NombreModelo VARCHAR(25),
@@ -37,7 +37,7 @@ BEGIN
       ,[RangoFinal]=@RangoFinal
       ,[Puntaje]=@Puntaje
   FROM [ScoreCardExperto] A WITH(NOLOCK) 
-  where id=ISNULL(@Id,Id)
+  where id=@Id
 
 END
 GO

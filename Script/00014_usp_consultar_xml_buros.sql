@@ -27,7 +27,7 @@ BEGIN
 
    select TOP 1 A.Estructura_XML AS TUCA,B.Estructura_XML AS CREDDIT from Buro..Tuca_ContenidoXML A WITH(NOLOCK) INNER JOIN 
 
-Buro..Tuca_ContenidoXML B WITH(NOLOCK) ON A.identificacion=B.identificacion
+Buro..Credid_ContenidoXML B WITH(NOLOCK) ON A.identificacion=B.identificacion
 INNER JOIN Personas C WITH(NOLOCK) ON B.identificacion=C.Identificacion
 
 WHERE C.Identificacion=@Identificacion

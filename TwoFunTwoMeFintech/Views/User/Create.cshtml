@@ -3,7 +3,7 @@
 	ViewBag.Title = "Crear";
 	Layout = null;
 }
-<h2>Crear Usuario</h2>
+<h2>Create</h2>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -24,7 +24,12 @@
 		<form>
 			<script type="text/javascript">
 				$(document).ready(function () {
-					$('input[type="text"]').val('');
+					document.getElementById("nombre").value = "";
+					$('#nombre').val("").focus();
+					$('#cod_agente').val("").focus();
+					$('#correo').val("").focus();
+					$('#pass').val("").focus();
+					$('#ConfirmPassword').val("").focus();
 				});
 			</script>
 

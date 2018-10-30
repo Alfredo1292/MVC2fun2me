@@ -27,6 +27,20 @@ ul.nav.nav-tabs li:not(active) a{
 	 color: grey;
 }
 
-ul.nav.nav-tabs li.active a{
-	border-top: 3px solid #16a765;
+ul.nav.nav-tabs li.active a {
+    border-top: 3px solid #337ab7;
+}
+
+.results tr[visible='false'],
+.no-result {
+    display: none;
+}
+
+.results tr[visible='true'] {
+    display: table-row;
+}
+
+.counter {
+    padding: 8px;
+    color: #ccc;
 }

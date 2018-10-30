@@ -15,8 +15,7 @@ namespace TwoFunTwoMeFintech.Models
         [DisplayName("Nombre Cliente:")]
         public string nombre { get; set; }
 
-		[DisplayName("Contraseña:")]
-		public string Mensaje { get; set; }
+        public string Mensaje { get; set; }
 
         public string pass { get; set; }
 
@@ -45,7 +44,6 @@ namespace TwoFunTwoMeFintech.Models
         public int? ROLID { get; set; }
 
 		public string ROLES { get; set; }
-		[DisplayName("Confirmar Contraseña:")]
 		public int ConfirmPassword { get; set; }
         public string ConfiguracionBucket { get; set; }
 		public List<dto_login> listadoDto_login { get; set; }
@@ -82,6 +80,31 @@ namespace TwoFunTwoMeFintech.Models
 
     }
 
+
+    public class dto_CantidadBuckets
+    {
+        public int Cantidad_Cuentas { get; set; }
+
+        public int AgenteAsignado { get; set; }
+
+        public String Bucket { get; set; }
+
+        public bool? PromesaRota { get; set; }
+
+        public bool? CeroPagos { get; set; }
+
+        public bool? RangoSaldoAlto { get; set; }
+
+        public bool? RangoSaldoMedio { get; set; }
+
+        public bool? RangoSaldoBajo { get; set; }
+
+        public bool? Estado { get; set; }
+
+        public bool? CuentaAlDia { get; set; }
+
+
+    }
 
 
 }

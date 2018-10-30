@@ -15,17 +15,10 @@ $(document).ready(function () {
 });
 //Load Data function
 function loadData() {
-	$(document).ready(function () {
-		$('#TableUsuarios').DataTable();
-	});
-	$.ajax({
-		processing: true, // for show progress bar
-		serverSide: true, // for process server side
-		filter: true, // this is for disable filter (search box)
-		orderMulti: false, // for disable multiple column at once
+    $.ajax({
         url: "/User/Detalle",
         type: "GET",
-		contentType: "application/json;charset=utf-8",
+        contentType: "application/json;charset=utf-8",
         dataType: "json",
         success: function (result) {
             var html = '';
@@ -40,14 +33,12 @@ function loadData() {
                 html += '</tr>';
             });
             $('.tbody').html(html);
-		},
-
+        },
         error: function (errormessage) {
             alert(errormessage.responseText);
         }
     });
 
-	
 }
 
 //Function for getting the Data Based upon Employee ID
@@ -104,8 +95,6 @@ function Update() {
         url: "/User/Update",
         data: JSON.stringify(empObj),
         type: "POST",
-        contentType: "application/json;charset=utf-8",
-        dataType: "json",
         success: function (result) {
             loadData();
             $('#myModal').modal('hide');
@@ -209,5 +198,6 @@ function validate() {
     else {
         $('#correo').css('border-color', 'lightgrey');
     }
+    
     return isValid;
 }

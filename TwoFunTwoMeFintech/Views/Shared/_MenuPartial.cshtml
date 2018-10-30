@@ -24,7 +24,11 @@
             <a class="navbar-brand" href="#">Menú</a>
         </div>
         <ul class="nav navbar-nav">
+            @if (Session["MenuMaster"] == null)
+            {
+                @Html.ActionLink("Login", "Login", "Login", null, new { target = "_parent" });
 
+            }
 
             @if (Session["MenuMaster"] != null)
             {
@@ -61,6 +65,20 @@
                 <li>@Html.ActionLink("Login", "Login", "Login")</li>
             }
 
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                @if (Session["UserName"] != null)
+                {
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-user"></span>
+                        <strong>@Session["UserName"].ToString()</strong>
+                        <span class="glyphicon glyphicon-chevron-down"></span>
+                    </a>
+
+                }
+            </li>
         </ul>
 
     </div>
