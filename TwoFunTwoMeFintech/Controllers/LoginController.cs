@@ -80,7 +80,18 @@ namespace TwoFunTwoMeFintech.Controllers
 
         public ActionResult CambioPassword(LoginModels _login)
         {
-            return View();
+            if(_login.Password==null) return View();
+            ManagerUser mang = new ManagerUser();
+            try
+            {
+                mang.cambioPass(_login);
+            }
+            catch
+            {
+                ViewBag.ErrorMsg = "Ocurrio un error.";
+                return View();
+            }
+            return RedirectToAction("Login", "Login"); ;
         }
 
         public ActionResult LogOff()

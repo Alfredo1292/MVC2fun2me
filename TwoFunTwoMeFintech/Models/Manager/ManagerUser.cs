@@ -65,6 +65,36 @@ namespace TwoFunTwoMe.Models.Manager
             return JsonConvert.DeserializeObject<List<dto_login>>(JsonConvert.SerializeObject(ds.Result.Tables[0]));
         }
 
+        public List<dto_login> LoginRol(dto_login login)
+        {
+            var dto = new DynamicDto
+            {
+                ParameterList = new List<SpParameter>
+                {
+                    new SpParameter
+                    {
+                        Name = "CLAVE",
+                        Value = login.pass
+                    },
+                      new SpParameter
+                    {
+                        Name = "CORREO",
+                        Value = login.correo
+                    },
+                      new SpParameter
+                    {
+                        Name = "COD_AGENTE",
+                        Value = login.cod_agente
+                    }
+                },
+                Result = null,
+                SPName = "usp_traeAgenteRol"
+            };
+
+            DynamicDto ds = DynamicSqlDAO.ExecuterSp(dto, GlobalClass.connectionString.Where(a => a.Key == infDto.STR_COD_PAIS).FirstOrDefault().Value);
+
+            return JsonConvert.DeserializeObject<List<dto_login>>(JsonConvert.SerializeObject(ds.Result.Tables[0]));
+        }
 
         public List<dto_AsignacionBuckets> AsignaBucket()
         {
@@ -1547,6 +1577,34 @@ namespace TwoFunTwoMe.Models.Manager
         }
         #endregion
 
+        #region cambio pass
+        public void cambioPass(LoginModels login)
+        {
+            var dto = new DynamicDto();
+            dto.ParameterList = new List<SpParameter>();
 
+            dto.ParameterList.AddRange(from nodo in login.GetType().GetProperties()
+                                       where nodo.GetValue(login) != null
+                                       select new SpParameter
+                                       {
+                                           Name = nodo.Name,
+                                           Value = nodo.GetValue(login).ToString()
+                                       }
+                );
+            dto.Result = null;
+            dto.SPName = "usp_cambio_pass";
+
+            try
+            {
+                var objRet = DynamicSqlDAO.ExecuterSp(dto, GlobalClass.connectionString.Where(a => a.Key == infDto.STR_COD_PAIS).FirstOrDefault().Value);
+
+            }
+            catch
+            {
+                //dto_result.FirstOrDefault().Mensaje = "Ocurrio un Error";
+                throw;
+            }
+        }
+        #endregion
     }
 }

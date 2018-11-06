@@ -58,7 +58,7 @@ namespace TwoFunTwoMeFintech.Controllers
                         pass = string.Empty,
                         correo = string.Empty
                     };
-                    var agente = mnage.Login(log);
+                    var agente = mnage.LoginRol(log);
 
 
                     // Getting all Customer data
