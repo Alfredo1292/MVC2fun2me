@@ -45,7 +45,8 @@ SELECT [cod_agente]
       ,[FEC_MODIFICACION]
       ,[estado]
       ,[correo]
-	  ,configuracionbucket
+	  ,configuracionbucket,
+	  esTemporal
   FROM [agente] WITH(NOLOCK) WHERE [pass]=CASE WHEN LEN(@CLAVE)>0 THEN @CLAVE ELSE  [pass]END  AND cod_agente= CASE WHEN LEN( @COD_AGENTE)>0 THEN @COD_AGENTE  ELSE COD_AGENTE END AND estado='Activo'
 
 END

@@ -1,0 +1,63 @@
+﻿@model TwoFunTwoMeFintech.Models.DTO.clsMAINMENU
+
+@{
+	ViewBag.Title = "Details";
+}
+<script src="~/Scripts/Proyecto/JsMAINMENU.js"></script>
+
+<link href="~/Styles/DataTable.css" rel="stylesheet" />
+<link href="~/Styles/DataTabledtr.css" rel="stylesheet" />
+
+<script src="~/Scripts/Proyecto/DataTables 1.10.15.js"></script>
+<script src="~/Scripts/Proyecto/DataTable Bootstrap.js"></script>
+
+<link href="~/Styles/Site.css" rel="stylesheet" />
+
+<div class="container">
+	<div class="form-group">
+
+	</div>
+	<table ID="MAINMENUTable" class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>
+					ID
+				</th>
+				<th>
+					Menú
+				</th>
+				<th>
+					Accion
+				</th>
+			</tr>
+		</thead>
+		<tbody class="tbody"></tbody>
+	</table>
+</div>
+<div class="modal fade" Id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				@*<button type="button" class="close" data-dissmiss="modal"><span aria-hidden="true">×</span></button>*@
+				<button type="button" class="close" data-dismiss="modal">×</button>
+
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="form-group">
+						<label for="ID">ID</label>
+						<input type="text" class="form-control" id="ID" placeholder="ID" disabled="disabled" />
+					</div>
+					<div class="form-group">
+						<label for="MAINMENU">Nombre</label>
+						<input type="text" class="form-control" id="MAINMENU" placeholder="CodigoAgente" />
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" Id="btnUpdate" style="display:none;" onclick="Update();">Actualizar</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearTextBox();">Cerrar</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -22,7 +22,10 @@ namespace TwoFunTwoMeFintech.Models.DTO
 
         public bool? Activo { get; set; }
 
-        public int? OrdenEjecucion { get; set; }
+		public string ActivoString { get; set; }
+		public bool? Estado { get; set; }
+
+		public int? OrdenEjecucion { get; set; }
 
         public DateTime? FechaCreacion { get; set; }
 
@@ -31,5 +34,9 @@ namespace TwoFunTwoMeFintech.Models.DTO
         public string UsuarioCreacion { get; set; }
 
         public string UsuarioModificacion { get; set; }
-    }
+
+		public string Mensaje { get; set; }
+
+		public string ACCION { get; set; }
+	}
 }

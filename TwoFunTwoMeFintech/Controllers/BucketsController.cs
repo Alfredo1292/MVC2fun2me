@@ -292,6 +292,114 @@ namespace TwoFunTwoMeFintech.Controllers
 
         }
 
+        public ActionResult Buckets_NoAsignado()
+        {
+
+
+            try
+            {
+                var draw = HttpContext.Request.Form["draw"];
+                var start = Request.Form["start"];
+                // Paging Length 10,20
+                var length = Request.Form["length"];
+                // Sort Column Name
+                var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"];
+                // Sort Column Direction ( asc ,desc)
+                var sortColumnDirection = Request.Form["order[0][dir]"];
+                // Search Value from (Search box)
+                var searchValue = Request.Form["search[value]"];
+
+                //Paging Size (10,20,50,100)
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                int skip = start != null ? Convert.ToInt32(start) : 0;
+                int recordsTotal = 0;
+
+                ManagerUser mang = new ManagerUser();
+                var agenteSession = Session["LoginCredentials"] as List<dto_login>;
+                var bucket = mang.DetalleBucket_NoAsignado();
+
+                // Getting all Customer data
+                var customerData = (from tempcustomer in bucket
+                                    select new
+                                    {
+                                        Bucket = tempcustomer.Bucket.ToString(),
+                                        Cantidad_Cuentas = tempcustomer.Cantidad_Cuentas.ToString(),
+                                        PRPRotas = tempcustomer.PromesaRota.ToString(),
+                                        CeroPagos = tempcustomer.CeroPagos.ToString(),
+                                        SaldoAlto = tempcustomer.RangoSaldoAlto.ToString(),
+                                        SaldoMedio = tempcustomer.RangoSaldoMedio.ToString(),
+                                        SaldoBajo = tempcustomer.RangoSaldoBajo.ToString(),
+                                        CuentaAlDia = tempcustomer.CuentaAlDia.ToString(),
+                                    });
+
+                if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection)))
+                {
+                    switch (sortColumn)
+                    {
+
+                        case "Bucket":
+                            if (sortColumnDirection == "desc")
+                            {
+
+                                customerData = (from foobars in customerData
+                                                orderby foobars.Bucket descending
+                                                select foobars
+                                                 );
+                            }
+                            else
+                            {
+
+                                customerData = (from foobars in customerData
+                                                orderby foobars.Bucket ascending
+                                                select foobars
+                                                );
+                            }
+                            break;
+                        case "Cantidad_Cuentas":
+                            if (sortColumnDirection == "desc")
+                            {
+
+                                customerData = (from foobars in customerData
+                                                orderby foobars.Cantidad_Cuentas descending
+                                                select foobars
+                                                 );
+                            }
+                            else
+                            {
+
+                                customerData = (from foobars in customerData
+                                                orderby foobars.Cantidad_Cuentas ascending
+                                                select foobars
+                                                );
+                            }
+                            break;
+                    }
+                    //customerData = customerData.OrderBy(x =>x.cod_agente);
+
+
+                }
+                //Search
+                if (!string.IsNullOrEmpty(searchValue))
+                {
+                    customerData = customerData.Where(m => m.Bucket.ToLower().Contains(searchValue.ToLower()));
+                }
+
+                //total number of rows count 
+                recordsTotal = customerData.Count();
+                //Paging 
+                var data = customerData.Skip(skip).Take(pageSize).ToList();
+
+                return Json(new { draw = draw, recordsFiltered = customerData.Count(), recordsTotal = customerData.Count(), data = data });
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
+
 
         public ActionResult Buckets()
         {

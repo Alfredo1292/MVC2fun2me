@@ -1,0 +1,31 @@
+﻿@model TwoFunTwoMeFintech.Models.DTO.BucketCobros
+
+@{
+    ViewBag.Title = "Details";
+}
+<script src="~/Scripts/Proyecto/ColaCobros.js"></script>
+
+<div class="well mx-auto w-50 p-3 leftspan">
+    <div class="container-fluid">
+        <div class="input-group">
+            <span class="input-group-addon m-sm">Fecha Promesa de Pago:</span>
+            <input type="date" data-date="" data-date-format="YYYY MMMM DD" required class="form-control input-sm" id="txtFechaPP" placeholder="Fecha Promesa de Pago">
+            <span class="input-group-addon m-sm">Monto PP:</span>
+            <input type="number" class="form-control  input-sm" id="txtMontoPP" required placeholder="Monto Promesa de Pago">
+
+        </div>
+        <div class="input-group">
+
+            <span class="input-group-addon m-sm">Acción llamada:</span>
+            <select id="ddlAccionLlamada" required class="form-control input-sm"></select>
+            <span class="input-group-addon m-sm">Resultado llamada:</span>
+            <select id="ddlResultadoLlamada" required class="form-control input-sm"></select>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon m-sm">Detalle:</span>
+            <textarea class="form-control" rows="8" cols="100" id="txtDetalle" required></textarea>
+        </div>
+    </div>
+
+    <button type="button" id="btnGuardar" onclick="return guardar();" class="btn btn-primary">Guardar</button>
+</div>
