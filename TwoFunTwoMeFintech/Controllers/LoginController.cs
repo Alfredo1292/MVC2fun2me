@@ -50,6 +50,12 @@ namespace TwoFunTwoMeFintech.Controllers
 
                 if (dto_retorno.Any())
                 {
+
+                    //if (dto_retorno.FirstOrDefault().esTemporal)
+                    //{
+                    //    return RedirectToAction("CambioPassword", "Login");
+                    //}
+
                     var dto_ret = mang.mostrarMenu( _login.Cedula);
 
                     Session["LoginCredentials"] = dto_retorno;
@@ -65,12 +71,18 @@ namespace TwoFunTwoMeFintech.Controllers
                 }
                 else
                 {
-                    ViewBag.ErrorMsg = "Please enter the valid credentials!...";
+                    ViewBag.ErrorMsg = "Credenciales inválidas!";
                     return View();
                 }
             }
             return View();
         }
+
+        public ActionResult CambioPassword(LoginModels _login)
+        {
+            return View();
+        }
+
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();

@@ -38,6 +38,9 @@ namespace TwoFunTwoMeFintech
                         "~/Content/themes/base/jquery.ui.datepicker.css",
                         "~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/jquery.ui.theme.css"));
+
+            bundles.Add(new StyleBundle("~/Content/bootstrap-4.0.0/fonts").Include(
+                       "~/Content/bootstrap-4.0.0/fonts/glyphicons-halflings-regular.woff2"));
         }
     }
 }

@@ -30,5 +30,13 @@ namespace TwoFunTwoMeFintech.Models
 
         object temporaryVariable;
         public DbSet<ScoreCardExperto> ScoreCardExpertoes { get; set; }
-    }
+
+        public DbSet<Roles> Roles { get; set; }
+
+        public DbSet<BucketCobros> BucketCobros { get; set; }
+
+		public DbSet<Rules> Rules { get; set; }
+
+		public DbSet<clsSUBMENU> clsSUBMENUs { get; set; }
+	}
 }

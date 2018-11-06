@@ -1,9 +1,8 @@
 ﻿//Load Data in Table when documents is ready
 $(document).ready(function () {
     loadData();
-
-   
     buscarGrid();
+   // $("#dtBasicExample").DataTable();
 });
 
 function buscarGrid() {
@@ -57,13 +56,15 @@ function loadData() {
                 html += '<td><a href="#" class="btn btn-primary" onclick="return Editar(' + item.Id + ')"> Editar </a> | <a class="btn btn-primary"  href="#" onclick="Delele(' + item.Id + ')">Eliminar</a></td>';
                 html += '</tr>';
             });
-            $('.tbody').html(html);
+			$('.tbody').html(html);
+			$.noConflict();		
+	        $('#dtBasicExample').DataTable();
         },
         error: function (errormessage) {
             alert(errormessage.responseText);
         }
     });
-
+	
 }
 
 //Function for getting the Data Based upon Employee ID
@@ -83,11 +84,9 @@ function Editar(id) {
             $('#rangoInicial').val(result.RangoInicial);
             $('#rangoFinal').val(result.RangoFinal);
             $('#Puntaje').val(result.Puntaje);
-            $('#myModal').modal('show');
-            $('#btnUpdate').show();
-            $('#btnAdd').hide();
-
-
+			$('#myModal').modal('show');
+			$('#btnUpdate').show();
+			$('#btnAdd').hide();
         },
         error: function (errormessage) {
             alert(errormessage.responseText);
@@ -111,7 +110,7 @@ function Update() {
         contentType: "application/json;charset=utf-8",
         dataType: "json",
         success: function (result) {
-            loadData();
+            //loadData();
             $('#myModal').modal('hide');
 
             $('#nombreModelo').val("");
@@ -142,15 +141,20 @@ function Update() {
                 $('.counter').text(jobCount + ' item');
 
                 if (jobCount == '0') { $('.no-result').show(); }
-                else { $('.no-result').hide(); }
-            });
+				else { $('.no-result').hide(); }
+				location.reload();
+			});
+			//loadData();
+			//location.reload();
+
             $('#id').val("");
         },
         error: function (errormessage) {
             alertify.error('UPPS, lo ciento, favor contacte con el Administrador');
             //alert(errormessage.responseText);
         }
-    });
+	});
+
 }
 //function for deleting employee's record
 function Delele(ID) {

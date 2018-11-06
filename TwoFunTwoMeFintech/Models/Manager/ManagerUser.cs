@@ -1,13 +1,16 @@
-﻿using TwoFunTwoMeFintech.Models;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 using TwoFunTwoMe.Models.Utility;
 using TwoFunTwoMe_Common;
 using TwoFunTwoMe_DataAccess;
-using System.Reflection;
+using TwoFunTwoMeFintech.Models;
 using TwoFunTwoMeFintech.Models.DTO;
 
 namespace TwoFunTwoMe.Models.Manager
@@ -117,6 +120,33 @@ namespace TwoFunTwoMe.Models.Manager
 
             return JsonConvert.DeserializeObject<List<dto_CantidadBuckets>>(JsonConvert.SerializeObject(ds.Result.Tables[0]));
         }
+
+        public List<dto_CantidadBucketsNoAsignado> DetalleBucket_NoAsignado()
+        {
+            var dto = new DynamicDto
+            {
+                ParameterList = new List<SpParameter>
+                {
+                    new SpParameter
+                    {
+                        Name = "Bandera",
+                        Value = "2"
+                    }
+                },
+                Result = null,
+                SPName = "usp_CargaBuckets"
+            };
+
+
+            //var dto = new DynamicDto();
+            //dto.ParameterList = new List<SpParameter>();
+            //dto.Result = null;
+            //dto.SPName = "usp_CargaBuckets";
+
+            DynamicDto ds = DynamicSqlDAO.ExecuterSp(dto, GlobalClass.connectionString.Where(a => a.Key == infDto.STR_COD_PAIS).FirstOrDefault().Value);
+
+            return JsonConvert.DeserializeObject<List<dto_CantidadBucketsNoAsignado>>(JsonConvert.SerializeObject(ds.Result.Tables[0]));
+        }
         public int Registrar(dto_login login)
         {
             var dto = new DynamicDto
@@ -138,22 +168,27 @@ namespace TwoFunTwoMe.Models.Manager
                         Name = "pass",
                         Value = login.pass
                     },
-                      new SpParameter
+						new SpParameter
+					{
+						Name = "STR_USUARIO_AD",
+						Value = login.STR_USUARIO_AD
+					},
+					  new SpParameter
                     {
                         Name = "correo",
                         Value = login.correo
-                    },
-                      new SpParameter
-                    {
-                        Name = "ROLID",
-                        Value = login.ROLID.ToString()
-                    },
+                    },                     
                       new SpParameter
                     {
                         Name = "estado",
                         Value = login.estado
-                    }
-                },
+                    },
+					   new SpParameter
+					{
+						Name = "ROLID",
+						Value = login.ROLID.ToString()
+					}
+				},
                 Result = null,
                 SPName = "usp_inserta_agente"
             };
@@ -772,6 +807,746 @@ namespace TwoFunTwoMe.Models.Manager
             return SCE;
         }
         #endregion
+
+        #region Rules
+        public List<Rules> MantenimientoRules(Rules rules)
+        {
+            var dto = new DynamicDto();
+            dto.ParameterList = new List<SpParameter>();
+
+            dto.ParameterList.AddRange(from nodo in rules.GetType().GetProperties()
+                                       where nodo.GetValue(rules) != null
+                                       select new SpParameter
+                                       {
+                                           Name = nodo.Name,
+                                           Value = nodo.GetValue(rules).ToString()
+                                       }
+                );
+            dto.Result = null;
+            dto.SPName = "usp_mantenimiento_rules";
+            var dto_result = new List<Rules>();
+
+            try
+            {
+                var objRet = DynamicSqlDAO.ExecuterSp(dto, GlobalClass.connectionString.Where(a => a.Key == infDto.STR_COD_PAIS).FirstOrDefault().Value);
+                if (objRet.HasResult)
+                {
+                    dto_result = JsonConvert.DeserializeObject<List<Rules>>(JsonConvert.SerializeObject(objRet.Result.Tables[0]));
+                    dto_result.FirstOrDefault().Mensaje = string.Concat("Se creo Buckets N#: ", dto_result.FirstOrDefault().IdRule);
+                }
+            }
+            catch
+            {
+                dto_result.FirstOrDefault().Mensaje = "Ocurrio un Error";
+                throw;
+            }
+            return dto_result;
+        }
+
+        #endregion
+        #region Roles
+        public List<Roles> MantenimientoRoles(Roles roles)
+        {
+            var dto = new DynamicDto();
+            dto.ParameterList = new List<SpParameter>();
+
+            dto.ParameterList.AddRange(from nodo in roles.GetType().GetProperties()
+                                       where nodo.GetValue(roles) != null
+                                       select new SpParameter
+                                       {
+                                           Name = nodo.Name,
+                                           Value = nodo.GetValue(roles).ToString()
+                                       }
+                );
+            dto.Result = null;
+            dto.SPName = "usp_mantenimiento_roles";
+            var dto_result = new List<Roles>();
+
+            try
+            {
+                var objRet = DynamicSqlDAO.ExecuterSp(dto, GlobalClass.connectionString.Where(a => a.Key == infDto.STR_COD_PAIS).FirstOrDefault().Value);
+                if (objRet.HasResult)
+                {
+                    dto_result = JsonConvert.DeserializeObject<List<Roles>>(JsonConvert.SerializeObject(objRet.Result.Tables[0]));
+                    dto_result.FirstOrDefault().Mensaje = string.Concat("Se creo Buckets N#: ", dto_result.FirstOrDefault().ID);
+				}
+			}
+			catch
+			{
+				dto_result.FirstOrDefault().Mensaje = "Ocurrio un Error";
+				throw;
+			}
+			return dto_result;
+		}
+
+		#endregion
+
+		#region SUBMENU
+		public List<clsSUBMENU> MantenimientoSUBMENU(clsSUBMENU submenu)
+		{
+			var dto = new DynamicDto();
+			dto.ParameterList = new List<SpParameter>();
+
+			dto.ParameterList.AddRange(from nodo in submenu.GetType().GetProperties()
+									   where nodo.GetValue(submenu) != null
+									   select new SpParameter
+									   {
+										   Name = nodo.Name,
+										   Value = nodo.GetValue(submenu).ToString()
+									   }
+				);
+			dto.Result = null;
+			dto.SPName = "usp_mantenimiento_SUBMENU";
+			var dto_result = new List<clsSUBMENU>();
+
+			try
+			{
+				var objRet = DynamicSqlDAO.ExecuterSp(dto, GlobalClass.connectionString.Where(a => a.Key == infDto.STR_COD_PAIS).FirstOrDefault().Value);
+				if (objRet.HasResult)
+				{
+					dto_result = JsonConvert.DeserializeObject<List<clsSUBMENU>>(JsonConvert.SerializeObject(objRet.Result.Tables[0]));
+					dto_result.FirstOrDefault().Mensaje = string.Concat("Se creo el submenú N#: ", dto_result.FirstOrDefault().ID);
+				}
+			}
+			catch
+			{
+				dto_result.FirstOrDefault().Mensaje = "Ocurrio un Error";
+				throw;
+			}
+			return dto_result;
+		}
+
+		#endregion
+
+		#region MAINMENU
+		public List<clsMAINMENU> MantenimientoMAINMENU(clsMAINMENU mainmenu)
+		{
+			var dto = new DynamicDto();
+			dto.ParameterList = new List<SpParameter>();
+
+			dto.ParameterList.AddRange(from nodo in mainmenu.GetType().GetProperties()
+									   where nodo.GetValue(mainmenu) != null
+									   select new SpParameter
+									   {
+										   Name = nodo.Name,
+										   Value = nodo.GetValue(mainmenu).ToString()
+									   }
+				);
+			dto.Result = null;
+			dto.SPName = "usp_mantenimiento_MAINMENU";
+			var dto_result = new List<clsMAINMENU>();
+
+			try
+			{
+				var objRet = DynamicSqlDAO.ExecuterSp(dto, GlobalClass.connectionString.Where(a => a.Key == infDto.STR_COD_PAIS).FirstOrDefault().Value);
+				if (objRet.HasResult)
+				{
+					dto_result = JsonConvert.DeserializeObject<List<clsMAINMENU>>(JsonConvert.SerializeObject(objRet.Result.Tables[0]));
+					dto_result.FirstOrDefault().Mensaje = string.Concat("Se creo el menú principal N#: ", dto_result.FirstOrDefault().ID);
+				}
+            }
+            catch
+            {
+                dto_result.FirstOrDefault().Mensaje = "Ocurrio un Error";
+                throw;
+            }
+            return dto_result;
+        }
+
+        #endregion
+
+        #region Cola Cobros
+
+
+        public List<BucketCobros> ColaAutomaticaCobros(BucketCobros roles)
+        {
+            var dto = new DynamicDto();
+            dto.ParameterList = new List<SpParameter>();
+
+            dto.ParameterList.AddRange(from nodo in roles.GetType().GetProperties()
+                                       where nodo.GetValue(roles) != null
+                                       select new SpParameter
+                                       {
+                                           Name = nodo.Name,
+                                           Value = nodo.GetValue(roles).ToString()
+                                       }
+                );
+            dto.Result = null;
+            dto.SPName = "usp_cola_cobros";
+            var dto_result = new List<BucketCobros>();
+
+            try
+            {
+                var objRet = DynamicSqlDAO.ExecuterSp(dto, GlobalClass.connectionString.Where(a => a.Key == infDto.STR_COD_PAIS).FirstOrDefault().Value);
+                if (objRet.HasResult)
+                {
+                    dto_result = JsonConvert.DeserializeObject<List<BucketCobros>>(JsonConvert.SerializeObject(objRet.Result.Tables[0]));
+                    //dto_result.FirstOrDefault().Mensaje = string.Concat("Se creo Buckets N#: ", dto_result.FirstOrDefault().ID);
+                }
+            }
+            catch
+            {
+                //dto_result.FirstOrDefault().Mensaje = "Ocurrio un Error";
+                throw;
+            }
+            return dto_result;
+        }
+
+        public List<BucketCobros> ObtenerCobros(BucketCobros roles)
+        {
+            var dto = new DynamicDto();
+            dto.ParameterList = new List<SpParameter>();
+
+            dto.ParameterList.AddRange(from nodo in roles.GetType().GetProperties()
+                                       where nodo.GetValue(roles) != null
+                                       select new SpParameter
+                                       {
+                                           Name = nodo.Name,
+                                           Value = nodo.GetValue(roles).ToString()
+                                       }
+                );
+            dto.Result = null;
+            dto.SPName = "usp_ConsultaCreditosCuotas";
+            var dto_result = new List<BucketCobros>();
+
+            try
+            {
+                var objRet = DynamicSqlDAO.ExecuterSp(dto, GlobalClass.connectionString.Where(a => a.Key == infDto.STR_COD_PAIS).FirstOrDefault().Value);
+                if (objRet.HasResult)
+                {
+                    dto_result = JsonConvert.DeserializeObject<List<BucketCobros>>(JsonConvert.SerializeObject(objRet.Result.Tables[0]));
+                    //dto_result.FirstOrDefault().Mensaje = string.Concat("Se creo Buckets N#: ", dto_result.FirstOrDefault().ID);
+                }
+            }
+            catch
+            {
+                //dto_result.FirstOrDefault().Mensaje = "Ocurrio un Error";
+                throw;
+            }
+            return dto_result;
+        }
+
+        public List<ConsultarCreditos> ObtenerEncabezado(BucketCobros roles)
+        {
+            var dto = new DynamicDto();
+            dto.ParameterList = new List<SpParameter>();
+
+            dto.ParameterList.AddRange(from nodo in roles.GetType().GetProperties()
+                                       where nodo.GetValue(roles) != null
+                                       select new SpParameter
+                                       {
+                                           Name = nodo.Name,
+                                           Value = nodo.GetValue(roles).ToString()
+                                       }
+                );
+            dto.Result = null;
+            dto.SPName = "usp_ConsultarCreditos_cobros";
+            var dto_result = new List<ConsultarCreditos>();
+
+            try
+            {
+                var objRet = DynamicSqlDAO.ExecuterSp(dto, GlobalClass.connectionString.Where(a => a.Key == infDto.STR_COD_PAIS).FirstOrDefault().Value);
+                if (objRet.HasResult)
+                {
+                    dto_result = JsonConvert.DeserializeObject<List<ConsultarCreditos>>(JsonConvert.SerializeObject(objRet.Result.Tables[0]));
+                    //dto_result.FirstOrDefault().Mensaje = string.Concat("Se creo Buckets N#: ", dto_result.FirstOrDefault().ID);
+                }
+            }
+            catch
+            {
+                //dto_result.FirstOrDefault().Mensaje = "Ocurrio un Error";
+                throw;
+            }
+            return dto_result;
+        }
+
+        public void ActualizaColaAutomaticaCobros(BucketCobros roles)
+        {
+            var dto = new DynamicDto();
+            dto.ParameterList = new List<SpParameter>();
+
+            dto.ParameterList.AddRange(from nodo in roles.GetType().GetProperties()
+                                       where nodo.GetValue(roles) != null
+                                       select new SpParameter
+                                       {
+                                           Name = nodo.Name,
+                                           Value = nodo.GetValue(roles).ToString()
+                                       }
+                );
+            dto.Result = null;
+            dto.SPName = "usp_actualiza_cola_cobros_automaticos";
+
+            try
+            {
+                var objRet = DynamicSqlDAO.ExecuterSp(dto, GlobalClass.connectionString.Where(a => a.Key == infDto.STR_COD_PAIS).FirstOrDefault().Value);
+
+            }
+            catch
+            {
+                //dto_result.FirstOrDefault().Mensaje = "Ocurrio un Error";
+                throw;
+            }
+        }
+
+
+
+        public List<Tabla_Accion> monstrarAciones()
+        {
+            var dto = new DynamicDto();
+            dto.ParameterList = new List<SpParameter>();
+            dto.Result = null;
+            dto.SPName = "usp_TraeAccion";
+            var dto_result = new List<Tabla_Accion>();
+
+            try
+            {
+                var objRet = DynamicSqlDAO.ExecuterSp(dto, GlobalClass.connectionString.Where(a => a.Key == infDto.STR_COD_PAIS).FirstOrDefault().Value);
+                if (objRet.HasResult)
+                {
+                    dto_result = JsonConvert.DeserializeObject<List<Tabla_Accion>>(JsonConvert.SerializeObject(objRet.Result.Tables[0]));
+                    //dto_result.FirstOrDefault().Mensaje = string.Concat("Se creo Buckets N#: ", dto_result.FirstOrDefault().ID);
+                }
+            }
+            catch
+            {
+                //dto_result.FirstOrDefault().Mensaje = "Ocurrio un Error";
+                throw;
+            }
+            return dto_result;
+        }
+
+        public List<Tabla_RespuestaGestion> mostrarResultadoLLamada()
+        {
+            var dto = new DynamicDto();
+            dto.ParameterList = new List<SpParameter>();
+            dto.Result = null;
+            dto.SPName = "usp_TraeTabla_RespuestaGestion";
+            var dto_result = new List<Tabla_RespuestaGestion>();
+
+            try
+            {
+                var objRet = DynamicSqlDAO.ExecuterSp(dto, GlobalClass.connectionString.Where(a => a.Key == infDto.STR_COD_PAIS).FirstOrDefault().Value);
+                if (objRet.HasResult)
+                {
+                    dto_result = JsonConvert.DeserializeObject<List<Tabla_RespuestaGestion>>(JsonConvert.SerializeObject(objRet.Result.Tables[0]));
+                    //dto_result.FirstOrDefault().Mensaje = string.Concat("Se creo Buckets N#: ", dto_result.FirstOrDefault().ID);
+                }
+            }
+            catch
+            {
+                //dto_result.FirstOrDefault().Mensaje = "Ocurrio un Error";
+                throw;
+            }
+            return dto_result;
+        }
+
+
+        public void GuardaCobro(GestionCobro cobros)
+        {
+            var dto = new DynamicDto();
+            dto.ParameterList = new List<SpParameter>();
+
+            dto.ParameterList.AddRange(from nodo in cobros.GetType().GetProperties()
+                                       where nodo.GetValue(cobros) != null
+                                       select new SpParameter
+                                       {
+                                           Name = nodo.Name,
+                                           Value = nodo.GetValue(cobros).ToString()
+                                       }
+                );
+            dto.Result = null;
+            dto.SPName = "usp_InsertaGestionCobro";
+
+            try
+            {
+                var objRet = DynamicSqlDAO.ExecuterSp(dto, GlobalClass.connectionString.Where(a => a.Key == infDto.STR_COD_PAIS).FirstOrDefault().Value);
+
+            }
+            catch
+            {
+                //dto_result.FirstOrDefault().Mensaje = "Ocurrio un Error";
+                throw;
+            }
+        }
+        public List<contacto> ConsultarContactos(contacto contacs)
+        {
+            var dto = new DynamicDto();
+            dto.ParameterList = new List<SpParameter>();
+
+            dto.ParameterList.AddRange(from nodo in contacs.GetType().GetProperties()
+                                       where nodo.GetValue(contacs) != null
+                                       select new SpParameter
+                                       {
+                                           Name = nodo.Name,
+                                           Value = nodo.GetValue(contacs).ToString()
+                                       }
+                );
+            dto.Result = null;
+            dto.SPName = "usp_consulta_contactos";
+            var dto_result = new List<contacto>();
+
+            try
+            {
+                var objRet = DynamicSqlDAO.ExecuterSp(dto, GlobalClass.connectionString.Where(a => a.Key == infDto.STR_COD_PAIS).FirstOrDefault().Value);
+                if (objRet.HasResult)
+                {
+                    dto_result = JsonConvert.DeserializeObject<List<contacto>>(JsonConvert.SerializeObject(objRet.Result.Tables[0]));
+                    //dto_result.FirstOrDefault().Mensaje = string.Concat("Se creo Buckets N#: ", dto_result.FirstOrDefault().ID);
+                }
+            }
+            catch
+            {
+                //dto_result.FirstOrDefault().Mensaje = "Ocurrio un Error";
+                throw;
+            }
+            return dto_result;
+        }
+
+
+        public List<Tabla_Accion> ConsultaHistoricoGestiones(Tabla_Accion tabla_Accion)
+        {
+            var dto = new DynamicDto();
+            dto.ParameterList = new List<SpParameter>();
+
+            dto.ParameterList.AddRange(from nodo in tabla_Accion.GetType().GetProperties()
+                                       where nodo.GetValue(tabla_Accion) != null
+                                       select new SpParameter
+                                       {
+                                           Name = nodo.Name,
+                                           Value = nodo.GetValue(tabla_Accion).ToString()
+                                       }
+                );
+            dto.Result = null;
+            dto.SPName = "usp_historico_gestiones";
+            var dto_result = new List<Tabla_Accion>();
+
+            try
+            {
+                var objRet = DynamicSqlDAO.ExecuterSp(dto, GlobalClass.connectionString.Where(a => a.Key == infDto.STR_COD_PAIS).FirstOrDefault().Value);
+                if (objRet.HasResult)
+                {
+                    dto_result = JsonConvert.DeserializeObject<List<Tabla_Accion>>(JsonConvert.SerializeObject(objRet.Result.Tables[0]));
+                    //dto_result.FirstOrDefault().Mensaje = string.Concat("Se creo Buckets N#: ", dto_result.FirstOrDefault().ID);
+                }
+            }
+            catch
+            {
+                //dto_result.FirstOrDefault().Mensaje = "Ocurrio un Error";
+                throw;
+            }
+            return dto_result;
+        }
+
+        public List<Tabla_Accion> ConsultaPromesasPagos(Tabla_Accion tabla_Accion)
+        {
+            var dto = new DynamicDto();
+            dto.ParameterList = new List<SpParameter>();
+
+            dto.ParameterList.AddRange(from nodo in tabla_Accion.GetType().GetProperties()
+                                       where nodo.GetValue(tabla_Accion) != null
+                                       select new SpParameter
+                                       {
+                                           Name = nodo.Name,
+                                           Value = nodo.GetValue(tabla_Accion).ToString()
+                                       }
+                );
+            dto.Result = null;
+            dto.SPName = "usp_promesas_pagos";
+            var dto_result = new List<Tabla_Accion>();
+
+            try
+            {
+                var objRet = DynamicSqlDAO.ExecuterSp(dto, GlobalClass.connectionString.Where(a => a.Key == infDto.STR_COD_PAIS).FirstOrDefault().Value);
+                if (objRet.HasResult)
+                {
+                    dto_result = JsonConvert.DeserializeObject<List<Tabla_Accion>>(JsonConvert.SerializeObject(objRet.Result.Tables[0]));
+                    //dto_result.FirstOrDefault().Mensaje = string.Concat("Se creo Buckets N#: ", dto_result.FirstOrDefault().ID);
+                }
+            }
+            catch
+            {
+                //dto_result.FirstOrDefault().Mensaje = "Ocurrio un Error";
+                throw;
+            }
+            return dto_result;
+        }
+
+
+        public List<Tabla_Accion> ConsultaPagos(Tabla_Accion tabla_Accion)
+        {
+            var dto = new DynamicDto();
+            dto.ParameterList = new List<SpParameter>();
+
+            dto.ParameterList.AddRange(from nodo in tabla_Accion.GetType().GetProperties()
+                                       where nodo.GetValue(tabla_Accion) != null
+                                       select new SpParameter
+                                       {
+                                           Name = nodo.Name,
+                                           Value = nodo.GetValue(tabla_Accion).ToString()
+                                       }
+                );
+            dto.Result = null;
+            dto.SPName = "usp_historico_pagos";
+            var dto_result = new List<Tabla_Accion>();
+
+            try
+            {
+                var objRet = DynamicSqlDAO.ExecuterSp(dto, GlobalClass.connectionString.Where(a => a.Key == infDto.STR_COD_PAIS).FirstOrDefault().Value);
+                if (objRet.HasResult)
+                {
+                    dto_result = JsonConvert.DeserializeObject<List<Tabla_Accion>>(JsonConvert.SerializeObject(objRet.Result.Tables[0]));
+                    //dto_result.FirstOrDefault().Mensaje = string.Concat("Se creo Buckets N#: ", dto_result.FirstOrDefault().ID);
+                }
+            }
+            catch
+            {
+                //dto_result.FirstOrDefault().Mensaje = "Ocurrio un Error";
+                throw;
+            }
+            return dto_result;
+        }
+
+        public Tabla_Accion ConsultaSaldoMontoPendiente(Tabla_Accion tabla_Accion)
+        {
+            var dto = new DynamicDto();
+            dto.ParameterList = new List<SpParameter>();
+
+            dto.ParameterList.AddRange(from nodo in tabla_Accion.GetType().GetProperties()
+                                       where nodo.GetValue(tabla_Accion) != null
+                                       select new SpParameter
+                                       {
+                                           Name = nodo.Name,
+                                           Value = nodo.GetValue(tabla_Accion).ToString()
+                                       }
+                );
+            dto.Result = null;
+            dto.SPName = "usp_desboard_monto_cantidad_cola";
+            var dto_result = new List<Tabla_Accion>();
+
+            try
+            {
+                var objRet = DynamicSqlDAO.ExecuterSp(dto, GlobalClass.connectionString.Where(a => a.Key == infDto.STR_COD_PAIS).FirstOrDefault().Value);
+                if (objRet.HasResult)
+                {
+                    dto_result = JsonConvert.DeserializeObject<List<Tabla_Accion>>(JsonConvert.SerializeObject(objRet.Result.Tables[0]));
+                    //dto_result.FirstOrDefault().Mensaje = string.Concat("Se creo Buckets N#: ", dto_result.FirstOrDefault().ID);
+                }
+            }
+            catch
+            {
+                //dto_result.FirstOrDefault().Mensaje = "Ocurrio un Error";
+                throw;
+            }
+            return dto_result.FirstOrDefault();
+        }
+        public Tabla_Accion ConsultaSaldoMontoProcesado(Tabla_Accion tabla_Accion)
+        {
+            var dto = new DynamicDto();
+            dto.ParameterList = new List<SpParameter>();
+
+            dto.ParameterList.AddRange(from nodo in tabla_Accion.GetType().GetProperties()
+                                       where nodo.GetValue(tabla_Accion) != null
+                                       select new SpParameter
+                                       {
+                                           Name = nodo.Name,
+                                           Value = nodo.GetValue(tabla_Accion).ToString()
+                                       }
+                );
+            dto.Result = null;
+            dto.SPName = "usp_desboard_monto_cantidad_cola_procesada";
+            var dto_result = new List<Tabla_Accion>();
+
+            try
+            {
+                var objRet = DynamicSqlDAO.ExecuterSp(dto, GlobalClass.connectionString.Where(a => a.Key == infDto.STR_COD_PAIS).FirstOrDefault().Value);
+                if (objRet.HasResult)
+                {
+                    dto_result = JsonConvert.DeserializeObject<List<Tabla_Accion>>(JsonConvert.SerializeObject(objRet.Result.Tables[0]));
+                    //dto_result.FirstOrDefault().Mensaje = string.Concat("Se creo Buckets N#: ", dto_result.FirstOrDefault().ID);
+                }
+            }
+            catch
+            {
+                //dto_result.FirstOrDefault().Mensaje = "Ocurrio un Error";
+                throw;
+            }
+            return dto_result.FirstOrDefault();
+        }
+
+
+        public List<InformacionCuenta> consultaInformacionCuenta(InformacionCuenta informacionCuenta)
+        {
+            var dto = new DynamicDto();
+            dto.ParameterList = new List<SpParameter>();
+
+            dto.ParameterList.AddRange(from nodo in informacionCuenta.GetType().GetProperties()
+                                       where nodo.GetValue(informacionCuenta) != null
+                                       select new SpParameter
+                                       {
+                                           Name = nodo.Name,
+                                           Value = nodo.GetValue(informacionCuenta).ToString()
+                                       }
+                );
+            dto.Result = null;
+            dto.SPName = "usp_informacion_cuenta";
+            var dto_result = new List<InformacionCuenta>();
+
+            try
+            {
+                var objRet = DynamicSqlDAO.ExecuterSp(dto, GlobalClass.connectionString.Where(a => a.Key == infDto.STR_COD_PAIS).FirstOrDefault().Value);
+                if (objRet.HasResult)
+                {
+                    dto_result = JsonConvert.DeserializeObject<List<InformacionCuenta>>(JsonConvert.SerializeObject(objRet.Result.Tables[0]));
+                    //dto_result.FirstOrDefault().Mensaje = string.Concat("Se creo Buckets N#: ", dto_result.FirstOrDefault().ID);
+                }
+            }
+            catch
+            {
+                //dto_result.FirstOrDefault().Mensaje = "Ocurrio un Error";
+                throw;
+            }
+            return dto_result;
+        }
+
+
+        public Credid MostrarImagenesCreddid(Solicitudes solicitudes)
+        {
+            var dto = new DynamicDto();
+            dto.ParameterList = new List<SpParameter>();
+
+            dto.ParameterList.AddRange(from nodo in solicitudes.GetType().GetProperties()
+                                       where nodo.GetValue(solicitudes) != null
+                                       select new SpParameter
+                                       {
+                                           Name = nodo.Name,
+                                           Value = nodo.GetValue(solicitudes).ToString()
+                                       }
+                );
+            dto.Result = null;
+            dto.SPName = "usp_consultar_xml_buros";
+
+            var dto_result = new Credid();
+            try
+            {
+                var objRet = DynamicSqlDAO.ExecuterSp(dto, GlobalClass.connectionString.Where(a => a.Key == infDto.STR_COD_PAIS).FirstOrDefault().Value);
+                if (objRet.HasResult)
+                {
+                    var result = JsonConvert.DeserializeObject<List<BurosXml>>(JsonConvert.SerializeObject(objRet.Result.Tables[0]));
+
+                    XDocument dox = XDocument.Parse(result.FirstOrDefault().CREDDIT);
+
+                    dto_result.Fotografia = dox.Descendants().Where(n => n.Name == "Fotografia").Select(x => new Credid { Fotografia = x.Value }).FirstOrDefault().Fotografia;
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return dto_result;
+        }
+
+        public List<InformacionCuenta> consultaCritoCredito(InformacionCuenta informacionCuenta)
+        {
+            var dto = new DynamicDto();
+            dto.ParameterList = new List<SpParameter>();
+
+            dto.ParameterList.AddRange(from nodo in informacionCuenta.GetType().GetProperties()
+                                       where nodo.GetValue(informacionCuenta) != null
+                                       select new SpParameter
+                                       {
+                                           Name = nodo.Name,
+                                           Value = nodo.GetValue(informacionCuenta).ToString()
+                                       }
+                );
+            dto.Result = null;
+            dto.SPName = "usp_GridCredito";
+            var dto_result = new List<InformacionCuenta>();
+
+            try
+            {
+                var objRet = DynamicSqlDAO.ExecuterSp(dto, GlobalClass.connectionString.Where(a => a.Key == infDto.STR_COD_PAIS).FirstOrDefault().Value);
+                if (objRet.HasResult)
+                {
+                    dto_result = JsonConvert.DeserializeObject<List<InformacionCuenta>>(JsonConvert.SerializeObject(objRet.Result.Tables[0]));
+                    //dto_result.FirstOrDefault().Mensaje = string.Concat("Se creo Buckets N#: ", dto_result.FirstOrDefault().ID);
+                }
+            }
+            catch
+            {
+                //dto_result.FirstOrDefault().Mensaje = "Ocurrio un Error";
+                throw;
+            }
+            return dto_result;
+        }
+        public List<Prestamos> consultaPrestamosCliente(Prestamos informacionCuenta)
+        {
+            var dto = new DynamicDto();
+            dto.ParameterList = new List<SpParameter>();
+
+            dto.ParameterList.AddRange(from nodo in informacionCuenta.GetType().GetProperties()
+                                       where nodo.GetValue(informacionCuenta) != null
+                                       select new SpParameter
+                                       {
+                                           Name = nodo.Name,
+                                           Value = nodo.GetValue(informacionCuenta).ToString()
+                                       }
+                );
+            dto.Result = null;
+            dto.SPName = "usp_prestamos_cliente";
+            var dto_result = new List<Prestamos>();
+
+            try
+            {
+                var objRet = DynamicSqlDAO.ExecuterSp(dto, GlobalClass.connectionString.Where(a => a.Key == infDto.STR_COD_PAIS).FirstOrDefault().Value);
+                if (objRet.HasResult)
+                {
+                    dto_result = JsonConvert.DeserializeObject<List<Prestamos>>(JsonConvert.SerializeObject(objRet.Result.Tables[0]));
+                    //dto_result.FirstOrDefault().Mensaje = string.Concat("Se creo Buckets N#: ", dto_result.FirstOrDefault().ID);
+                }
+            }
+            catch
+            {
+                //dto_result.FirstOrDefault().Mensaje = "Ocurrio un Error";
+                throw;
+            }
+            return dto_result;
+        }
+        public List<Personas> consultaCreditoParientes(Personas personas)
+        {
+            var dto = new DynamicDto();
+            dto.ParameterList = new List<SpParameter>();
+
+            dto.ParameterList.AddRange(from nodo in personas.GetType().GetProperties()
+                                       where nodo.GetValue(personas) != null
+                                       select new SpParameter
+                                       {
+                                           Name = nodo.Name,
+                                           Value = nodo.GetValue(personas).ToString()
+                                       }
+                );
+            dto.Result = null;
+            dto.SPName = "usp_credito_parientes";
+            var dto_result = new List<Personas>();
+
+            try
+            {
+                var objRet = DynamicSqlDAO.ExecuterSp(dto, GlobalClass.connectionString.Where(a => a.Key == infDto.STR_COD_PAIS).FirstOrDefault().Value);
+                if (objRet.HasResult)
+                {
+                    dto_result = JsonConvert.DeserializeObject<List<Personas>>(JsonConvert.SerializeObject(objRet.Result.Tables[0]));
+                    //dto_result.FirstOrDefault().Mensaje = string.Concat("Se creo Buckets N#: ", dto_result.FirstOrDefault().ID);
+                }
+            }
+            catch
+            {
+                //dto_result.FirstOrDefault().Mensaje = "Ocurrio un Error";
+                throw;
+            }
+            return dto_result;
+        }
+        #endregion
+
 
     }
 }

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Web.WebPages.OAuth;
-using TwoFunTwoMeFintech.Models;
-
-namespace TwoFunTwoMeFintech
+﻿namespace TwoFunTwoMeFintech
 {
     public static class AuthConfig
     {
@@ -27,6 +20,7 @@ namespace TwoFunTwoMeFintech
             //    appSecret: "");
 
             //OAuthWebSecurity.RegisterGoogleClient();
+
         }
     }
 }

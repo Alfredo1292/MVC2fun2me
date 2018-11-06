@@ -44,3 +44,5 @@ ul.nav.nav-tabs li.active a {
     padding: 8px;
     color: #ccc;
 }
+.tab-content .navbar-inverse {
+    display: none;
