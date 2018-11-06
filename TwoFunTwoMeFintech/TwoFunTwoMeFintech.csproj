@@ -415,10 +415,7 @@
     <Compile Include="Controllers\CobrosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-<<<<<<< HEAD
     <Compile Include="Controllers\MAINMENUController.cs" />
-=======
->>>>>>> ac0767b1264815dbffda7b552798a889d03973a0
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\RulesController.cs" />
     <Compile Include="Controllers\ScoreCardExpertoController.cs" />
@@ -765,10 +762,7 @@
     <Content Include="Scripts\Proyecto\DataTable Bootstrap.js" />
     <Content Include="Scripts\Proyecto\DataTables 1.10.15.js" />
     <Content Include="Scripts\Proyecto\cambioPass.js" />
-<<<<<<< HEAD
     <Content Include="Scripts\Proyecto\JsMAINMENU.js" />
-=======
->>>>>>> ac0767b1264815dbffda7b552798a889d03973a0
     <Content Include="Scripts\Proyecto\JSSUBMENU.js" />
     <Content Include="Scripts\Proyecto\Roles.js" />
     <Content Include="Scripts\Proyecto\ColaCobros.js" />
@@ -1167,14 +1161,11 @@
     <Content Include="Views\SUBMENU\Details.cshtml" />
     <Content Include="Views\SUBMENU\Edit.cshtml" />
     <Content Include="Views\SUBMENU\Index.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\MAINMENU\Index.cshtml" />
     <Content Include="Views\MAINMENU\Details.cshtml" />
     <Content Include="Views\MAINMENU\Create.cshtml" />
     <Content Include="Views\MAINMENU\Edit.cshtml" />
     <Content Include="Views\MAINMENU\Delete.cshtml" />
-=======
->>>>>>> ac0767b1264815dbffda7b552798a889d03973a0
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
