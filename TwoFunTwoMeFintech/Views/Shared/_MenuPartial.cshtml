@@ -18,17 +18,16 @@
 <link href="~/Content/alertifyjs/css/themes/semantic.rtl.min.css" rel="stylesheet" />
 
 <nav class="navbar navbar-inverse">
-
+     
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Menú</a>
+            <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-home"></span></a>
+
+            
+
         </div>
         <ul class="nav navbar-nav">
-            @if (Session["MenuMaster"] == null)
-            {
-                @Html.ActionLink("Login", "Login", "Login", null, new { target = "_parent" });
 
-            }
 
             @if (Session["MenuMaster"] != null)
             {
@@ -56,17 +55,9 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-            @if (Session["LoginCredentials"] != null)
-            {
-                <li>@Html.ActionLink("Logout", "LogOff", "Login")</li>
-            }
-            else
-            {
-                <li>@Html.ActionLink("Login", "Login", "Login")</li>
-            }
+          
+            </ul>
 
-
-        </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
                 @if (Session["UserName"] != null)
@@ -74,11 +65,45 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-user"></span>
                         <strong>@Session["UserName"].ToString()</strong>
-                        <span class="glyphicon glyphicon-chevron-down"></span>
+                        @*<span class="glyphicon glyphicon-chevron-down"></span>*@
                     </a>
 
                 }
             </li>
+
+            <li class="dropdown">
+                @if (Session["LoginCredentials"] != null)
+                {
+
+
+                    @*<a class="navbar-brand" href="#"><img src="~/Content/bootstrap-4.0.0/4.ico" width="30" height="30" class="d-inline-block align-content-center" alt="">@Html.ActionLink("  ", "LogOff", "Login")</a>*@
+
+
+                    <a href='@Url.Action("Login", "Login")'>
+                        <img src='@Url.Content("~/Content/bootstrap-4.0.0/4.ico") ' width="30" height="30" class="d-inline-block align-content-center" />
+                    </a>
+
+                    @*@Html.ActionLink("Logout", "LogOff", "Login", null, new { @class = "glyphicon glyphicon-share" })*@
+
+                    @*<a href="@Url.Action("Action", "Controller")" class="glyphicon glyphicon-user">
+                link text
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            </a>*@
+
+                    @*<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user"></span>
+                <strong>@Html.ActionLink("Logout", "LogOff", "Login")</strong>
+            </a>*@
+
+                    @*@Html.ActionLink("Logout", "LogOff", "Login", htmlAttributes: new { @class = "glyphicon glyphicon-user" })*@
+
+                }
+                else
+                {
+                    @Html.ActionLink("Login", "Login", "Login")
+                }
+            </li>
+
         </ul>
 
     </div>

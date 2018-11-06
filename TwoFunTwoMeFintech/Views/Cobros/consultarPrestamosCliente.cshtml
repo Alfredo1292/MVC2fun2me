@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "consultarPrestamosCliente";
+}
+
+<script src="~/Scripts/Proyecto/ColaCobros.js"></script>
+<link href="~/Styles/DataTable.css" rel="stylesheet" />
+<link href="~/Styles/DataTabledtr.css" rel="stylesheet" />
+
+<script src="~/Scripts/Proyecto/DataTables 1.10.15.js"></script>
+<script src="~/Scripts/Proyecto/DataTable Bootstrap.js"></script>
+
+<link href="~/Styles/Site.css" rel="stylesheet" />
+
+<div class="table">
+  
+    <table ID="PrestamosClientesTable" class="table table-bordered" cellspacing="0">
+        <thead>
+            <tr class="info">
+                <th >
+                    Solicitud
+                </th>
+                <th>
+                    Producto
+                </th>
+                <th>
+                    Monto
+                </th>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Int. Corriente
+                </th>
+                <th>
+                    Int. Mora
+                </th>
+                <th>
+                    Monto Cuota
+                </th>
+                <th>
+                   Cap. Pendiente
+                </th>
+                
+            </tr>
+        </thead>
+        <tbody class="tbody GridPrestamos"></tbody>
+    </table>
+</div>

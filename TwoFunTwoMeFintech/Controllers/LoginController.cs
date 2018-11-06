@@ -41,7 +41,7 @@ namespace TwoFunTwoMeFintech.Controllers
                 //Manager.ClientPostRequest(loginUser, AppSettings.urlApi, AppSettings.controladorLogin);
                 //Manager.SendRequestAsync(AppSettings.urlApi , AppSettings.controladorLogin, loginUser);
 
-                ManagerUser mang = new ManagerUser();              
+                ManagerUser mang = new ManagerUser();
 
 
                 var dto_retorno = mang.Login(loginUser);
@@ -50,7 +50,13 @@ namespace TwoFunTwoMeFintech.Controllers
 
                 if (dto_retorno.Any())
                 {
-                    var dto_ret = mang.mostrarMenu( _login.Cedula);
+
+                    if (dto_retorno.FirstOrDefault().esTemporal)
+                    {
+                        return RedirectToAction("CambioPassword", "Login");
+                    }
+
+                    var dto_ret = mang.mostrarMenu(_login.Cedula);
 
                     Session["LoginCredentials"] = dto_retorno;
                     Session["MenuMaster"] = dto_ret; //Bind the _menus list to MenuMaster session
@@ -65,12 +71,18 @@ namespace TwoFunTwoMeFintech.Controllers
                 }
                 else
                 {
-                    ViewBag.ErrorMsg = "Please enter the valid credentials!...";
+                    ViewBag.ErrorMsg = "Credenciales inválidas!";
                     return View();
                 }
             }
             return View();
         }
+
+        public ActionResult CambioPassword(LoginModels _login)
+        {
+            return View();
+        }
+
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();

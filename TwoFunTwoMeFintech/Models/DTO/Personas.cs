@@ -71,5 +71,6 @@ namespace TwoFunTwoMeFintech.Models.DTO
         public string UsrModifica { get; set; }
 
         public int? IdStatusOrden { get; set; }
+        public string CapitalPendiente { get; set; }
     }
 }

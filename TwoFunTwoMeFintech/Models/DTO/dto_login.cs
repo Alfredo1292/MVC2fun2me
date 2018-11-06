@@ -43,12 +43,13 @@ namespace TwoFunTwoMeFintech.Models
         [Display(Name = "Rol"), Required]
         public int? ROLID { get; set; }
 
-		public string ROLES { get; set; }
-		public int ConfirmPassword { get; set; }
+        public string ROLES { get; set; }
+        public int ConfirmPassword { get; set; }
         public string ConfiguracionBucket { get; set; }
-		public List<dto_login> listadoDto_login { get; set; }
+        public List<dto_login> listadoDto_login { get; set; }
 
-		public List<Roles> ListRoles { get; set; }
+        public List<Roles> ListRoles { get; set; }
+        public bool esTemporal { get; set; }
     }
 
 
@@ -76,10 +77,30 @@ namespace TwoFunTwoMeFintech.Models
         public bool? Estado { get; set; }
 
         public bool? CuentaAlDia { get; set; }
-        
+
 
     }
 
+    public class dto_CantidadBucketsNoAsignado
+    {
+        public int Cantidad_Cuentas { get; set; }
+
+        public String Bucket { get; set; }
+
+        public bool? PromesaRota { get; set; }
+
+        public bool? CeroPagos { get; set; }
+
+        public bool? RangoSaldoAlto { get; set; }
+
+        public bool? RangoSaldoMedio { get; set; }
+
+        public bool? RangoSaldoBajo { get; set; }
+
+        public bool? CuentaAlDia { get; set; }
+
+
+    }
 
     public class dto_CantidadBuckets
     {

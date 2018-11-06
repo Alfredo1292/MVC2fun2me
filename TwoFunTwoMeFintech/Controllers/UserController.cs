@@ -126,11 +126,30 @@ namespace TwoFunTwoMeFintech.Controllers
 			}			
 			return View(dto_login);
 		}
+		public ActionResult Crear(dto_login dto_login)
+		{
+			if (ModelState.IsValid)
+			{
 
-        //
-        // GET: /User/Edit/5
+				ManagerUser mang = new ManagerUser();
+				dto_login.ListRoles = new List<Roles>();
+				dto_login.pass = Cryption.Encrypt(dto_login.pass, ConfigurationManager.AppSettings["claveEncriptacion"]);
 
-        public ActionResult Edit(string id)
+				mang.Registrar(dto_login);
+				dto_login = Limpiar();
+
+				var ret = mang.GetUserRoles();
+				if (ret.Any())
+				{
+					dto_login.ListRoles = ret;
+				}
+			}
+			return Json(dto_login);
+		}
+		//
+		// GET: /User/Edit/5
+
+		public ActionResult Edit(string id)
         {
             ManagerUser mang = new ManagerUser();
             dto_login dto_login = new dto_login();
