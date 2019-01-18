@@ -358,7 +358,6 @@
     <Content Include="GINIMACHINE.html" />
     <Content Include="Global.asax" />
     <Content Include="gracias.html" />
-    <Content Include="index.aspx" />
     <Content Include="index.html" />
     <Content Include="Index1.html" />
     <Content Include="jquery-2.0.3.min.js" />
@@ -425,13 +424,6 @@
     <Compile Include="Controllers\ValidateModelAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="index.aspx.cs">
-      <DependentUpon>index.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="index.aspx.designer.cs">
-      <DependentUpon>index.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\DTO\AWSAccess.cs" />
     <Compile Include="Models\DTO\ConfigSys.cs" />
