@@ -1,0 +1,91 @@
+﻿@model TwoFunTwoMeFintech.Models.DTO.AsignacionBuckets
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>AsignacionBuckets</legend>
+
+        @Html.HiddenFor(model => model.id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BucketInicial)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BucketInicial)
+            @Html.ValidationMessageFor(model => model.BucketInicial)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BucketFinal)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BucketFinal)
+            @Html.ValidationMessageFor(model => model.BucketFinal)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PRPRotas)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PRPRotas)
+            @Html.ValidationMessageFor(model => model.PRPRotas)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CeroPagos)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CeroPagos)
+            @Html.ValidationMessageFor(model => model.CeroPagos)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SaldoAlto)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SaldoAlto)
+            @Html.ValidationMessageFor(model => model.SaldoAlto)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SaldoMedio)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SaldoMedio)
+            @Html.ValidationMessageFor(model => model.SaldoMedio)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SaldoBajo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SaldoBajo)
+            @Html.ValidationMessageFor(model => model.SaldoBajo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Estado)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Estado)
+            @Html.ValidationMessageFor(model => model.Estado)
+        </div>
+
+        <p>
+            <input type="submit" value="Guardar" class="btn btn-primary" />
+        </p>
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

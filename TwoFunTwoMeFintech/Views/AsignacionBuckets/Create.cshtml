@@ -1,0 +1,86 @@
+﻿@model TwoFunTwoMeFintech.Models.DTO.AsignacionBuckets
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Creación Buckets</legend>
+
+
+        <link href="~/Content/bootstrap-4.0.0/dist/css/font-awesome.min.css" rel="stylesheet" />
+        <link href="~/Content/awesome-bootstrap-checkbox.css" rel="stylesheet" />
+
+        <div class="container">
+            <form class="form-inline">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.BucketInicial)
+                            @Html.TextBox("BucketInicial", "", new { @class = "form-control", @placeholder = "0", required = "required", @type = "number" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.BucketFinal)
+                            @Html.TextBox("BucketFinal", "", new { @class = "form-control", @placeholder = "0", required = "required", @type = "number" })
+                        </div>
+                        <div class="form-check">
+                            <div>
+                                @Html.LabelFor(model => model.PRPRotas)
+                                @Html.CheckBoxFor(m => m.PRPRotas, new { @class = "check-input"})
+
+                            </div>
+                            <div>
+                                @Html.LabelFor(model => model.CeroPagos)
+                                @Html.CheckBoxFor(m => m.CeroPagos, new { @class = "check-input" })
+                            </div>
+                            <div>
+                                @Html.LabelFor(model => model.SaldoAlto)
+                                @Html.CheckBoxFor(m => m.SaldoAlto, new { @class = "check-input" })
+                         
+                            </div>
+                            <div>
+                                @Html.LabelFor(model => model.SaldoMedio)
+                                @Html.CheckBoxFor(m => m.SaldoMedio, new { @class = "check-input" })
+                            
+                            </div>
+                            <div>
+                                @Html.LabelFor(model => model.SaldoBajo)
+                                @Html.CheckBoxFor(m => m.SaldoBajo, new { @class = "check-input" })
+            
+                            </div>
+                            <div>
+                                @Html.LabelFor(model => model.CuentaAlDia)
+                                @Html.CheckBoxFor(m => m.CuentaAlDia, new { @class = "check-input" })
+                     
+                            </div>
+                            <div>
+                                @Html.LabelFor(model => model.Estado)
+                                @Html.CheckBoxFor(m => m.Estado, new { @class = "check-input" })
+                      
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <br />
+                <br />
+                <div class="alert alert-info">
+                    <strong></strong> @ViewBag.MensajeError @ViewBag.Mensaje
+                </div>
+            </form>
+        </div>
+
+
+    </fieldset>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

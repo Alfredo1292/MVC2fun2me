@@ -1,0 +1,88 @@
+﻿@model TwoFunTwoMeFintech.Models.DTO.ScoreCardExperto
+<script src="~/Scripts/Proyecto/DataTables 1.10.15.js"></script>
+<link href="~/Styles/DataTable.css" rel="stylesheet" />
+<link href="~/Styles/DataTabledtr.css" rel="stylesheet" />
+<script src="~/Scripts/Proyecto/DataTable Bootstrap.js"></script>
+<script src="~/Scripts/Proyecto/ScoreCare.js"></script>
+<div class="container">
+	<div class="form-group pull-right">
+		<input id="Buscar" type="text" class="search form-control" placeholder="Buscar">
+	</div>
+	<span class="counter pull-right"></span>
+
+	<table id="dtBasicExample" class="table table-hover table-bordered results" cellspacing="0">
+		<thead>
+			<tr>
+				<th class="th-sm">
+					@Html.LabelFor(model => model.Id)
+					<i class="fa fa-sort float-right" aria-hidden="true"></i>
+				</th>
+				<th class="th-sm">
+					@Html.LabelFor(model => model.NombreModelo)
+					<i class="fa fa-sort float-right" aria-hidden="true"></i>
+				</th>
+				<th class="th-sm">
+					@Html.LabelFor(model => model.RangoInicial)
+					<i class="fa fa-sort float-right" aria-hidden="true"></i>
+				</th>
+				<th class="th-sm">
+					@Html.LabelFor(model => model.RangoFinal)
+					<i class="fa fa-sort float-right" aria-hidden="true"></i>
+				</th>
+				<th class="th-sm">
+					@Html.LabelFor(model => model.Puntaje)
+					<i class="fa fa-sort float-right" aria-hidden="true"></i>
+				</th>
+				<th class="th-sm">
+					Acción
+					<i class="fa fa-sort float-right" aria-hidden="true"></i>
+				</th>
+			</tr>
+		</thead>
+		<tbody class="tbody"></tbody>
+
+	</table>
+
+</div>
+
+<div class="modal fade" Id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				@*<button type="button" class="close" data-dissmiss="modal"><span aria-hidden="true">×</span></button>*@
+				<button type="button" class="close" data-dismiss="modal">×</button>
+
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="form-group">
+						<label for="Id"> @Html.LabelFor(model => model.Id)</label>
+						<input type="text" class="form-control" id="id" placeholder="Id" disabled="disabled" />
+					</div>
+					<div class="form-group">
+						<label for="Nombre"> @Html.LabelFor(model => model.NombreModelo)</label>
+						<input type="text" class="form-control" id="nombreModelo" placeholder="Nombre Modelo" />
+					</div>
+					<div class="form-group">
+						<label for="Rango"> @Html.LabelFor(model => model.RangoInicial)</label>
+						<input type="text" class="form-control" id="rangoInicial" placeholder="Rango Inicial" />
+					</div>
+					<div class="form-group">
+						<label for="FinalRango"> @Html.LabelFor(model => model.RangoFinal)</label>
+						<input type="text" class="form-control" id="rangoFinal" placeholder="Rango Final" />
+					</div>
+					<div class="form-group">
+						<label for="puntua"> @Html.LabelFor(model => model.Puntaje)</label>
+						<input type="text" class="form-control" id="Puntaje" placeholder="estado" Puntaje />
+						@*<input type="text" class="form-control" id="ROLID" placeholder="ROLID" />*@
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" Id="btnUpdate" style="display:none;" onclick="Update();">Actualizar</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+			</div>
+		</div>
+	</div>
+
+</div>

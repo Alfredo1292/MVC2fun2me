@@ -1,0 +1,48 @@
+﻿body {
+	padding-top:0px;
+	padding-bottom:20px;
+}
+/*Set padding to keep content from hitting the edges*/
+.body-content{
+	padding-left:15px;
+	padding-right:15px;
+}
+/*Set width on the from input elements since they´re 100% wide by default*/
+
+input,
+select,
+textarea{max-width:280px;}
+
+/*styles for validation helpers*/
+.field-validation-error{
+	color:#b94a48;
+}
+
+ul.nav.nav.tabs{
+	margin:10px 0px;
+}
+
+ul.nav.nav-tabs li:not(active) a{
+	 background-color: #eeeeee;
+	 color: grey;
+}
+
+ul.nav.nav-tabs li.active a {
+    border-top: 3px solid #337ab7;
+}
+
+.results tr[visible='false'],
+.no-result {
+    display: none;
+}
+
+.results tr[visible='true'] {
+    display: table-row;
+}
+
+.counter {
+    padding: 8px;
+    color: #ccc;
+}
+.tab-content .navbar-inverse {
+    display: none;

@@ -1,0 +1,189 @@
+﻿@model IEnumerable<TwoFunTwoMeFintech.Models.DTO.Solicitudes>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdBuro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaIngreso)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaModificacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UsrModifica)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdPersona)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaTransferencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comentarios)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UsoCredito)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Consentimiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdProducto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdAgente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoporteTipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdStatusOrden)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FotoCedula)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Recibo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Contrato)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pagare)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReciboIngresos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CuentaBancaria)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Selfie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Origen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdUsrAsig)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdEstadoProc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MontoMaximo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Score)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdBuro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaIngreso)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaModificacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UsrModifica)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdPersona)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaTransferencia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comentarios)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UsoCredito)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Consentimiento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdProducto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdAgente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoporteTipo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdStatusOrden)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FotoCedula)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Recibo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Contrato)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pagare)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReciboIngresos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CuentaBancaria)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Selfie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Origen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdUsrAsig)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdEstadoProc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MontoMaximo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Score)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

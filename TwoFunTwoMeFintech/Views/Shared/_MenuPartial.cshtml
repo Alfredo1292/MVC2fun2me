@@ -1,0 +1,111 @@
+﻿<script src="~/Content/alertifyjs/alertify.js"></script>
+<script src="~/Content/alertifyjs/alertify.min.js"></script>
+<link href="~/Content/alertifyjs/css/alertify.css" rel="stylesheet" />
+<link href="~/Content/alertifyjs/css/alertify.min.css" rel="stylesheet" />
+<link href="~/Content/alertifyjs/css/alertify.rtl.css" rel="stylesheet" />
+<link href="~/Content/alertifyjs/css/alertify.rtl.min.css" rel="stylesheet" />
+<link href="~/Content/alertifyjs/css/themes/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/alertifyjs/css/themes/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/alertifyjs/css/themes/bootstrap.rtl.css" rel="stylesheet" />
+<link href="~/Content/alertifyjs/css/themes/bootstrap.rtl.min.css" rel="stylesheet" />
+<link href="~/Content/alertifyjs/css/themes/default.css" rel="stylesheet" />
+<link href="~/Content/alertifyjs/css/themes/default.min.css" rel="stylesheet" />
+<link href="~/Content/alertifyjs/css/themes/default.rtl.css" rel="stylesheet" />
+<link href="~/Content/alertifyjs/css/themes/default.rtl.min.css" rel="stylesheet" />
+<link href="~/Content/alertifyjs/css/themes/semantic.css" rel="stylesheet" />
+<link href="~/Content/alertifyjs/css/themes/semantic.min.css" rel="stylesheet" />
+<link href="~/Content/alertifyjs/css/themes/semantic.rtl.css" rel="stylesheet" />
+<link href="~/Content/alertifyjs/css/themes/semantic.rtl.min.css" rel="stylesheet" />
+
+<nav class="navbar navbar-inverse">
+     
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-home"></span></a>
+
+            
+
+        </div>
+        <ul class="nav navbar-nav">
+
+
+            @if (Session["MenuMaster"] != null)
+            {
+                var MenuMaster = (List<TwoFunTwoMeFintech.Models.MenuModels>)Session["MenuMaster"];
+                var groupByMenu = MenuMaster.GroupBy(x => x.MainMenuName).ToList();
+
+                foreach (var MenuList in groupByMenu)
+                {
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">@MenuList.Key<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            @foreach (var SubMenuList in MenuList)
+                            {
+                                <li>
+                                    @Html.ActionLink(@SubMenuList.SubMenuName, @SubMenuList.ActionName, @SubMenuList.ControllerName, null, new { target = "_parent" })
+                                </li>
+                            }
+                        </ul>
+                    </li>
+
+                }
+            }
+
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+          
+            </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                @if (Session["UserName"] != null)
+                {
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-user"></span>
+                        <strong>@Session["UserName"].ToString()</strong>
+                        @*<span class="glyphicon glyphicon-chevron-down"></span>*@
+                    </a>
+
+                }
+            </li>
+
+            <li class="dropdown">
+                @if (Session["LoginCredentials"] != null)
+                {
+
+
+                    @*<a class="navbar-brand" href="#"><img src="~/Content/bootstrap-4.0.0/4.ico" width="30" height="30" class="d-inline-block align-content-center" alt="">@Html.ActionLink("  ", "LogOff", "Login")</a>*@
+
+
+                    <a href='@Url.Action("Login", "Login")'>
+                        <img src='@Url.Content("~/Content/bootstrap-4.0.0/4.ico") ' width="30" height="30" class="d-inline-block align-content-center" />
+                    </a>
+
+                    @*@Html.ActionLink("Logout", "LogOff", "Login", null, new { @class = "glyphicon glyphicon-share" })*@
+
+                    @*<a href="@Url.Action("Action", "Controller")" class="glyphicon glyphicon-user">
+                link text
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            </a>*@
+
+                    @*<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user"></span>
+                <strong>@Html.ActionLink("Logout", "LogOff", "Login")</strong>
+            </a>*@
+
+                    @*@Html.ActionLink("Logout", "LogOff", "Login", htmlAttributes: new { @class = "glyphicon glyphicon-user" })*@
+
+                }
+                else
+                {
+                    @Html.ActionLink("Login", "Login", "Login")
+                }
+            </li>
+
+        </ul>
+
+    </div>
+
+</nav>

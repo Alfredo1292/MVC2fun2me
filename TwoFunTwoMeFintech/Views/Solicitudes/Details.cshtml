@@ -1,0 +1,220 @@
+﻿@model TwoFunTwoMeFintech.Models.DTO.Solicitudes
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+
+    <!-- Bootstrap core CSS -->
+    @*<link href="../../dist/css/bootstrap.min.css" rel="stylesheet">*@
+
+@*<link href = "~/Content/bootstrap-4.0.0/dist/css/bootstrap.min.css" rel = "stylesheet" />*@
+
+<fieldset>
+
+    <div id='ModInicial' class="alert alert-info">
+        <strong>Forzamiento!</strong> Buscar Solicitud.
+    </div>
+ 
+    <br />
+    @*<div class="input-group">
+        <span class="input-group-addon">Nombre Campo</span>
+        <input id="msg" type="text" class="form-control" name="msg" placeholder="Additional Info">
+    </div>*@
+
+    @*<legend>Buscar Solicitud</legend>*@
+
+    <script src="~/Scripts/jquery-2.0.3.min.js"></script>
+    <script src="~/Scripts/Proyecto/download.js"></script>
+    <form>
+
+
+
+
+        <div class="container">
+
+
+
+
+
+            <div class="row">
+
+
+
+                @*<label for="form-control"> @Html.LabelFor(model => model.ID_SOLICITUD)</label>*@
+
+                <div class="input-group col-xs-5">
+
+                    @*<span class="input-group-addon">@Html.LabelFor(model => model.ID_SOLICITUD)</span>*@
+                    <span class="input-group-addon">Id Solicitud</span>
+
+                    <input type="number" class="form-control" id="SolicitudBuro" aria-describedby="emailHelp" placeholder="Ingrese aquí su Solicitud">
+
+                    <a class="input-group-addon btn btn-primary" href="#" onclick="retornarUrl();">Buscar</a>
+                </div>
+
+
+                <br />
+                <br />
+
+                <div class="w3-container w3-teal">
+                    <div class="row row-centered pos">
+                        <div class="table-responsive">
+                            <table id="tblBuscar" class="table table-bordered w-auto ">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Solicitud</th>
+                                        <th scope="col">@Html.LabelFor(model => model.Identificacion)</th>
+                                        <th scope="col">@Html.LabelFor(model => model.NOMBRE)</th>
+                                        <th scope="col">@Html.LabelFor(model => model.Descripcion)</th>
+                                        <th scope="col">@Html.LabelFor(model => model.NombreProducto)</th>
+                                        <th scope="col">@Html.LabelFor(model => model.MontoMaximo)</th>
+                                        <th scope="col">Actualizar</th>
+                                        <th scope="col">Descargar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in @Model.ListSolicitudes)
+                                    {
+                                        <tr>
+                                            <td scope="row">@item.ID_SOLICITUD</td>
+                                            <td>@item.Identificacion</td>
+                                            <td>@item.NOMBRE</td>
+                                            <td>
+
+                                                <select id="ddlEstados">
+                                                    @foreach (var itemTipo in @Model.ListTipos)
+                                                    {
+                                                        if (itemTipo.ID_ESTADO.ToString() == @item.ID_ESTADO.ToString())
+                                                        {
+                                                            <option value="@itemTipo.ID_ESTADO" selected>@itemTipo.Descripcion</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@itemTipo.ID_ESTADO">@itemTipo.Descripcion</option>
+                                                        }
+                                                    }
+                                                </select>
+
+                                            </td>
+                                            <td>
+                                                <select id="ddlProductos">
+                                                    @foreach (var itemProd in @Model.ListProductos)
+                                                    {
+                                                        if (@itemProd.IdProducto.ToString() == @item.IdProducto.ToString())
+                                                        {
+                                                            <option value="@itemProd.IdProducto" selected>@itemProd.NombreProducto</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@itemProd.IdProducto">@itemProd.NombreProducto</option>
+                                                        }
+                                                    }
+                                                </select>
+
+                                            </td>
+
+                                            <td>@Html.TextBox("montoMaximo", @item.MontoMaximo, new { maxlength = 50, size = 10 })</td>
+                                            <td>
+                                                <a href='#' class='btn btn-primary' onclick="ActualizarSolicitud(@item.ID_SOLICITUD,$('#ddlProductos option:selected').val(),$('#ddlEstados option:selected').val(),$('#montoMaximo').val())">Actualizar</a>
+                                            </td>
+                                            <td>
+
+                                                <a href='#' class='btn btn-success' onclick="Descargar(@item.Identificacion)">Descargar</a>
+                                            </td>
+                                        </tr>
+
+                                    }
+
+                                </tbody>
+
+                            </table>
+
+                            <span id="spnMensaje" class="badge badge-primary"></span>
+
+                            <span id="spnMensajeError" class="badge badge-danger"></span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</fieldset>
+
+
+}
+<script type="text/javascript">
+        var baseUrl = '@Url.Content("~/")';
+    function retornarUrl() {
+        if (document.getElementById("SolicitudBuro").value == "") return false;
+        window.top.location.href = "/Solicitudes/Buscar/" + document.getElementById("SolicitudBuro").value;
+        $("#tblBuscar").css("display", "inline");
+        return false;
+    }
+
+function ActualizarSolicitud(ID_SOLICITUD, ID_Productos, ID_Estados, montoMaximo) {
+
+    $.ajax(
+        {
+            url: baseUrl + "Solicitudes/ActualizaSolicitud",
+            type: "POST",
+            data: {
+                Id: ID_SOLICITUD,
+                MontoMaximo: montoMaximo,
+                IdProducto: ID_Productos,
+                Status: ID_Estados
+            },
+            success: function (result) {
+
+                $("#spnMensaje").html(result.Mensaje);
+
+            },
+            error: function (xhr, status, p3, p4) {
+                var err = p3;
+                if (xhr.responseText && xhr.responseText[0] == "{")
+                    err = JSON.parse(xhr.responseText).message;
+                $("#spnMensajeError").html(result.Mensaje);
+            }
+        });
+
+}
+    function Descargar(ident) {
+
+        $.ajax(
+            {
+                url: baseUrl + "Solicitudes/DescargarXmlBuros",
+                type: "POST",
+                data: {
+                    identificacion: ident
+                },
+                success: function (result) {
+
+                    $("#spnMensaje").html(result.Mensaje);
+
+
+                    download(result.DATATUCA, result.NOMBRETUCA, result.MIMETYPE);
+                    download(result.DATACREDDIT, result.NOMBRECREDDIT, result.MIMETYPE);
+                    return false;
+                },
+                error: function (xhr, status, p3, p4) {
+                    var err = p3;
+                    if (xhr.responseText && xhr.responseText[0] == "{")
+                        err = JSON.parse(xhr.responseText).message;
+                    $("#spnMensajeError").html(result.Mensaje);
+                }
+            });
+
+    }
+
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

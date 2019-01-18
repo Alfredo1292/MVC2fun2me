@@ -1,0 +1,723 @@
+﻿@model TwoFunTwoMeFintech.Models.agente
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+
+
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        @*<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />*@
+
+        <link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
+
+        <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+        <link href="~/Styles/Site.css" rel="stylesheet" />
+
+
+
+        @*<script type="text/javascript">
+                function MostrarBucket() {
+
+                    document.getElementById('Buckets').style.display = 'block';
+                    document.getElementById('Agentes').style.display = 'none';
+                    document.getElementById('ModBucket').style.display = 'block';
+                    document.getElementById('ModAgente').style.display = 'none';
+                    document.getElementById('ModGeneral').style.display = 'none';
+                    document.getElementById('ModInicial').style.display = 'none';
+
+                }
+
+                function Ambos() {
+                    document.getElementById('Buckets').style.display = 'block';
+                    document.getElementById('Agentes').style.display = 'block';
+                    document.getElementById('ModGeneral').style.display = 'block';
+                    document.getElementById('ModBucket').style.display = 'none';
+                    document.getElementById('ModAgente').style.display = 'none';
+                    document.getElementById('ModInicial').style.display = 'none';
+                }
+
+
+                function MostrarAgente() {
+                    document.getElementById('Agentes').style.display = 'block';
+                    document.getElementById('Buckets').style.display = 'none';
+                    document.getElementById('ModAgente').style.display = 'block';
+                    document.getElementById('ModBucket').style.display = 'none';
+                    document.getElementById('ModGeneral').style.display = 'none';
+                    document.getElementById('ModInicial').style.display = 'none';
+                }
+
+            </script>*@
+
+
+        <script>
+
+
+
+        $(document).ready(function ()
+        {
+
+            $("#confagente").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Buckets/Agente",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                //"columnDefs":
+                //[{
+
+                //        className: 'configuraciones',
+                //        visible: false
+                //}],
+
+                "columns": [
+                    { "data": "cod_agente", "name": "cod_agente", "autoWidth": true },
+                    { "data": "nombre", "name": "nombre", "autoWidth": true },
+                    { "data": "estado", "name": "estado", "autoWidth": true },
+                    { "data": "fechacreacion", "name": "fechacreacion", "autoWidth": true },
+                    { "data": "fechamodificacion", "name": "fechamodificacion", "autoWidth": true },
+                    { "data": "configuraciones1", "name": "configuraciones1", "autoWidth": true  ,"visible": false },
+                    { "data": "configuraciones2", "name": "configuraciones2", "autoWidth": true, "visible": false},
+                    { "data": "configuraciones3", "name": "configuraciones3", "autoWidth": true, "visible": false },
+
+                    { "data": "configuraciones4", "name": "configuraciones4", "autoWidth": true, "visible": false },
+                    { "data": "configuraciones5", "name": "configuraciones5", "autoWidth": true, "visible": false },
+                    { "data": "configuraciones6", "name": "configuraciones6", "autoWidth": true, "visible": false },
+                    { "data": "configuraciones7", "name": "configuraciones7", "autoWidth": true, "visible": false },
+                    { "data": "configuraciones8", "name": "configuraciones8", "autoWidth": true, "visible": false },
+                    //{
+                    //    "data": "configuraciones", "name": "configuraciones",
+                    //    "render": function (data, type, full, meta) {
+                    //        return data.cod_agente
+                    //    }
+                    //},
+
+                    //{
+                    //    data: 'configuraciones', "render": function (data, type, row) {
+                    //        return data
+                    //    },
+
+                    //},
+
+
+
+                    {
+                        "render": function (data, type, full, meta)
+                        {
+                            return "<a href='#' class='btn btn-primary' onclick=EditeData('" + full.cod_agente + "'); >Editar</a>";
+                        }
+                    },
+                    {
+                        data: null, render: function (data, type, row)
+                        {
+                            return "<a href='#' class='btn btn-danger' onclick=DeleteData('" + row.cod_agente + "'); >Eliminar</a>";
+                        }
+                    },
+                    {
+                        data: null, render: function (data, type, row) {
+
+                            estado1 = "";
+                            estado2 = "";
+                            estado3 = "";
+                            estado4 = "";
+                            estado5 = "";
+                            estado6 = "";
+                            estado7 = "";
+                            estado8 = "";
+
+                            if (row.configuraciones1 == "1")
+                                estado1 = "checked";
+
+                            if (row.configuraciones2 == "1")
+                                estado2 = "checked";
+
+                            if (row.configuraciones3 == "1")
+                                estado3 = "checked";
+
+
+                            if (row.configuraciones4 == "1")
+                                estado4 = "checked";
+                            if (row.configuraciones5 == "1")
+                                estado5 = "checked";
+                            if (row.configuraciones6 == "1")
+                                estado6 = "checked";
+                            if (row.configuraciones7 == "1")
+                                estado7 = "checked";
+                            if (row.configuraciones8 == "1")
+                                estado8 = "checked";
+
+
+                            return " <input " + estado1 + " id='" + row.cod_agente + "X" + "' type='checkbox'>1 <input " + estado2 + " id='" + row.cod_agente + "X1" + "' type='checkbox'>2 <input " + estado3 + " id='" + row.cod_agente + "X2" + "' type='checkbox'>3  <input " + estado4 + " id='" + row.cod_agente + "X3" + "' type='checkbox'>4 <input " + estado5 + " id='" + row.cod_agente + "X4" + "' type='checkbox'>5 <input " + estado6 + " id='" + row.cod_agente + "X5" + "' type='checkbox'>6 <input " + estado7 + " id='" + row.cod_agente + "X6" + "' type='checkbox'>7 <input " + estado8 + " id='" + row.cod_agente + "X7" + "' type='checkbox'>8 ";
+                        }
+
+
+
+                    },
+                ]
+
+            });
+
+
+
+            $("#confbucket").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Buckets/ConfiguracionBucket",
+                    "type": "POST",
+                    "data": { Top: $('.nowrap').val() },
+                    "datatype": "json"
+                },
+                //"columnDefs":
+                //[{
+                //    "targets": [0],
+                //    "visible": true,
+                //    "searchable": true
+                //}],
+
+                "columns": [
+                    { "data": "id", "name": "id", "autoWidth": true },
+                    { "data": "BucketInicial", "name": "BucketInicial", "autoWidth": true },
+                    { "data": "BucketFinal", "name": "BucketFinal", "autoWidth": true },
+
+
+
+                    {
+                        data: null, render: function (data, type, row) {
+                            estado1 = "";
+                            if (row.PRPRotas == "True")
+                                estado1 = "checked";
+                            return " <input " + estado1 + " id='" + row.id + "Y" + "' type='checkbox'>";
+                        }
+                    },
+                    {
+                        data: null, render: function (data, type, row) {
+                            estado2 = "";
+                            if (row.CeroPagos == "True")
+                                estado2 = "checked";
+                            return " <input " + estado2 + " id='" + row.id + "Y1" + "' type='checkbox'>";
+                        }
+                    },
+                    {
+                        data: null, render: function (data, type, row) {
+                            estado3 = "";
+                            if (row.SaldoAlto == "True")
+                                estado3 = "checked";
+                            return " <input " + estado3 + " id='" + row.id + "Y2" + "' type='checkbox'>";
+                        }
+                    },
+                    {
+                        data: null, render: function (data, type, row) {
+                            estado4 = "";
+                            if (row.SaldoMedio == "True")
+                                estado4 = "checked";
+                            return " <input " + estado4 + " id='" + row.id + "Y3" + "' type='checkbox'>";
+                        }
+                    },
+                    {
+                        data: null, render: function (data, type, row) {
+                            estado5 = "";
+                            if (row.SaldoBajo == "True")
+                                estado5 = "checked";
+                            return " <input " + estado5 + " id='" + row.id + "Y4" + "' type='checkbox'>";
+                        }
+                    },
+
+                    {
+                        data: null, render: function (data, type, row) {
+                            estado6 = "";
+                            if (row.CuentaAlDia == "True")
+                                estado6 = "checked";
+                            return " <input " + estado6 + " id='" + row.id + "Y5" + "' type='checkbox'>";
+                        }
+                    },
+
+
+                    {
+                        "render": function (data, type, full, meta) {
+                            return "<a href='#' class='btn btn-primary' onclick=EditeBucket('" + full.id + "'); >Editar</a>";
+                        }
+                    },
+
+
+                ]
+
+            });
+
+
+            $("#cantidadconf").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Buckets/Buckets",
+                    "type": "POST",
+                    "data": { Top: $('.nowrap').val() },
+                    "datatype": "json"
+                },
+                //"columnDefs":
+                //[{
+                //    "targets": [0],
+                //    "visible": true,
+                //    "searchable": true
+                //}],
+
+                "columns": [
+                    { "data": "Bucket", "name": "Bucket", "autoWidth": true },
+                    { "data": "PRPRotas", "name": "PRPRotas", "autoWidth": true },
+                    { "data": "CeroPagos", "name": "CeroPagos", "autoWidth": true },
+                    { "data": "SaldoAlto", "name": "SaldoAlto", "autoWidth": true },
+                    { "data": "SaldoMedio", "name": "SaldoMedio", "autoWidth": true },
+                    { "data": "SaldoBajo", "name": "SaldoBajo", "autoWidth": true },
+                    { "data": "CuentaAlDia", "name": "CuentaAlDia", "autoWidth": true },
+                    { "data": "AgenteAsignado", "name": "AgenteAsignado", "autoWidth": true },
+                    { "data": "Cantidad_Cuentas", "name": "Cantidad_Cuentas", "autoWidth": true },
+                ]
+
+            });
+
+
+            $("#noasignado").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Buckets/Buckets_NoAsignado",
+                    "type": "POST",
+                    "data": { Top: $('.nowrap').val() },
+                    "datatype": "json"
+                },
+                //"columnDefs":
+                //[{
+                //    "targets": [0],
+                //    "visible": true,
+                //    "searchable": true
+                //}],
+
+                "columns": [
+                    { "data": "Bucket", "name": "Bucket", "autoWidth": true },
+                    { "data": "PRPRotas", "name": "PRPRotas", "autoWidth": true },
+                    { "data": "CeroPagos", "name": "CeroPagos", "autoWidth": true },
+                    { "data": "SaldoAlto", "name": "SaldoAlto", "autoWidth": true },
+                    { "data": "SaldoMedio", "name": "SaldoMedio", "autoWidth": true },
+                    { "data": "SaldoBajo", "name": "SaldoBajo", "autoWidth": true },
+                    { "data": "CuentaAlDia", "name": "CuentaAlDia", "autoWidth": true },
+                    { "data": "Cantidad_Cuentas", "name": "Cantidad_Cuentas", "autoWidth": true },
+                ]
+
+            });
+
+
+
+        });
+
+
+    function DeleteData(cod_agente)
+        {
+        alertify.confirm("¿Esta Seguro de Eliminar el Registro?",
+            function () {
+                Delete(cod_agente);
+            },
+            function () {
+                return false;
+            });
+        }
+
+
+
+
+function EditeBucket(id)
+    {
+            var url = '@Url.Content("~/")' + "Buckets/EditBucket";
+
+
+
+
+            var vv1;
+            if ($("#" + id + "Y" + ":checked").val()) vv1 = true;else vv1 = false;
+
+            var vv2;
+            if ($("#" + id + "Y1" + ":checked").val()) vv2 = true; else vv2 = false;
+
+            var vv3;
+    if ($("#" + id + "Y2" + ":checked").val()) vv3 = true; else vv3 = false;
+
+            var vv4;
+    if ($("#" + id + "Y3" + ":checked").val()) vv4 = true; else vv4 = false;
+
+            var vv5;
+    if ($("#" + id + "Y4" + ":checked").val()) vv5 = true; else vv5 = false;
+
+    var vv6;
+    if ($("#" + id + "Y5" + ":checked").val()) vv6 = true; else vv6 = false;
+
+
+    $.ajax(
+        {
+            url: url,
+            type: "POST",
+            data: {
+                PRPRotas: vv1,
+                CeroPagos: vv2,
+                SaldoAlto: vv3,
+                SaldoMedio: vv4,
+                SaldoBajo: vv5,
+                CuentaAlDia: vv6,
+                id: id,
+                Estado: 0,
+                Asignado: 0,
+                    },
+            success: function (result) {
+                alertify
+                    .alert("Registro Actualizado", function () {
+                        oTable = $('#example').DataTable();
+                        oTable.draw();
+                        bootbox.alert("Correcto!");
+                    });
+                    },
+                    error: function (xhr, status, p3, p4) {
+                        var err = p3;
+                        if (xhr.responseText && xhr.responseText[0] == "{")
+                            err = JSON.parse(xhr.responseText).message;
+                        alert(err);
+                    }
+                });
+                }
+
+
+
+        function EditeData(cod_agente)
+    {
+            var url = '@Url.Content("~/")' + "Buckets/Edit";
+
+
+
+
+            var v1;
+            if ($("#" + cod_agente + "X" + ":checked").val()) v1 = 1;else v1 = 0;
+
+            var v2;
+            if ($("#" + cod_agente + "X1" + ":checked").val()) v2 = 1; else v2 = 0;
+
+            var v3;
+            if ($("#" + cod_agente + "X2" + ":checked").val()) v3 = 1; else v3 = 0;
+
+            var v4;
+            if ($("#" + cod_agente + "X3" + ":checked").val()) v4 = 1; else v4 = 0;
+
+            var v5;
+            if ($("#" + cod_agente + "X4" + ":checked").val()) v5 = 1; else v5 = 0;
+
+            var v6;
+            if ($("#" + cod_agente + "X5" + ":checked").val()) v6 = 1; else v6 = 0;
+
+            var v7;
+            if ($("#" + cod_agente + "X6" + ":checked").val()) v7 = 1; else v7 = 0;
+
+            var v8;
+            if ($("#" + cod_agente + "X7" + ":checked").val()) v8 = 1; else v8 = 0;
+
+            var configuracion = v1 + "|" + v2 + "|" + v3 + "|" + v4 + "|" + v5 + "|" + v6 + "|" + v7 + "|" + v8
+
+
+            $.ajax(
+                {
+                    url: url,
+                    type: "POST",
+                    data: {
+                         ID: cod_agente, configuracion
+                    },
+                    success: function (result) {
+                        alertify
+                            .alert("Registro Actualizado", function () {
+                                oTable = $('#example').DataTable();
+                                oTable.draw();
+                                bootbox.alert("Correcto!");
+                            });
+                        //oTable = $('#example').DataTable();
+                        //oTable.draw();
+                        //bootbox.alert("Correcto!");
+                    },
+                    error: function (xhr, status, p3, p4) {
+                        var err = p3;
+                        if (xhr.responseText && xhr.responseText[0] == "{")
+                            err = JSON.parse(xhr.responseText).message;
+                        alert(err);
+                    }
+                });
+        }
+
+
+
+
+
+    function Delete(cod_agente)
+    {
+        var url = '@Url.Content("~/")' + "Buckets/Delete";
+
+        $.ajax(
+            {
+                url: url,
+                type: "POST",
+                data: {
+                    ID: cod_agente
+                },
+                success: function (result) {
+                    oTable = $('#example').DataTable();
+                    oTable.draw();
+                    bootbox.alert("Correcto!");
+                },
+                error: function (xhr, status, p3, p4) {
+                    var err = p3;
+                    if (xhr.responseText && xhr.responseText[0] == "{")
+                        err = JSON.parse(xhr.responseText).message;
+                    alert(err);
+                }
+            });
+                }
+
+
+
+        </script>
+
+
+
+
+
+
+
+
+        @*<ul class="nav nav-pills">
+                <li class="active"><button type="button" onclick="MostrarBucket()" class="btn btn-primary">Buckets</button></li>
+                <li><button type="button" onclick="MostrarAgente()" class="btn btn-primary">Agentes</button></li>
+                <li><a href="#">Mensajes</a></li>
+            </ul>*@
+
+
+
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#fisrtTab">Buckets</a></li>
+            <li><a data-toggle="tab" href="#secondTab">Agentes</a></li>
+            <li><a data-toggle="tab" href="#TresTab">Cuentas Asignadas</a></li>
+            <li><a data-toggle="tab" href="#CuatroTab">Pendientes Asignar</a></li>
+        </ul>
+
+
+
+        <div class="container">
+
+            <br>
+
+
+            <div id='ModGeneral' class="alert alert-warning" style='display:none;'>
+                <strong>General!</strong> Configuración General.
+            </div>
+
+            @*<div class="btn-group">
+                    <button type="button" onclick="MostrarBucket()" class="btn btn-primary">Buckets</button>
+                    <button type="button" onclick="MostrarAgente()" class="btn btn-primary">Agentes</button>
+                    <button type="button" onclick="Ambos()" class="btn btn-primary" name="B1"><span class="glyphicon glyphicon-cog"></span></button>
+                </div>*@
+
+
+
+
+        </div>
+
+
+        <div class="tab-content">
+            <div id="fisrtTab" class="tab-pane fade in active">
+
+                <div id='ModBucket' class="alert alert-info">
+                    <strong>Bucket!</strong> Configuración Buckets.
+                </div>
+
+                <div id='Buckets' class="container">
+                    <p></p>
+                    @*<div class="alert alert-info">
+                        <strong>Info Buckets!</strong> aqui info*@
+                    @*</div>*@
+
+                    <div class="container">
+                        <br />
+                        <div style="width:90%; margin:0 auto;">
+                            <table id="confbucket" class="table  table-bordered dt-responsive " width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Bucket</th>
+                                        <th>Mora Inicial</th>
+                                        <th>Mora Final</th>
+                                        <th>PRPRotas</th>
+                                        <th>CeroPagos</th>
+                                        <th>SaldoAlto</th>
+                                        <th>SaldoMedio</th>
+                                        <th>SaldoBajo</th>
+                                        <th>CuentaAlDia</th>
+                                        <th>Editar</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+            <div id="secondTab" class="tab-pane fade in">
+
+                <div id='ModAgente' class="alert alert-info">
+                    <strong>Agente!</strong> Configuración Agente.
+                </div>
+
+
+                <div class="container">
+                    <div id='Agentes' class="container">
+                        <br />
+                        <div style="width:95%; margin:0 auto;">
+                            <table id="confagente" class="table  table-bordered dt-responsive " width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Codigo</th>
+                                        <th>Agente</th>
+                                        <th>Estado</th>
+                                        <th>Fecha Creacion</th>
+                                        <th>Fecha Modificacion</th>
+                                        <th>Estados</th>
+                                        <th>Codigo</th>
+                                        <th>Agente</th>
+                                        <th>Estados</th>
+                                        <th>Estados</th>
+                                        <th>Estados</th>
+                                        <th>Fecha Creacion</th>
+                                        <th>Fecha Modificacion</th>
+                                        <th>Editar</th>
+                                        <th>Eliminar</th>
+                                        <th>Configuracion Bucket</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <div id="TresTab" class="tab-pane fade in">
+
+                <div class="alert alert-success">
+                    <strong>Bucket!</strong> Cantidad Cuentas Asignadas.
+                </div>
+
+                <div class="container">
+                    <p></p>
+                    @*<div class="alert alert-info">
+                        <strong>Info Buckets!</strong> aqui info*@
+                    @*</div>*@
+
+                    <div class="container">
+                        <br />
+                        <div style="width:100%; margin:0 auto;">
+                            <table id="cantidadconf" class="table  table-bordered" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Bucket</th>
+                                        <th>PRPRotas</th>
+                                        <th>CeroPagos</th>
+                                        <th>SaldoAlto</th>
+                                        <th>SaldoMedio</th>
+                                        <th>SaldoBajo</th>
+                                        <th>CuentaAlDia</th>
+                                        <th>AgenteAsignado</th>
+                                        <th>Cantidad_Cuentas</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <div id="CuatroTab" class="tab-pane fade in">
+
+                <div class="alert alert-warning">
+                    <strong>Bucket!</strong> Cantidad Cuentas Pendientes Asignar.
+                </div>
+
+                <div class="container">
+                    <p></p>
+                    @*<div class="alert alert-info">
+                        <strong>Info Buckets!</strong> aqui info*@
+                    @*</div>*@
+
+                    <div class="container">
+                        <br />
+                        <div style="width:90%; margin:0 auto;">
+                            <table id="noasignado" class="container table table-bordered" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Bucket</th>
+                                        <th>PRPRotas</th>
+                                        <th>CeroPagos</th>
+                                        <th>SaldoAlto</th>
+                                        <th>SaldoMedio</th>
+                                        <th>SaldoBajo</th>
+                                        <th>CuentaAlDia</th>
+                                        <th>Cantidad_Cuentas</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+    </fieldset>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
