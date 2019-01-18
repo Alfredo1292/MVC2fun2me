@@ -1,0 +1,135 @@
+<div id="tipo_ident" class="center_div_ced_btns hide landscape" style="text-align: center; z-index: 1">
+    <span class="title1">Por favor selecciona tu tipo de identificación: </span>
+    <div class="form-row" style="margin-top: 10px;">
+        <div class="col form-group">
+            <button onclick="btnCedulaNacionalClick(this)" type="button" class="btn btn-yellow">Nacional</button>
+        </div>
+        <div class="col form-group">
+            <button onclick="bntCedulaDimexClick()" type="button" class="btn btn-yellow">Dimex</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-5 hide center_div landscape" id="paso2">
+    <!--Cedula tipo nacional parte 1 (cedula que muestra nombre)-->
+    <form id="solicitud-identificacion" name="solicitud" class="hide form-credito-nacional">
+        <!--se desoculta cuando el usuario selecciono su tipo de cedula-->
+        <div>
+            <div class="form-row">
+                <div class="col form-group">
+                    <label>Cédula</label>
+                    <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                        type="number" onkeyup="cedulaNacionalSolicitudKeyup(event)" onkeydown="cedulaSolicitudKeyDown(event,this);"
+                        class="form-control" id="cedula_solicitud" autocomplete="off" maxlength="9">
+                    <small class="form-text">*Recuerda que la cedula debe de ser de 9 digitos</small>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col form-group" id="label-bienvenida">
+                    <div class="center-button">
+                        <label class="label-bienvenida-nacional" style="text-align: left; font-size: 1.1em;"></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row" style="margin-left: 1rem">
+                <div class="col-md-4">
+                    <input type="checkbox" class="form-check-input" id="check" checked>
+                </div>
+                <div class="col-md-8" style="position:relative;bottom:0.3rem">
+                    <small onclick="mostrarConsentimientoInformado()">
+                        Acepto
+                        <a>
+                            <u style="cursor: pointer;">los términos y condiciones</u>
+                        </a>
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col form-group">
+                    <button id="continuar-identificacion" type="button" class="form-control corregir-ced-nacional hide"><i
+                            class="fa fa-undo" aria-hidden="true"></i> Corregir</button>
+                </div>
+                <div class="col form-group">
+                    <button onclick="solicitudCedulaNacionalClick(this)" id="continuar-identificacion" type="button"
+                        class="form-control solicitud-cedula-nacional hide"><i class="fa fa-arrow-right" aria-hidden="true"></i>
+                        Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!--Cedula tipo nacional parte 2 CONTACTO (cedula que muestra pantalla contacto telefono celular y correo)-->
+    <form id="frm-solicitud" name="solicitud" class="hide form-credito-nacional-contacto">
+        <div>
+            <div class="form-row">
+                <div class="col form-group">
+                    <label>Télefono celular</label>
+                    <input type="number" pattern="\d*" class="form-control" id="telefono_solicitud" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col form-group">
+                    <label>Correo</label>
+                    <input type="email" class="form-control" id="correo_solicitud">
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-yellow" onclick="solicitudAprobacionContactoClick()">Continuar</button>
+            </div>
+        </div>
+        <div class="porfavor_espere espere-formulario hide col-md-12">
+            <i class="fa fa-spinner fa-spin" style="font-size:2em"></i>
+            <p>Por favor espere....</p>
+        </div>
+    </form>
+    <!--Cedula tipo dimex-->
+    <form id="solicitud" name="solicitud" class="hide form-credito-dimex solicitud-dimex">
+        <!--se desoculta cuando el usuario selecciono su tipo de cedula-->
+        <div>
+            <div class="form-row">
+                <div class="col-sm-12 form-group">
+                    <p>Cédula</p>
+                    <input type="number" pattern="\d*" class="form-control" id="cedula_solicitud-dimex" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-sm-12 form-group">
+                    <p>Primer nombre</p>
+                    <input type="text" class="form-control" id="nombre-dimex">
+                </div>
+                <div class="col-sm-12 form-group">
+                    <p>Segundo nombre</p>
+                    <input type="text" class="form-control" id="nombre2-dimex">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-sm-12 form-group">
+                    <p>Primer apellido</p>
+                    <input type="text" class="form-control" id="apellido-dimex">
+                </div>
+                <div class="col-sm-12 form-group">
+                    <p>Segundo apellido</p>
+                    <input type="text" class="form-control" id="apellido2-dimex">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-sm-12 form-group">
+                    <p>Teléfono celular</p>
+                    <input type="number" pattern="\d*" class="form-control" id="telefono_solicitud-dimex" autocomplete="off">
+                </div>
+                <div class="col-sm-12 form-group">
+                    <p>Correo Electrónico</p>
+                    <input type="email" class="form-control" id="correo_solicitud-dimex">
+                </div>
+            </div>
+            <div class="form-group">
+                <button id="continuar" type="button" class="form-control solicitud-aprobacion-dimex">Continuar</button>
+            </div>
+        </div>
+        <div class="porfavor_espere espere-formulario-dimex hide col-md-12">
+            <i class="fa fa-spinner fa-spin" style="font-size:2em"></i>
+            <p>Por favor espere....</p>
+        </div>
+    </form>
+</div>

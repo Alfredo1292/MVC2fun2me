@@ -1,0 +1,564 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{276567F7-2EA0-4333-B53C-B0120B3C34B2}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TwoFunTwoMe</RootNamespace>
+    <AssemblyName>TwoFunTwoMe</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort>44325</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>%24/F2P.WAP/Desarrollo/SucursalVirtual/Dev/F2P.WAP/Source/F2P.WAP</SccProjectName>
+    <SccLocalPath>.</SccLocalPath>
+    <SccAuxPath>https://akrosproject.visualstudio.com</SccAuxPath>
+    <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
+    <TargetFrameworkProfile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Imaging, Version=2.2.5.0, Culture=neutral, PublicKeyToken=ba8ddea9676ca48b, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Imaging.2.2.5\lib\AForge.Imaging.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Math, Version=2.2.5.0, Culture=neutral, PublicKeyToken=abba2e25397ee8c9, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Math.2.2.5\lib\AForge.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\packages\AWSSDK.Core.3.3.29.14\lib\net45\AWSSDK.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.Rekognition, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\packages\AWSSDK.Rekognition.3.3.13\lib\net45\AWSSDK.Rekognition.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.S3, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\packages\AWSSDK.S3.3.3.30\lib\net45\AWSSDK.S3.dll</HintPath>
+    </Reference>
+    <Reference Include="EasyNetQ">
+      <HintPath>..\..\RABBIT\RabbitMQ API\EasyNetQ.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.8.1\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation, Version=1.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.5\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Net.Http.Headers, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.Headers.2.2.0\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=4.1.0.0, Culture=neutral, PublicKeyToken=e44a2bc38ed2c13c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
+      <HintPath>..\..\..\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ObjectBuilder, Version=1.0.51206.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Practices.ObjectBuilder.dll.3.1.0\lib\2.0\Microsoft.Practices.ObjectBuilder.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Models\Dll\Microsoft.SharePoint.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.Runtime, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Models\Dll\Microsoft.SharePoint.Client.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\2Fun2Me.Conexion\TwoFunTwoMe_Conexion\TwoFunTwoMe_DataAccess\bin\Release\netstandard.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\API_BLAZE\F2P.WAP\bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NReco.PdfGenerator, Version=1.1.14.0, Culture=neutral, PublicKeyToken=231663d50a41b451, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\NReco.PdfGenerator.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client">
+      <HintPath>..\..\RABBIT\RabbitMQ API\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQSender">
+      <HintPath>..\..\RABBIT\RabbitMQ API\RabbitMQSender.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.5.4.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.5.4\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Swashbuckle.Core.5.0.0\lib\net40\Swashbuckle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.0\lib\net45\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.4.0.0\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Context" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.5.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="TwoFunTwoMe_Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\2Fun2Me.Conexion\TwoFunTwoMe_Conexion_4.5\TwoFunTwoMe_Common\TwoFunTwoMe_DataAccess\bin\Release\TwoFunTwoMe_Common.dll</HintPath>
+    </Reference>
+    <Reference Include="TwoFunTwoMe_DataAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\2Fun2Me.Conexion\TwoFunTwoMe_Conexion_4.5\TwoFunTwoMe_Common\TwoFunTwoMe_DataAccess\bin\Release\TwoFunTwoMe_DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0.6\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\css\bootstrap-slider.1.css" />
+    <Content Include="assets\css\bootstrap-slider.css" />
+    <Content Include="assets\css\bootstrap.css" />
+    <Content Include="assets\css\css.css" />
+    <Content Include="assets\css\font-awesome.css" />
+    <Content Include="assets\css\magnific-popup.css" />
+    <Content Include="assets\css\steps.css" />
+    <Content Include="assets\css\styles.css" />
+    <Content Include="assets\css\swiper.css" />
+    <Content Include="assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="assets\images\aproba-mob.png" />
+    <Content Include="assets\images\aproba-mob11.png" />
+    <Content Include="assets\images\aproba.png" />
+    <Content Include="assets\images\aproba234.png" />
+    <Content Include="assets\images\arreglo.png" />
+    <Content Include="assets\images\avion.png" />
+    <Content Include="assets\images\bus.png" />
+    <Content Include="assets\images\carro.png" />
+    <Content Include="assets\images\decoracion.png" />
+    <Content Include="assets\images\down-arrow.png" />
+    <Content Include="assets\images\ella-res.png" />
+    <Content Include="assets\images\favicon.png" />
+    <Content Include="assets\images\fondo-about-cel.png" />
+    <Content Include="assets\images\fondo-about.png" />
+    <Content Include="assets\images\fondo-cel.png" />
+    <Content Include="assets\images\fondo-mob.png" />
+    <Content Include="assets\images\fondo-red.png" />
+    <Content Include="assets\images\fondo.png" />
+    <Content Include="assets\images\fondowo.png" />
+    <Content Include="assets\images\logo-menu.png" />
+    <Content Include="assets\images\logo.jpg" />
+    <Content Include="assets\images\logo.png" />
+    <Content Include="assets\images\logo.svg" />
+    <Content Include="assets\images\one.png" />
+    <Content Include="assets\images\opc-mob.png" />
+    <Content Include="assets\images\options.png" />
+    <Content Include="assets\images\recibos.png" />
+    <Content Include="assets\images\regalo.png" />
+    <Content Include="assets\images\sobre.png" />
+    <Content Include="assets\images\up-arrow.png" />
+    <Content Include="assets\img\back-movil.png" />
+    <Content Include="assets\img\back-pc.png" />
+    <Content Include="assets\img\bg-cel.png" />
+    <Content Include="assets\img\bg-pc.png" />
+    <Content Include="assets\img\botones\btn_aceptar.png" />
+    <Content Include="assets\img\botones\btn_continuar.png" />
+    <Content Include="assets\img\botones\btn_enviar.png" />
+    <Content Include="assets\img\botones\btn_micamara.png" />
+    <Content Include="assets\img\botones\btn_solicitar.png" />
+    <Content Include="assets\img\botones\btn_subirarchivo.png" />
+    <Content Include="assets\img\botones\txt_aprobado.png" />
+    <Content Include="assets\img\botones\txt_rechazado.png" />
+    <Content Include="assets\img\botones\wila_aceptado.png" />
+    <Content Include="assets\img\botones\x_rechazado.png" />
+    <Content Include="assets\img\cedula_dorso.png" />
+    <Content Include="assets\img\cedula_frente.png" />
+    <Content Include="assets\img\cedula_selfie.png" />
+    <Content Include="assets\img\cedula_selfie_movil.png" />
+    <Content Include="assets\img\favicon.png" />
+    <Content Include="assets\img\favicon1.png" />
+    <Content Include="assets\img\favicon2.png" />
+    <Content Include="assets\img\gracias-cel.png" />
+    <Content Include="assets\img\gracias-cel22.png" />
+    <Content Include="assets\img\gracias-pc.png" />
+    <Content Include="assets\img\gracias-pc234.png" />
+    <Content Include="assets\img\gracias2-cel.png" />
+    <Content Include="assets\img\gracias2-pc.png" />
+    <Content Include="assets\img\logo-cel.jpg" />
+    <Content Include="assets\img\logo-cel.png" />
+    <Content Include="assets\img\logo-pc.jpg" />
+    <Content Include="assets\img\logo-pc.png" />
+    <Content Include="assets\img\logo.png" />
+    <Content Include="assets\img\preview\1. Datos básicos.png" />
+    <Content Include="assets\img\preview\2. Videos.png" />
+    <Content Include="assets\img\preview\3. calculadora b.png" />
+    <Content Include="assets\img\preview\3. calculadora.png" />
+    <Content Include="assets\img\preview\4. Aprobado.png" />
+    <Content Include="assets\img\preview\4. Rechazado.png" />
+    <Content Include="assets\img\preview\5. foto de cédula a.png" />
+    <Content Include="assets\img\preview\5. Foto de cédula b.png" />
+    <Content Include="assets\img\preview\6 selfie b.png" />
+    <Content Include="assets\img\preview\6. Selfie a.png" />
+    <Content Include="assets\img\preview\7. cuenta bancaria.png" />
+    <Content Include="assets\img\preview\8. Firma.png" />
+    <Content Include="assets\img\SOLICITUD APROBADA ACTIVA.png" />
+    <Content Include="assets\img\SOLICITUD RECHAZADA EN LOS ULTIMOS 30 DIAS.png" />
+    <Content Include="assets\img\SOLICITUD RECHAZADA EN LOS ULTIMOS 30 DIAS03.png" />
+    <Content Include="assets\img\SOLICITUD RECHAZADA.png" />
+    <Content Include="assets\img\SOLICITUD RECHAZADA02.png" />
+    <Content Include="assets\img\solicitud-aprobada-activa.png" />
+    <Content Include="assets\img\test.mp4" />
+    <Content Include="assets\img\thank_you.png" />
+    <Content Include="assets\img\thank_you_movil.png" />
+    <Content Include="assets\img\video-anim-mobile.gif" />
+    <Content Include="assets\img\video-anim.gif" />
+    <Content Include="assets\img\video_final.mp4" />
+    <Content Include="assets\img\video_final.webm" />
+    <Content Include="assets\img\wila_aceptado.png" />
+    <Content Include="assets\js\bootstrap-slider.1.js" />
+    <Content Include="assets\js\bootstrap-slider.js" />
+    <Content Include="assets\js\bootstrap.min.js" />
+    <Content Include="assets\js\calcu.js" />
+    <Content Include="assets\js\components.js" />
+    <Content Include="assets\js\contador.js" />
+    <Content Include="assets\js\env.js" />
+    <Content Include="assets\js\handle-components.js" />
+    <Content Include="assets\js\jquery.easing.min.js" />
+    <Content Include="assets\js\jquery.inputmask.bundle.js" />
+    <Content Include="assets\js\jquery.magnific-popup.js" />
+    <Content Include="assets\js\jquery.min.js" />
+    <Content Include="assets\js\message.js" />
+    <Content Include="assets\js\metodos_api.js" />
+    <Content Include="assets\js\mobile-detect.min.js" />
+    <Content Include="assets\js\popper.min.js" />
+    <Content Include="assets\js\select2.min.js" />
+    <Content Include="assets\js\sign_pad.js" />
+    <Content Include="assets\js\swiper.min.js" />
+    <Content Include="assets\js\tabla.js" />
+    <Content Include="assets\js\user-public-ip.js" />
+    <Content Include="assets\js\utils.js" />
+    <Content Include="assets\js\validar.js" />
+    <Content Include="assets\js\validator.min.js" />
+    <Content Include="assets\tabla\buttons.colVis.min.js" />
+    <Content Include="assets\tabla\buttons.flash.min.js" />
+    <Content Include="assets\tabla\buttons.html5.min.js" />
+    <Content Include="assets\tabla\buttons.print.min.js" />
+    <Content Include="assets\tabla\dataTables.buttons.min.js" />
+    <Content Include="assets\tabla\jquery.dataTables.min.js" />
+    <Content Include="assets\tabla\jszip.min.js" />
+    <Content Include="assets\tabla\pdfmake.min.js" />
+    <Content Include="assets\tabla\vfs_fonts.js" />
+    <Content Include="download.js" />
+    <Content Include="GINIMACHINE.html" />
+    <Content Include="Global.asax" />
+    <Content Include="gracias.html" />
+    <Content Include="index.aspx" />
+    <Content Include="index.html" />
+    <Content Include="Index1.html" />
+    <Content Include="jquery-2.0.3.min.js" />
+    <Content Include="Machote\Bac_credomatic_logo.png" />
+    <Content Include="Machote\formulario-bac-sin-remplazo.html" />
+    <Content Include="Machote\formulario-bac.html" />
+    <Content Include="Metadata\Dll\Microsoft.IdentityModel.dll" />
+    <Content Include="Metadata\Dll\Microsoft.SharePoint.Client.dll" />
+    <Content Include="Metadata\Dll\Microsoft.SharePoint.Client.Runtime.dll" />
+    <Content Include="Properties\DataSources\System.Xml.XmlNode.datasource" />
+    <Content Include="Properties\DataSources\System.Xml.Linq.XElement.datasource" />
+    <Content Include="apiapp.json" />
+    <Content Include="Metadata\deploymentTemplates\apiappconfig.azureresource.json" />
+    <Content Include="Machote\Documento.pdf" />
+    <Content Include="Machote\documentoFinal.pdf" />
+    <Content Include="Machote\Formulario.pdf" />
+    <Content Include="assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff2" />
+    <Content Include="assets\fonts\FontAwesome.otf" />
+    <Content Include="assets\fonts\fuentes\DYNO BOLD ITALIC.TTF" />
+    <Content Include="assets\fonts\fuentes\DYNO BOLD.TTF" />
+    <Content Include="assets\fonts\fuentes\DYNO ITALIC.TTF" />
+    <Content Include="assets\fonts\fuentes\DYNO REGULAR.TTF" />
+    <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\TU_Consulta\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Views\pin-modal.html" />
+    <Content Include="Views\shared\consentimiento-informado.html" />
+    <Content Include="Views\shared\footer.html" />
+    <Content Include="Views\shared\header.html" />
+    <Content Include="Views\shared\top-section.html" />
+    <Content Include="Views\solicitud-activa.html" />
+    <Content Include="Views\step1.html" />
+    <Content Include="Views\step10.html" />
+    <Content Include="Views\step11.html" />
+    <Content Include="Views\step2.html" />
+    <Content Include="Views\step3.html" />
+    <Content Include="Views\step4.html" />
+    <Content Include="Views\step5.html" />
+    <Content Include="Views\step6.html" />
+    <Content Include="Views\step7.html" />
+    <Content Include="Views\step8.html" />
+    <Content Include="Views\step9.html" />
+    <Content Include="Views\wrap.html" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Web References\TU_Consulta\TU_Consulta.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\SwaggerConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\GiniMachineController.cs" />
+    <Compile Include="Controllers\TwoFunTwoMeController.cs" />
+    <Compile Include="Controllers\ValidateModelAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DTO\AWSAccess.cs" />
+    <Compile Include="Models\DTO\ConfigSys.cs" />
+    <Compile Include="Models\DTO\CuentaBancaria.cs" />
+    <Compile Include="Models\DTO\DTO_GiniMachine.cs" />
+    <Compile Include="Models\DTO\DTO_GiniMachineConfig.cs" />
+    <Compile Include="Models\DTO\dto_login.cs" />
+    <Compile Include="Models\DTO\Imagenes.cs" />
+    <Compile Include="Models\DTO\InsertPersonasWeb.cs" />
+    <Compile Include="Models\DTO\Padron.cs" />
+    <Compile Include="Models\DTO\PagareContrato.cs" />
+    <Compile Include="Models\DTO\Pasos_credito.cs" />
+    <Compile Include="Models\DTO\ReferenciaLaboral.cs" />
+    <Compile Include="Models\DTO\Solicitudes.cs" />
+    <Compile Include="Models\DTO\Tab_ConfigSys.cs" />
+    <Compile Include="Models\DTO\TraceLoop.cs" />
+    <Compile Include="Models\DTO\Utilitario.cs" />
+    <Compile Include="Models\Manager\Manager.cs" />
+    <Compile Include="Models\Manager\ManagerGiniMachine.cs" />
+    <Compile Include="Models\Manager\MQRabbit.cs" />
+    <Compile Include="Models\Utility\Cifrado.cs" />
+    <Compile Include="Models\Utility\ConvertidorHtmlToPdf.cs" />
+    <Compile Include="Models\Utility\ConvertImage.cs" />
+    <Compile Include="Models\Utility\EnvioCorreos.cs" />
+    <Compile Include="Models\Utility\FtpManager.cs" />
+    <Compile Include="Models\Utility\GlobalClass.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\TU_Consulta\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Machote\archivos\" />
+    <Folder Include="Metadata\Proxy\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="https://cars.transunioncentroamerica.com/sts/TU_Consulta.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\TU_Consulta\</RelPath>
+      <UpdateFromURL>https://cars.transunioncentroamerica.com/sts/TU_Consulta.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>F2P_WAP_TU_Consulta_TU_Consulta</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\AForge.Imaging.2.2.5\lib\AForge.Imaging.dll" />
+    <Analyzer Include="..\packages\AForge.Math.2.2.5\lib\AForge.Math.dll" />
+    <Analyzer Include="..\packages\AWSSDK.Rekognition.3.3.13\analyzers\dotnet\cs\AWSSDK.Rekognition.CodeAnalysis.dll" />
+    <Analyzer Include="..\packages\AWSSDK.S3.3.3.30\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>52047</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:52045/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <servers defaultServer="SelfHostServer">
+            <server name="SelfHostServer" exePath="" cmdArgs="" url="http://localhost:52045/" workingDir="" />
+          </servers>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Blaze App</title>
+	<script>
+		location.href = "index.aspx";
+	</script>
+</head>
+<body>
+
+    <!--<div>
+        <h2>All Products</h2>
+        <ul id="products" />
+    </div>-->
+    <div>
+
+        <!--<input type="button" value="Search" onclick="find();" />-->
+
+
+
+        <table id="DatosBlaze">
+            <tr>
+                <td>Cedula</td>
+                <td><input type="text" id="prodId" size="30" /></td>
+                <td><input type="button" value="Login" onclick="FindBlaze();" /></td>
+
+            </tr>
+
+        </table>
+
+        <!--<h2>Result</h2>
+        <ul id="productsRessult" />-->
+    </div>
+    <!--<p id="product" />-->
+    <script src="jquery-2.0.3.min.js"></script>
+    <script>
+        var uri = 'api/TwoFunTwoMe/Paso_1_GuardarPersonaWeb';
+
+
+        //$(document).ready(function () {
+        //    // Send an AJAX request
+        //    /*
+
+        //        AppName = InvokeMember,
+        //        AppVersion = version,
+        //        HostName = prop.Server.MachineName,
+        //        BaseUrl = prop.ApplicationInstance.Request.Url.Authority,
+        //        ClientIp = HttpContext.Current.Request.UserHostAddress
+        //    */
+
+        //});
+        function FindConfig() {
+
+
+            $.ajax(
+                {
+                    url: 'api/BlazeTranslator/InvokeConfig',
+                    type: "POST",
+                    data: {
+                        P_STR_LLAVE_01: "APLICACION_SUC_VIRTUAL_CR",
+                        P_STR_LLAVE_02: "CEDULA",
+                        P_STR_LLAVE_03: "CONFIGURACION",
+                        P_STR_LLAVE_04: "VALIDADORES"
+                    },
+                    success: function (result) {
+                        alert(result);
+
+                    },
+                    error: function (xhr, status, p3, p4) {
+                        var err = "Error " + " " + status + " " + p3;
+                        if (xhr.responseText && xhr.responseText[0] == "{")
+                            err = JSON.parse(xhr.responseText).message;
+                        alert(err);
+                    }
+                });
+
+        }
+
+        function findServer() {
+            $.getJSON("api/BlazeTranslator/ValidateService?InvokeMember=INDEX")
+                .done(function (data) {
+                    alert("HostName: " + data.HostName + " ClientIp: " + data.ClientIp + " BaseUrl: " + data.BaseUrl);
+                    // On success, 'data' contains a list of products.
+                    //$.each(data, function (key, item) {
+                    //    // Add a list item for the product.
+                    //    alert(data);
+                    //});
+                });
+        };
+
+        function FindBlaze() {
+
+            //OBJETO NECESARIO PARA GUATEMALA, SI NO VA EL SISTEMA NO DEBE DEJARLO PASAR
+            var STR_VARIABLES = [
+                { STR_TIPO: "CEDULA", STR_VALOR: $('#prodId').val(), STR_DESCRIPCION: "CEDULA DEL CLIENTE" }
+                , { STR_TIPO: "FECHANACIMIENTO", STR_VALOR: $('#Nacimiento').val(), STR_DESCRIPCION: "FECHA DE NACIMIENTO" },
+                { STR_TIPO: "PROFESION", STR_VALOR: $('#Profesion').val(), STR_DESCRIPCION: "PROFESION" },
+            ]
+
+            $.ajax(
+                {
+                    url: uri,
+                    type: "POST",
+                    data: {
+                        cod_agente: "503550481", pass: "123"
+
+                    },
+                    success: function (result) {
+
+                        if (result == "") return alert("Ocurrio un error");
+                        var F2P = result;
+                        var ciResponseText = document.getElementById('Resultado');
+                        $("#ResultadoBlaze tr").remove();
+                        ciResponseText.innerHTML = '';
+
+                        var res = F2P.F2P_FILE.TRANSACTION_RESPONSE.RESPONSE_CODE;
+                        if (res == "ACK00") {
+                            var tr = '';
+                            var td = '';
+                            td = td + '<tr><td>RESPONSE_CODE</td>' + '<td>' + F2P.F2P_FILE.TRANSACTION_RESPONSE.RESPONSE_CODE + '</td></tr>';
+
+
+                            // td = td + '<tr> <td>NOMBRE:</td>' + '<td>' + F2P.F2P_FILE.INFORMACION_PERSONAL.PRIMERNOMBRE + ' ' + F2P.F2P_FILE.INFORMACION_PERSONAL.PRIMERAPELLIDO + ' ' + F2P.F2P_FILE.INFORMACION_PERSONAL.SEGUNDOAPELLIDO + '</td></tr>';
+                            tr = td = td;
+
+                            $('#ResultadoBlaze').append(tr);
+
+
+                            //var obj = JSON.parse(http.response);
+
+                        }
+                        else {
+                            ciResponseText.innerHTML = '';
+                            $("#ResultadoBlaze tr").remove();
+                            alert("BLOQUEADO");
+                        }
+
+                        ciResponseText.innerHTML = JSON.stringify(F2P, undefined, 2);
+                    },
+                    error: function (xhr, status, p3, p4) {
+                        var err = p3;
+                        if (xhr.responseText && xhr.responseText[0] == "{")
+                            err = JSON.parse(xhr.responseText).message;
+                        alert(err);
+                    }
+                });
+
+        }
+    </script>
+
+    <br />
+    <div id="productsRessult">
+        <table id="ResultadoBlaze"> </table>
+        <!--<h2>Result</h2>
+        <ul id="productsRessult" />-->
+    </div>
+    <br />
+
+    <div id="Resultado">
+        <!--<h2>Result</h2>
+        <ul id="productsRessult" />-->
+    </div>
+</body>
+</html>

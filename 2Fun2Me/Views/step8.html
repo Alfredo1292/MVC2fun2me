@@ -1,0 +1,67 @@
+<div class="col-md-5 center_div landscape hide" id="paso8">
+   <form id="solicitud" name="solicitud">
+      <div>
+         <div class="form-row">
+            <div class="col form-group">
+               <div class="center-button">
+                  <label class="label-cuenta" style="text-align: left !important;">Indicanos en qué cuenta te tenemos
+                     que depositar. Recordá que tenés que ser el titular, no depositamos en cuentas de otras personas.</label>
+               </div>
+            </div>
+         </div>
+         <div class="form-row">
+            <div class="col form-group">
+               <label>Banco</label>
+               <select class="form-control-select" onchange="bancoSelectChange($(this).val())" data-dropup-auto="false" id="banco-select" onchange="">
+                  <option class="select-option" value="" disabled selected>Selecciona</option>
+                  <option value="1">Banco Nacional</option>
+                  <!--15 digitos..pero con guiones son 19-->
+                  <option value="2">BCR</option>
+                  <!--7 digitos -->
+                  <option value="4">BAC San Jos&eacute;</option>
+                  <!--7 digitos -->
+                  <option value="10">Otro</option>
+                  <!--17 digitos SINPE -->
+               </select>
+            </div>
+         </div>
+         <!-- Tipo de cuenta, corriente o de ahorros-->
+         <div class="form-row hide" id="tipo-cuenta-row">
+            <div class="col form-group ">
+               <label>Tipo de cuenta</label>
+               <select class="form-control-select" data-dropup-auto="false" id="cbo-tipo-cuenta" onchange="tipoCuentaChange()">
+                  <option class="select-option" value="" disabled selected>Selecciona</option>
+                  <option value="1">Cuenta corriente</option>
+                  <option value="2">Cuenta de ahorros</option>
+               </select>
+            </div>
+         </div>
+         <div class="form-row hide" id="cuenta-row">
+            <div class="col form-group ">
+               <label>Número de cuenta</label>
+               <!---
+               <input type="text" pattern="\d*" class="form-control" id="cuenta_cliente" autocomplete="off">
+               -->
+               <input 
+               oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+               type="text" 
+               class="form-control" 
+               id="cuenta_cliente"
+               autocomplete="off" 
+               maxlength="20"
+               onkeypress='return validaNumericos(event)'
+               >
+            </div>
+         </div>
+         <div class="form-row hide" id="cuenta-simpe-row">
+            <div class="col form-group ">
+               <label>Cuenta Simpe</label>
+               <input maxlength="17" onkeydown="utils.validateNumberOnType(event)" type="text" class="form-control" id="cuenta-simpe" autocomplete="off">
+            </div>
+         </div>
+         <div class="form-group">
+            <button id="continuar" onclick="cuentaBancariaContinuar()" type="button" class="btn btn-yellow cuenta-bancaria-continuar">Continuar</button>
+         </div>
+      </div>
+   </form>
+</div>

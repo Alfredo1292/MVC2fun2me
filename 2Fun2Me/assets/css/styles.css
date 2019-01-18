@@ -1,0 +1,1475 @@
+/* Template: Cedo - Loans Credit Landing Page Template
+   Author: InovatikThemes
+   Created: Jan 2018
+   Description: Master CSS file
+*/
+
+/*****************************************
+Table Of Contents:
+
+01. General Styles
+02. Preloader
+03. Navigation
+04. Header
+05. Approval
+06. Loan Options
+07. Amount Based
+08. Description 1
+09. Description 2
+10. Questions
+11. About
+12. Testimonials
+13. Contact
+14. Footer
+15. Copyright
+16. Back To Top Button
+17. Terms
+18. Privacy
+19. Media Queries
+******************************************/
+
+/*****************************************
+Colors:
+- Text white: #efefef
+- Text lighter purple: #864b82
+- Light purple: #7a2874
+- Dark purple: #70256b
+- Pink: #e23963
+- Light green: #97be5d
+- Dark green: #8baf56
+******************************************/
+
+
+/******************************/
+/*     01. General Styles     */
+/******************************/
+body,
+html {
+    width: 100%;
+	height: 100%;
+}
+
+body, p {
+	color: #efefef; 
+	font: 400 1rem/1.75rem "Open Sans", sans-serif;
+}
+
+.header-h1 {
+	font: 700 3rem/3.5rem "Open Sans", sans-serif;
+}
+
+h1 {
+	font: 700 3rem/3.5rem "Open Sans", sans-serif;
+}
+
+h2 {
+	font: 700 2.5rem/2.75rem "Open Sans", sans-serif;
+}
+
+h3 {
+	font: 700 2rem/2.5rem "Open Sans", sans-serif;
+}
+
+h4 {
+	font: 700 1.5rem/2rem "Open Sans", sans-serif;
+}
+
+h5 {
+	font: 700 1.25rem/1.75rem "Open Sans", sans-serif;
+}
+
+a {
+	color: #efefef;
+}
+
+a:hover {
+	color: #efefef;
+	text-decoration: none;
+}
+
+.underline,
+.underline:hover {
+	text-decoration: underline;
+}
+
+.button-solid {
+	display: inline-block;
+	padding: 0.5rem 2.125rem 0.5rem 2.125rem;
+	border: 1px solid #e23963;
+	border-radius: 25px;
+	background-color: #e23963;
+	color: #efefef;
+	font: 700 1rem/1.5rem "Open Sans", sans-serif;
+	transition: background-color .3s ease, color .3s ease;
+}
+
+.button-solid:hover {
+	border: 1px solid #e23963;
+	background-color: transparent;
+	color: #e23963;
+}
+
+.button-outline {
+	display: inline-block;
+	padding: 0.5rem 2.125rem 0.5rem 2.125rem;
+	border: 1px solid #efefef;
+	border-radius: 25px;
+	background-color: transparent;
+	color: #efefef;
+	font: 700 1rem/1.5rem "Open Sans", sans-serif;
+	transition: background-color .3s ease, color .3s ease, border .3s ease;
+}
+
+.button-outline:hover {
+	border: 1px solid #e23963;
+	color: #e23963;
+}
+
+.section-divide-hr {
+	width: 84%;
+	height: 1px;
+	border: none;
+	background-color: #864b82;
+	opacity: 0.2;
+}
+
+.cell-divide-hr {
+	width: 6rem;
+	height: 1px;
+	border: none;
+	background-color: #864b82;
+	opacity: 0.5;
+}
+
+.form-control-input,
+.form-control-select {
+    width: 100%;
+    height: 2.4rem;
+    padding-left: 1.5rem;
+    border: 1px solid #efefef;
+    border-radius: 5px;
+    background-color: #efefef;
+    color: #000;
+    font: 400 1rem/1.75rem "Open Sans", sans-serif;
+    -webkit-appearance: none;
+}
+
+select {
+    /* you should keep these firsts rules in place to maintain cross-browser behaviour */
+    -webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    background-image: url('../images/down-arrow.png');
+    background-position: 95% center;
+    background-repeat: no-repeat;
+    outline: none;
+}
+
+select::-ms-expand {
+    display: none; /* removes the ugly default down arrow on select form field in IE11 */
+}
+
+.form-control-textarea {
+	display: block; /* used to eliminate a bottom gap difference between Chrome and IE/FF */
+	width: 100%;
+	height: 8rem; /* used instead of html rows to normalize height between Chrome and IE/FF */
+	padding-top: 0.75rem;
+	padding-left: 1.5rem;
+	border: 1px solid #efefef;
+	border-radius: 25px;
+	background-color: #efefef;
+	color: #864b82;
+	font: 400 1rem/1.75rem "Open Sans", sans-serif;
+}
+
+.form-control-input::placeholder,
+.form-control-textarea::placeholder {
+	color: #864b82;
+}
+
+.form-control-input::-webkit-input-placeholder,
+.form-control-textarea::placeholder { /* Chrome/Opera/Safari */
+	color: #864b82;
+}
+
+.form-control-input::-moz-placeholder,
+.form-control-textarea::placeholder { /* Firefox 19+ */
+	color: #864b82;
+}
+
+.form-control-input:-ms-input-placeholder,
+.form-control-textarea::placeholder { /* IE 10+ */
+	color: #864b82;
+}
+
+.form-control-input:-moz-placeholder,
+.form-control-textarea::placeholder { /* Firefox 18- */
+	color: #864b82;
+}
+
+.form-control-submit-button {
+	display: inline-block;
+	width: 100%;
+	height: 2.75rem;
+	border: 1px solid #ab1f20;
+	border-radius: 25px;
+	background-color: yellow;
+	color: #ab1f20;
+	font: 700 1rem/1.75rem "Open Sans", sans-serif;
+	cursor: pointer;
+	transition: background-color .3s ease, color .3s ease;
+}
+
+.form-control-submit-button:hover {
+	background-color: transparent;
+	color: #e23963;
+}
+
+/* Form Success And Error Message Formatting */
+#msgSubmit.h3.text-center.tada.animated,
+#msgCSubmit.h3.text-center.tada.animated,
+#msgSubmit.h3.text-center,
+#msgCSubmit.h3.text-center {
+	margin-top: 0;
+	margin-bottom: 0;
+	font: 400 1.25rem/1rem "Open Sans", sans-serif;
+}
+
+#msgSubmit.h3.text-center.tada.animated,
+#msgSubmit.h3.text-center {
+	color: #efefef;
+}
+
+#msgCSubmit.h3.text-center.tada.animated,
+#msgCSubmit.h3.text-center {
+	color: #864b82;
+}
+
+#msgCSubmit.h3.text-center.tada.animated,
+#msgCSubmit.h3.text-center {
+	display: block;
+}
+
+.help-block.with-errors {
+	margin-top: 6px;
+	font-size: 13px;
+	line-height: 0.5rem
+}
+/* end of form success and error message formatting */
+
+/* Form Success And Error Message Animation From Animate.css */
+@-webkit-keyframes tada {
+	from {
+		-webkit-transform: scale3d(1, 1, 1);
+		-ms-transform: scale3d(1, 1, 1);
+		transform: scale3d(1, 1, 1);
+	}
+	10%, 20% {
+		-webkit-transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+		-ms-transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+		transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+	}
+	30%, 50%, 70%, 90% {
+		-webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+		-ms-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+		transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+	}
+	40%, 60%, 80% {
+		-webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+		-ms-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+		transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+	}
+	to {
+		-webkit-transform: scale3d(1, 1, 1);
+		-ms-transform: scale3d(1, 1, 1);
+		transform: scale3d(1, 1, 1);
+	}
+}
+
+@keyframes tada {
+	from {
+		-webkit-transform: scale3d(1, 1, 1);
+		-ms-transform: scale3d(1, 1, 1);
+		transform: scale3d(1, 1, 1);
+	}
+	10%, 20% {
+		-webkit-transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+		-ms-transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+		transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+	}
+	30%, 50%, 70%, 90% {
+		-webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+		-ms-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+		transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+	}
+	40%, 60%, 80% {
+		-webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+		-ms-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+		transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+	}
+	to {
+		-webkit-transform: scale3d(1, 1, 1);
+		-ms-transform: scale3d(1, 1, 1);
+		transform: scale3d(1, 1, 1);
+	}
+}
+
+.tada {
+	-webkit-animation-name: tada;
+	animation-name: tada;
+}
+
+.animated {
+	-webkit-animation-duration: 1s;
+	animation-duration: 1s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+}
+/* end of form success and error message animation from Animate.css */
+
+/* Fade-move Animation For Product Details Lightbox */
+/* at start */
+.my-mfp-slide-bottom .zoom-anim-dialog {
+	opacity: 0;
+	transition: all 0.2s ease-out;
+	-webkit-transform: translateY(-20px) perspective( 600px ) rotateX( 10deg );
+	-ms-transform: translateY(-20px) perspective( 600px ) rotateX( 10deg );
+	transform: translateY(-20px) perspective( 600px ) rotateX( 10deg );
+}
+
+/* animate in */
+.my-mfp-slide-bottom.mfp-ready .zoom-anim-dialog {
+	opacity: 1;
+	-webkit-transform: translateY(0) perspective( 600px ) rotateX( 0 ); 
+	-ms-transform: translateY(0) perspective( 600px ) rotateX( 0 ); 
+	transform: translateY(0) perspective( 600px ) rotateX( 0 ); 
+}
+
+/* animate out */
+.my-mfp-slide-bottom.mfp-removing .zoom-anim-dialog {
+	opacity: 0;
+	-webkit-transform: translateY(-10px) perspective( 600px ) rotateX( 10deg ); 
+	-ms-transform: translateY(-10px) perspective( 600px ) rotateX( 10deg ); 
+	transform: translateY(-10px) perspective( 600px ) rotateX( 10deg ); 
+}
+
+/* dark overlay, start state */
+.my-mfp-slide-bottom.mfp-bg {
+	opacity: 0;
+	transition: opacity 0.3s ease-out;
+}
+
+/* animate in */
+.my-mfp-slide-bottom.mfp-ready.mfp-bg {
+	opacity: 0.8;
+}
+/* animate out */
+.my-mfp-slide-bottom.mfp-removing.mfp-bg {
+	opacity: 0;
+}
+/* end of fade-move animation for product details lightbox */
+
+/* Fade Animation For Image Swiper Gallery */
+@-webkit-keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.fadeIn {
+	-webkit-animation: fadeIn 0.6s;
+	animation: fadeIn 0.6s;
+}
+
+@-webkit-keyframes fadeOut {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+@keyframes fadeOut {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+.fadeOut {
+	-webkit-animation: fadeOut 0.8s;
+	animation: fadeOut 0.8s;
+}
+/* end of fade animation for image swiper gallery */
+
+
+/*************************/
+/*     02. Preloader     */
+/*************************/
+.spinner-wrapper {
+	position: fixed;
+	z-index: 999999;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(25, 25, 25, 1);
+}
+
+.spinner {
+	position: absolute;
+	top: 50%; /* centers the loading animation vertically one the screen */
+	left: 50%; /* centers the loading animation horizontally one the screen */
+	width: 60px;
+	height: 20px;
+	margin: -10px 0 0 -30px; /* is width and height divided by two */ 
+	text-align: center;
+}
+
+.spinner > div {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	border-radius: 100%;
+	background-color: #fff;
+	-webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+	animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.spinner .bounce1 {
+	-webkit-animation-delay: -0.32s;
+	animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+	-webkit-animation-delay: -0.16s;
+	animation-delay: -0.16s;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+	0%, 80%, 100% { -webkit-transform: scale(0); }
+	40% { -webkit-transform: scale(1.0); }
+}
+
+@keyframes sk-bouncedelay {
+	0%, 80%, 100% { 
+		-webkit-transform: scale(0);
+		-ms-transform: scale(0);
+		transform: scale(0);
+	} 40% { 
+		-webkit-transform: scale(1.0);
+		-ms-transform: scale(1.0);
+		transform: scale(1.0);
+	}
+}
+
+
+/**************************/
+/*     03. Navigation     */
+/**************************/
+.navbar-custom {
+	background-color: #ab1f20;
+	font: 700 1rem/2rem "Open Sans", sans-serif;
+}
+
+.navbar-custom .navbar-brand.text-logo {
+	font: italic 700 3rem/35px "Open Sans", sans-serif;
+}
+
+.navbar-custom .navbar-brand.image-logo img {
+    width: 88px;
+	height: 35px;
+}
+
+.navbar-custom .navbar-nav {
+	margin-top: 0.7rem;
+}
+
+.navbar-custom .nav-item .nav-link {
+	padding: 0.25rem 0.75rem 0.25rem 0.75rem;
+	color: rgba(255, 255, 255, 0.8);
+	transition: all .3s ease;
+}
+
+.navbar-custom .nav-item .nav-link:hover {
+	color: rgba(255, 255, 255, 1);
+}
+
+.navbar-custom .navbar-toggler {
+	border-color: #efefef;
+	border-radius: 8px;
+}
+
+.navbar-dark .navbar-toggler-icon {
+	width: 1.3em;
+	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(239, 239, 239, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+
+/*********************/
+/*    04. Header     */
+/*********************/
+.header-vertical-form {
+	background: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.0)), #cc3333 center top no-repeat;
+	background-size: cover; 
+}
+
+.header-vertical-form .header-content {
+	padding-top: 7rem;
+	padding-bottom: 5rem;
+}
+
+.header-vertical-form .header-h1 {
+	margin-bottom: 1.25rem;
+}
+
+.header-vertical-form .under-heading {
+	margin-bottom: 2.25rem;
+	font: 400 1.125rem/1.75rem "Open Sans", sans-serif;
+}
+
+.header-vertical-form .form-group {
+	margin-bottom: 1.5rem;
+}
+
+
+/***********************/
+/*    05. Approval     */
+/***********************/
+.accordion {
+	padding-top: 5rem;
+	padding-bottom: 3rem;
+	height: 40vw;
+	background: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.0)), #cc3333 center center no-repeat;
+	background-size: cover; 
+}
+#options {
+	padding-top: 5rem;
+	padding-bottom: 3rem;
+	background: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.0)), #cc3333 center center no-repeat;
+	background-size: cover; 
+}
+
+.accordion .item {
+	margin-bottom: 2rem;
+}
+
+.accordion a[aria-expanded="true"] .circle-numbering {
+	display: inline-block;
+	width: 2.5rem;
+	height: 2.5rem;
+	margin-right: 0.75rem;
+	border: 1px solid #97be5d;
+	border-radius: 50%;
+	background-color: #97be5d;
+	color: #efefef;
+	font: 700 1rem/38px "Open Sans", sans-serif;
+	text-align: center;
+	vertical-align: top;
+}
+
+.accordion a[aria-expanded="false"] .circle-numbering {
+	display: inline-block;
+	width: 2.5rem;
+	height: 2.5rem;
+	margin-right: 0.75rem;
+	border: 1px solid #97be5d;
+	border-radius: 50%;
+	background-color: #97be5d;
+	color: #efefef;
+	font: 700 1rem/38px "Open Sans", sans-serif;
+	text-align: center;
+	vertical-align: top;
+}
+
+.accordion .accordion-title {
+	display: inline-block;
+	width: 78%;
+	margin-top: 0.375rem;
+	font: 700 1.25rem/1.75rem "Open Sans", sans-serif;
+}
+
+.accordion .accordion-body {
+	margin-left: 3.25rem;
+}
+
+
+/****************************/
+/*     06. Loan Options     */
+/****************************/
+.vector-cards {
+	padding-top: 5rem;
+	padding-bottom: 0.5rem;
+	color: #864b82;
+}
+
+.vector-cards p {
+	color: #864b82;
+}
+
+.vector-cards .card {
+	background: none;
+	margin-right: auto;
+	margin-left: auto;
+	border: none;
+	margin-top: 1rem;
+	margin-bottom: 3rem;
+}
+
+.vector-cards .card-title {
+	margin-bottom: 0.5rem;
+}
+
+.vector-cards .card .card-image {
+	width: 110px;
+	height: 100px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.vector-cards .card-body {
+	padding-right: 1rem;
+	padding-left: 1rem;
+}
+
+.vector-cards .card-body p {
+	margin-bottom: 1.5rem;
+}
+
+/* Loan Options Details Magnific Popup */
+.lightbox-details-container {
+	position: relative;
+	max-width: 1000px;
+	margin: 40px auto;
+	padding: 25px;
+	border-radius: 25px;
+	background: #70256b;
+	text-align: left;
+}
+
+.lightbox-details-container .container {
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
+.lightbox-details-container img {
+	display: block;
+	width: 100%;
+	max-width: 540px;
+	margin-right: auto;
+	margin-left: auto;
+	border-radius: 25px;
+}
+
+.lightbox-details-container h3 {
+	margin-top: 2rem;
+	margin-bottom: 14px;
+}
+
+.lightbox-details-container hr   {
+	width: 40px;
+	height: 1px;
+	margin-top: 0px;
+	margin-bottom: 14px;
+	margin-left: 0;
+	border: 0;
+	background-color: #efefef;
+	text-align: left;
+}
+
+.lightbox-details-container h4 {
+	margin-bottom: 17px;
+}
+
+.lightbox-details-container table {
+	margin-top: 13px;
+}
+
+.lightbox-details-container table tr {
+	line-height: 1.8em;
+}
+
+.lightbox-details-container table .icon-cell {
+	width: 33px;
+	text-align: center;
+}
+
+.lightbox-details-container table .fa {
+	color: #efefef;
+}
+
+.lightbox-details-container .button-outline,
+.lightbox-details-container .button-solid {
+	margin-top: 20px;
+}
+
+.lightbox-details-container a.mfp-close.as-button {
+	position: relative;
+	width: auto;
+	height: auto;
+	margin-right: 5px;
+	color: #efefef;
+	opacity: 1;
+}
+
+.lightbox-details-container .button-solid.mfp-close.as-button:hover {
+	border: 1px solid #e23963;
+	background-color: transparent;
+	color: #e23963;
+}
+
+.lightbox-details-container .button-outline.mfp-close.as-button:hover {
+	border: 1px solid #e23963;
+	color: #e23963;
+}
+
+.lightbox-details-container button.mfp-close.x-button {
+	position: absolute;
+	top: -2px;
+	right: -2px;
+	width: 44px;
+	height: 44px;
+	color: #efefef;
+}
+/* end of loan options details magnific popup */
+
+
+/****************************/
+/*     07. Amount Based     */
+/****************************/
+.list-cards {
+	padding-top: 4rem;
+	padding-bottom: 0.5rem;
+	color: #864b82;
+}
+
+.list-cards p {
+	color: #864b82;
+}
+
+.list-cards .card {
+	max-width: 20rem;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 5rem;
+	padding-top: 1rem;
+	padding-bottom: 2rem;
+	border: 1px solid #864b82;
+	border-radius: 25px;
+}
+
+.list-cards .card .cell-divide-hr {
+	margin-top: 1.75rem;
+	margin-bottom: 1.5rem;
+}
+
+.list-cards .card .price {
+	font: 300 3rem/3rem "Open Sans", sans-serif;
+}
+
+.list-cards .card .price .currency {
+	position: relative;
+	top: -0.5rem;
+	font-size: 2.75rem;
+}
+
+.list-cards .card .list-group {
+	margin-top: 1.75rem;
+	margin-bottom: 1.75rem;
+}
+
+.list-cards .card .list-group-item {
+	border: none;
+	padding: .25rem;
+}
+
+.list-cards .card .fa-check {
+	margin-right: 5px;
+	color: #97be5d;
+	font-size: 1rem;
+}
+
+
+/*****************************/
+/*     08. Description 1     */
+/*****************************/
+.image-slider {
+	height: 42vw;
+	padding-top: 6rem;
+	padding-bottom: 7rem;
+	background: url('../images/fondowo.png') center bottom no-repeat;
+	background-size: cover;
+}
+
+.image-slider .swiper-container {
+	border-radius: 25px;
+	margin-bottom: 3rem;
+}
+
+.image-slider .swiper-button-prev,
+.image-slider .swiper-button-next {
+	top: 49%;
+	background: none;
+	color: #e23963;
+}
+
+.image-slider .swiper-button-prev {
+	left: 1.25rem;
+}
+
+.image-slider .swiper-button-next {
+	right: 2rem;
+}
+
+.image-slider h3 {
+	margin-bottom: 1.5rem;
+}
+
+.image-slider .icon-cell {
+	vertical-align: top;
+}
+
+.image-slider .icon-cell .fa {
+	margin-right: 0.5rem;
+	color: yellow;
+	font-size: 4.5rem;
+}
+
+.image-slider table td {
+	padding-bottom: 0.5rem;
+}
+
+
+/*****************************/
+/*     09. Description 2     */
+/*****************************/
+.nav-tabs-horizontal {
+	padding-top: 4rem;
+	padding-bottom: 4rem;
+	background-color: #70256b;
+	color: #efefef;
+}
+
+.nav-tabs-horizontal .nav-tabs {
+	margin-bottom: 2rem;
+	border: none;
+}
+
+.nav-tabs-horizontal .nav-tabs .nav-item {
+	width: 100%;
+	margin-bottom: 0.75rem;
+	text-align: center;
+}
+
+.nav-tabs-horizontal .nav-tabs .nav-item .nav-link {
+	padding: 0.5rem 2rem;
+	border-radius: 25px;
+	border: 1px solid #efefef;
+	color: #efefef;
+	transition: background-color .3s ease, color .3s ease;
+}
+
+.nav-tabs-horizontal .nav-tabs .nav-item .nav-link.active {
+	color: #864b82;
+}
+
+.nav-tabs-horizontal .nav-tabs .nav-item .nav-link:hover {
+	background-color: #efefef;
+	color: #864b82;
+}
+
+.nav-tabs-horizontal .tab-content {
+	margin-bottom: 3rem;
+}
+
+.nav-tabs-horizontal #tab-2 .icon-cell {
+	vertical-align: top;
+}
+
+.nav-tabs-horizontal #tab-2 .icon-cell .fa {
+	margin-right: 1rem;
+}
+
+.nav-tabs-horizontal #tab-2 table td {
+	padding-bottom: 1rem;
+}
+
+
+/*************************/
+/*     10. Questions     */
+/*************************/
+.text-section {
+	padding-top: 9rem;
+	padding-bottom: 5.5rem;
+	background: url('../images/curved-hills-bottom-background.jpg') center top no-repeat;
+	background-size: cover;
+}
+
+.text-section .button-solid {
+	margin-top: 0.5rem;
+}
+
+.text-section .button-solid .fa-phone {
+	margin-right: 4px;
+}
+
+
+/*********************/
+/*     11. About     */
+/*********************/
+.video-section {
+    padding-top: 5rem;
+    height: 62.5vw;
+	padding-bottom: 6rem;
+	background-size: contain;
+    background-image: url(../images/sobre.png);
+    background-repeat: no-repeat;
+}
+
+.video-section .embed-responsive {
+	border-radius: 25px;
+	max-width: 640px;
+}
+
+
+/****************************/
+/*     12. Testimonials     */
+/****************************/
+.cards-slider {
+	padding-top: 5rem;
+	padding-bottom: 5.5rem;
+	background-color: #8baf56;
+}
+
+.cards-slider .card {
+	border: none;
+	background-color: transparent;
+}
+
+.cards-slider .card-image {
+	width: 130px;
+	height: 130px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.cards-slider .testimonial-text {
+	margin-bottom: 10px;
+	font-style: italic;
+}
+
+.cards-slider .swiper-pagination {
+	bottom: -8px;
+}
+
+.cards-slider .swiper-pagination-bullet {
+	width: 10px;
+	height: 10px;
+	background: #efefef;
+}
+
+
+/***********************/
+/*     13. Contact     */
+/***********************/
+.map-and-form {
+	padding-top: 5rem;
+	padding-bottom: 5rem;
+	padding-top: 6rem;
+    padding-bottom: 7rem;
+    background: #cc3333 center bottom no-repeat;
+    background-size: cover;
+}
+
+.map-and-form p,
+.map-and-form a {
+	color: #fff;
+}
+
+.map-and-form a:hover {
+	color: #864b82;
+}
+
+.map-and-form .map-responsive {
+	position: relative;
+	overflow: hidden;
+	width: 60vw;
+	margin: 0 auto;
+	margin-bottom: 3rem;
+	padding-bottom: 40%;
+	border-radius: 25px;
+}
+
+.map-and-form .map-responsive iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border: none; 
+}
+
+.map-and-form .form-control-submit-button:hover {
+	color: #e23963;
+}
+
+.map-and-form .help-block.with-errors {
+	margin-left: 10px;
+}
+
+
+/**********************/
+/*     14. Footer     */
+/**********************/
+.footer-three-cols {
+	padding-top: 4rem;
+	padding-bottom: 2rem;
+	background-color: #7a2874;
+}
+
+.footer-three-cols .footer-col {
+	margin-bottom: 2rem;
+}
+
+.footer-three-cols h4 {
+	margin-bottom: 0.75rem;
+}
+
+.footer-three-cols h3,
+.footer-three-cols p,
+.footer-three-cols a {
+	color: #efefef;
+}
+
+.footer-three-cols .fa-stack.fa-lg {
+	margin-top: 0.125rem;
+	font-size: 25px;
+	line-height: 52px;
+}
+
+.footer-three-cols .fa-stack a .facebook.fa-stack-2x {
+    color: #3b5998;
+}
+
+.footer-three-cols .fa-stack a .twitter.fa-stack-2x {
+    color: #45b0e3;
+}
+
+.footer-three-cols .fa-stack a .google-plus.fa-stack-2x {
+    color: #dd4b39;
+}
+
+.footer-three-cols .fa-stack a .instagram.fa-stack-2x {
+    color: #d51a6f;
+}
+
+.footer-three-cols .fa-stack a .linkedin.fa-stack-2x {
+    color: #0177b5;
+}
+
+.footer-three-cols .fa-stack a .dribbble.fa-stack-2x {
+    color: #ea4c89;
+}
+
+/* Default Social Icon */
+.footer-three-cols .fa-stack a .fa-stack-1x {
+    color: #fff;
+	transition: color .3s ease;
+}
+
+.footer-three-cols .fa-stack a .fa-stack-2x {
+	color: #3b5998;
+	transition: color .3s ease;
+}
+
+.footer-three-cols .fa-stack a:hover .fa-stack-1x {
+	color: #e23963;
+}
+
+.footer-three-cols .fa-stack a:hover .fa-stack-2x {
+    color: #fff;
+}
+/* end of default social icon */
+
+
+/*************************/
+/*     15. Copyright     */
+/*************************/
+.copyright-basic {
+	padding-top: 1.5rem;
+	padding-bottom: 0.5rem;
+	background-color: #70256b;
+}
+
+.copyright-basic p, 
+.copyright-basic p a {
+	color: #efefef;
+	font: 400 14px/1.5rem "Open Sans", sans-serif;
+}
+
+
+/**********************************/
+/*     16. Back To Top Button     */
+/**********************************/
+a.back-to-top {
+	position: fixed;
+	z-index: 999;
+	right: 12px;
+	bottom: 12px;
+	display: none;
+	width: 42px;
+	height: 42px;
+	border-radius: 30px;
+	background: #e23963 url("../images/up-arrow.png") no-repeat center 47%;
+	background-size: 18px 18px; 
+	text-indent: -9999px;
+}
+
+a:hover.back-to-top {
+	background-color: #dd2956; 
+}
+
+
+/*********************/
+/*     17. Terms     */
+/*********************/
+.header-h1-terms {
+	font: 700 3rem/3.5rem "Open Sans", sans-serif;
+}
+
+.header-center-text-terms {
+	padding-top: 7rem;
+	padding-bottom: 5rem;
+	background: #7a2874;
+	text-align: center;
+}
+
+.text-section-terms {
+	padding-top: 4rem;
+	padding-bottom: 5.5rem;
+	background-color: #efefef;
+	color: #864b82;
+}
+
+.text-section-terms h4,
+.text-section-terms p,
+.text-section-terms a.underline {
+	color: #864b82;
+}
+
+.text-section-terms .breadcrumbs .list-inline-item {
+	margin-right: 0.25rem;
+	font-size: 14px;
+}
+
+
+/***********************/
+/*     18. Privacy     */
+/***********************/
+.header-h1-privacy {
+	font: 700 3rem/3.5rem "Open Sans", sans-serif;
+}
+
+.header-center-text-privacy {
+	padding-top: 7rem;
+	padding-bottom: 5rem;
+	background: #7a2874;
+	text-align: center;
+}
+
+.text-section-privacy {
+	padding-top: 4rem;
+	padding-bottom: 5.5rem;
+	background-color: #efefef;
+	color: #864b82;
+}
+
+.text-section-privacy h4,
+.text-section-privacy p,
+.text-section-privacy a.underline {
+	color: #864b82;
+}
+
+.text-section-privacy .breadcrumbs .list-inline-item {
+	margin-right: 0.25rem;
+	font-size: 14px;
+}
+
+
+/*****************************/
+/*     19. Media Queries     */
+/*****************************/	
+/* Min-width width 768px */
+@media (min-width: 768px)	{
+	.navbar-custom {
+        padding: 0.125rem 1.5rem 1.125rem 1.5rem;
+		background-color: transparent;
+		transition: .3s;
+    }
+
+    .navbar-custom.top-nav-collapse {
+        padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+        background-color: #ab1f20;
+	}
+	
+	.navbar-custom .navbar-brand.image-logo img {
+        width: 100px;
+        height: 40px;
+	}
+
+	.navbar-custom.top-nav-collapse .navbar-brand.image-logo img {
+        width: 88px;
+		height: 35px;
+	}
+    
+	.navbar-custom .navbar-nav {
+		margin-top: 1px;
+	}
+
+	.header-vertical-form {
+		position: relative;
+		height: 100%;
+	}
+
+	.header-vertical-form .header-content {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		height: 100vh;
+	}
+
+	.header-vertical-form .text-container {
+		margin-top: 1rem;
+	}
+
+	.accordion #detailsAccordion {
+		width: 80%;
+		margin-right: auto;
+		margin-left: auto;
+	}
+
+	.accordion .accordion-title {
+		width: 90%;
+	}
+
+	.list-cards .card .price {
+		font: 300 4rem/3.5rem "Open Sans", sans-serif;
+	}
+
+	.image-slider {
+		padding-bottom: 9rem;
+	}
+
+	.nav-tabs-horizontal .nav-tabs .nav-item {
+		width: auto;
+		margin-right: 10px;
+		margin-bottom: 0px;
+	}
+
+	.footer-three-cols {
+		padding-bottom: 3rem;
+	}
+
+	.footer-three-cols .footer-col {
+		margin-bottom: 0;
+	}
+
+	/* Terms */
+	.header-center-text-terms {
+		padding-top: 11rem;
+		padding-bottom: 8rem;
+	}
+
+	/* Privacy */
+	.header-center-text-privacy {
+		padding-top: 11rem;
+		padding-bottom: 8rem;
+	}
+}
+
+
+/* Min-width width 992px */
+@media (min-width: 992px) {
+	.header-h1 {
+		font: 700 3.5rem/4.125rem "Open Sans", sans-serif;
+	}
+
+	.header-vertical-form .header-content {
+		padding-top: 4rem;
+		padding-bottom: 6rem;
+	}
+
+	.header-vertical-form .help-block.with-errors,
+	.header-vertical-form .form-message {
+		position: absolute;
+	}
+
+	.header-vertical-form .help-block.with-errors {
+		margin-left: 10px;
+	}
+
+	.header-vertical-form .form-message {
+		right: 0;
+		left: 0;
+		bottom: -1rem;
+	}
+
+	.accordion #detailsAccordion {
+		width: 65%;
+	}
+
+	.vector-cards .card {
+		width: auto;
+		margin-bottom: 3rem;
+	}
+
+	.lightbox-details-container {
+		padding: 35px;
+	}
+
+	.lightbox-details-container img {
+		max-width: 96%;
+		margin-left: 0.5rem;
+	}
+	
+	.lightbox-details-container h3 {
+		margin-top: 0px;
+	}
+
+	.image-slider .swiper-container {
+		max-width: 30rem;
+		margin-left: 2rem;
+		margin-bottom: 0rem;
+	}
+
+	.image-slider .text-container {
+		margin-left: 1rem;
+	}
+
+	.nav-tabs-horizontal .tab-content {
+		margin-bottom: 0;
+	}
+
+	.map-and-form .map-responsive {
+		margin-bottom: 0;
+	}
+
+	.map-and-form #ContactForm {
+		margin-left: 1rem;
+	}
+
+	.map-and-form .form-control-textarea {
+		height: 6.5rem; 
+	}
+}
+
+
+/* Min-width width 1200px */
+@media (min-width: 1200px) {
+	.header-h1 {
+		font: 700 4rem/4.5rem "Open Sans", sans-serif;
+	}
+
+	.under-heading {
+		width: 70%;
+		margin-right: auto;
+		margin-left: auto;
+	}
+
+	.header-vertical-form {
+		background-position: bottom;
+	}
+
+	.header-vertical-form .text-container {
+		margin-top: 1.75rem;
+		width: 90%;
+		margin-left: 3rem;
+	}
+
+	.header-vertical-form .under-heading {
+		width: 100%;
+	}
+
+	.header-vertical-form form {
+		width: 80%;
+		margin-left: 1rem;
+	}
+
+	.header-vertical-form .form-control-input,
+	.header-vertical-form .form-control-select,
+	.header-vertical-form .form-control-submit-button {
+		margin-right: 0.25rem;
+		margin-left: 0.25rem;
+	}
+
+	.header-vertical-form form #msgSubmit.h3.text-center {
+		width: 80%;
+		margin-left: 1.5rem;
+	}
+
+	.accordion {
+		padding-bottom: 43.5rem;
+	}
+
+	.accordion .accordion-title {
+		width: 91%;
+	}
+
+	.accordion #detailsAccordion {
+		width: 55%;
+	}
+
+	.image-slider {
+		padding-bottom: 11rem;
+	}
+
+	.image-slider h3 {
+		margin-top: 1.5rem;
+	}
+
+	.nav-tabs-horizontal {
+		padding-top: 2rem;
+	}
+
+	.nav-tabs-horizontal .nav-tabs,
+	.nav-tabs-horizontal .tab-content {
+		margin-left: 1.75rem;
+	}
+
+	.nav-tabs-horizontal .nav-tabs {
+		margin-top: 4rem;
+	}
+
+	.nav-tabs-horizontal .description-image {
+		margin-left: 3rem;
+	}
+
+	.text-section {
+		padding-top: 10rem;
+	}
+
+	.map-and-form .form-control-textarea {
+		height: 10rem; 
+	}
+
+	.footer-three-cols .footer-col {
+		width: 95%;
+	}
+}

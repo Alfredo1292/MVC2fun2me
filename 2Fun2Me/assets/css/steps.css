@@ -1,0 +1,80 @@
+/*landscape*/
+
+/*
+Step1
+*/
+
+span#mont {
+    font: 700 1em/1.75rem "Open Sans", sans-serif;
+}
+
+/*Step 2*/
+
+.label-bienvenida-nacional>span {
+    text-transform: capitalize;
+}
+
+#frm-solicitud .btn,
+#paso4 .btn,
+#paso5 .btn,
+#paso6 .btn,
+#paso7 .btn,
+#paso8 .btn,
+#paso11 .btn,
+#solicitud .btn
+{
+    width: 100%;
+}
+
+#frm-solicitud label {
+    text-transform: capitalize;
+}
+
+#paso2 form {
+    padding: 2rem;
+    background-color: darkred;
+    border-radius: 4%;
+}
+
+/*Step 9*/
+
+.terminos-condiciones {
+    max-height: 19em;
+    overflow-y: auto;
+    border: 1px double;
+    font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+    font-size: 0.9em;
+    padding: 10px;
+}
+
+/*
+Step 10
+*/
+
+#signature-pad {
+    height: 22rem;
+}
+
+@media (orientation:landscape) and (max-width: 998px) {
+    body {
+        background-color: #c1272d;
+    }
+    .landscape {
+        margin-top: -0.5rem;
+    }
+    #signature-pad {
+        height: 13rem;
+    }
+    #solicitud-firma {
+        position: relative;
+        top: 2rem;
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+}
+
+#solicitud-activa-img-wrap {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

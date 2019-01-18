@@ -1,0 +1,1063 @@
+.hide {
+    display: none;
+}
+
+p {
+    font: 700 0.9em/1.75rem "Open Sans", sans-serif !important;
+}
+
+label {
+    font: 700 0.9em/1.75rem "Open Sans", sans-serif;
+}
+
+span {
+    font: 700 1em/1.75rem "Open Sans", sans-serif;
+}
+
+span.title1 {
+    font: 700 1em/1.75rem "Open Sans", sans-serif !important;
+}
+
+body {
+    background-color: #c1272d;
+}
+
+#logo_efectivo {
+    width: 60%;
+}
+
+#back-button {
+    width: 40%
+}
+
+.porfavor_espere {
+    margin: auto;
+    text-align: center;
+}
+
+.btn-yellow {
+    background-color: yellow !important;
+    font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+    background: yellow;
+    margin: 0 auto;
+    margin-top: 2vw;
+    /*border: none;*/
+    height: 50px;
+    width: 125px;
+    font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+    font-size: 0.9em;
+    color: #ab1f20;
+}
+
+.landscape .frm-solicitud {
+    padding: 3em;
+    background-color: darkred;
+    border-radius: 4%;
+}
+
+/*******************************************************************/
+
+.img_aceptado {
+    height: 15vw;
+}
+
+.img_rechazado {
+    height: 10vw;
+}
+
+.center-button {
+    margin: auto;
+    display: block !important;
+    text-align: center;
+}
+
+/*jquery dialog*/
+
+.ui-dialog-titlebar-close {
+    visibility: hidden;
+}
+
+#solicitud-condiciones {
+    padding: 3em;
+    background-color: darkred;
+    border-radius: 4%;
+}
+
+#solicitud-condiciones h1 {
+    font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+    font-size: 1.1em;
+}
+
+#solicitud-identificacion {
+    padding: 3em;
+    background-color: darkred;
+    border-radius: 4%;
+}
+
+#solicitud-firma {
+    background-color: darkred;
+    border-radius: 4%;
+    padding: 1em;
+}
+
+#solicitud input {
+    border-radius: 50px;
+}
+
+#solicitud select {
+    border-radius: 50px;
+}
+
+#solicitud-paso2 {
+    padding: 3em;
+    background-color: darkred;
+    border-radius: 4%;
+}
+
+#solicitud-paso2 input {
+    border-radius: 50px;
+}
+
+#solicitud-paso3 {
+    padding: 3em;
+    background-color: darkred;
+    border-radius: 4%;
+}
+
+#solicitud-paso4 {
+    padding: 3em;
+    background-color: darkred;
+    border-radius: 4%;
+}
+
+#video-gif {
+    width: 100%;
+}
+
+/*alineado al top left de la pantalla*/
+
+.back_button {
+    position: absolute;
+    left: 0px;
+    z-index: 1;
+    top: 10px;
+}
+
+/*alineado al top right de la pantalla...*/
+
+.logo-efectivo {
+    position: absolute;
+    right: 15px;
+    text-align: right;
+    z-index: 999;
+}
+
+#plazo3 .slider.slider-horizontal {
+    width: 90% !important;
+}
+
+.center_div_ced_btns {
+    position: absolute;
+    left: 50%;
+    top: 25%;
+    /*
+  Nope =(
+  margin-left: -25%;
+  margin-top: -25%;
+  */
+    /* 
+  Yep!
+  */
+    transform: translate(-50%, -50%);
+}
+
+.center_div {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    /*
+  Nope =(
+  margin-left: -25%;
+  margin-top: -25%;
+  */
+    /* 
+  Yep!
+  */
+    transform: translate(-50%, -50%);
+}
+
+#upload {
+    background: yellow;
+    margin: 0 auto;
+    margin-top: 2vw;
+    border: none;
+    height: 5vw;
+    width: 15vw;
+    font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+    font-size: 1.5vw;
+    color: #ab1f20;
+    cursor: pointer;
+}
+
+/*Firma*/
+
+.signature {
+    padding: 0;
+}
+
+#continuar-terminos {
+    background: yellow;
+    margin: 0 auto;
+    margin-top: 2vw;
+    border: none;
+    height: 50px;
+    width: 125px;
+    font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+    font-size: 1.1em;
+    color: #ab1f20;
+    cursor: pointer;
+}
+
+#continuar-identificacion {
+    background: yellow;
+    margin: 0 auto;
+    margin-top: 2vw;
+    border: none;
+    height: 50px;
+    width: 125px;
+    font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+    font-size: 1.1em;
+    color: #ab1f20;
+    cursor: pointer;
+}
+
+#back {
+    background: yellow;
+    margin: 0 auto;
+    margin-top: 2vw;
+    border: none;
+    height: 50px;
+    width: 125px;
+    font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+    font-size: 1.1em;
+    color: #ab1f20;
+    cursor: pointer;
+}
+
+.txt_aprobado_gracias {
+    margin-bottom: 1em;
+    font: 700 1.2em/1.75rem "Open Sans", sans-serif !important;
+    text-align: center;
+    margin-top: 1em
+}
+
+#paso3 video {
+    max-height: 350px !important;
+}
+
+.signature button {
+    background: yellow;
+    border: none;
+    font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+    font-size: 1em;
+    color: #ab1f20;
+    cursor: pointer;
+    height: auto;
+}
+
+.modal-body {
+    color: #000;
+}
+
+.modal-body p {
+    color: #000;
+}
+
+.calculadora {
+    margin: 0 auto;
+    width: 352px;
+}
+
+.aproba-cel {
+    display: none !important;
+}
+
+.txtSobre {
+    padding-top: 14vw;
+    width: 27vw;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.title-sobre {
+    margin-top: 8vw;
+    display: flex;
+    align-items: flex-start;
+    font-family: 'dyno';
+}
+
+.options img {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-nav {
+    font-size: 20px;
+}
+
+.onebill {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.header-h1 {
+    font-size: 2.7em !important;
+}
+
+.formPrin {
+    margin-top: 15vw !important;
+}
+
+.logo {
+    position: relative;
+    padding-top: 10vw;
+    margin: 0 auto;
+}
+
+.container {
+    margin-top: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+@media (min-width: 600px) {}
+
+.range-slider {
+    width: 100%;
+}
+
+.range-slider__range {
+    -webkit-appearance: none;
+    width: calc(100% - (73px));
+    height: 10px;
+    border-radius: 5px;
+    background: #d7dcdf;
+    outline: none;
+    padding: 0;
+    margin: 0;
+}
+
+.range-slider__range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #2c3e50;
+    cursor: pointer;
+    transition: background .15s ease-in-out;
+}
+
+.range-slider__range::-webkit-slider-thumb:hover {
+    background: #1abc9c;
+}
+
+.range-slider__range:active::-webkit-slider-thumb {
+    background: #1abc9c;
+}
+
+.range-slider__range::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border: 0;
+    border-radius: 50%;
+    background: #2c3e50;
+    cursor: pointer;
+    transition: background .15s ease-in-out;
+}
+
+.range-slider__range::-moz-range-thumb:hover {
+    background: #1abc9c;
+}
+
+.range-slider__range:active::-moz-range-thumb {
+    background: #1abc9c;
+}
+
+.range-slider__range:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 3px #fff, 0 0 0 6px #1abc9c;
+}
+
+@font-face {
+    font-family: 'dyno';
+    src: url('../fonts/fuentes/DYNO REGULAR.TTF');
+    /* IE9 Compat Modes */
+}
+
+.vector-cards .card {
+    font-family: 'dyno';
+    color: #fff;
+}
+
+.card-body p {
+    color: #fff;
+}
+
+.aproba img {
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.title-why {
+    font-family: 'navBarFont';
+}
+
+@font-face {
+    font-family: 'navBarFont';
+    src: url('../fonts/fuentes/DYNO\ REGULAR.TTF');
+    /* IE9 Compat Modes */
+}
+
+.opt-prestamos {
+    font-family: 'navBarFont';
+    color: yellow;
+}
+
+.opt-aprobacion {
+    align-items: flex-start;
+    font-family: 'navBarFont';
+    color: #fff;
+    padding-bottom: 5vw;
+}
+
+.opt-aprobacion span {
+    color: yellow;
+}
+
+.navbar {
+    font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+    font-family: 'navBarFont';
+    font-size: 1.444em;
+}
+
+.range-slider__value {
+    display: inline-block;
+    position: relative;
+    width: 60px;
+    color: #fff;
+    line-height: 20px;
+    text-align: center;
+    padding: 5px 10px;
+    margin-left: 8px;
+}
+
+::-moz-range-track {
+    background: #d7dcdf;
+    border: 0;
+}
+
+input::-moz-focus-inner,
+input::-moz-focus-outer {
+    border: 0;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.range-slider2 {
+    margin: 60px 0 0 0%;
+}
+
+.range-slider2 {
+    width: 100%;
+}
+
+.range-slider__range2 {
+    -webkit-appearance: none;
+    width: calc(100% - (73px));
+    height: 10px;
+    border-radius: 5px;
+    background: #d7dcdf;
+    outline: none;
+    padding: 0;
+    margin: 0;
+}
+
+.range-slider__range2::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #2c3e50;
+    cursor: pointer;
+    transition: background .15s ease-in-out;
+}
+
+.range-slider__range2::-webkit-slider-thumb:hover {
+    background: #1abc9c;
+}
+
+.range-slider__range2:active::-webkit-slider-thumb {
+    background: #1abc9c;
+}
+
+.range-slider__range2::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border: 0;
+    border-radius: 50%;
+    background: #2c3e50;
+    cursor: pointer;
+    transition: background .15s ease-in-out;
+}
+
+.range-slider__range2::-moz-range-thumb:hover {
+    background: #1abc9c;
+}
+
+.range-slider__range2:active::-moz-range-thumb {
+    background: #1abc9c;
+}
+
+.range-slider__range2:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 3px #fff, 0 0 0 6px #1abc9c;
+}
+
+.range-slider__value2 {
+    display: inline-block;
+    position: relative;
+    width: 60px;
+    color: #fff;
+    line-height: 20px;
+    text-align: center;
+    padding: 5px 10px;
+    margin-left: 8px;
+}
+
+::-moz-range-track {
+    background: #d7dcdf;
+    border: 0;
+}
+
+input::-moz-focus-inner,
+input::-moz-focus-outer {
+    border: 0;
+}
+
+@media (max-width: 1165px) {
+    div#plazo3 .slider-tick-label {
+        font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+        font-size: 0.8em;
+    }
+    div#plazo2 .slider-tick-label {
+        font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+        font-size: 0.8em;
+    }
+}
+
+@media (min-width: 1166px) {
+    div#plazo3 .slider-tick-label {
+        font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+        font-size: 0.8em;
+    }
+    div#plazo2 .slider-tick-label {
+        font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+        font-size: 0.8em;
+    }
+}
+
+/*
+
+  #plazo2 .slider.slider-horizontal .slider-tick-label-container .slider-tick-label{
+      font-size: 1vw;
+      padding-right: 5vw;
+  }
+
+*/
+
+#plazo2 .slider.slider-horizontal {
+    width: 19vw !important;
+}
+
+.calculadora {
+    text-align: center;
+}
+
+.btn-solicitar {
+    margin-top: 2vw;
+}
+
+.navbar {
+    background: #cc3333;
+}
+
+#enviar {
+    background: yellow;
+    margin: 0 auto;
+    margin-top: 2vw;
+    border: none;
+    height: 50px;
+    width: 125px;
+    font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+    font-size: 1.1em;
+    color: #ab1f20;
+    cursor: pointer;
+}
+
+.legal-txt {
+    font-size: 0.6em !important;
+    line-height: initial !important;
+}
+
+.sign-button {
+    background: yellow;
+    margin: 0 auto;
+    margin-top: 2vw;
+    border: none;
+    height: 50px;
+    width: 125px;
+    font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+    font-size: 1.1em;
+    color: #ab1f20;
+    cursor: pointer;
+}
+
+#continuar-terminos {
+    background: yellow;
+    margin: 0 auto;
+    margin-top: 2vw;
+    border: none;
+    height: 50px;
+    width: 125px;
+    font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+    font-size: 1.1em;
+    color: #ab1f20;
+    cursor: pointer;
+}
+
+#continuar-identificacion {
+    background: yellow;
+    margin: 0 auto;
+    margin-top: 2vw;
+    border: none;
+    height: 50px;
+    width: 125px;
+    font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+    font-size: 1.1em;
+    color: #ab1f20;
+    cursor: pointer;
+}
+
+#back {
+    background: yellow;
+    margin: 0 auto;
+    margin-top: 2vw;
+    border: none;
+    height: 5vw;
+    width: 10vw;
+    font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+    font-size: 1.5em;
+    color: #ab1f20;
+    cursor: pointer;
+}
+
+#btn-camera {
+    background: yellow;
+    margin: 0 auto;
+    margin-top: 2vw;
+    border: none;
+    height: 5vw;
+    width: 15vw;
+    font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+    font-size: 1.2em;
+    color: #ab1f20;
+    cursor: pointer;
+}
+
+.btn-solicitar button {
+    background: yellow;
+    border: none;
+    height: 50px;
+    width: 150px;
+    font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+    font-size: 1.5em;
+    color: #ab1f20;
+    cursor: pointer;
+}
+
+@media (max-width: 993px) {
+    .solicitud-dimex {
+        padding: 1em !important;
+        background-color: darkred;
+        border-radius: 0%;
+    }
+    .solicitud-dimex p {
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 570px) {}
+
+@media (max-height: 570px) {
+    #paso3 {
+        margin-top: 20%;
+    }
+    #solicitud-paso3 {
+        max-height: 600px;
+    }
+    #solicitud-paso3 label {
+        font: 700 0.9em/1.75rem "Open Sans", sans-serif !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .accordion {
+        height: 50vw;
+    }
+}
+
+@media (max-width: 768px) {
+    #solicitud-paso3 {
+        margin-bottom: 55%;
+    }
+    /*#paso10 {
+        margin-top: 10%
+    }*/
+    #paso11 {
+        margin-top: 10%;
+    }
+    #paso3 video {
+        height: 100%;
+        max-height: 420px;
+    }
+    .modal-verificacion-text {
+        font: 700 1.1em/1.75rem "Open Sans", sans-serif;
+    }
+    #solicitud-condiciones h1 {
+        font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+        font-size: 1.2em;
+    }
+    #solicitud-condiciones p {
+        font: 700 1.1em/1.75rem "Open Sans", sans-serif !important;
+    }
+    #paso1 {
+        margin-top: 15%;
+    }
+    #paso3 {
+        margin-top: 25%;
+    }
+    .legal-txt {
+        font-size: 0.5em !important;
+        line-height: initial !important;
+    }
+    .solicitud-dimex {
+        height: 500px !important;
+        overflow-y: scroll !important;
+    }
+    #tipo_ident {
+        width: 100% !important;
+    }
+    .ced-nacional {
+        width: 85% !important;
+    }
+    .ced-dimex {
+        width: 85% !important;
+    }
+    span {
+        font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+    }
+    span#mont {
+        font: 700 1em/1.75rem "Open Sans", sans-serif;
+    }
+    span.title1 {
+        font: 700 1.1em/1.75rem "Open Sans", sans-serif !important;
+    }
+    .modal-verificacion-text {
+        font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+    }
+    p {
+        font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+    }
+    label {
+        font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+    }
+    #solicitud-paso3 label {
+        font: 700 1em/1.75rem "Open Sans", sans-serif;
+    }
+    #solicitud-identificacion label {
+        font: 700 1.1em/1.75rem "Open Sans", sans-serif !important;
+    }
+    .form-credito-nacional-contacto label {
+        font: 700 1.1em/1.75rem "Open Sans", sans-serif !important;
+    }
+    .slider-tick-label {
+        font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+        font-size: 0.8em;
+    }
+    #solicitud-condiciones {
+        padding: 2em;
+    }
+    #solicitud-identificacion {
+        padding: 2em;
+    }
+    .solicitud-dimex {
+        padding: 1em !important;
+        background-color: darkred;
+        border-radius: 0%;
+    }
+    .solicitud-dimex p {
+        font: 700 1.1em/1.75rem "Open Sans", sans-serif !important;
+    }
+    .back_button {
+        z-index: 1;
+    }
+    .center_div_ced_btns {
+        position: absolute;
+        left: 50%;
+        top: 30%;
+        transform: translate(-50%, -50%);
+    }
+    #preview-ced-img {
+        width: 100% !important;
+    }
+    #solicitud-firma {
+        border-radius: 4%;
+        /* padding: 1em;*/
+    }
+    #upload {
+        font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+        font-size: 1em;
+        font-weight: bold;
+    }
+    .upload-btn-wrapper {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+    }
+    .upload-btn-wrapper input[type=file] {
+        font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+        font-size: 100px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        height: 100%;
+        width: 100%;
+    }
+    .btn {
+        font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+        font-size: 1em;
+    }
+    .img_aceptado {
+        height: 40vw;
+    }
+    .img_rechazado {
+        height: 30vw;
+    }
+    body {
+        background-color: #c1272d;
+    }
+    div#plazo3 .slider-tick-label {
+        font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+        font-size: 0.8em;
+    }
+    div#plazo2 .slider-tick-label {
+        font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+        font-size: 0.8em;
+    }
+    .formPrin {
+        margin-top: 0vw !important;
+    }
+    .container {
+        margin-top: 0vw;
+    }
+    .accordion {
+        height: 50vw;
+    }
+    .aproba-desk {
+        display: none !important;
+    }
+    #continuar-terminos {
+        width: 100px;
+        height: 45px;
+        font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+        font-size: 0.9em;
+    }
+    #continuar-identificacion {
+        width: 105px;
+        height: 45px;
+        font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+        font-size: 0.9em;
+    }
+    #back {
+        width: 3em;
+        height: 2em;
+    }
+    #btn-camera {
+        width: 12em;
+        height: 4em;
+        font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+        font-size: 1em;
+    }
+    .btn {
+        font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+        font-size: 0.9em;
+    }
+    #upload {
+        width: 12em;
+        height: 4em;
+    }
+    .video-section {
+        padding-top: 5rem;
+        height: 176.5vw;
+        padding-bottom: 6rem;
+        background-image: url(../images/fondo-mob.png);
+        background-repeat: no-repeat;
+    }
+    .txtSobre {
+        padding-top: 40vw;
+        width: 80vw;
+        text-align: center;
+        margin: 0 auto;
+    }
+    .aproba-cel {
+        display: block !important;
+    }
+    .hidden {
+        display: block;
+        height: 20vw;
+        margin: 0 auto;
+    }
+    .header-vertical-form {
+        background: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.0)), #cc3333 center top no-repeat;
+        background-size: cover;
+    }
+    .calculadora {
+        width: 100%;
+    }
+    .image-slider {
+        height: 175vw;
+        padding-top: 2rem;
+        padding-bottom: 7rem;
+        background: url(../images/ella-res.png) center bottom no-repeat;
+        background-size: cover;
+    }
+    .video-section {
+        padding-top: 5rem;
+    }
+    #plazo2 .slider.slider-horizontal {
+        width: 65vw !important;
+    }
+    .header-h1 {
+        line-height: 2;
+        text-align: center;
+        font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+        font-size: 1em !important;
+    }
+    .header-vertical-form .header-h1 {
+        margin-bottom: 0;
+    }
+    .btn-solicitar button {
+        background: yellow;
+        border: none;
+        height: 50px;
+        width: 150px;
+        font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+        font-size: 1.2em;
+        color: #ab1f20;
+        cursor: pointer;
+    }
+    .accordion {
+        height: 90vw;
+        padding-top: 2rem;
+        padding-bottom: 3rem;
+        background: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.0)), #cc3333 center center no-repeat;
+        background-size: cover;
+    }
+    .map-and-form .map-responsive {
+        position: relative;
+        overflow: hidden;
+        width: 90vw;
+        margin: 0 auto;
+        margin-bottom: 3rem;
+        padding-bottom: 70%;
+        border-radius: 25px;
+    }
+}
+
+/*
+Elementos del paso 8
+*/
+
+#cuenta_cliente {
+    text-align: center;
+}
+
+#banco-select {
+    text-align-last: center;
+    text-align: center
+}
+
+/*
+Lista del contrado
+*/
+
+#contract-list {
+    /*padding-left: 12px;*/
+    list-style-type: decimal;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+/*
+Elementos del paso 9 contrato
+*/
+
+.cuentas-bancarias {
+    display: flex;
+}
+
+/*
+paso10
+*/
+
+.signature {
+    padding-bottom: 15px;
+}
+
+/**
+Linea horizontal blanca
+*/
+
+.line {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #fff !important;
+    margin: 1em 0;
+    padding-bottom: 5px;
+}
+
+.buttons-wrap {
+    display: flex;
+}
+
+.buttons-wrap>div:nth-child(1) {
+    flex: 1;
+}

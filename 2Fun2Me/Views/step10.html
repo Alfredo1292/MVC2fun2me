@@ -1,0 +1,29 @@
+<div class="col-md-5 center_div landscape hide" id="paso10">
+    <small>
+        Podés girar la pantalla para tener una mayor superficie de firma
+    </small>
+    <form id="solicitud-firma" name="solicitud">
+        <div class="form-row">
+            <div class="col form-group">
+                <label class="label-firma" style="text-align: left;">Favor ingresar tu firma como aparece en tu
+                    cédula</label>
+                <canvas id="signature-pad" class="form-control firma"></canvas>
+                <div class="buttons-wrap">
+                    <div>
+                        <button type="button" class="btn sign-button" id="clear">
+                            <i class="fa fa-undo" style="color:#ab1f20"></i>
+                            Corregir
+                        </button>
+                    </div>
+                    <div>
+                        <button onclick="firmaTerminarClick();" id='btn-firma-continuar' type="button" class="btn sign-button">Continuar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="porfavor_espere espere-firma hide col-md-12">
+            <i class="fa fa-spinner fa-spin" style="font-size:2em"></i>
+            <p>Por favor espere....</p>
+        </div>
+    </form>
+</div>

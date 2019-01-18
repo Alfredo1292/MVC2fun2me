@@ -1,0 +1,65 @@
+<div class="col-md-5 center_div landscape hide" id="paso5">
+   <form id="solicitud" name="solicitud">
+      <div id="cedula-form">
+         <div class="form-row">
+            <div class="col form-group">
+               <div class="center-button">
+                  <label class="label-ced-frontal" style="text-align: left;">Necesitamos una fotografía de tu cédula
+                     por el frente</label>
+               </div>
+               <div class="img-ced-frente">
+                  <img id="preview-ced-img" class="img-responsive" style="width:100%; max-height: 200px;" src="assets/img/cedula_frente.png" />
+               </div>
+            </div>
+         </div>
+         <div id="cedula-foto-mobile" class="form-row">
+            <!--mobile y desktop-->
+            <div class="col form-group">
+               <div class="center-button">
+                  <div class="upload-btn-wrapper">
+                     <button id="button-upload-cedula-mobiles" type="button" class="btn btn-yellow"><i class="fa fa-camera"
+                           aria-hidden="true"></i> Tomar foto</button>
+                     <input id="button-upload-cedula-mobile" type="file" accept="image/*" capture />
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div id="cedula-foto-desktop" class="form-row hide">
+            <!--Desktop solo-->
+            <div class="col form-group">
+               <div class="center-button">
+                  <div class="upload-btn-wrapper">
+                     <button id="button-upload-cedula-desktops" type="button" class="btn"><i class="fa fa-paperclip"
+                           aria-hidden="true"></i> Subir archivo</button>
+                     <input id="button-upload-cedula-desktop" type="file" accept="image/x-png,image/jpeg" name="myfile" />
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!--mostrar cedula-->
+      <div id="cedula-preview-now" class="form-row hide">
+         <div class="col form-group">
+            <div class="center-button" id="ced-prev">
+               <!-- <img id="ced-prev" style="width: 100%" class="img-responsive"> -->
+            </div>
+         </div>
+         <div class="form-group">
+            <button id="continuar" type="button" class="form-control cedula-aceptar">Aceptar</button>
+         </div>
+         <div class="form-group">
+            <div class="center-button">
+               <div class="upload-btn-wrapper">
+                  <button id="button-upload-cedula-mobiles" type="button" class="btn btn-yellow"><i class="fa fa-camera"
+                        aria-hidden="true"></i> Otra</button>
+                  <input id="button-upload-cedula-otravez" type="file" accept="image/*" capture />
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="porfavor_espere espere-frontal hide col-md-12">
+         <i class="fa fa-spinner fa-spin" style="font-size:2em"></i>
+         <p>Por favor espere....</p>
+      </div>
+   </form>
+</div>
