@@ -1,0 +1,295 @@
+﻿@{
+    ViewBag.Title = "ConsultaCobros";
+}
+<div class="row">
+    <div class="col-lg-3">
+        <div class="titulo-pagina">
+            <div class="circulo"></div>
+            <p id="lblTituloConsultaCobros">Consulta Informacion de Cobros</p>
+        </div>
+    </div>
+</div>
+<div class="controles-colocacion row">
+    <div class="col-lg-3 col-md-6 col-sm-12 tab-buscar">
+        <div class="table-responsive">
+            <form class="form-inline" onSubmit="return false;">
+                <div class="btn-group btn-group-s" role="group">
+                </div>
+                <button type="button" id="btnBuscar" onclick="buscarConsulta('ConsultaCobros');" required class="btn btn-primary btn-group-s"><span class="glyphicon glyphicon-search"></span> Buscar</button>
+                <input id="txIdentificacionConsulta" onkeyup="buscarColaKey(event);" type="text" class="form-control input-sm" name="msg" placeholder="Ingrese Identificacion">
+                @*@Html.TextBox("txIdentificacion", "", new { @class = "form-control", @placeholder = "Usuario", required = "required" })*@
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12 tab-buscar">
+        <div class="table-responsive">
+            <form class="form-inline">
+                <div class="btn-group btn-group-s" role="group"></div>
+                <button type="button" id="btnCalCular" onclick="calcularCuotas();" required class="btn btn-primary btn-group-s"><span class="glyphicon glyphicon-indent-left"></span> Calcular</button>
+                <input id="txtFechaCalcular" type="date" data-date="" data-date-format="YYYY MMMM DD" class="form-control input-sm" name="msg">
+            </form>
+        </div>
+    </div>
+</div>
+<div class="controles-colocacion row">
+    <div class="col-md-4 order-md-2 mb-4 tab-info">
+        <ul class="list-group mb-3">
+            <li class="d-flex justify-content-between lh-condensed">
+                <div>
+                    <h6 class="my-0">Nombre Cliente:<small class="text-muted"><label id="lblNombre" style="font-size:12px" class="text-muted"></label></small></h6>
+                    <h6 class="my-0">Identificación:<small class="text-muted"><label id="lblidentificacion" style="font-size:12px" class="text-muted"></label></small></h6>
+                    <h6 class="my-0">Crédito:<small class="text-muted"><label id="lblCodCliente" style="font-size:12px" class="text-muted"></label></small></h6>
+                    <h6 class="my-0"><span class="glyphicon glyphicon-phone-alt"></span> Tel Casa:<small class="text-muted"><label id="lblTelCasa" style="font-size:12px" class="text-muted"></label></small></h6>
+                    <h6 class="my-0"><span class="glyphicon glyphicon-phone"></span> Tel Móvil:<small class="text-muted"><label id="lblTelMovil" style="font-size:12px" class="text-muted"></label></small></h6>
+                    <h6 class="my-0"><span class="glyphicon glyphicon-earphone"></span> Tel Trabajo:<small class="text-muted"><label id="lblTelTrabajo" style="font-size:12px" class="text-muted"></label></small></h6>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-4 order-md-2 mb-4 tab-info">
+        <ul class="list-group mb-3">
+            <li class="d-flex justify-content-between lh-condensed">
+                <div>
+                    <h6 class="my-0"><span class="glyphicon glyphicon-calendar"></span> Fecha Apertura:<small class="text-muted"><label id="lblApertura" style="font-size:12px" class="text-muted"></label></small></h6>
+                    <h6 class="my-0">Trabajo:<small class="text-muted"><label id="lblTrabajoNombre" style="font-size:12px" class="text-muted"></label></small></h6>
+                    <h6 class="my-0">Correo:<small class="text-muted"><label id="lblCorreo" style="font-size:12px" class="text-muted"></label></small></h6>
+                    <h6 class="my-0">Estado Civil:<small class="text-muted"><label id="lblEstadoCivil" style="font-size:12px" class="text-muted"></label></small></h6>
+
+                                    <h6 class="my-0">
+                        <h6 class="my-0">Cónyuge:<small class="text-muted"><label id="lblConyugue" style="font-size:12px" class="text-muted"></label></small></h6>
+                        <h6 class="my-0">Fecha Modificación:<small class="text-muted"><label id="lblFecMod" style="font-size:12px" class="text-muted"></label></small></h6>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-4 order-md-2 mb-4 tab-info">
+            <ul class="list-group mb-3">
+                <li class="d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">Usuario Modificación:<small class="text-muted"><label id="lblUsuarioMod" style="font-size:12px" class="text-muted"></label></small></h6>
+                        <h6 class="my-0">Dirección Trabajo:<small class="text-muted"><input id="txtDirecionTrabajo" type="text" class="text-muted input-sm" name="msg" placeholder="Ingrese Direccion Trabajo"></small></h6>
+                        <h6 class="my-0">Dirección Domicilio:<small class="text-muted"><input id="txtDirecion" type="text" class="text-muted input-sm" name="msg" placeholder="Ingrese Direccion Domicilio"></small></h6>
+                        <h6 class="my-0">Comentario:<small class="text-muted"><input id="txtComentario" type="text" class="text-muted input-sm" name="msg" placeholder="Ingrese Comentario"></small></h6>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-4 order-md-2 mb-4 tab-foto">
+            <ul class="list-group mb-3">
+                <li class="d-flex justify-content-between lh-condensed">
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-muted">Fotografia</span>
+                    </h4>
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" id="imgCliente" class="img-thumbnail" alt="Cinque Terre">
+                </li>
+            </ul>
+        </div>
+    </div>
+<div class="controles-colocacion row">
+    <div class="col-md-12 ">
+        <div class="table-responsive">
+            <div>
+                <table id="tblDatosCreditos" class="container table table-bordered table-hover no-footer dataTable">
+                    <tr class="info">
+                        <th>Producto</th>
+                        <th>Dias Venc.</th>
+                        <th>Cuota</th>
+                        <th>Comisión</th>
+                        <th>Saldo Venc.</th>
+                        <th>Saldo Total</th>
+                        <th>Saldo Capital</th>
+                        <th>Int.Corriente</th>
+                        <th>Int.Mora</th>
+                        <th>Mora Desde</th>
+                        <th>Fec.Ult.Pago</th>
+                        <th>Mto.Ult.Pago</th>
+                    </tr>
+                    <tbody class="tbody HistoDatosCreditos"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="controles-colocacion row">
+    <div class="col-md-12 ">
+        <ul class="nav nav-tabs tab-cobro">
+            <li class="active"><a data-toggle="tab" href="#secondTab">Contactos</a></li>
+            <li><a data-toggle="tab" href="#TabHisto">Histórico de Gestiones</a></li>
+            <li><a data-toggle="tab" href="#TabPromPagos">Promesas de Pago</a></li>
+            <li><a data-toggle="tab" href="#TabPagos">Pagos</a></li>
+            <li style="display:none"><a data-toggle="tab" href="#TabCreditos">Estado Cuenta</a></li>
+            <li><a data-toggle="tab" href="#TabPrestamos">Histórico Créditos</a></li>
+            <!--<li data-toggle="tab"><a data-toggle="tab" href="#TabPrestamosParientes">Prestamos Parientes</a></li>-->
+            <li><a data-toggle="tab" href="#TabRefPersonales">Referencias Personales</a></li>
+            @*<li><a data-toggle="tab" href="#TabCorreos">Correos</a></li>*@
+        </ul>
+        <div class="tab-content tab-cobro">
+            <div id="secondTab" class="tab-pane fade in active">
+                @Html.Action("Contactos")
+            </div>
+            <div id="TabHisto" class="tab-pane fade in">
+                @Html.Action("HistoricoGestiones")
+            </div>
+            <div id="TabPromPagos" class="tab-pane fade in">
+                @Html.Action("HistoricoPromesasPagos")
+            </div>
+            <div id="TabPagos" class="tab-pane fade in">
+                @Html.Action("HistoricoPagos")
+            </div>
+            <div id="TabCreditos" class="tab-pane fade in">
+                @Html.Action("consultarGridCreditos")
+            </div>
+            <div id="TabPrestamos" class="tab-pane fade in">
+                @Html.Action("consultarPrestamosCliente")
+            </div>
+            <!--<div id="TabPrestamosParientes" class="tab-pane fade in">
+           @Html.Action("consultarPrestamosParientes")
+        </div>-->
+            <div id="TabRefPersonales" class="tab-pane fade in">
+                @Html.Action("ReferenciasPersonales")
+            </div>
+
+            @*<div id="TabCorreos" class="tab-pane fade in">
+                @Html.Action("CorreoPersona")
+            </div>*@
+        </div>
+    </div>
+</div>
+
+
+    <div class="modal fade" Id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    @*<button type="button" class="close" data-dissmiss="modal"><span aria-hidden="true">×</span></button>*@
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+                <div class="modal-body">
+                    <div id="demo">
+                        <div>
+                            <table class="table table-striped">
+                                <tr class="success">
+                                    <th>Cantidad Procesada</th>
+                                    <td><label id="lblCantidadProcesada" class="text-muted"></label></td>
+                                </tr>
+                                <tr class="danger">
+                                    <th>Cantidad Pendiente</th>
+                                    <td><label id="lblCantidadPendiente" class="text-muted"></label></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" Id="btnUpdate" style="display:none;" onclick="Update();">Actualizar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" Id="CalculadoraModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    @*<button type="button" class="close" data-dissmiss="modal"><span aria-hidden="true">×</span></button>*@
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+                <div class="modal-body">
+                    <div id="demo">
+                        <div>
+                            <table class="table table-striped">
+                                <tr class="success">
+                                    <th>Dias Mora</th>
+                                    <td><label id="lblDiasMora" class="text-muted"></label></td>
+                                    <th>Monto Calculado</th>
+                                    <td><label id="lblMontoCalculado" class="text-muted"></label></td>
+                                    <th>Monto Cancela</th>
+                                    <td><label id="lblMontoCancela" class="text-muted"></label></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" Id="btnUpdate" style="display:none;" onclick="Update();">Actualizar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" Id="CalculadoraModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    @*<button type="button" class="close" data-dissmiss="modal"><span aria-hidden="true">×</span></button>*@
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+                <div class="modal-body">
+                    <div id="demo">
+                        <div>
+                            <table class="table table-striped">
+                                <tr class="success">
+                                    <th>Dias Mora</th>
+                                    <td><label id="lblDiasMora" class="text-muted"></label></td>
+                                    <th>Monto Calculado</th>
+                                    <td><label id="lblMontoCalculado" class="text-muted"></label></td>
+                                    <th>Monto Cancela</th>
+                                    <td><label id="lblMontoCancela" class="text-muted"></label></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" Id="btnUpdate" style="display:none;" onclick="Update();">Actualizar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" Id="ElegirConsulta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">x</button>
+                <div class="modal-header titulo-modal">
+                    <p id="titulo-coment-repro" class="alert alert-info"><strong>Seleccione la cuenta que desea consultar</strong></p>
+                </div>
+                <div class="modal-body">
+                    <div id="demo-consulta-cobros">
+                        <form>
+                            <table ID="tableConsultaCobros" class="container table table-bordered table-hover no-footer dataTable">
+                                <thead>
+                                    <tr class="info">
+                                        <th>
+                                            Nombre
+                                        </th>
+                                        <th>
+                                            Identificación
+                                        </th>
+                                        <th>
+                                            IdCredito
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tblConsultaCobros" class="tbody planPago"></tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    $(document).ready(function () {
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+    });
+    </script>

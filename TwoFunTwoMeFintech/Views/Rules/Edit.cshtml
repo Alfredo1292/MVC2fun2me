@@ -1,0 +1,136 @@
+﻿@model TwoFunTwoMeFintech.Models.DTO.Rules
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Rules</legend>
+
+        @Html.HiddenFor(model => model.IdRule)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Modelo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Modelo)
+            @Html.ValidationMessageFor(model => model.Modelo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NombreModelo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NombreModelo)
+            @Html.ValidationMessageFor(model => model.NombreModelo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Descripcion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Descripcion)
+            @Html.ValidationMessageFor(model => model.Descripcion)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Proceso)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Proceso)
+            @Html.ValidationMessageFor(model => model.Proceso)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Condicion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Condicion)
+            @Html.ValidationMessageFor(model => model.Condicion)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Tipo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Tipo)
+            @Html.ValidationMessageFor(model => model.Tipo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Activo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Activo)
+            @Html.ValidationMessageFor(model => model.Activo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OrdenEjecucion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OrdenEjecucion)
+            @Html.ValidationMessageFor(model => model.OrdenEjecucion)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FechaCreacion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FechaCreacion)
+            @Html.ValidationMessageFor(model => model.FechaCreacion)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FechaModificacion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FechaModificacion)
+            @Html.ValidationMessageFor(model => model.FechaModificacion)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UsuarioCreacion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UsuarioCreacion)
+            @Html.ValidationMessageFor(model => model.UsuarioCreacion)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UsuarioModificacion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UsuarioModificacion)
+            @Html.ValidationMessageFor(model => model.UsuarioModificacion)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

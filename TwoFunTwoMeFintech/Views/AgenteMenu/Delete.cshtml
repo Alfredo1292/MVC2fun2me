@@ -1,0 +1,59 @@
+﻿@model TwoFunTwoMeFintech.Models.DTO.AgenteMenu
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>AgenteMenu</legend>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.COD_AGENTE)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.COD_AGENTE)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.IDSUBMENU)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IDSUBMENU)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Mensaje)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Mensaje)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.ACCION)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ACCION)
+    </div>
+</fieldset>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Details";
+    Layout = null;
+}
+
+<h4 class="titulo-tesoreria accordion-toggle alert alert-info">Transferencias para realizar</h4>
+<h4 id="mensajeAccion"class="titulo-tesoreria accordion-toggle alert" style="display:none"></h4>
+
+<div class="container">
+    <div id="controles-tesoreria" class="acciones-tesoreria hide">
+        <label id="lbAccion"></label>
+        <select id="ddAccion" class="dropdown-tesoreria form-control"><option value="0"></option><option value="1">Realizada</option><option value="2">Verificar</option></select>
+        <a id="btnGuardarPendiente" class="btn-tesoreria btn btn-primary btn-primary-editar" onclick="accion()" value="">Guardar</a>
+    </div>
+
+    <table ID="tableTesoreriaPendienteTranferencia" class="container table table-bordered table-hover  dataTable">
+        <thead>
+            <tr class="info">
+                <th>
+                    ID
+                </th>
+                <th>
+                    Cédula
+                </th>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Producto
+                </th>
+                <th>
+                    Monto
+                </th>
+                <th>
+                    Banco
+                </th>
+                <th>
+                    Cuenta
+                </th>
+                <th>
+                    Sinpe
+                </th>
+            </tr>
+        </thead>
+        <tbody class="tbody" id="tblTesoreriaPendienteTranferencia"></tbody>
+    </table>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="~/Scripts/Proyecto/TesoreriaPendienteTranferencia.js"></script>
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

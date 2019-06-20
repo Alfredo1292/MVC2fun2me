@@ -1,0 +1,38 @@
+﻿@{ 
+    Layout = null;
+}
+<div class="table">
+    <div class="form-group">
+
+    </div>
+    <table ID="RefPersonalesTable" class="container table table-bordered table-hover no-footer dataTable">
+        <thead>
+            <tr class="info">
+                <th>
+                    Tipo Referencia
+                </th>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Supervisor
+                </th>
+                <th>
+                    Teléfono
+                </th>
+
+            </tr>
+        </thead>
+        <tbody class="tbody refPersonales"></tbody>
+    </table>
+</div>
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

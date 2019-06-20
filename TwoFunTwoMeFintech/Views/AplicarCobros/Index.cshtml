@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<h4 class="titulo-tesoreria alert alert-info">Cuentas de Cobros</h4>
+<div class="controles-colocacion">
+    <table Id="tableCuentaCobros" class="container table table-bordered table-hover dataTable">
+        <thead>
+            <tr class="info">
+                <th>
+                    Referencia Bancaria
+                </th>
+                <th>
+                    Id Banco
+                </th>
+                <th>
+                    Banco Transaccion
+                </th>
+                <th>
+                    Fecha Tranferencia
+                </th>
+                <th>
+                    Descripción
+                </th>
+                <th>
+                    Monto Cuota
+                </th>
+                <th>
+                    Numero Credito
+                </th>
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tbody class="tbody" id="tblCuentaCobros"></tbody>
+    </table>
+</div>
+<h4 class="titulo-tesoreria alert alert-info">Subir archivos al servidor</h4>
+<div id="subir-archivos-cobros" class="controles-colocacion">
+    <form class="form-inline input-folder-cobros-BCR" onSubmit="return false;" name="Fichiero">
+        <label id="lblCobroBCR">Cobros BCR</label>
+        <input id="txtArchivoBCR" class="form-control" readonly>
+        <button type="button" id="btnExaminarBCR" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Examinar</button>
+    </form>
+    <form class="form-inline input-folder-cobros-BAC">
+        <label id="lblCobroBAC">Cobros BAC</label>
+        <input id="txtArchivoBAC" class="form-control" readonly>
+        <button type="button" id="btnExaminarBAC" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Examinar</button>
+    </form>
+    <form class="form-inline input-folder-cobros-BN">
+        <label id="lblCobroBN">Cobros BN</label>
+        <input id="txtArchivoBN" class="form-control" readonly>
+        <button type="button" id="btnExaminarBN" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Examinar</button>
+    </form>
+    <button type="button" id="btnSubirArchivos" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-upload"></span> Subir Archivos</button>
+</div>
+<script src="~/Scripts/Proyecto/AplicarCobros/cobrosPendientes.js"></script>

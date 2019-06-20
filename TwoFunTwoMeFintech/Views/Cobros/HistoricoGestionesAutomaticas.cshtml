@@ -1,0 +1,44 @@
+﻿@{
+        Layout = null;
+    }
+<div class="table">
+    <div class="form-group">
+
+    </div>
+    <table ID="HistoTableAutom" class="container table table-bordered table-hover no-footer dataTable">
+        <thead>
+            <tr class="info">
+                <th>
+                    Crédito
+                </th>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Gestión
+                </th>
+                <th>
+                    Acción
+                </th>
+                <th>
+                    Respuesta
+                </th>
+                <th>
+                    Usuario
+                </th>
+            </tr>
+        </thead>
+        <tbody class="tbody HistoAuto"></tbody>
+    </table>
+</div>
+<script src="~/Scripts/Proyecto/ColaCobros.js"></script>
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

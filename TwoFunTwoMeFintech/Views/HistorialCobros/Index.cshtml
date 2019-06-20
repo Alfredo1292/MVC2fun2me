@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<link href="~/Styles/bootstrap-datetimepicker.css" rel="stylesheet" />
+<div id="historial-cobros-container">
+    <h4 class="titulo-tesoreria alert alert-info"><strong>Historial de Cobros</strong></h4>
+    <div class="row contenido-general">
+        <div class="col-lg-3">
+            <from lass="form-inline">
+                <label for="lblBuscar">Fecha Inicio:</label>
+                <input id="txtFechaInicio" type="date" data-date="" data-date-format="YYYY MMMM DD" name="msg">
+            </from>
+        </div>
+        <div class="col-lg-3">
+            <from lass="form-inline">
+                <label for="lblBuscar">Fecha Inicio:</label>
+                <input id="txtFechaFinal" type="date" data-date="" data-date-format="YYYY MMMM DD" name="msg">
+            </from>
+        </div>
+        <div class="col-lg-3">
+            <from lass="form-inline">
+                <label for="lblBuscar">Buscar</label>
+                <input id="txtBusquedaCobros" type="text" name="msg">
+            </from>
+        </div>
+        <div class="col-lg-3">
+            <from lass="form-inline">
+                <button type="button" class="btn btn-primary" Id="btnBurcarHistorialCobros">Buscar  <span class="glyphicon glyphicon-search"></span></button>
+                <button type="button" class="btn btn-primary btn-primary-eliminar" Id="btnLimpiarBusqueda">Limpiar  <span class="glyphicon glyphicon-refresh"></span></button>
+                <button type="button" class="btn btn-primary btn-primary-asignar" Id="btnDescargarExcel">Excel  <span class="glyphicon glyphicon-download-alt"></span></button>
+            </from>
+        </div>
+    </div>
+    <div id="contenido-tabla-historial-cobros" class="row contenido-general">
+        <div class="col-lg-12">
+            <table id="tableHistorialCobros" class="container table table-bordered table-hover dataTable">
+                <thead>
+                    <tr class="info">
+                        <th>
+                            Identificación
+                        </th>
+                        <th>
+                            IdCredito
+                        </th>
+                        <th>
+                            Nombre
+                        </th>
+                        <th>
+                            Banco
+                        </th>
+                        <th>
+                            Referencia
+                        </th>
+                        <th>
+                            Total Cobro
+                        </th>
+                        <th>
+                            Fecha Cobro
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="tbody" id="tblHistorialCobros"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!--tabla oculta con los datos para exportar al excel-->
+    <!--Usamos esta tabla, porque la otra tiene paginacion, y esto hace que el excel solo se exporte con los datos visibles y se pierden todods los demas-->
+    <div id="contenido-tabla-historial-cobros-exportar-excel" class="row contenido-general" style="display: none;">
+        <div class="col-lg-12">
+            <table id="tableHistorialCobros-exportar-excel" class="container table table-bordered table-hover dataTable">
+                <thead>
+                    <tr class="info">
+                        <th>
+                            Identificación
+                        </th>
+                        <th>
+                            IdCredito
+                        </th>
+                        <th>
+                            Nombre
+                        </th>
+                        <th>
+                            Banco
+                        </th>
+                        <th>
+                            Referencia
+                        </th>
+                        <th>
+                            Total Cobro
+                        </th>
+                        <th>
+                            Fecha Cobro
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="tbody" id="tblHistorialCobros-exportar-excel"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+<script src="~/Scripts/Proyecto/HistorialCobros/HistorialCobros.js"></script>

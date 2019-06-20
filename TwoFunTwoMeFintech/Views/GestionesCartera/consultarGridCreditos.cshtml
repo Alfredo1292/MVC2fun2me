@@ -1,0 +1,61 @@
+﻿@{ 
+    Layout = null;
+}
+<div class="table"> 
+    <table ID="GridCreditoTable"  class="container table table-bordered table-hover no-footer dataTable" width="100%" cellspacing="0">
+        <thead>
+            <tr class="info">
+                <th>
+                    Tipo
+                </th>
+                <th>
+                    Fecha Historial         
+                </th>
+                <th>
+                    Cap. Pend
+                </th>
+                <th>
+                    Orig. Pend
+                </th>
+                <th>
+                    Int. Pend
+                </th>
+                <th>
+                    Mora Pend
+                </th>
+                <th>
+                    Saldo al dia
+                </th>
+                <th>
+                    Tot. Cobro
+                </th>
+                <th>
+                    Cap. Cobro
+                </th>
+                <th>
+                    Orig Cobro
+                </th>
+                <th>
+                    Int Cobrado
+                </th>
+                <th>
+                    Mora Cobro
+                </th>
+                <th>
+                    Saldo
+                </th>
+            </tr>
+        </thead>
+        <tbody class="tbody GridCredit"></tbody>
+    </table>
+</div>
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

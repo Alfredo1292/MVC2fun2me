@@ -1,0 +1,315 @@
+﻿@font-face {
+    font-family: 'OpenSans-Light';
+    src: url('../fonts/OpenSans-Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'OpenSans-Regular';
+    src: url('../fonts/OpenSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'OpenSans-Semibold';
+    src: url('../fonts/OpenSans-Semibold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'OpenSans-SemiboldItalic';
+    src: url('../fonts/OpenSans-SemiboldItalic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'OpenSans-Bold';
+    src: url('../fonts/OpenSans-Bold.ttf') format('truetype');
+}
+
+.tooltiptext {
+    font-size: 10px;
+    display: none;
+    position: absolute;
+    color: #1e2129;
+    left: 185px;
+    width: 70px;
+}
+
+.subitem:hover .mostrar-tip-text {
+    display: block;
+}
+
+.item a:hover .mostrar-item-tip-text {
+    display: block;
+}
+
+.nav-menu {
+    font-family: OpenSans-Bold;
+    position: fixed;
+    margin: 0;
+    font-size: 13px;
+    height: 98.5%;
+    background-color: #1e2129;
+    z-index: 500;
+    transition: 0.5s;
+    left: 5px;
+    width: 180px;
+    border-radius: 5px;
+}
+
+.esconder-menu {
+    position: fixed;
+    margin: 0;
+    font-size: 13px;
+    z-index: 500;
+    transition: 0.5s;
+    left: -153px;
+}
+
+#body > .container-menu-abierto {
+    padding: 0;
+    margin: 5px 14%;
+    transition: 5s;
+}
+
+@media (max-width: 992px) {
+    #body > .container-menu-abierto {
+        margin: 5px 19%;
+    }
+
+    .tooltiptext {
+        background-color: #438eb9;
+        color: #ffffff;
+    }
+
+    .subitem:hover .mostrar-tip-text {
+        display: block;
+    }
+
+    .item:hover .mostrar-item-tip-text {
+        display: block;
+    }
+}
+
+@media (min-width: 1400px) {
+    #body > .container-menu-abierto {
+        margin: 5px auto;
+    }
+}
+
+#body > .container-menu-cerrado {
+    padding: 0;
+    margin: 5px auto;
+    transition: 5s;
+}
+
+#menu .glyphicon {
+    position: absolute;
+    left: 158px;
+    top: 11px;
+}
+
+#menu .fas {
+    position: absolute;
+    left: 134px;
+}
+/*.menu .item a .icono-menu {
+    position: absolute;
+    left: 115px;
+    top: 10px;
+}*/
+#menu a {
+    text-decoration: none;
+    color: #ffffff;
+    top: 0;
+}
+
+ul,
+#menu ul ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.usuario-login {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+    .usuario-login .cerrar-sesion {
+    }
+
+        .usuario-login .cerrar-sesion a {
+            display: block;
+        }
+
+        .usuario-login .cerrar-sesion p {
+            color: #ffffff;
+        }
+
+.subitem {
+    margin-left: 15px;
+}
+
+    .subitem a {
+        color: #999 !important;
+        border-bottom: none !important;
+    }
+
+    .subitem:hover {
+        color: #ffffff !important;
+        background-color: #039be5;
+        transition: all 1s ease;
+    }
+
+    .subitem:active {
+        background-color: yellow;
+    }
+
+.imagen-menu-abierto {
+    text-align: center;
+    transition: 0.5s;
+}
+
+    .imagen-menu-abierto img {
+        width: 100px;
+        transition: 0.5s;
+    }
+
+.imagen-menu-cerrado {
+    text-align: right;
+    transition: 0.5s;
+}
+
+    .imagen-menu-cerrado img {
+        width: 20px;
+        transition: 0.5s;
+    }
+
+.menu {
+    width: auto;
+    height: auto;
+    /*-webkit-box-shadow: 0px 1px 3px 0px rgba(0,0,0,.73), 0px 0px 18px 0px rgba(0,0,0,.13);
+    -moz-box-shadow: 0px 1px 3px 0px rgba(0,0,0,.73), 0px 0px 18px 0px rgba(0,0,0,.13);
+    box-shadow: 0px 1px 3px 0px rgba(0,0,0,.73), 0px 0px 18px 0px rgba(0,0,0,.13);*/
+}
+
+    .menu > li > a {
+        width: 100%;
+        height: 2.75em;
+        line-height: 2.75em;
+        text-indent: 2px;
+        display: block;
+        position: relative;
+    }
+    /* estilos de los sub menus*/
+    .menu ul li a {
+        height: 2.75em;
+        line-height: 2.75em;
+        text-indent: 2px;
+        display: block;
+        position: relative;
+        font-size: 12px;
+    }
+
+.item a:hover {
+    color: #4b88b7 !important;
+    /*background-color: #9bb4dd;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#00b0c2),to(#9bb4dd));
+        background-image: -webkit-linear-gradient(top, #00b0c2, #9bb4dd);
+        background-image: -moz-linear-gradient(top, #00b0c2, #9bb4dd);
+        background-image: -o-linear-gradient(top, #00b0c2, #9bb4dd);
+        background-image: linear-gradient(top, #00b0c2, #9bb4dd);
+        filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#00b0c2', EndColorStr='#9bb4dd');*/
+    /*-webkit-box-shadow: inset 0px 1px 0px 0px #6ad2ef;
+        -moz-box-shadow: inset 0px 1px 0px 0px #6ad2ef;
+        box-shadow: inset 0px 1px 0px 0px #6ad2ef;*/
+}
+
+.menu > li > a.active {
+}
+
+.item1 > a:before {
+    background-position: 0 0;
+}
+
+.bordes-puntos tr td {
+    border-left: dotted 1px #438eb9;
+}
+
+.bordes-puntos tr:first-child td {
+    border-bottom: dotted 1px #438eb9;
+}
+
+.item a:hover {
+    color: #438eb9;
+    transition: all 0.5s ease;
+}
+
+.subitem a:hover {
+    color: #ffffff !important;
+}
+
+.item-menu {
+    display: inline !important;
+}
+
+.imagen-item {
+    width: 15px;
+    margin-left: 6px;
+    margin-right: 10px;
+}
+
+.item-submenu span {
+    top: 10px !important;
+    left: 142px !important;
+}
+
+.item ul {
+    background-color: #2d323e;
+}
+
+    .item ul li:last-child {
+        border-bottom: none;
+    }
+
+.header-brand {
+    margin-left: 0 !important;
+}
+
+    .header-brand span {
+        top: 7px !important;
+    }
+
+.cerrar-sesion span {
+    top: 3px !important;
+}
+
+.cerrar-sesion p {
+    left: 180px !important;
+}
+
+.cerrar-sesion:hover .mostrar-tip-text {
+    display: block;
+}
+
+.cerrar-sesion:hover a {
+    color: #4b88b7 !important;
+}
+
+.dropdown {
+    padding-left: 35px;
+}
+/* (1440x900) WXGA+ Display */
+@media screen and (min-width: 1440px) {
+    #body > .container-menu-abierto {
+        margin-left: auto !important;
+    }
+
+    #body > .container-menu-cerrado {
+        margin-left: auto !important;
+    }
+}
+/* (600px) Mobile */
+@media only screen and (max-width: 600px) {
+    body {
+    }
+}

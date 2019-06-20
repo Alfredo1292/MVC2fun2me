@@ -1,0 +1,74 @@
+﻿@model TwoFunTwoMeFintech.Models.DTO.GestionGeneral
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>GestionGeneral</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IdSolicitud)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdSolicitud)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Detalle)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Detalle)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaIngreso)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaIngreso)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Cod_Agente)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Cod_Agente)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaGestion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaGestion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TipoGestion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TipoGestion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Activo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Activo)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.IdGestionGeneral }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

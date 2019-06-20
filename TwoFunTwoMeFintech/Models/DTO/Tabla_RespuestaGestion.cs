@@ -1,0 +1,13 @@
+﻿namespace TwoFunTwoMeFintech.Models.DTO
+{
+    public class Tabla_RespuestaGestion
+    {
+        public string IdRespuestaGestion { get; set; }
+
+        public string Descripcion { get; set; }
+
+        public string EstadoGestion { get; set; }
+
+        public bool Activo { get; set; }
+    }
+}

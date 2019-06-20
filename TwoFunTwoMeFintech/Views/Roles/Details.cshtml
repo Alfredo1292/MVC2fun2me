@@ -1,0 +1,81 @@
+﻿@model TwoFunTwoMeFintech.Models.DTO.Roles
+
+@{
+    ViewBag.Title = "Details";
+    //Layout = null;
+}
+
+
+<script src="~/Scripts/Proyecto/Roles.js"></script>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="container">
+            <div class="row row-cobro">
+                <div class="container">
+                    @*<ul class="nav nav-tabs tab-cobro">
+                            <li class="active"><a data-toggle="tab" href="#fisrtTab">Roles</a></li>
+                            <li><a data-toggle="tab" href="#secondTab">Nuevo Rol</a></li>
+                        </ul>*@
+                    <div id="fisrtTab" class="tab-pane fade in active">
+                        <div class="table-responsive">
+                            <table ID="RolesTable" class="table table-bordered  table-hover">
+                                <thead>
+                                    <tr class="info">
+                                        <th scope="row">
+                                            ID
+                                        </th>
+                                        <th scope="row">
+                                            ROLES
+                                        </th>
+                                        <th scope="row">
+                                            Accion
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" Id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*<button type="button" class="close" data-dissmiss="modal"><span aria-hidden="true">×</span></button>*@
+                <button type="button" class="close" data-dismiss="modal">×</button>
+
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="ID">Rol ID</label>
+                        <input type="text" class="form-control" id="ID" placeholder="ROL ID" disabled="disabled" />
+                    </div>
+                    <div class="form-group">
+                        <label for="ROLES">Nombre</label>
+                        <input type="text" class="form-control" id="ROL" placeholder="ROLES" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" Id="btnUpdate" style="display:none;" onclick="Update();">Actualizar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

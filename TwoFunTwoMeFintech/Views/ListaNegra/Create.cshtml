@@ -1,0 +1,80 @@
+﻿@model TwoFunTwoMeFintech.Models.DTO.ListaNegra.dto_ListaNegra
+@{
+	ViewBag.Title = "Crear";
+	Layout = null;
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <form>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('input[type="text"]').val('');
+                });
+            </script>
+            <script src="~/Scripts/Proyecto/ListaNegra/ctrListaNegra.js"></script>
+
+
+            <div class="input-group">
+
+                @Html.LabelFor(model => model.Identificacion, new { @class = "input-group-addon" })
+                @Html.TextBox("txtIIdentificacion", "", new { @class = "form-control input-user", @placeholder = "Identificacion", required = "required" })
+
+            </div>
+            <div style="height:5px">
+            </div>
+            <div class="input-group">
+                @Html.LabelFor(model => model.Telefono, new { @class = "input-group-addon" })
+                @Html.TextBox("txtITelefono", "", new { @class = "form-control input-user", @placeholder = "Teléfono", required = "required" })
+            </div>
+            <div style="height:5px">
+            </div>
+            <div class="input-group">
+                @Html.LabelFor(model => model.Nombre, new { @class = "input-group-addon" })
+                @Html.TextBox("txtINombre", "", new { @class = "form-control input-user", @placeholder = "Nombre", required = "required" })
+            </div>
+            <div style="height:5px">
+            </div>
+            <div class="input-group">
+                @Html.LabelFor(model => model.Motivo, new { @class = "input-group-addon" })
+                @Html.TextBox("txtIMotivo", "", new { @class = "form-control input-user", @placeholder = "Motivo", required = "required" })
+            </div>
+            <div style="height:5px">
+            </div>
+            <div class="input-group">
+                @Html.LabelFor(model => model.Accion, new { @class = "input-group-addon" })
+                <select class="form-control input-user" id="ddlIAccion">
+                    <option value="1">Rechazado</option>
+                    <option value="2">Condicional</option>
+                </select>
+            </div>
+            <div style="height:5px">
+            </div>
+            <div class="input-group">
+                @Html.LabelFor(model => model.Activo, new { @class = "input-group-addon" })
+                <input type="checkbox" class="form-control input-user" id="chkIActivo" />
+            </div>
+            <div style="height:5px">
+            </div>
+            <div class="input-group">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="Insert();">Crear</button>
+            </div>
+        </form>
+    </fieldset>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+    <script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+    </script>

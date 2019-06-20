@@ -1,0 +1,64 @@
+﻿@model TwoFunTwoMeFintech.Models.DTO.clsSUBMENU
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>clsSUBMENU</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SUBMENU)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SUBMENU)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CONTROLLER)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CONTROLLER)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MAINMENUID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MAINMENUID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ROLEID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ROLEID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ACTION)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ACTION)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+    <script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+    </script>

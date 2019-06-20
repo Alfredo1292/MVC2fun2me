@@ -1,0 +1,188 @@
+﻿@model IEnumerable<TwoFunTwoMeFintech.Models.DTO.GestionGeneral>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Gestión General</h2>
+
+<script src="~/Scripts/Proyecto/GestionGeneral.js"></script>
+
+<link href="~/Styles/DataTable.css" rel="stylesheet" />
+<link href="~/Styles/DataTabledtr.css" rel="stylesheet" />
+
+<script src="~/Scripts/Proyecto/DataTables 1.10.15.js"></script>
+<script src="~/Scripts/Proyecto/DataTable Bootstrap.js"></script>
+<script src="~/Scripts/jquery.dataTables.js"></script>
+<link href="~/Content/css/jquery.dataTables.css" rel="stylesheet" />
+<style type="text/css">
+    .modal-dialog {
+        width: 1020px !important;
+    }
+</style>
+
+<div class="container">
+    <div class="form-group">
+
+    </div>
+    <div class="row anyClass">
+        <div class="col-sm-3 ">
+            <div class="input-group">
+                <label class="input-group-addon" for="lblBusquedaSolicitud">Buscar</label>
+                <input type="text" class="form-control" id="txtBusquedaSolicitud" placeholder="Buscar" />
+            </div>
+        </div>
+        <div class="col-sm-1 ">
+            <button type="button" id="btnBuscar" onclick="Busqueda();" required class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Buscar</button>
+        </div>
+        <div class="col-sm-4 ">
+            <div class="input-group">
+                <span class="input-group-addon m-sm">Fecha de Gestión:</span>
+                <input type="date" data-date="" data-date-format="YYYY MMMM DD" required class="form-control input-sm" id="txtFechaGestion" placeholder="Fecha de Gestión">
+            </div>
+        </div>
+        <div class="col-sm-4 ">
+            <div class="input-group">
+                <label class="input-group-addon" for="lblTipoGestion">Tipo de Gestión</label>
+                <select id="ddlTipoGestion" class="form-control">
+                    <option value=0> -Seleccione-</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div style="height:15px">
+    </div>
+    <label class="input-group-addon" for="Detalle">Detalle</label>
+    <textarea class="form-control" rows="6" cols="100" id="txtDetalle" required></textarea>
+    <div style="height:15px">
+    </div>
+    <table ID="SolicitudesTable" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Solicitud
+                </th>
+                <th>
+                    Cliente
+                </th>
+                <th>
+                    NombreProducto
+                </th>
+                <th>
+                    Monto
+                </th>
+                <th>
+                    Accion
+                </th>
+            </tr>
+        </thead>
+        <tbody id="SolicitudesTablebody" class="tbody"></tbody>
+    </table>
+</div>
+
+<div class="modal" Id="myModalGestiones" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*<button type="button" class="close" data-dissmiss="modal"><span aria-hidden="true">×</span></button>*@
+                <button type="button" class="close" data-dismiss="modal">×</button>
+
+            </div>
+            <div class="modal-body">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Gestiones</span>
+                </h4>
+                <div id="demo">
+
+                    <table ID="GestionesTable" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Id
+                                </th>
+                                <th>
+                                    Solicitud
+                                </th>
+                                <th>
+                                    Agente
+                                </th>
+                                <th>
+                                    Detalle
+                                </th>
+                                <th>
+                                    Gestión
+                                </th>
+                                <th>
+                                    Accion
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="GestionesGeneralBody" class="tbody"></tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" Id="myModalGestionesAprobadas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*<button type="button" class="close" data-dissmiss="modal"><span aria-hidden="true">×</span></button>*@
+                <button type="button" class="close" data-dismiss="modal">×</button>
+
+            </div>
+            <div class="modal-body">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Gestiones Aprobadas</span>
+                </h4>
+                <div id="demo">
+
+                    <table ID="GestionesAprobadasTable" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Id
+                                </th>
+                                <th>
+                                    Solicitud
+                                </th>
+                                <th>
+                                    Agente
+                                </th>
+                                <th>
+                                    Detalle
+                                </th>
+                                <th>
+                                    Accion
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="GestionesAprobadasBody" class="tbody"></tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

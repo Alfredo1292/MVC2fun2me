@@ -1,0 +1,85 @@
+﻿@model IEnumerable<TwoFunTwoMeFintech.Models.DTO.AsignacionBuckets>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BucketInicial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BucketFinal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRPRotas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CeroPagos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SaldoAlto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SaldoMedio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SaldoBajo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BucketInicial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BucketFinal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRPRotas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CeroPagos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SaldoAlto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SaldoMedio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SaldoBajo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estado)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

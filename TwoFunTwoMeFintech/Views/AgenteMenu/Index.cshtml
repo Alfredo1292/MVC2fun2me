@@ -1,0 +1,21 @@
+﻿@model IEnumerable<TwoFunTwoMeFintech.Models.DTO.AgenteMenu>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container">
+    <div class="form-group">
+        <label id="lblUsuario" class="input-group-addon" style="width: 120px;">Usuario</label>
+        <select id="ddlUsuarios" class="form-control"></select>
+    </div>
+</div>
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

@@ -1,0 +1,112 @@
+﻿@model TwoFunTwoMeFintech.Models.LoginModels
+@{
+    ViewBag.Title = "Login";
+}
+<head>
+    @*<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="../../../../favicon.ico">
+        <title>Signin Template for Bootstrap</title>*@
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/bootstrap-4.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="~/Content/bootstrap-4.0.0/signin.css" rel="stylesheet">
+    <style>
+        .nav-menu {
+            display: none;
+        }
+        .form-signin {
+            width: 100%!important;
+            height: 240px!important;
+        }
+        #imagen-login {
+            position: absolute;
+            top: 15%;
+            left: 39%;
+        }
+            #imagen-login img {
+                margin-top:10%;
+            }
+    </style>
+</head>
+<body>
+    <div>
+        <div>
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary(true)
+                <section>
+                    <div id="ventana-login" class="form-signin" style="display:none;">
+                        <div class="text-center mb-4">
+                            <table class="header-login">
+                                <tr>
+                                    <td class="izquierda"><p>Inicio de Sesión</p></td>
+                                    <td class="derecha"><img src="~/Content/menu/iconos/Fenix-atomo.png" /></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="form-label-group entrada-datos">
+                            @*@Html.EditorFor(model => model.Cedula, new { htmlAttributes = new { @data_minlength = "3", @class = "form-control", @placeholder = "Name", @required = "required", @id = "txtName" } })*@
+                            @*@Html.TextBox(model => model.Cedula, new { maxlength = 8, style = "width: 100px; text-align: right;" })*@
+
+                            @*@Html.TextBox("Cedula", "", new { @class = "form-control", @placeholder = "Usuario", required = "required" })*@
+
+
+                            <input class="form-control" data-val="true" data-val-required="Please enter the User Name" id="Cedula" name="Cedula" placeholder="Usuario" required="required" type="text" value="">
+                            <img src="~/Images/user.png" />
+                            @*<span asp-validation-for="Input.Cedula" class="text-danger"></span>*@
+                            @*<input asp-for="model => model.Cedula" class="form-control" placeholder="Email address" required autofocus />*@
+                            @*<label asp-for="Input.Email">Email address</label>*@
+                            @*<span asp-validation-for="Input.Email" class="text-danger"></span>*@
+                        </div>
+                        <div class="form-label-group entrada-datos">
+                            @*@Html.LabelFor(model => model.Password)
+                                @Html.EditorFor(model => model.Password)
+                                @Html.ValidationMessageFor(model => model.Password)
+                                <span style="color:Red">@ViewBag.ErrorMsg</span>
+                                <br />*@
+                            @*@Html.Password("Password", "", new { @class = "form-control", @placeholder = "Password", required = "required" })*@
+
+
+                            <input class="form-control" data-val="true" data-val-required="Please enter the Password" id="Password" name="Password" placeholder="Password" required="required" type="password" value="">
+                            <img src="~/Images/lock.png" />
+                        </div>
+                        <div class="form-label-group container-btn-login">
+                            <button type="submit" class="btn btn-lg btn-primary" value="Login" onclick="SomeThingChanged();"><img src="~/Images/key.png" />Ingresar</button>
+                        </div>
+                        @if (ViewBag.ErrorMsg != null)
+                        {
+                            <div class="alert alert-danger alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                @ViewBag.ErrorMsg
+                            </div>
+                        }
+                    </div>
+                    <div id="imagen-login" style="display:none">
+                        <img src="~/Content/menu/iconos/Fenix-Principal.png" />
+                    </div>
+                </section>
+            }
+        </div>
+    </div>
+</body>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-ui-1.10.4.custom.min.js"></script>
+    <script>
+        
+        $(function () {
+            $('#UserName').addClass('form-control');
+            $('#Password').addClass('form-control');
+            $('.container').removeClass('container-menu-abierto');
+            $('body').css("background-image", "none");
+        });
+        $(document).ready(function () {
+            $('#imagen-login').fadeIn(1200).delay(100);
+            $('#imagen-login').fadeOut(1200).delay(100);
+            $('#ventana-login').delay(2400).show("bounce", { times: 5 }, 1200)
+        });
+    </script>
+}

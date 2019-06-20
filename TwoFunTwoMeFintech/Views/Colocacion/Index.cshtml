@@ -1,0 +1,1626 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<script src="~/Scripts/Proyecto/Colocacion/Colocacion.js"></script>
+<script src="~/Scripts/Proyecto/CuentaBancaria/CuentaBancaria.js"></script>
+<script src="~/Scripts/Proyecto/AnalisisRules/AnalisisRules.js"></script>
+<script src="~/Scripts/Proyecto/jquery.inputmask.bundle.min.js"></script>
+<script src="~/Scripts/Proyecto/download.js"></script>
+<script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+<link href="~/Styles/bootstrap-datetimepicker.css" rel="stylesheet" />
+<div id="frmPrincipal" class="clearAllFrm">
+    @*panel derecho de info*@
+    @Html.Action("PanelInfo")
+    <input type="hidden" id="ColaIniciada" name="custId" value="0">
+    <div class="fondo-general"></div>
+    @*icortes Tipo de identificacion*@
+    <input type="hidden" id="hdfTipoIdentificacion" name="custId" value="0">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="titulo-pagina-blanco">
+                <p id="lblDetalleOrigen"></p>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div id="titulo-alarma" class="titulo-pagina-blanco">
+                <p id="lblTiempoGestion">Tiempo Gestión:</p>
+                <p id="lblTiempoMinuto">00</p>
+                <p id="lblDosPuntos">:</p>
+                <p id="lblTiempoSegundo">00</p>
+            </div>
+        </div>
+    </div>
+    <div class="contenido-general row">
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="table-responsive">
+                <form class="form-inline" onSubmit="return false;">
+                    <div class="btn-group btn-group-s" role="group">
+                    </div>
+                    <button type="button" id="btnFiltrar" onclick="MostrarFiltros();" required class="btn btn-primary btn-group-s"><span class="fas fa-angle-double-down"></span><span class="tooltiptexGeneral">Buscar Por Nombre</span></button>
+                    <input id="txtBusqueda" type="text" class="form-control input-sm" name="msg">
+                    <button type="button" id="btnBuscar" onclick="buscarSolicitudManual();" required class="btn btn-primary btn-group-s"><span class="glyphicon glyphicon-search"></span> Buscar</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="table-responsive">
+                <form class="form-inline">
+                    <div class="btn-group btn-group-s" role="group"></div>
+                    <button type="button" id="btnComentarioReprog" onclick="mostrarModalComentarioRepro();" required class="btn btn-primary btn-primary-editar"><span class="glyphicon glyphicon-calendar"></span> Reprog</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-sm-12">
+            <div class="table-responsive">
+                <form class="form-inline">
+                    <div role="group">
+                        <button type="button" id="button_play" onclick="buttonPlayPress();" class="btn btn-primary btn-primary-asignar" style="display:none">
+                            <i id="button_play_i" class="fa fa-play"></i>
+                            @*<span class="glyphicon glyphicon-play-circle"></span>*@
+                            Iniciar
+                        </button>
+                        <button type="button" id="button_stop" onclick="buttonStopPress();" class="btn btn-primary btn-primary-eliminar" style="display:none">
+                            <i id="button_stop_i" class="fa fa-stop"></i>
+                            @*<span class="glyphicon glyphicon-step-forward"></span>*@
+                            Detener
+                        </button>
+                        <button type="button" id="button_fw" onclick="buttonForwardPress();" class="btn btn-warning" style="display:none;">
+                            <i id="button_fw_i" class="fa fa-forward"></i>
+                            @*<span class="glyphicon glyphicon-step-forward"></span>*@
+                            Sguiente
+                        </button>
+                        <button type="button" id="button_reiniciarCola" onclick="reiniciarCola();" class="btn btn-primary btn-primary-asignar" style="display:none">
+                            <i id="button_reiniciar" class="fa fa-play"></i>
+                            @*<span class="glyphicon glyphicon-step-forward"></span>*@
+                            Continuar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="table-responsive">
+                <form class="form-inline" onSubmit="return false;">
+                    <div class="btn-group btn-group-s" role="group">
+                    </div>
+                    <label for="lblNuevoMoneda">Status Asesor</label>
+                    <select id="ddlStatusAsesor" class="form-control control-editar-usuario" onchange="SelectChangeStatusAsesor();"></select>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-1 col-md-6 col-sm-12">
+            <div class="table-responsive">
+                <form class="form-inline" onSubmit="return false;">
+                    <button style="float: right;" id="btnGuardarPersona" value="Guardar" class="btn btn-primary btn-primary-editar" onclick="mostrarModal();">Acciones</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="filtro-busqueda" class="contenido-general row oculto" style="display:none;">
+        <div class="col-lg-11">
+            <div class="row">
+                <div class="col-lg-3">
+                    <form class="form-inline" onSubmit="return false;">
+                        <div class="btn-group btn-group-s" role="group">
+                        </div>
+                        <label>Primer</label>
+                        <input id="txtPrimerNombre" onkeyup="buscarColaKey(event);" type="text" class="form-control input-sm" name="msg" placeholder="Nombre">
+                    </form>
+                </div>
+                <div class="col-lg-3">
+                    <form class="form-inline" onSubmit="return false;">
+                        <div class="btn-group btn-group-s" role="group">
+                        </div>
+                        <label>Segundo</label>
+                        <input id="txtSegundoNombre" onkeyup="buscarColaKey(event);" type="text" class="form-control input-sm" name="msg" placeholder="Nombre">
+                    </form>
+                </div>
+                <div class="col-lg-3">
+                    <form class="form-inline" onSubmit="return false;">
+                        <div class="btn-group btn-group-s" role="group">
+                        </div>
+                        <label>Primer</label>
+                        <input id="txtPrimerApellido" onkeyup="buscarColaKey(event);" type="text" class="form-control input-sm" name="msg" placeholder="Apellido">
+                    </form>
+                </div>
+                <div class="col-lg-3">
+                    <form class="form-inline" onSubmit="return false;">
+                        <div class="btn-group btn-group-s" role="group">
+                        </div>
+                        <label>Segundo</label>
+                        <input id="txtSegundoApellido" onkeyup="buscarColaKey(event);" type="text" class="form-control input-sm" name="msg" placeholder="Apellido">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-1">
+            <div class="table-responsive">
+                <form class="form-inline" onSubmit="return false;">
+                    <div class="btn-group btn-group-s" role="group">
+                    </div>
+                    <button type="button" id="btnBuscarNombre" onclick="BuscarNombre();" required class="btn btn-primary btn-primary-asignar btn-group-s"><span class="fas fa-search"></span><span class="tooltiptexGeneral">Buscar Nombre</span></button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="contenido-general row info-personal">
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="table-responsive">
+                <form class="form-inline" onSubmit="return false;">
+                    <label id="lblNombre">Nombre: </label>
+                    <input style="width:77%;" id="txtNombre" type="text" class="form-control input-sm" name="msg" readonly>
+                </form>
+
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-sm-12">
+            <div class="table-responsive">
+                <form class="form-inline" onSubmit="return false;">
+                    <label id="lblCedula">Cédula: </label>
+                    <input id="txtCedula" type="text" class="form-control input-sm" name="msg" readonly>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-sm-12">
+            <div class="table-responsive">
+                <form class="form-inline" onSubmit="return false;">
+                    <label id="lblSolicitud">Solicitud: </label>
+                    <input id="txtSolicitud" type="text" class="form-control input-sm" name="msg" readonly>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-sm-12">
+            <div class="table-responsive">
+                <form class="form-inline" onSubmit="return false;">
+                    <label id="lblTelefono">Telefono: </label>
+                    <input id="txtTelefono" type="text" class="form-control input-sm" name="msg" readonly>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="table-responsive">
+                <form class="form-inline" onSubmit="return false;">
+                    <label id="lblFechaSolicitud">Fecha: </label>
+                    <input id="txtFechaSolicitud" type="text" class="form-control input-sm" name="msg" readonly>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="contenido-general row info-personal">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="table-responsive">
+                <form class="form-inline" onSubmit="return false;">
+                    <label id="lblEmpresaCreddid">Empresa Labora: </label>
+                    <label id="lblEmpresaCreddidNombre"></label>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="table-responsive">
+                <form class="form-inline" onSubmit="return false;">
+                    <label id="lblFechaUltimaRepro">Reprogramacion: </label>
+                    <input id="txtFechaUltimaRepro" type="text" class="form-control input-sm" name="msg">
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-5 col-md-6 col-sm-12">
+            <div class="table-responsive">
+                <form class="form-inline" onSubmit="return false;">
+                    <div role="group">
+                        <label id="lblFechaPlanPago">Fecha Plan de Pagos: </label>
+                        <input type="date" id="txtFechaPlanPago" name="PlanPago" required>
+                        <button type="button" class="btn btn-primary" Id="btnCalcularPlanPago" onclick="CalcularPlanPagos();">Plan de Pagos</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal fade" Id="modalPlanPago" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">x</button>
+                <div class="modal-header titulo-modal">
+                    <p id="idEditarAgente" class="alert alert-info"><strong>Plan de Pagos</strong></p>
+                </div>
+                <div class="modal-body">
+                    <form>
+
+                        <table ID="tblPlanPago" class="container table table-bordered table-hover no-footer dataTable">
+                            <thead>
+                                <tr class="info">
+                                    <th>
+                                        Fecha
+                                    </th>
+                                    <th>
+                                        Cuota
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody planPago"></tbody>
+                        </table>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <ul id="ul-tabs-ventas" class="nav nav-tabs tab-ventas">
+            <li id="tab1" class="active"><a data-toggle="tab" href="#contentTab1"><span class="round-tabs one"><i class="glyphicon glyphicon-user"></i></span><span class="tooltiptexMenu">Información Personal</span></a></li>
+            <li id="tab2"><a data-toggle="tab" href="#contentTab2"><span class="round-tabs one"><i class="glyphicon glyphicon-comment"></i></span><span class="tooltiptexMenu">Referencias</span></a></li>
+            <li id="tab3"><a data-toggle="tab" href="#contentTab3"><span class="round-tabs one"><i class="glyphicon glyphicon-usd"></i></span><span class="tooltiptexMenu">Información Producto</span></a></li>
+            <li id="tab4"><a data-toggle="tab" href="#contentTab4" onclick="CargaCuentaBancaria();"><span class="round-tabs one"><i class="glyphicon glyphicon-piggy-bank"></i></span><span class="tooltiptexMenu">Información Banco</span></a></li>
+            <li id="tab5"><a data-toggle="tab" href="#contentTab5"><span class="round-tabs one"><i class="glyphicon glyphicon-file"></i></span><span class="tooltiptexMenu">Documentación</span></a></li>
+            <li id="tab6"><a data-toggle="tab" href="#contentTab6"><span class="round-tabs one"><i class="glyphicon glyphicon-list-alt"></i></span><span class="tooltiptexMenu">Gestiones</span></a></li>
+            <li id="tab7"><a data-toggle="tab" href="#contentTab7"><span class="round-tabs one"><i class="glyphicon glyphicon-folder-close"></i></span><span class="tooltiptexMenu">Historial Solicitudes</span></a></li>
+            <div class="line line1"></div>
+            <div class="line line2"></div>
+            <div class="line line3"></div>
+            <div class="line line4"></div>
+            <div class="line line5"></div>
+            <div class="line line6"></div>
+        </ul>
+        <div class="tab-content tab-colocacion">
+            <div id="contentTab1" class="tab-colocacion tab-pane fade in active">
+                <div>
+                    <ul id="tab_infoper" class="nav nav-tabs">
+                        <li id="Infotab1" class="active"><a data-toggle="tab" href="#InfocontentTab1">Informacion Personal</a></li>
+                        <li id="Infotab2"><a data-toggle="tab" href="#InfocontentTab2">Contactos</a></li>
+                        <li id="Infotab3"><a data-toggle="tab" href="#InfocontentTab3">Direccion</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="InfocontentTab1" class="tab-pane fade active in">
+                            <div class="contenido-general">
+                                <h4>Información Personal</h4>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="table-responsive">
+                                            <form class="form-inline" onSubmit="return false;">
+                                                <label id="lblCorreo">Email: </label>
+                                                <input id="txtCorreo" class="form-control input-sm" name="msg">
+                                                <span id="verificar-mail-icon" class="fas fa-times-circle"></span>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="table-responsive">
+                                            <form class="form-inline" onSubmit="return false;">
+                                                <label id="lblNacionalidad">Nacionalidad: </label>
+                                                <select class="form-control" id="ddlNacionalidad"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="table-responsive">
+                                            <form class="form-inline" onSubmit="return false;">
+                                                <label id="lblEstCivil">Estado Civil: </label>
+                                                <select class="form-control" id="ddlEstadoCivil"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="table-responsive">
+                                            <form class="form-inline" onSubmit="return false;">
+                                                <label id="lblNac">Nacimiento: </label>
+                                                <input id="txtFechaNacimiento" type="text" class="form-control input-sm" name="msg" readonly>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="table-responsive">
+                                            <form class="form-inline" onSubmit="return false;">
+                                                <label id="lblCedVence">Céd. Vence: </label>
+                                                <input id="txtCedulaVence" type="text" class="form-control input-sm" name="msg" readonly>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="table-responsive">
+                                            <form class="form-inline" onSubmit="return false;">
+                                                <label id="lblGenero">Genero: </label>
+                                                <select class="form-control" id="ddlGenero"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="table-responsive">
+                                            <form class="form-inline" onSubmit="return false;">
+                                                <label id="lblProvincia">Provincia: </label>
+                                                <select class="form-control" id="ddlProvincia" onchange="getCanton();"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="table-responsive">
+                                            <form class="form-inline" onSubmit="return false;">
+                                                <label id="lblCanton">Canton: </label>
+                                                <select class="form-control" id="ddlCanton" onchange="getDistrito();"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="table-responsive">
+                                            <form class="form-inline" onSubmit="return false;">
+                                                <label id="lblDistrito">Distrito: </label>
+                                                <select class="form-control" id="ddlDistrito"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-6 col-sm-12">
+                                        <div class="table-responsive">
+                                            <form class="form-inline" onSubmit="return false;">
+                                                <label id="lblDetalle">Detalle: </label>
+                                                <textarea class="form-control" rows="8" cols="100" id="txtDetalle" required></textarea>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-6 col-sm-12">
+                                        <div class="table-responsive">
+                                            <form class="form-inline" onSubmit="return false;">
+                                                <button type="button" id="btnProcesarColaPersona" onclick="procesarColaPersona();" required class="btn btn-primary btn-derecha">Guardar</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="InfocontentTab2" class="tab-pane fade in">
+                            <div class="contenido-general">
+                                <h4>Teléfonos</h4>
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-primary" Id="btnUpdate" onclick="MostrarModalNuevoTelefono();">Nuevo</button>
+                                </div>
+                                <table ID="ContacTable" class="container table table-bordered table-hover no-footer dataTable">
+                                    <thead>
+                                        <tr class="info">
+                                            <th>
+                                                Predeterminado
+                                            </th>
+                                            <th>
+                                                Fuente
+                                            </th>
+                                            <th>
+                                                Tipo
+                                            </th>
+                                            <th>
+                                                Relación
+                                            </th>
+                                            <th>
+                                                Teléfono
+                                            </th>
+                                            <th>
+                                                Fecha
+                                            </th>
+                                            <th>
+                                                Acción
+                                                <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbody contact"></tbody>
+                                </table>                              
+                            </div>
+                            <div class="contenido-general">
+                                <div id="tel-laboral">
+                                    <h4>Teléfono Laboral</h4>
+                                    <div class="row">
+                                        <div class="col-lg-11">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <form class="form-inline">
+                                                        <div class="btn-group btn-group-s" role="group"></div>
+                                                        <label for="lblTelefonoLaboral">Numero: </label>
+                                                        <input type="text" class="form-control" id="txtTelefonoLaboral" placeholder="Numero de Telefono" />
+                                                    </form>
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <form class="form-inline">
+                                                        <div class="btn-group btn-group-s" role="group"></div>
+                                                        <label for="lblTelefonoLaboralComentario">Comentario Validacion</label>
+                                                        <input type="text" class="form-control" id="txtTelefonoLaboralComentario" placeholder="Comentario" />
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <button type="button" class="btn btn-primary" id="btnGuardarTelefonoLaboral" onclick="guardarTelefonoLaboral();" value="Guardar">Guardar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" Id="myModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        @*<button type="button" class="close" data-dissmiss="modal"><span aria-hidden="true">×</span></button>*@
+                                        <button type="button" class="close" data-dismiss="modal">×</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="EditId">Id</label>
+                                                <input type="text" class="form-control" id="EditId" placeholder="IdTelefono" disabled="disabled" />
+                                            </div>
+                                            <div class="table-responsive">
+                                                <label for="lblEditPredeterminado">Predeterminado</label>
+                                                <select id="ddlEditPredeterminado" class="form-control control-editar-usuario"></select>
+                                            </div>
+                                            @*<div class="form-group">
+                                                    <label for="EditFuenteDatos">Fuente de Datos</label>
+                                                    <input type="text" class="form-control" id="EditFuenteDatos" placeholder="Fuente de Datos" />
+                                                </div>*@
+                                            @*<div class="form-group">
+                                                    <label for="EditTipo">Tipo</label>
+                                                    <input type="text" class="form-control" id="EditTipo" placeholder="Tipo" />
+                                                </div>*@
+                                            <div class="form-group">
+                                                <label for="EditRelacion">Relación</label>
+                                                <input type="text" class="form-control" id="EditRelacion" placeholder="Relación" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="EditTelefono">Teléfono</label>
+                                                <input type="number" class="form-control" id="EditTelefono" max="99999999999" placeholder="Teléfono" />
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" Id="btnEditUpdate" style="display:none;" onclick="ActualizarTelefono();">Actualizar</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" Id="myModalNuevo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        @*<button type="button" class="close" data-dissmiss="modal"><span aria-hidden="true">×</span></button>*@
+                                        <button type="button" class="close" data-dismiss="modal">×</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="table-responsive">
+                                                <label for="lblNuevoPredeterminado">Predeterminado</label>
+                                                <select id="ddlNuevoPredeterminado" class="form-control control-editar-usuario"></select>
+                                            </div>
+                                            @*<div class="form-group">
+                                                    <label for="NuevoFuenteDatos">Fuente Datos</label>
+                                                    <input type="text" class="form-control" id="NuevoFuenteDatos" placeholder="Fuente de Datos" />
+                                                </div>*@
+                                            <div class="form-group">
+                                                <label for="ddlNuevoTipoTEL">Tipo</label>
+                                                <select id="ddlNuevoTipoTEL" class="form-control control-editar-usuario">
+                                                    <option value="">--Seleccionar--</option>
+                                                    <option value="Celular">Celular</option>
+                                                    <option value="Casa">Casa</option>
+                                                    <option value="Trabajo">Trabajo</option>
+                                                    <option value="Otro">Otro</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="NuevoRelacion">Relación</label>
+                                                <input type="text" class="form-control" id="NuevoRelacion" placeholder="Relación" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="NuevoTelefono">Numero de Teléfono</label>
+                                                <input type="number" class="form-control" id="NuevoTelefono" maxlength="11" placeholder="Teléfono" />
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" Id="btnCrear" style="display:none;" onclick="CrearTelefonoNuevo();">Crear</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="InfocontentTab3" class="tab-pane fade in">
+                            <div class="contenido-general">
+                                <h4>Direcciones</h4>
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-primary" Id="btnUpdate" onclick="MostrarModalNuevoDireccion();">Nuevo</button>
+                                </div>
+                                <table ID="ContacDireccionTable" class="container table table-bordered table-hover no-footer dataTable">
+                                    <thead>
+                                        <tr class="info">
+                                            <th>
+                                                Predeterminado
+                                            </th>
+                                            <th>
+                                                Fuente
+                                            </th>
+                                            <th>
+                                                Tipo
+                                            </th>
+                                            <th>
+                                                Relación
+                                            </th>
+                                            <th>
+                                                Direccion
+                                            </th>
+                                            <th>
+                                                Fecha
+                                            </th>
+                                            <th>
+                                                Acción
+                                                <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbody Direccion"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal fade" Id="myModalEditDIR" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        @*<button type="button" class="close" data-dissmiss="modal"><span aria-hidden="true">×</span></button>*@
+                                        <button type="button" class="close" data-dismiss="modal">×</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="EditIdDIR">Id</label>
+                                                <input type="text" class="form-control" id="EditIdDIR" placeholder="IdDireccion" disabled="disabled" />
+                                            </div>
+                                            <div class="table-responsive">
+                                                <label for="lblEditPredeterminadoDIR">Predeterminado</label>
+                                                <select id="ddlEditPredeterminadoDIR" class="form-control control-editar-usuario"></select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="EditRelacionDIR">Relación</label>
+                                                <input type="text" class="form-control" id="EditRelacionDIR" placeholder="Relación" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="EditDireccion">Dirección</label>
+                                                @*<input type="text" class="form-control" id="EditDireccion" placeholder="Dirección" />*@
+                                                <textarea class="form-control" rows="8" cols="100" id="EditDireccion" maxlength="500" required style="margin: 0px; width: 880px; height: 128px;"></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" Id="btnEditUpdateDIR" style="display:none;" onclick="ActualizarDireccion();">Actualizar</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" Id="myModalNuevoDIR" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        @*<button type="button" class="close" data-dissmiss="modal"><span aria-hidden="true">×</span></button>*@
+                                        <button type="button" class="close" data-dismiss="modal">×</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="table-responsive">
+                                                <label for="lblNuevoPredeterminadoDIR">Predeterminado</label>
+                                                <select id="ddlNuevoPredeterminadoDIR" class="form-control control-editar-usuario"></select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="ddlNuevoTipoDIR">Tipo</label>
+                                                <select id="ddlNuevoTipoDIR" class="form-control control-editar-usuario">
+                                                    <option value="">--Seleccionar--</option>
+                                                    <option value="Casa">Casa</option>
+                                                    <option value="Trabajo">Trabajo</option>
+                                                    <option value="Otro">Otro</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="NuevoRelacionDIR">Relación</label>
+                                                <input type="text" class="form-control" id="NuevoRelacionDIR" placeholder="Relación" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="NuevoDireccion">Direcccion</label>
+                                                @*<input type="text" class="form-control" id="NuevoDireccion" placeholder="Dirección" />*@
+                                                <textarea class="form-control" rows="8" cols="100" id="NuevoDireccion" maxlength="500" required style="margin: 0px; width: 880px; height: 128px;"></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" Id="btnCrearDIR" style="display:none;" onclick="CrearDiereccionNuevo();">Crear</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="contentTab2" class="tab-colocacion tab-pane fade in">
+                <div class="contenido-general">
+                    <h4>Referencias Familiares</h4>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <label id="lblTipoRef">Tipo Referencia: </label>
+                                    <select class="form-control" id="ddlTipoReferencia"></select>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <label id="lblNombreRef">Nombre: </label>
+                                    <input id="txtNombreRefFamiliar" type="text" class="form-control input-sm" name="msg">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <label id="lblTelefonoRefFamiliar">Telefono: </label>
+                                    <input id="txtTelefonoRefFamiliar" type="text" class="form-control input-sm" name="msg">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Referencias Laborales</h4>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <label id="lblNombreRefEmpresa">Empresa: </label>
+                                    <input class="form-control" id="txtNombreRefEmpresa">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <label id="lblTelefonoRefEmpresa">Telefono: </label>
+                                    <input id="txtTelefonoRefEmpresa" type="text" class="form-control input-sm" name="msg">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <label id="lblNombreRefSupervisor">Nombre Supervisor: </label>
+                                    <input id="txtNombreRefSupervisor" type="text" class="form-control input-sm" name="msg">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Referencias Personales</h4>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <label id="lblNombreRefPersonal">Nombre Completo: </label>
+                                    <input class="form-control" id="txtNombreRefPersonal">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <label id="lblTelefonoRefPersonal">Telefono: </label>
+                                    <input id="txtTelefonoRefPersonal" type="text" class="form-control input-sm" name="msg">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-6 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <button type="button" id="btnProcesarColaReferenciaPersonal" onclick="procesarColaReferenciaPersonas();" required class="btn btn-primary">Guardar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="contentTab3" class="tab-colocacion tab-pane fade in">
+                <div class="contenido-general">
+                    <h4>Informacion del Producto</h4>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <form class="form-inline">
+                                <div class="btn-group btn-group-s" role="group"></div>
+                                <label id="lblMontoCredito" for="lblMontoCredito">Monto crédito</label>
+                                <select id="ddlMontoCredito" class="form-control control-editar-usuario" onchange="cargarComboboxPlazoProducto(); calcularProducto();"></select>
+                                @*<input type="text" class="form-control" id="ROLID" placeholder="ROLID" />*@
+                            </form>
+                        </div>
+                        <div class="col-lg-2">
+                            <form class="form-inline">
+                                <div class="btn-group btn-group-s" role="group"></div>
+                                <label id="lblPlazoPago" for="lblPlazoPago">Plazo a pagarlo</label>
+                                <select id="ddlPlazoPago" class="form-control control-editar-usuario" onchange="calcularProducto();"></select>
+                                @*<input type="text" class="form-control" id="ROLID" placeholder="ROLID" />*@
+                            </form>
+                        </div>
+                        <div class="col-lg-2">
+                            <form class="form-inline">
+                                <div class="btn-group btn-group-s" role="group"></div>
+                                <label id="lblFrecuencia" for="lblFrecuencia">Forma de pago</label>
+                                <select id="ddlFrecuencia" class="form-control control-editar-usuario" onchange="calcularProducto();"></select>
+                                @*<input type="text" class="form-control" id="ROLID" placeholder="ROLID" />*@
+                            </form>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <label id="lblMontoMaximo">Monto maximo: </label>
+                                    <input id="txtMontoMaximo" type="text" class="form-control input-sm" name="msg" readonly>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <label id="lblProducto">Producto: </label>
+                                    <input id="ddlProducto" type="text" class="form-control input-sm" name="msg" readonly>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <label id="lblCuota">Cuota: </label>
+                                    <input id="textCuota" type="text" class="form-control input-sm" name="msg" readonly>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <div class="table-responsive">
+                            </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <button type="button" id="btnProcesarColaProducto" onclick="procesarColaProducto();" required class="btn btn-primary">Guardar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="contentTab4" class="tab-colocacion tab-pane fade in">
+                <div class="contenido-general">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#tabCuentaBanc" onclick="CargaCuentaBancaria();">Informacion Cuentas Bancarias</a></li>
+                        <li><a data-toggle="tab" href="#tabNuevaCuentaBanc" onclick="LlenarCombobox();">Nuevo</a></li>
+                    </ul>
+                    <div class="tab-content tab-colocacion">
+                        <div id="tabCuentaBanc" class="tab-colocacion tab-pane fade in active">
+                            <div>
+                                <table ID="tblBCO" class="table table-responsive-sm table-bordered  table-hover">
+                                    <thead>
+                                        <tr class="info">
+                                            <th>
+                                                Predeterminado
+                                            </th>
+                                            <th>
+                                                Banco
+                                            </th>
+                                            <th>
+                                                Tipo Cuenta
+                                            </th>
+                                            <th>
+                                                Moneda
+                                            </th>
+                                            <th>
+                                                Cuenta Banco
+                                            </th>
+                                            <th>
+                                                Cuenta Sinpe
+                                            </th>
+                                            <th>
+                                                Verificacion
+                                            </th>
+                                            <th>
+                                                Imagen
+                                            </th>
+                                            <th id="thUserTableAccion">
+                                                Accion
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="bodyTableBCO" class="tbody transfer"></tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                        <div id="tabNuevaCuentaBanc" class="tab-colocacion tab-pane fade in">
+                            <div>
+                                <div class="row" style="margin-bottom:5px">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="table-responsive">
+                                            <form class="form-inline" onSubmit="return false;">
+                                                <input type="checkbox" class="" id="ChkNuevoCuentaPredet" name="ChkNuevoCuentaPredet">Cuenta Predeterminada
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="table-responsive">
+                                            <form class="form-inline" onSubmit="return false;">
+                                                <label for="lblNuevoBanco">Banco</label>
+                                                <select id="ddlNuevoBanco" class="form-control control-editar-usuario" onchange="bancoSelectChangeNuevo($(this).val());"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="table-responsive">
+                                            <form class="form-inline" onSubmit="return false;">
+                                                <label for="lblNuevoTipoCuenta">Tipo de Cuenta</label>
+                                                <select id="ddlNuevoTipoCuenta" class="form-control control-editar-usuario"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="table-responsive">
+                                            <form class="form-inline" onSubmit="return false;">
+                                                <label for="lblNuevoMoneda">Moneda</label>
+                                                <select id="ddlNuevoMoneda" class="form-control control-editar-usuario"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="table-responsive">
+                                            <form class="form-inline" onSubmit="return false;">
+                                                <label id="lblnuevaCuentaBancaria" for="txtNuevaCuentaBancaria">Cuenta Bancaria</label>
+                                                <input type="text" class="form-control control-editar-usuario" id="txtNuevaCuentaBancaria" placeholder="Cuenta Bancaria" />
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="table-responsive">
+                                            <form class="form-inline" onSubmit="return false;">
+                                                <label id="lblnuevaCuentaSinpe" for="txtNuevaCuentaSinpe">Cuenta Sinpe</label>
+                                                <input type="text" class="form-control control-editar-usuario" id="txtNuevaCuentaSinpe" placeholder="Cuenta Sinpe" />
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top:5px">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="table-responsive">
+                                            <form class="form-inline" onSubmit="return false;">
+                                                <button id="crearNuevaCuenta" type="button" class="btn btn-primary" data-dismiss="modal" onclick="Crear();">Crear</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="contentTab5" class="tab-colocacion tab-pane fade in">
+                <div class="contenido-general">
+                    <h4>Administrar Documentos</h4>
+                    <div class="row">
+                        <div class="box-colocacion col-lg-2">
+                            <div class="table-responsive">
+                                <form class="form-inline input-file-Frontal" onSubmit="return false;" name="Fichiero">
+                                    <table id="tabla-cedula-frontal">
+                                        <tr><td><h5>Cedula Frontal</h5></td></tr>
+                                        <tr>
+                                            <td id="imagen-cedula-frontal"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table class="posicion-relativa">
+                                                    <tr>
+                                                        <td id="descargar-frontal"></td>
+                                                        <td id="girar-frontal"></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="box-colocacion col-lg-2">
+                            <div class="table-responsive">
+                                <form class="form-inline input-file-Trasera" onSubmit="return false;" name="Fichiero">
+                                    <table id="tabla-cedula-frontal">
+                                        <tr><td><h5>Cedula trasera</h5></td></tr>
+                                        <tr>
+                                            <td id="imagen-cedula-trasera"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table class="posicion-relativa">
+                                                    <tr>
+                                                        <td id="descargar-trasera"></td>
+                                                        <td id="girar-trasera"></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="box-colocacion col-lg-2">
+                            <div class="table-responsive">
+                                <form class="form-inline input-file-Selfie" onSubmit="return false;" name="Fichiero">
+                                    <table id="tabla-cedula-frontal">
+                                        <tr><td><h5>Selfie</h5></td></tr>
+                                        <tr>
+                                            <td id="imagen-selfie"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table class="posicion-relativa">
+                                                    <tr>
+                                                        <td id="descargar-selfie"></td>
+                                                        <td id="girar-selfie"></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="box-colocacion col-lg-2">
+                            <div class="table-responsive">
+                                <form class="form-inline input-file-Firma" onSubmit="return false;" name="Fichiero">
+                                    <table id="tabla-cedula-frontal">
+                                        <tr><td><h5>Firma</h5></td></tr>
+                                        <tr>
+                                            <td id="imagen-firma"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table class="posicion-relativa">
+                                                    <tr>
+                                                        <td id="descargar-firma"></td>
+                                                        <td id="girar-firma"></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="box-colocacion col-lg-2">
+                            <div class="table-responsive">
+                                <form class="form-inline input-file-Domiciliacion" onSubmit="return false;" name="Fichiero">
+                                    <table id="tabla-cedula-frontal">
+                                        <tr><td><h5>Pagaré</h5></td></tr>
+                                        <tr>
+                                            <td id="imagen-pagare"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table id="tabla-pagare" class="posicion-relativa">
+                                                    <tr>
+                                                        <td id="descargar-dom"></td>
+                                                        <td id="descargar-pagare"></td>
+                                                        <td id="girar-pagare"></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contenido-general">
+                    <h4>Cargar Documentos</h4>
+                    <div class="row">
+                        <div class="box-colocacion col-lg-2">
+                            <div class="table-responsive">
+                                <form class="form-inline input-file-Frontal" onSubmit="return false;" name="Fichiero">
+                                    <table>
+                                        <tr><td><h5>Cedula Frontal</h5></td></tr>
+                                        <tr>
+                                            <td><input type="text" class="form-control" placeholder='Cargar Archivo...' /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table class="posicion-relativa">
+                                                    <tr>
+                                                        <td><a class="btn btn-primary btn-primary-eliminar btn-reset"><span class="glyphicon glyphicon-retweet"></span><span class="tooltiptexMenu">Reset</span></a></td>
+                                                        <td><a id="btnGuardarFrontal" onclick="saveFileFrontal();" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span><span class="tooltiptexMenu">Guardar</span></a></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="box-colocacion col-lg-2">
+                            <div class="table-responsive">
+                                <form class="form-inline input-file-Trasera" onSubmit="return false;" name="Fichiero">
+                                    <table>
+                                        <tr><td><h5>Cedula Trasera</h5></td></tr>
+                                        <tr>
+                                            <td><input type="text" class="form-control" placeholder='Cargar Archivo...' /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table class="posicion-relativa">
+                                                    <tr>
+                                                        <td><a class="btn btn-primary btn-primary-eliminar btn-reset"><span class="glyphicon glyphicon-retweet"></span><span class="tooltiptexMenu">Reset</span></a></td>
+                                                        <td><a id="btnGuardarTrasera" onclick="saveFileTrasera();" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span><span class="tooltiptexMenu">Guardar</span></a></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="box-colocacion col-lg-2">
+                            <div class="table-responsive">
+                                <form class="form-inline input-file-Selfie" onSubmit="return false;" name="Fichiero">
+                                    <table>
+                                        <tr><td><h5>Selfie</h5></td></tr>
+                                        <tr>
+                                            <td><input id="cargar-foto-selfie" type="text" class="form-control" placeholder='Cargar Archivo...' /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table class="posicion-relativa">
+                                                    <tr>
+                                                        <td><a class="btn btn-primary btn-primary-eliminar btn-reset"><span class="glyphicon glyphicon-retweet"></span><span class="tooltiptexMenu">Reset</span></a></td>
+                                                        <td><a id="btnGuardarSelfie" onclick="saveFileSelfie();" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span><span class="tooltiptexMenu">Guardar</span></a></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="box-colocacion col-lg-2">
+                            <div class="table-responsive">
+                                <form class="form-inline input-file-Firma" onSubmit="return false;" name="Fichiero">
+                                    <table>
+                                        <tr><td><h5>Firma</h5></td></tr>
+                                        <tr>
+                                            <td><input type="text" class="form-control" placeholder='Cargar Archivo...' /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table class="posicion-relativa">
+                                                    <tr>
+                                                        <td><a class="btn btn-primary btn-primary-eliminar btn-reset"><span class="glyphicon glyphicon-retweet"></span><span class="tooltiptexMenu">Reset</span></a></td>
+                                                        <td><a id="btnGuardarFirma" onclick="saveFileFirma();" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span><span class="tooltiptexMenu">Guardar</span></a></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="box-colocacion col-lg-2">
+                            <div class="table-responsive">
+                                <form class="form-inline input-file-Domiciliacion" onSubmit="return false;" name="Fichiero">
+                                    <table>
+                                        <tr><td><h5>Pagare</h5></td></tr>
+                                        <tr>
+                                            <td><input type="text" class="form-control" placeholder='Cargar Archivo...' /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table class="posicion-relativa">
+                                                    <tr>
+                                                        <td><a class="btn btn-primary btn-primary-eliminar btn-reset"><span class="glyphicon glyphicon-retweet"></span><span class="tooltiptexMenu">Reset</span></a></td>
+                                                        <td><a id="btnGuardarDomiciliacion" onclick="saveFileDocument();" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span><span class="tooltiptexMenu">Guardar</span></a></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contenido-general row">
+                    <h4>Link de Firma</h4>
+                    <div class="col-lg-12">
+                        <div class="table-responsive">
+                            <form class="form-inline" onSubmit="return false;">
+                                <button id="btnGenerarLink" value="Guardar" class="btn btn-primary" onclick="GeneracionLinkLoop();">Generar Link</button>
+                                <label id="lblLink"></label>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                @*<h4>Revisar Documentos</h4>
+                    <div class="controles-colocacion">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-2 col-sm-12">
+                                <div class="table-responsive">
+                                    <form class="form-inline" onSubmit="return false;">
+                                        <input type="checkbox" class="custom-control-input" id="chkFotoCedula">
+                                        <label class="custom-control-label" for="defaultUnchecked">Foto Cedula</label>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-2 col-sm-12">
+                                <div class="table-responsive">
+                                    <form class="form-inline" onSubmit="return false;">
+                                        <input type="checkbox" class="custom-control-input" id="chkSelfie">
+                                        <label class="custom-control-label" for="defaultUnchecked">Selfie</label>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-2 col-sm-12">
+                                <div class="table-responsive">
+                                    <form class="form-inline" onSubmit="return false;">
+                                        <input type="checkbox" class="custom-control-input" id="chkRecibo">
+                                        <label class="custom-control-label" for="defaultUnchecked">Recibo (verificació de dirección)</label>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-2 col-sm-12">
+                                <div class="table-responsive">
+                                    <form class="form-inline" onSubmit="return false;">
+                                        <input type="checkbox" class="custom-control-input" id="chkReciboSalario">
+                                        <label class="custom-control-label" for="defaultUnchecked">Recibo (Ingreso/constacia Salario)</label>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-2 col-sm-12">
+                                <div class="table-responsive">
+                                    <form class="form-inline" onSubmit="return false;">
+                                        <input type="checkbox" class="custom-control-input" id="chkCuentabco">
+                                        <label class="custom-control-label" for="defaultUnchecked">Cuenta Bancaria</label>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-2 col-sm-12">
+                                <div class="table-responsive">
+                                    <form class="form-inline" onSubmit="return false;">
+                                        <input type="checkbox" class="custom-control-input" id="chkContrato">
+                                        <label class="custom-control-label" for="defaultUnchecked">Contrato</label>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-2 col-sm-12">
+                                <div class="table-responsive">
+                                    <form class="form-inline" onSubmit="return false;">
+                                        <input type="checkbox" class="custom-control-input" id="chkPagare">
+                                        <label class="custom-control-label" for="defaultUnchecked">Pagare</label>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        </div>*@
+            </div>
+            <div id="contentTab6" class="tab-colocacion tab-pane fade in">
+                <div class="contenido-general">
+                    <h4>Informacion de Gestiones</h4>
+                    <table Id="tableGestiones" class="container table table-bordered table-hover  dataTable">
+                        <thead>
+                            <tr class="info">
+                                <th>
+                                    Tipo Gestion
+                                </th>
+                                <th>
+                                    Solicitud
+                                </th>
+                                <th>
+                                    Fecha
+                                </th>
+                                <th>
+                                    Agente
+                                </th>
+                                <th>
+                                    Detalle
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="tbody" id="tblGestiones"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="contentTab7" class="tab-colocacion tab-pane fade in">
+                <div class="contenido-general">
+                    <h4>Historial de Solicitudes</h4>
+                    <table Id="tableHistorialSolicitudes" class="container table table-bordered table-hover  dataTable">
+                        <thead>
+                            <tr class="info">
+                                <th>
+                                    Solicitud
+                                </th>
+                                <th>
+                                    Descripción
+                                </th>
+                                <th>
+                                    Origen
+                                </th>
+                                <th>
+                                    Fecha Ingreso
+                                </th>
+                                <th>
+                                    Usuario Modificacion
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="tbody" id="tblHistorialSolicitudes"></tbody>
+                    </table>
+                </div>
+                <div class="row contenido-general">
+                    <h4>Analisis Rules</h4>
+                    <div class="col-lg-6">
+                        <from lass="form-inline">
+                            <label for="lblBuscar">Identificación:</label>
+                            <input id="txtBusquedaRules" type="text" name="msg">
+                            <button type="button" class="btn btn-primary" Id="btnBuscarRules">Buscar</button>
+                            <button type="button" class="btn btn-primary btn-primary-eliminar" Id="btnCerrarRules">Cerrar Tabla</button>
+                        </from>
+                    </div>
+                    <div class="col-lg-6"></div>
+                </div>
+                <div id="contenido-tabla-rules" class="row contenido-general" style="display:none">
+                    <div class="col-lg-12">
+                        <table id="TableRules" class="container table table-bordered table-hover dataTable">
+                            <thead>
+                                <tr class="info">
+                                    <th>
+                                        IdSolicitud
+                                    </th>
+                                    <th>
+                                        Identificación
+                                    </th>
+                                    <th>
+                                        MotivoRechazo
+                                    </th>
+                                    <th>
+                                        DescripcionMotivoRechazo
+                                    </th>
+                                    <th>
+                                        FechaIngreso
+                                    </th>
+                                    <th>
+                                        Descripción
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody" id="tblrules"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            @*Alfredo José Vargas Seinfarth--INICIO--15/02/2019*@
+            <div class="modal fade" Id="ModalEditCuentaBanc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <button type="button" class="close" data-dismiss="modal">x</button>
+                        <div class="modal-header titulo-modal">
+                            <p id="idEditarAgente" class="alert alert-info"><strong></strong></p>
+                        </div>
+                        <div class="modal-body modal-editar-agente">
+                            <form>
+                                <div class="row">
+                                    <div class="form-group col-lg-6">
+                                        <input type="hidden" class="form-control control-editar-usuario" id="IdCuentaBanc" disabled="disabled" />
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <input type="checkbox" id="ChkEditCuentaPredet" name="ChkEditCuentaPredet" checked> Cuenta Predeterminada<br>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group col-lg-6">
+                                        <label for="lblEditBanco">Banco</label>
+                                        <select id="ddlEditBanco" class="form-control control-editar-usuario" onchange="bancoSelectChangeEdit($(this).val());"></select>
+                                        @*<input type="text" class="form-control" id="ROLID" placeholder="ROLID" />*@
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group col-lg-6">
+                                        <label for="lblEditTipoCuenta">Tipo de Cuenta</label>
+                                        <select id="ddlEditTipoCuenta" class="form-control control-editar-usuario"></select>
+                                        @*<input type="text" class="form-control" id="ROLID" placeholder="ROLID" />*@
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group col-lg-6">
+                                        <label for="lblEditMoneda">Moneda</label>
+                                        <select id="ddlEditMoneda" class="form-control control-editar-usuario"></select>
+                                        @*<input type="text" class="form-control" id="ROLID" placeholder="ROLID" />*@
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group col-lg-6">
+                                        <label id="lblEditCuentaBancaria" for="txtEditCuentaBancaria">Cuenta Bancaria</label>
+                                        <input type="text" class="form-control control-editar-usuario" id="txtEditCuentaBancaria" placeholder="Cuenta Bancaria" onkeypress="return validaNumericos(event)" />
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label id="lblEditCuentaSinpe" for="txtEditCuentaSinpe">Cuenta Sinpe</label>
+                                        <input type="text" class="form-control control-editar-usuario" id="txtEditCuentaSinpe" placeholder="Cuenta Sinpe" onkeypress="return validaNumericos(event)" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer footer-editar-agente">
+                            <button type="button" class="btn btn-primary" Id="btnUpdate" onclick="Update();">Actualizar</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearTextBox();">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*Alfredo José Vargas Seinfarth--Fin--15/02/2019*@
+            <div class="modal fade" Id="ModalEditCuentaBanc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <button type="button" class="close" data-dismiss="modal">x</button>
+                        <div class="modal-header titulo-modal">
+                            <p id="idEditarAgente" class="alert alert-info"><strong></strong></p>
+                        </div>
+                        <div class="modal-body modal-editar-agente">
+                            <form>
+                                <div class="row">
+                                    <div class="form-group col-lg-6">
+                                        <input type="hidden" class="form-control control-editar-usuario" id="IdCuentaBanc" disabled="disabled" />
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <input type="checkbox" id="ChkEditCuentaPredet" name="ChkEditCuentaPredet" checked> Cuenta Predeterminada<br>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group col-lg-6">
+                                        <label for="lblEditBanco">Banco</label>
+                                        <select id="ddlEditBanco" class="form-control control-editar-usuario" onchange="MostrarCampoCuenta($(this).val());"></select>
+                                        @*<input type="text" class="form-control" id="ROLID" placeholder="ROLID" />*@
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group col-lg-6">
+                                        <label for="lblEditTipoCuenta">Tipo de Cuenta</label>
+                                        <select id="ddlEditTipoCuenta" class="form-control control-editar-usuario"></select>
+                                        @*<input type="text" class="form-control" id="ROLID" placeholder="ROLID" />*@
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group col-lg-6">
+                                        <label for="lblEditMoneda">Moneda</label>
+                                        <select id="ddlEditMoneda" class="form-control control-editar-usuario"></select>
+                                        @*<input type="text" class="form-control" id="ROLID" placeholder="ROLID" />*@
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group col-lg-6">
+                                        <label id="lblEditCuentaBancaria" for="correo">Cuenta Bancaria</label>
+                                        <input type="text" class="form-control control-editar-usuario" id="txtEditCuentaBancaria" placeholder="Cuenta Bancaria" onkeypress="return validaNumericos(event)" />
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label id="lblEditCuentaSinpe" for="estado">Cuenta Sinpe</label>
+                                        <input type="text" class="form-control control-editar-usuario" id="txtEditCuentaSinpe" placeholder="Cuenta Sinpe" onkeypress="return validaNumericos(event)" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer footer-editar-agente">
+                            <button type="button" class="btn btn-primary" Id="btnUpdate" style="display:none;" onclick="Update();">Actualizar</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearTextBox();">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*Alfredo José Vargas Seinfarth--Fin--15/02/2019*@
+
+            @*@*INICIO FCAMACHO 20/02/2019 FRAGMENTACION DEL GURADADO DE LA COLA RQ 02 COLOCACION*@
+            <div class="modal fade" Id="ModalProcesarSolicitud" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <button type="button" class="close" data-dismiss="modal">x</button>
+                        <div class="modal-header titulo-modal">
+                            <p id="idEditarAgente" class="alert alert-info"><strong></strong></p>
+                        </div>
+                        <div class="modal-body modal-editar-agente">
+                            <form>
+                                <div>
+                                    <div class="form-group col-lg-6">
+
+                                        <label id="lblEstadoSol">Estado Solicitud: </label>
+                                        <select class="form-control" id="ddlEstadoSol" onchange="statusSolicutudGestion();"></select>
+
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group col-lg-6">
+                                        <label id="lblUsoCredito">Uso Credito: </label>
+                                        <input id="txtUsoCredito" type="text" class="form-control input-sm" name="msg">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer footer-editar-agente">
+                            <button type="button" class="btn btn-primary" Id="btnPorcesarSolicitudPro" onclick="procesarColaSolicitud();">Procesar</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*FIN FCAMACHO 20/02/2019 FRAGMENTACION DEL GURADADO DE LA COLA RQ 02 COLOCACION*@
+        </div>
+        @*@*Inicio Modal comentario de reprogramacion*@
+        <div class="modal fade" Id="ModalComentarioReprogramacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-comentario-repro">
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                    <div class="modal-header titulo-modal">
+                        <p id="titulo-coment-repro" class="alert alert-info"><strong>Reprogramar Solicitud</strong></p>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <form class="form-inline">
+                                    <div class="btn-group btn-group-s" role="group"></div>
+                                    <label id="lblFechaReprogramacion">Fecha Reprogramacion: </label>
+                                </form>
+                            </div>
+                            <div class="col-lg-6">
+                                <form class="form-inline">
+                                    <div class="btn-group btn-group-s" role="group"></div>
+                                    <label id="lblComentReprogramacion">Comentario Reprogramacion: </label>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <form class="form-inline">
+                                    <div class="btn-group btn-group-s" role="group"></div>
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                    <input id="txtFechaRep" type="text" class="form-control input-sm" name="msg" readonly>
+                                </form>
+                            </div>
+                            <div class="col-lg-6">
+                                <form class="form-inline">
+                                    <div class="btn-group btn-group-s" role="group"></div>
+                                    <textarea id="txtComentarioRepro" name="Text1" rows="7" autofocus style="resize: none;"></textarea>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6"></div>
+                            <div class="col-lg-6">
+                                <form class="form-inline">
+                                    <div class="btn-group btn-group-s" role="group"></div>
+                                    <button type="button" class="btn btn-primary" Id="btnReprog" onclick="reprogramarSolicitud();">Procesar</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*FIN Modal comentario de reprogramacion*@
+    </div>
+
+    <!--Ventanas Modales-->
+    <div class="modal fade" Id="ElegirConsulta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">x</button>
+                <div class="modal-header titulo-modal">
+                    <p class="titulo-ventana-modal"><strong>Seleccione la cuenta que desea consultar</strong></p>
+                </div>
+                <div class="modal-body">
+                    <div id="demo-consulta-cobros">
+                        <form>
+                            <table ID="tableConsultaCobros" class="container table table-bordered table-hover no-footer dataTable">
+                                <thead>
+                                    <tr class="info">
+                                        <th>
+                                            Nombre
+                                        </th>
+                                        <th>
+                                            Identificación
+                                        </th>
+                                        <th>
+                                            IdSolicitud
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tblConsultaCobros" class="tbody planPago"></tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-lg-1" style="text-align:left;">
+                            <label style="display:none;" id="icono-cargando-modal-busqueda" class="fas fa-spinner fa-pulse"></label>
+                        </div>
+                        <div class="col-lg-10">
+
+                        </div>
+                        <div class="col-lg-1">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" Id="ImagenSinpe" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">x</button>
+                <div class="modal-header titulo-modal">
+                    <p class="titulo-ventana-modal"><strong>Imagen Sinpe</strong></p>
+                </div>
+                <div class="modal-body">
+                    <div id="imagen-sinpe">
+                        <img />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-lg-10">
+
+                        </div>
+                        <div class="col-lg-1">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .player {
+            margin: 50px 0;
+        }
+    </style>
+    <script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+    </script>
+    <script type="text/javascript">
+        $("#txtFechaRep").datetimepicker({
+            format: 'yyyy-mm-dd hh:ii',
+            autoclose: true,
+            todayBtn: true
+        });
+    </script>
+</div>
+

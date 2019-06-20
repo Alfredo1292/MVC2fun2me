@@ -1,0 +1,168 @@
+﻿@model TwoFunTwoMeFintech.Models.DTO.Solicitudes
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <!-- Bootstrap core CSS -->
+    @*<link href="../../dist/css/bootstrap.min.css" rel="stylesheet">*@
+    @*<link href = "~/Content/bootstrap-4.0.0/dist/css/bootstrap.min.css" rel = "stylesheet" />*@
+<fieldset>
+    <h4 class="titulo-tesoreria accordion-toggle alert alert-info"><strong>Forzamiento!</strong> Buscar Solicitud.</h4>
+    @*<div class="input-group">
+            <span class="input-group-addon">Nombre Campo</span>
+            <input id="msg" type="text" class="form-control" name="msg" placeholder="Additional Info">
+        </div>*@
+    @*<legend>Buscar Solicitud</legend>*@
+    <script src="~/Scripts/Proyecto/Solicitudes.js"></script>
+    <script src="~/Scripts/jquery-2.0.3.min.js"></script>
+    <script src="~/Scripts/Proyecto/download.js"></script>
+    <form>
+        <div class="container">
+            <div class="row">
+                @*<label for="form-control"> @Html.LabelFor(model => model.ID_SOLICITUD)</label>*@
+                <div class="input-group col-xs-5">
+                    @*<span class="input-group-addon">@Html.LabelFor(model => model.ID_SOLICITUD)</span>*@
+                    <span class="input-group-addon">Id Solicitud</span>
+                    <input type="number" class="form-control" id="SolicitudBuro" aria-describedby="emailHelp" placeholder="Ingrese aquí su Solicitud">
+                    <a class="input-group-addon btn btn-primary" href="#" onclick="retornarUrl();">Buscar</a>
+                </div>
+                <br />
+                <div class="w3-container w3-teal">
+                    <div class="row row-centered pos">
+                        <div class="table-responsive">
+                            <table id="tblBuscar" class="container table table-bordered table-hover no-footer dataTable">
+                                <thead>
+                                    <tr class="info">
+                                        <th>Solicitud</th>
+                                        <th>@Html.LabelFor(model => model.Identificacion)</th>
+                                        <th>@Html.LabelFor(model => model.NOMBRE)</th>
+                                        <th>@Html.LabelFor(model => model.Descripcion)</th>
+                                        <th>@Html.LabelFor(model => model.NombreProducto)</th>
+                                        <th>@Html.LabelFor(model => model.MontoMaximo)</th>
+                                        <th>@Html.LabelFor(model => model.Score)</th>
+                                        <th>@Html.LabelFor(model => model.ScoreGini)</th>
+                                        <th>Actualizar</th>
+                                        <th>Descargar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in @Model.ListSolicitudes)
+                                    {
+                                        <tr>
+                                            <td>@item.ID_SOLICITUD</td>
+                                            <td>@item.Identificacion</td>
+                                            <td>@item.NOMBRE</td>
+                                            <td>
+                                                <select id="ddlEstados">
+                                                    @foreach (var itemTipo in @Model.ListTipos)
+                                                    {
+                                                        if (itemTipo.ID_ESTADO.ToString() == @item.ID_ESTADO.ToString())
+                                                        {
+                                                            <option value="@itemTipo.ID_ESTADO" selected>@itemTipo.Descripcion</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@itemTipo.ID_ESTADO">@itemTipo.Descripcion</option>
+                                                        }
+                                                    }
+                                                </select>
+
+                                            </td>
+                                            <td>
+                                                <select id="ddlProductos">
+                                                    @foreach (var itemProd in @Model.ListProductos)
+                                                    {
+                                                        if (@itemProd.IdProducto.ToString() == @item.IdProducto.ToString())
+                                                        {
+                                                            <option value="@itemProd.IdProducto" selected>@itemProd.NombreProducto</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@itemProd.IdProducto">@itemProd.NombreProducto</option>
+                                                        }
+                                                    }
+                                                </select>
+                                            </td>
+                                            <td>@Html.TextBox("montoMaximo", @item.MontoMaximo, new { maxlength = 50, size = 10 })</td>
+                                            <td>@item.Score</td>
+                                            <td>@item.ScoreGini</td>
+                                            <td>
+                                                <a href='#' class='btn btn-primary' onclick="ActualizarSolicitud(@item.ID_SOLICITUD,$('#ddlProductos option:selected').val(),$('#ddlEstados option:selected').val(),$('#montoMaximo').val())">Actualizar</a>
+                                            </td>
+                                            <td>
+                                                <a href='#' class='btn btn-success' onclick="Descargar(@item.Identificacion)">Descargar</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <table id="TblResultadoScore" class="container table table-bordered  table-hover" cellspacing="0">
+                                <thead>
+                                    <tr class="info">
+                                        <th>Id Rule</th>
+                                        <th>Evaluar</th>
+                                        <th>Procesado</th>
+                                        <th>Puntaje</th>
+                                        <th>Fecha Proceso</th>
+                                        <th>Descripción</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tbody ResultadoScore">
+                                    @foreach (var item in @Model.ListadoScore)
+                                    {
+                                        <tr>
+                                            <td>@item.IdRule</td>
+                                            <td>@item.Evaluar</td>
+                                            <td>@item.Procesado</td>
+                                            <td>@item.Puntaje</td>
+                                            <td>@item.FechaProceso</td>
+                                            <td>@item.Descripcion</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <span id="spnMensaje" class="badge badge-primary"></span>
+                            <span id="spnMensajeError" class="badge badge-danger"></span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</fieldset>
+}
+<script type="text/javascript">
+      var baseUrl = '@Url.Content("~/")';
+function retornarUrl() {
+	if (document.getElementById("SolicitudBuro").value == "") return false;
+	window.location.href = "/Solicitudes/Buscar/" + document.getElementById("SolicitudBuro").value;
+    $("#tblBuscar").css("display", "inline");
+	return false;
+    }
+    $(document).ready(function () {
+       //quitar el ordenamiento de la tabla
+      $('#TblResultadoScore').DataTable({
+           "ordering": false // false to disable sorting (or any other option)
+      });
+      $("select[name*='TblResultadoScore']").change();
+    });
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

@@ -1,0 +1,109 @@
+﻿@model TwoFunTwoMeFintech.Models.DTO.Rules
+
+@{
+	ViewBag.Title = "Details";
+}
+<script src="~/Scripts/Proyecto/Rules.js"></script>
+<link href="~/Styles/DataTable.css" rel="stylesheet" />
+<link href="~/Styles/DataTabledtr.css" rel="stylesheet" />
+
+<script src="~/Scripts/Proyecto/DataTables 1.10.15.js"></script>
+<script src="~/Scripts/Proyecto/DataTable Bootstrap.js"></script>
+
+<div class="container">
+	<div class="form-group">
+
+	</div>
+	<table ID="RulesTable" class="container table table-bordered table-hover no-footer dataTable">
+		<thead>
+			<tr class="info">
+				<th>
+					@Html.LabelFor(model => model.IdRule)
+				</th>
+				<th>
+					@Html.LabelFor(model => model.NombreModelo)
+				</th>
+				<th>
+					@Html.LabelFor(model => model.Descripcion)
+				</th>
+				<th>
+					@Html.LabelFor(model => model.Proceso)
+				</th>
+				<th>
+					@Html.LabelFor(model => model.Condicion)
+				</th>
+				<th>
+					@Html.LabelFor(model => model.Tipo)
+				</th>
+				<th>
+					@Html.LabelFor(model => model.Activo)
+				</th>
+				<th>
+					Acción
+					<i class="fa fa-sort float-right" aria-hidden="true"></i>
+				</th>
+			</tr>
+		</thead>
+		<tbody class="tbody"></tbody>
+	</table>
+</div>
+<div class="modal fade" Id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				@*<button type="button" class="close" data-dissmiss="modal"><span aria-hidden="true">×</span></button>*@
+				<button type="button" class="close" data-dismiss="modal">×</button>
+
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="form-group">
+						<label for="IdRule">CodigoAgente</label>
+						<input type="text" class="form-control" id="IdRule" placeholder="IdRule" disabled="disabled" />
+					</div>
+					<div class="form-group">
+						<label for="NombreModelo">Nombre Modelo</label>
+						<input type="text" class="form-control" id="NombreModelo" placeholder="Nombre Modelo" disabled="disabled" />
+					</div>
+					<div class="form-group">
+						<label for="Descripcion">Descripcion</label>
+						<input type="text" class="form-control" id="Descripcion" placeholder="Descripcion" />
+					</div>
+					<div class="form-group">
+						<label for="Proceso">Proceso</label>
+						<input type="text" class="form-control" id="Proceso" placeholder="Proceso" disabled="disabled" />
+					</div>
+					<div class="form-group">
+						<label for="Condicion">Condicion</label>
+						<input type="text" class="form-control" id="Condicion" placeholder="Condicion" />
+					</div>
+					<div class="form-group">
+						<label for="Tipo">Tipo</label>
+						<input type="text" class="form-control" id="Tipo" placeholder="Tipo" disabled="disabled" />
+					</div>
+					<div class="form-group">
+						<label for="Activo">Activo</label>
+						<select id="ddlActivo" class="form-control">
+							<option value="true">Activo</option>
+							<option value="false" selected>Inactivo</option>
+						</select>
+
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" Id="btnUpdate" style="display:none;" onclick="Update();">Actualizar</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+    @if(!User.Identity.IsAuthenticated) {
+
+        System.Web.Security.FormsAuthentication.SignOut();
+        System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+        Response.Redirect(FormsAuthentication.LoginUrl, true);
+    }
+</script>

@@ -1,0 +1,93 @@
+﻿@model TwoFunTwoMeFintech.Models.DTO.AsignacionBuckets
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+<fieldset>
+    <h4 class="titulo-tesoreria accordion-toggle alert alert-info">Creación Buckets</h4>
+    <link href="~/Content/bootstrap-4.0.0/dist/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/awesome-bootstrap-checkbox.css" rel="stylesheet" />
+    <div style="margin: 10px;">
+        <form class="form-inline">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.BucketInicial)
+                        @Html.TextBox("BucketInicial", "", new { @class = "form-control", @placeholder = "0", required = "required", @type = "number" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.BucketFinal)
+                        @Html.TextBox("BucketFinal", "", new { @class = "form-control", @placeholder = "0", required = "required", @type = "number" })
+                    </div>
+                    <div class="form-check">
+                        <div>
+                            @Html.LabelFor(model => model.PRPRotas)
+                            @Html.CheckBoxFor(m => m.PRPRotas, new { @class = "check-input" })
+
+                        </div>
+                        <div>
+                            @Html.LabelFor(model => model.CeroPagos)
+                            @Html.CheckBoxFor(m => m.CeroPagos, new { @class = "check-input" })
+                        </div>
+                        <div>
+                            @Html.LabelFor(model => model.SaldoAlto)
+                            @Html.CheckBoxFor(m => m.SaldoAlto, new { @class = "check-input" })
+
+                        </div>
+                        <div>
+                            @Html.LabelFor(model => model.SaldoMedio)
+                            @Html.CheckBoxFor(m => m.SaldoMedio, new { @class = "check-input" })
+
+                        </div>
+                        <div>
+                            @Html.LabelFor(model => model.SaldoBajo)
+                            @Html.CheckBoxFor(m => m.SaldoBajo, new { @class = "check-input" })
+
+                        </div>
+                        <div>
+                            @Html.LabelFor(model => model.CuentaAlDia)
+                            @Html.CheckBoxFor(m => m.CuentaAlDia, new { @class = "check-input" })
+
+                        </div>
+                        <div>
+                            @Html.LabelFor(model => model.Estado)
+                            @Html.CheckBoxFor(m => m.Estado, new { @class = "check-input" })
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <h4 class="titulo-tesoreria accordion-toggle alert alert-info">@ViewBag.MensajeError @ViewBag.Mensaje</h4>
+        </form>
+    </div>
+
+
+</fieldset>
+}
+<script>
+        $(function () {
+            $('body').css("background-image", "none");
+        });
+</script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

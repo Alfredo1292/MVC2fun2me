@@ -1,0 +1,57 @@
+﻿@model TwoFunTwoMeFintech.Models.DTO.ScoreCardExperto
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>ScoreCardExperto</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NombreModelo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NombreModelo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RangoInicial)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RangoInicial)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RangoFinal)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RangoFinal)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Puntaje)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Puntaje)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+    <script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+    </script>

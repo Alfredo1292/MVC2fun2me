@@ -1,0 +1,861 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<script src="~/Scripts/Proyecto/Colocacion/Colocacion.js"></script>
+<script src="~/Scripts/Proyecto/CuentaBancaria/CuentaBancaria.js"></script>
+<script src="~/Scripts/Proyecto/jquery.inputmask.bundle.min.js"></script>
+<form id="frmPrincipal" class="clearAll">
+    @*panel derecho de info*@
+    @Html.Action("PanelInfo")
+    <input type="hidden" id="ColaIniciada" name="custId" value="0">
+    @*icortes Tipo de identificacion*@
+
+    @*inicio icortes origen*@
+    <form class="form-inline" onSubmit="return false;">
+        <div class="btn-group btn-group-s" role="group">
+        </div>
+        <label id="lblOrigen">Origen: </label>
+        <label id="lblDetalleOrigen"> </label>
+    </form>
+    @*fin icortes origen*@
+    <input type="hidden" id="hdfTipoIdentificacion" name="custId" value="0">
+    <div class="controles-colocacion row">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="table-responsive">
+                <form class="form-inline" onSubmit="return false;">
+                    <div class="btn-group btn-group-s" role="group">
+                    </div>
+                    <input id="txtBusqueda" type="text" class="form-control input-sm" name="msg" placeholder="Ingrese Identificacion">
+                    <button type="button" id="btnBuscar" onclick="buscarSolicitudesXAgentes();" required class="btn btn-primary btn-group-s"><span class="glyphicon glyphicon-search"></span> Buscar</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="table-responsive">
+                <form class="form-inline">
+                    <div class="btn-group btn-group-s" role="group"></div>
+                    <input id="txtFechaRep" type="datetime-local" class="form-control input-sm" name="msg">
+                    <button type="button" id="btnReprog" onclick="reprogramarSolicitud();" required class="btn btn-primary btn-primary-eliminar"><span class="glyphicon glyphicon-calendar"></span> Reprog</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="table-responsive">
+                <form class="form-inline">
+                    <div role="group">
+                        <button type="button" id="button_play" onclick="buttonPlayPress();" class="btn btn-primary btn-primary-asignar">
+                            <i id="button_play_i" class="fa fa-play"></i>
+                            @*<span class="glyphicon glyphicon-play-circle"></span>*@
+                            Iniciar
+                        </button>
+                        <button type="button" id="button_stop" onclick="buttonForwardPress();" class="btn btn-primary btn-primary-asignar">
+                            <i id="button_stop_i" class="fa fa-stop"></i>
+                            @*<span class="glyphicon glyphicon-step-forward"></span>*@
+                            Detener
+                        </button>
+                        <button type="button" id="button_fw" onclick="buttonForwardPress();" class="btn btn-primary btn-primary-asignar">
+                            <i id="button_fw_i" class="fa fa-forward"></i>
+                            @*<span class="glyphicon glyphicon-step-forward"></span>*@
+                            Sguiente
+                        </button>
+					<label for="lblNuevoMoneda">Status Asesor</label>
+					<select id="ddlStatusAsesor" class="form-control control-editar-usuario" onchange="SelectChangeStatusAsesor();"></select>
+                    </div>
+                </form>
+            </div>
+    </div>
+    <div class="col-lg-1 col-md-6 col-sm-12">
+        <div class="table-responsive">
+            <form class="form-inline" onSubmit="return false;">
+                <button id="btnGuardarPersona" value="Guardar" class="btn btn-primary" onclick="ActualizaPersona();">Guardar</button>   
+            </form>
+        </div>
+    </div>
+</div>
+    <div class="controles-colocacion row info-personal">
+    <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="table-responsive">
+                <form class="form-inline" onSubmit="return false;">
+                    <label id="lblNombre">Nombre: </label>
+                    <input id="txtNombre" type="text" class="form-control input-sm" name="msg" readonly>
+                </form>
+            </div>
+        </div>
+    <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="table-responsive">
+                <form class="form-inline" onSubmit="return false;">
+                    <label id="lblCedula">Cédula: </label>
+                    <input id="txtCedula" type="text" class="form-control input-sm" name="msg" readonly>
+                </form>
+            </div>
+        </div>
+    <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="table-responsive">
+                <form class="form-inline" onSubmit="return false;">
+                    <label id="lblSolicitud">Solicitud: </label>
+                    <input id="txtSolicitud" type="text" class="form-control input-sm" name="msg" readonly>
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="table-responsive">
+            <form class="form-inline" onSubmit="return false;">
+                <label id="lblFechaSolicitud">Fecha: </label>
+                <input id="txtFechaSolicitud" type="text" class="form-control input-sm" name="msg" readonly>
+            </form>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <ul class="nav nav-tabs tab-ventas">
+            <div class="liner"></div>
+            <li class="active"><a data-toggle="tab" href="#tabInfoPersonal"><span class="tooltiptexMenu">Información Personal</span><span class="round-tabs one"><i class="glyphicon glyphicon-user"></i></span></a></li>
+            <li><a data-toggle="tab" href="#tabReferencias"><span class="tooltiptexMenu">Referencias</span><span class="round-tabs one"><i class="glyphicon glyphicon-comment"></i></span></a></li>
+            <li><a data-toggle="tab" href="#tabInfoProd"><span class="tooltiptexMenu">Información Producto</span><span class="round-tabs one"><i class="glyphicon glyphicon-usd"></i></span></a></li>
+            <li><a data-toggle="tab" href="#tabInfoBCO"><span class="tooltiptexMenu">Información Banco</span><span class="round-tabs one"><i class="glyphicon glyphicon-piggy-bank"></i></span></a></li>
+            <li><a data-toggle="tab" href="#tabInfoDocumentacion"><span class="tooltiptexMenu">Documentación</span><span class="round-tabs one"><i class="glyphicon glyphicon-file"></i></span></a></li>
+            <li><a data-toggle="tab" href="#tabInfoSoporte"><span class="tooltiptexMenu">Soporte</span><span class="round-tabs one"><i class="glyphicon glyphicon-cog"></i></span></a></li>
+            <li><a data-toggle="tab" href="#tabInformacion"><span class="tooltiptexMenu">Información</span><span class="round-tabs one"><i class="glyphicon glyphicon-list-alt"></i></span></a></li>
+        <li><a data-toggle="tab" href="#tabGestiones"><span class="tooltiptexMenu">Gestiones</span><span class="round-tabs one"><i class="glyphicon glyphicon-list-alt"></i></span></a></li>
+        </ul>
+        <div class="tab-content tab-colocacion">
+
+            <div id="tabInfoPersonal" class="tab-colocacion tab-pane fade in active">
+                <h4>Informacion Personal</h4>
+                <div class="controles-colocacion ">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <label id="lblFechaSolicitud">Fecha: </label>
+                                    <input id="txtFechaSolicitud" type="text" class="form-control input-sm" name="msg" readonly>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <label id="lblNacionalidad">Nacionalidad: </label>
+                                    <select class="form-control" id="ddlNacionalidad"></select>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <label id="lblTelefono">Telefono: </label>
+                                    <input id="txtTelefono" type="text" class="form-control input-sm" name="msg" readonly>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <label id="lblCorreo">Email: </label>
+                                    <input id="txtCorreo" type="text" class="form-control input-sm" name="msg" readonly>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <label id="lblNac">Nacimiento: </label>
+                                    <input id="txtFechaNacimiento" type="text" class="form-control input-sm" name="msg" readonly>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <label id="lblCedVence">Céd. Vence: </label>
+                                    <input id="txtCedulaVence" type="text" class="form-control input-sm" name="msg" readonly>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <label id="lblGenero">Genero: </label>
+                                    <select class="form-control" id="ddlGenero"></select>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <label id="lblEstCivil">Estado Civil: </label>
+                                    <select class="form-control" id="ddlEstadoCivil"></select>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="tabReferencias" class="tab-colocacion tab-pane fade in">
+                <h4>Referencias Familiares</h4>
+                <div class="row controles-colocacion ">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="table-responsive">
+                            <form class="form-inline" onSubmit="return false;">
+                                <label id="lblTipoRef">Tipo Referencia: </label>
+                                <select class="form-control" id="ddlTipoReferencia"></select>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="table-responsive">
+                            <form class="form-inline" onSubmit="return false;">
+                                <label id="lblNombreRef">Nombre: </label>
+                                <input id="txtNombreRefFamiliar" type="text" class="form-control input-sm" name="msg">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="table-responsive">
+                            <form class="form-inline" onSubmit="return false;">
+                                <label id="lblTelefonoRefFamiliar">Telefono: </label>
+                                <input id="txtTelefonoRefFamiliar" type="text" class="form-control input-sm" name="msg">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <h4>Referencias Laborales</h4>
+                <div class="row controles-colocacion ">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="table-responsive">
+                            <form class="form-inline" onSubmit="return false;">
+                                <label id="lblNombreRefEmpresa">Empresa: </label>
+                                <input class="form-control" id="txtNombreRefEmpresa">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="table-responsive">
+                            <form class="form-inline" onSubmit="return false;">
+                                <label id="lblTelefonoRefEmpresa">Telefono: </label>
+                                <input id="txtTelefonoRefEmpresa" type="text" class="form-control input-sm" name="msg">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="table-responsive">
+                            <form class="form-inline" onSubmit="return false;">
+                                <label id="lblNombreRefSupervisor">Nombre Supervisor: </label>
+                                <input id="txtNombreRefSupervisor" type="text" class="form-control input-sm" name="msg">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <h4>Referencias Personales</h4>
+                <div class="row controles-colocacion ">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="table-responsive">
+                            <form class="form-inline" onSubmit="return false;">
+                                <label id="lblNombreRefPersonal">Nombre Completo: </label>
+                                <input class="form-control" id="txtNombreRefPersonal">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="table-responsive">
+                            <form class="form-inline" onSubmit="return false;">
+                                <label id="lblTelefonoRefPersonal">Telefono: </label>
+                                <input id="txtTelefonoRefPersonal" type="text" class="form-control input-sm" name="msg">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="tabInfoProd" class="tab-colocacion tab-pane fade in">
+                <h4>Informacion del Producto</h4>
+                <div class="row controles-colocacion ">
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="table-responsive">
+                            <form class="form-inline" onSubmit="return false;">
+                                <label id="lblProducto">Producto: </label>
+                                <select class="form-control" id="ddlProducto"></select>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="table-responsive">
+                            <form class="form-inline" onSubmit="return false;">
+                                <label id="lblMontoMaximo">Monto maximo: </label>
+                                <input id="txtMontoMaximo" type="text" class="form-control input-sm" name="msg" readonly>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="table-responsive">
+                            <form class="form-inline" onSubmit="return false;">
+                                <label id="lblEstadoSol">Estado Solicitud: </label>
+                                <select class="form-control" id="ddlEstadoSol" onchange="statusSolicutudGestion();"></select>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="table-responsive">
+                            <form class="form-inline" onSubmit="return false;">
+                                <label id="lblUsoCredito">Uso Credito: </label>
+                                <input id="txtUsoCredito" type="text" class="form-control input-sm" name="msg" readonly>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*Alfredo José Vargas Seinfarth--INICIO--15/02/2019*@
+            <div id="tabInfoBCO" class="tab-pane fade in">
+                <ul class="nav nav-tabs ">
+                    <li class="active"><a data-toggle="tab" href="#tabCuentaBanc" title="InformacionCuentasBancarias" onclick="CargaCuentaBancaria();">Informacion Cuentas Bancarias</a></li>
+                    <li><a data-toggle="tab" href="#tabNuevaCuentaBanc" title="Nuevo" onclick="LlenarCombobox();">Nuevo</a></li>
+                </ul>
+                <div id="tabCuentaBanc" class="tab-pane fade in active">
+                    <div class=" table table-responsive-sm">
+                        <div class="row h-auto">
+                            <table ID="tblBCO" class="table table-responsive-sm table-bordered  table-hover">
+                                <thead>
+                                    <tr class="info">
+                                        <th style="width:6%; visibility:hidden;">
+                                            Id
+                                        </th>
+                                        <th style="width:10%;">
+                                            Predeterminado
+                                        </th>
+                                        <th style="width:10%;">
+                                            Banco
+                                        </th>
+                                        <th style="width:15%;">
+                                            Tipo Cuenta
+                                        </th>
+                                        <th style="width:5%;">
+                                            Moneda
+                                        </th>
+                                        <th style="width:20%;">
+                                            Cuenta Banco
+                                        </th>
+                                        <th style="width:20%;">
+                                            Cuenta Sinpe
+                                        </th>
+                                        <th id="thUserTableAccion" width="300px;">
+                                            Accion
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tbody transfer"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div id="tabNuevaCuentaBanc" class="tab-pane fade in">
+                    <div class="input-group">
+                        <input type="checkbox" class="form-control control-editar-usuario" id="ChkNuevoCuentaPredet" name="ChkNuevoCuentaPredet"> Cuenta Predeterminada<br>
+                    </div>
+                    <div style="height:5px">
+                    </div>
+                    <div class="input-group">
+                        <label for="lblNuevoBanco">Banco</label>
+                    <select id="ddlNuevoBanco" class="form-control control-editar-usuario" onchange="bancoSelectChangeNuevo($(this).val());"></select>
+                    </div>
+                    <div style="height:5px">
+                    </div>
+                    <div class="input-group">
+                        <label for="lblNuevoTipoCuenta">Tipo de Cuenta</label>
+                        <select id="ddlNuevoTipoCuenta" class="form-control control-editar-usuario"></select>
+                    </div>
+                    <div style="height:5px">
+                    </div>
+                    <div class="input-group">
+                        <label for="lblNuevoMoneda">Moneda</label>
+                        <select id="ddlNuevoMoneda" class="form-control control-editar-usuario"></select>
+                    </div>
+                    <div style="height:5px">
+                    </div>
+                    <div class="input-group">
+                    <label id="lblnuevaCuentaBancaria" for="txtNuevaCuentaBancaria">Cuenta Bancaria</label>
+                        <input type="text" class="form-control control-editar-usuario" id="txtNuevaCuentaBancaria" placeholder="Cuenta Bancaria" />
+                    </div>
+                    <div style="height:5px">
+                    </div>
+                    <div class="input-group">
+                    <label id="lblnuevaCuentaSinpe" for="txtNuevaCuentaSinpe">Cuenta Sinpe</label>
+                        <input type="text" class="form-control control-editar-usuario" id="txtNuevaCuentaSinpe" placeholder="Cuenta Sinpe" />
+                    </div>
+                    <div class="form-label-group">
+                        <div class="form-group col-md-2">
+                            <button type="button" class="btn btn-lg btn-primary btn-block" data-dismiss="modal" onclick="Crear();">Crear</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal fade" Id="ModalEditCuentaBanc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <button type="button" class="close" data-dismiss="modal">x</button>
+                        <div class="modal-header titulo-modal">
+                            <p id="idEditarAgente" class="alert alert-info"><strong></strong></p>
+                        </div>
+                        <div class="modal-body modal-editar-agente">
+                            <form>
+                                <div class="row">
+                                    <div class="form-group col-lg-6">
+                                        <input type="hidden" class="form-control control-editar-usuario" id="IdCuentaBanc" disabled="disabled" />
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <input type="checkbox" id="ChkEditCuentaPredet" name="ChkEditCuentaPredet" checked> Cuenta Predeterminada<br>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group col-lg-6">
+                                        <label for="lblEditBanco">Banco</label>
+                                    <select id="ddlEditBanco" class="form-control control-editar-usuario" onchange="bancoSelectChangeEdit($(this).val());"></select>
+                                        @*<input type="text" class="form-control" id="ROLID" placeholder="ROLID" />*@
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group col-lg-6">
+                                        <label for="lblEditTipoCuenta">Tipo de Cuenta</label>
+                                        <select id="ddlEditTipoCuenta" class="form-control control-editar-usuario"></select>
+                                        @*<input type="text" class="form-control" id="ROLID" placeholder="ROLID" />*@
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group col-lg-6">
+                                        <label for="lblEditMoneda">Moneda</label>
+                                        <select id="ddlEditMoneda" class="form-control control-editar-usuario"></select>
+                                        @*<input type="text" class="form-control" id="ROLID" placeholder="ROLID" />*@
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group col-lg-6">
+                                    <label id="lblEditCuentaBancaria" for="txtEditCuentaBancaria">Cuenta Bancaria</label>
+                                        <input type="text" class="form-control control-editar-usuario" id="txtEditCuentaBancaria" placeholder="Cuenta Bancaria" onkeypress="return validaNumericos(event)" />
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                    <label id="lblEditCuentaSinpe" for="txtEditCuentaSinpe">Cuenta Sinpe</label>
+                                        <input type="text" class="form-control control-editar-usuario" id="txtEditCuentaSinpe" placeholder="Cuenta Sinpe" onkeypress="return validaNumericos(event)" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer footer-editar-agente">
+                            <button type="button" class="btn btn-primary" Id="btnUpdate" style="display:none;" onclick="Update();">Actualizar</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearTextBox();">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*Alfredo José Vargas Seinfarth--Fin--15/02/2019*@
+            <div class="modal fade" Id="ModalEditCuentaBanc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <button type="button" class="close" data-dismiss="modal">x</button>
+                        <div class="modal-header titulo-modal">
+                            <p id="idEditarAgente" class="alert alert-info"><strong></strong></p>
+                        </div>
+                        <div class="modal-body modal-editar-agente">
+                            <form>
+                                <div class="row">
+                                    <div class="form-group col-lg-6">
+                                        <input type="hidden" class="form-control control-editar-usuario" id="IdCuentaBanc" disabled="disabled" />
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <input type="checkbox" id="ChkEditCuentaPredet" name="ChkEditCuentaPredet" checked> Cuenta Predeterminada<br>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group col-lg-6">
+                                        <label for="lblEditBanco">Banco</label>
+                                        <select id="ddlEditBanco" class="form-control control-editar-usuario" onchange="MostrarCampoCuenta($(this).val());"></select>
+                                        @*<input type="text" class="form-control" id="ROLID" placeholder="ROLID" />*@
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group col-lg-6">
+                                        <label for="lblEditTipoCuenta">Tipo de Cuenta</label>
+                                        <select id="ddlEditTipoCuenta" class="form-control control-editar-usuario"></select>
+                                        @*<input type="text" class="form-control" id="ROLID" placeholder="ROLID" />*@
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group col-lg-6">
+                                        <label for="lblEditMoneda">Moneda</label>
+                                        <select id="ddlEditMoneda" class="form-control control-editar-usuario"></select>
+                                        @*<input type="text" class="form-control" id="ROLID" placeholder="ROLID" />*@
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group col-lg-6">
+                                    <label id="lblEditCuentaBancaria" for="correo">Cuenta Bancaria</label>
+                                        <input type="text" class="form-control control-editar-usuario" id="txtEditCuentaBancaria" placeholder="Cuenta Bancaria" onkeypress="return validaNumericos(event)" />
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                    <label id="lblEditCuentaSinpe" for="estado">Cuenta Sinpe</label>
+                                        <input type="text" class="form-control control-editar-usuario" id="txtEditCuentaSinpe" placeholder="Cuenta Sinpe" onkeypress="return validaNumericos(event)" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer footer-editar-agente">
+                            <button type="button" class="btn btn-primary" Id="btnUpdate" style="display:none;" onclick="Update();">Actualizar</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearTextBox();">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*Alfredo José Vargas Seinfarth--Fin--15/02/2019*@
+            <div id="tabInfoDocumentacion" class="tab-colocacion tab-pane fade in">
+                <h4>Administrar Documentos</h4>
+                <div class="row">
+                    <div class="box-colocacion col-lg-2">
+                        <div class="table-responsive">
+                            <form class="form-inline input-file" onSubmit="return false;" name="Fichiero">
+                                <table id="tabla-cedula-frontal">
+                                    <tr><td><h5>Cedula Frontal</h5></td></tr>
+                                    <tr>
+                                        <td id="imagen-cedula-frontal"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <td id="descargar-frontal"></td>
+                                                    <td id="girar-frontal"></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="box-colocacion col-lg-2">
+                        <div class="table-responsive">
+                            <form class="form-inline input-file" onSubmit="return false;" name="Fichiero">
+                                <table id="tabla-cedula-frontal">
+                                    <tr><td><h5>Selfie</h5></td></tr>
+                                    <tr>
+                                        <td id="imagen-selfie"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <td id="descargar-selfie"></td>
+                                                    <td id="girar-selfie"></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="box-colocacion col-lg-2">
+                        <div class="table-responsive">
+                            <form class="form-inline input-file" onSubmit="return false;" name="Fichiero">
+                                <table id="tabla-cedula-frontal">
+                                    <tr><td><h5>Cedula trasera</h5></td></tr>
+                                    <tr>
+                                        <td id="imagen-cedula-trasera"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <td id="descargar-trasera"></td>
+                                                    <td id="girar-trasera"></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="box-colocacion col-lg-2">
+                        <div class="table-responsive">
+                            <form class="form-inline input-file" onSubmit="return false;" name="Fichiero">
+                                <table id="tabla-cedula-frontal">
+                                    <tr><td><h5>Firma</h5></td></tr>
+                                    <tr>
+                                        <td id="imagen-firma"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <td id="descargar-firma"></td>
+                                                    <td id="girar-firma"></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="box-colocacion col-lg-2">
+                        <div class="table-responsive">
+                            <form class="form-inline input-file" onSubmit="return false;" name="Fichiero">
+                                <table id="tabla-cedula-frontal">
+                                    <tr><td><h5>Pagaré</h5></td></tr>
+                                    <tr>
+                                        <td id="imagen-pagare"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <td id="descargar-pagare"></td>
+                                                    <td id="girar-pagare"></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <h4>Cargar Documentos</h4>
+                <div class="row">
+                    <div class="box-colocacion col-lg-2">
+                        <div class="table-responsive">
+                            <form class="form-inline input-file" onSubmit="return false;" name="Fichiero">
+                                <table>
+                                    <tr><td><h5>Cedula Frontal</h5></td></tr>
+                                    <tr>
+                                        <td><input type="text" class="form-control" placeholder='Cargar Archivo...' /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <td><button class="btn btn-primary-eliminar btn-reset" type="button">Reset</button></td>
+                                                    <td><button id="btnGuardarFrontal" onclick="saveFileFrontal();" class="btn btn-primary" type="button">Guardar</button></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="box-colocacion col-lg-2">
+                        <div class="table-responsive">
+                            <form class="form-inline input-file" onSubmit="return false;" name="Fichiero">
+                                <table>
+                                    <tr><td><h5>Cedula Trasera</h5></td></tr>
+                                    <tr>
+                                        <td><input type="text" class="form-control" placeholder='Cargar Archivo...' /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <td><button class="btn btn-primary-eliminar btn-reset" type="button">Reset</button></td>
+                                                    <td><button id="btnGuardarTrasera" onclick="saveFileTrasera();" class="btn btn-primary" type="button">Guardar</button></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="box-colocacion col-lg-2">
+                        <div class="table-responsive">
+                            <form class="form-inline input-file" onSubmit="return false;" name="Fichiero">
+                                <table>
+                                    <tr><td><h5>Selfie</h5></td></tr>
+                                    <tr>
+                                        <td><input type="text" class="form-control" placeholder='Cargar Archivo...' /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <td><button class="btn btn-primary-eliminar btn-reset" type="button">Reset</button></td>
+                                                    <td><button id="btnGuardarSelfie" onclick="saveFileSelfie();" class="btn btn-primary" type="button">Guardar</button></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="box-colocacion col-lg-2">
+                        <div class="table-responsive">
+                            <form class="form-inline input-file" onSubmit="return false;" name="Fichiero">
+                                <table>
+                                    <tr><td><h5>Firma</h5></td></tr>
+                                    <tr>
+                                        <td><input type="text" class="form-control" placeholder='Cargar Archivo...' /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <td><button class="btn btn-primary-eliminar btn-reset" type="button">Reset</button></td>
+                                                    <td><button id="btnGuardarFirma" onclick="saveFileFirma();" class="btn btn-primary" type="button">Guardar</button></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="box-colocacion col-lg-2">
+                        <div class="table-responsive">
+                            <form class="form-inline input-file" onSubmit="return false;" name="Fichiero">
+                                <table>
+                                    <tr><td><h5>Domiciliacion</h5></td></tr>
+                                    <tr>
+                                        <td><input type="text" class="form-control" placeholder='Cargar Archivo...' /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <td><button class="btn btn-primary-eliminar btn-reset" type="button">Reset</button></td>
+                                                    <td><button id="btnGuardarDomiciliacion" onclick="saveFileDocument();" class="btn btn-primary" type="button">Guardar</button></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <h4>Revisar Documentos</h4>
+                <div class="controles-colocacion">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-2 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <input type="checkbox" class="custom-control-input" id="chkFotoCedula">
+                                    <label class="custom-control-label" for="defaultUnchecked">Foto Cedula</label>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-2 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <input type="checkbox" class="custom-control-input" id="chkSelfie">
+                                    <label class="custom-control-label" for="defaultUnchecked">Selfie</label>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-2 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <input type="checkbox" class="custom-control-input" id="chkRecibo">
+                                    <label class="custom-control-label" for="defaultUnchecked">Recibo (verificació de dirección)</label>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-2 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <input type="checkbox" class="custom-control-input" id="chkReciboSalario">
+                                    <label class="custom-control-label" for="defaultUnchecked">Recibo (Ingreso/constacia Salario)</label>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-2 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <input type="checkbox" class="custom-control-input" id="chkCuentabco">
+                                    <label class="custom-control-label" for="defaultUnchecked">Cuenta Bancaria</label>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-2 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <input type="checkbox" class="custom-control-input" id="chkContrato">
+                                    <label class="custom-control-label" for="defaultUnchecked">Contrato</label>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-2 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <input type="checkbox" class="custom-control-input" id="chkPagare">
+                                    <label class="custom-control-label" for="defaultUnchecked">Pagare</label>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="tabInfoSoporte" class="tab-colocacion tab-pane fade in">
+                <h4>Soporte</h4>
+                <div class="row controles-colocacion ">
+                    <div class="col-lg-12 col-md-6 col-sm-12">
+                        <div class="table-responsive">
+                            <form class="form-inline" onSubmit="return false;">
+                                <label id="lblSoporte">Soporte: </label>
+                                <select class="form-control" id="ddlSoporte"></select>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="tabInformacion" class="tab-colocacion tab-pane fade in">
+                <h4>Informacion</h4>
+                <div class="controles-colocacion ">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <label id="lblProvincia">Provincia: </label>
+                                    <select class="form-control" id="ddlProvincia" onchange="getCanton();"></select>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <label id="lblCanton">Canton: </label>
+                                    <select class="form-control" id="ddlCanton" onchange="getDistrito();"></select>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <label id="lblDistrito">Distrito: </label>
+                                    <select class="form-control" id="ddlDistrito"></select>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-6 col-sm-12">
+                            <div class="table-responsive">
+                                <form class="form-inline" onSubmit="return false;">
+                                    <label id="lblDetalle">Detalle: </label>
+                                    <textarea class="form-control" rows="8" cols="100" id="txtDetalle" required></textarea>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button id="btnGuardarPersona" value="Guardar" class="btn btn-primary" onclick="ActualizaPersona();">Guardar</button>
+            </div>
+        </div>
+    </div>
+    <div id="divGestiones"></div>
+    <style>
+        .player {
+            margin: 50px 0;
+        }
+    </style>
+</form>

@@ -1,0 +1,95 @@
+﻿@*@model TwoFunTwoMeFintech.Models.DTO.clsSUBMENU*@
+@{ 
+    Layout = null;
+}
+<script src="~/Scripts/Proyecto/JSSUBMENU.js"></script>
+<div>
+	<div class="form-group">
+
+	</div>
+	<table ID="SUBMENUTable" class="container table table-bordered table-hover no-footer dataTable">
+		<thead>
+			<tr class="info">
+				<th>
+					ID
+				</th>
+				<th>
+					SUBMENU
+				</th>
+				<th>
+					CONTROLADOR
+				</th>
+				<th>
+					MENÚ PRINCIPAL
+				</th>
+				<th>
+					ROL
+				</th>
+				<th>
+					PROCESO
+				</th>
+				<th>
+					ACCIÓN
+				</th>
+			</tr>
+		</thead>
+		<tbody class="tbody" id="SUBMENUTableBody"></tbody>
+	</table>
+</div>
+<div class="modal fade" Id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				@*<button type="button" class="close" data-dissmiss="modal"><span aria-hidden="true">×</span></button>*@
+				<button type="button" class="close" data-dismiss="modal">×</button>
+
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="form-group">
+						<label for="ID">ID</label>
+						<input type="text" class="form-control" id="ID" placeholder="ID" disabled="disabled" />
+					</div>
+					<div class="form-group">
+						<label for="SUBMENU">Submenú</label>
+						<input type="text" class="form-control" id="SUBMENU" placeholder="Submenú" />
+					</div>
+					<div class="form-group">
+						<label for="CONTROLER">Controlador</label>
+						<input type="text" class="form-control" id="CONTROLLER" placeholder="Controlador" />
+					</div>
+					<div class="form-group">
+						<label for="MAINMENU">Menú Principal</label>
+						<select id="ddlMAINMENU" class="form-control" required aria-required="true"></select>
+					</div>
+					<div class="form-group">
+						<label for="ROLEID">Rol</label>
+						<select id="ddlROLEID" class="form-control" required aria-required="true">
+							<option value="0">Seleccione</option>
+						</select>
+						  
+						@*<input type="text" class="form-control" id="ROLID" placeholder="ROLID" />*@
+					</div>
+					<div class="form-group">
+						<label for="ACTION">Proceso</label>
+						<input type="text" class="form-control" id="ACTION" placeholder="Controlador" />
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" Id="btnUpdate" style="display:none;" onclick="Update();">Actualizar</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearTextBox();">Cerrar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

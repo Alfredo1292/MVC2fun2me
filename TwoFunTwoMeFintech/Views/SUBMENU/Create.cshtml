@@ -1,0 +1,81 @@
+﻿@model TwoFunTwoMeFintech.Models.DTO.clsSUBMENU
+@{ 
+    Layout = null;
+}
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+<fieldset>
+	<form>
+		<div class="input-group">
+			<label id="SubMenu" class="input-group-addon" style="width: 120px;">Submenú</label>
+			<input id="TextSubMenu" class = "form-control" type="text">
+			@*@Html.TextBox("SUBMENU", "", new { @class = "form-control", @placeholder = "SUBMENU", required = "required" })*@
+		</div>
+		<div style="height:5px">
+		</div>
+		<div class="input-group">
+			<label id="Controller" class="input-group-addon" style="width: 120px;">Controlador</label>
+			<input id="TextCONTROLLER" class="form-control" type="text">
+			@*@Html.TextBox("CONTROLLER", "", new { @class = "form-control", @placeholder = "Controlador", required = "required" })*@
+		</div>
+		<div style="height:5px">
+		</div>
+		<div class="input-group">
+			@Html.LabelFor(model => model.MAINMENUID, new { @class = "input-group-addon", style = "width: 120px;" })
+			<select id="ddlMAINMENUlist" class="form-control" style="width: 196px;">
+				<option value=0> -Seleccione-</option>
+				@foreach (var item in Model.listadoMainMenu)
+				{
+					<option value=@item.ID> @item.MAINMENU</option>
+				}
+			</select>
+			@*@Html.DropDownListFor(model => model.MAINMENUID, new SelectList(Model.listadoMainMenu, "ID", "MAINMENU"), "- Please Select -", htmlAttributes: new { @class = "form-control", @id = "ddlMAINMENU", style = "width: 195px;" })
+			@Html.ValidationMessageFor(model => model.MAINMENUID, "", new { @class = "text-danger" })*@
+		</div>
+		<div style="height:5px">
+		</div>
+		<div class="input-group">
+			@Html.LabelFor(model => model.ROLEID, new { @class = "input-group-addon", style = "width: 120px;" })
+
+			<select id="ddlROLEIDlist" class="form-control" style="width: 196px;">
+				<option value=0> -Seleccione-</option>
+				@foreach (var item in Model.ListRoles)
+				{
+					<option value=@item.ID> @item.ROLES</option>
+				}
+			</select>
+
+			@*@Html.DropDownListFor(model => model.ROLEID, new SelectList(Model.ListRoles, "ID", "ROLES"), "- Please Select -", htmlAttributes: new { @class = "form-control", id = "ddlROLEID", style = "width: 195px;" })
+			@Html.ValidationMessageFor(model => model.ROLEID, "", new { @class = "text-danger" })*@
+		</div>
+		<div style="height:5px">
+		</div>
+		<div class="input-group">
+			<label id="lblAction" class="input-group-addon" style="width: 120px;">Proceso</label>
+			<input id="TextAction" class="form-control" type="text">
+			@*@Html.TextBox("ACTION", "", new { @class = "form-control", @placeholder = "Proceso", required = "required" })*@
+		</div>
+		<br />
+		<div class="form-label-group">
+			<div class="form-group col-md-2">
+				<button type="button" class="btn btn-lg btn-primary btn-block" data-dismiss="modal" onclick="Crear();">Crear</button>
+			</div>
+		</div>
+	</form>
+</fieldset>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

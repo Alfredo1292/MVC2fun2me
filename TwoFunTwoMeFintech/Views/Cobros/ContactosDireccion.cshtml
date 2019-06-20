@@ -1,0 +1,135 @@
+﻿
+
+@{
+    Layout = null;
+}
+<div class="table">
+    <div class="form-group">
+        <button type="button" class="btn btn-primary" Id="btnUpdate" onclick="MostrarModalNuevoDireccion();">Nuevo</button>
+    </div>
+    <table ID="ContacDireccionTable" class="container table table-bordered table-hover no-footer dataTable">
+        <thead>
+            <tr class="info">
+                <th>
+                    Predeterminado
+                </th>
+                <th>
+                    Fuente
+                </th>
+                <th>
+                    Tipo
+                </th>
+                <th>
+                    Relación
+                </th>
+                <th>
+                    Direccion
+                </th>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Acción
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+            </tr>
+        </thead>
+        <tbody class="tbody Direccion"></tbody>
+    </table>
+</div>
+<div class="modal fade" Id="myModalEditDIR" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*<button type="button" class="close" data-dissmiss="modal"><span aria-hidden="true">×</span></button>*@
+                <button type="button" class="close" data-dismiss="modal">×</button>
+
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="EditIdDIR">Id</label>
+                        <input type="text" class="form-control" id="EditIdDIR" placeholder="IdDireccion" disabled="disabled" />
+                    </div>
+                    <div class="table-responsive">
+                        <label for="lblEditPredeterminadoDIR">Predeterminado</label>
+                        <select id="ddlEditPredeterminadoDIR" class="form-control control-editar-usuario"></select>
+                    </div>
+                    @*<div class="form-group">
+                        <label for="EditFuenteDatosDIR">Fuente de Datos</label>
+                        <input type="text" class="form-control" id="EditFuenteDatosDIR" placeholder="Fuente de Datos" />
+                    </div>*@					
+                    <div class="form-group">
+                        <label for="EditRelacionDIR">Relación</label>
+                        <input type="text" class="form-control" id="EditRelacionDIR" placeholder="Relación" />
+                    </div>
+                    <div class="form-group">
+                        <label for="EditDireccion">Dirección</label>
+						@*<input type="text" class="form-control" id="EditDireccion" placeholder="Dirección" />*@
+						<textarea class="form-control" rows="8" cols="100" id="EditDireccion" maxlength="500" required style="margin: 0px; width: 880px; height: 128px;"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" Id="btnEditUpdateDIR" style="display:none;" onclick="ActualizarDireccion();">Actualizar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" Id="myModalNuevoDIR" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*<button type="button" class="close" data-dissmiss="modal"><span aria-hidden="true">×</span></button>*@
+                <button type="button" class="close" data-dismiss="modal">×</button>
+
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="table-responsive">
+                        <label for="lblNuevoPredeterminadoDIR">Predeterminado</label>
+                        <select id="ddlNuevoPredeterminadoDIR" class="form-control control-editar-usuario"></select>
+                    </div>
+                    @*<div class="form-group">
+                        <label for="NuevoFuenteDatosDIR">Fuente Datos</label>
+                        <input type="text" class="form-control" id="NuevoFuenteDatosDIR" placeholder="Fuente de Datos" />
+                    </div>*@
+                    <div class="form-group">
+                        <label for="ddlNuevoTipoDIR">Tipo</label>
+						<select id="ddlNuevoTipoDIR" class="form-control control-editar-usuario">
+							<option value="">--Seleccionar--</option>
+							<option value="Casa">Casa</option>
+							<option value="Trabajo">Trabajo</option>
+							<option value="Otro">Otro</option>
+						</select>
+                    </div>
+                    <div class="form-group">
+                        <label for="NuevoRelacionDIR">Relación</label>
+                        <input type="text" class="form-control" id="NuevoRelacionDIR" placeholder="Relación" />
+                    </div>
+                    <div class="form-group">
+                        <label for="NuevoDireccion">Direcccion</label>
+						@*<input type="text" class="form-control" id="NuevoDireccion" placeholder="Dirección" />*@
+						<textarea class="form-control" rows="8" cols="100" id="NuevoDireccion" maxlength="500" required style="margin: 0px; width: 880px; height: 128px;"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" Id="btnCrearDIR" style="display:none;" onclick="CrearDiereccionNuevo();">Crear</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

@@ -1,0 +1,144 @@
+﻿@{
+	ViewBag.Title = "InsertarSolictitudes";
+}
+<h4 class="titulo-tesoreria alert alert-info"><strong>Ingreso Solicitudes</strong></h4>
+<div id="frmIngresoSolicitud">
+    <div class="row contenido-general">
+        <table id="tabla-controles-ingreso-solicitud">
+            <tr>
+                <td>
+                    <form class="form-inline" onSubmit="return false;">
+                        <label id="lblIdentificacion">Identificación: </label>
+                        <input id="txtIdentificacion" type="text" class="form-control input-sm" name="msg">
+                    </form>
+                </td>
+                <td>
+                    <form class="form-inline" onSubmit="return false;">
+                        <label id="lblTelefono">Teléfono: </label>
+                        <input id="txtTelefonoIngresoSolicitudes" type="text" class="form-control input-sm" name="msg">
+                    </form>
+                </td>
+                <td>
+                    <form class="form-inline" onSubmit="return false;">
+                        <label id="lblMails">Mail: </label>
+                        <input id="txtMailIngresoSolicitudes" type="text" class="form-control input-sm" name="msg">
+                    </form>
+                </td>
+                <td>
+                    <form class="form-inline" onSubmit="return false;">
+                        <label id="lblSubOrigen">SubOrigen: </label>
+                        <select id="ddlSubOrigen" class="form-control control-editar-usuario"></select>
+                    </form>
+                </td>
+                <td>
+                    <form class="form-inline" onSubmit="return false;">
+                        <button type="button" class="btn btn-primary" Id="btnInsertar" onclick="InsertaSolicitud();">Ingresar Solicitud</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="solicitudes-panel-1" class="contenido-general" style="display:none">
+        <div class="row">
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <form class="form-inline">
+                    <div class="btn-group btn-group-s" role="group"></div>
+                    <label id="lblNombreRec" for="lblNombreRec">Nombre Cliente:</label>
+                    <label id="lblNombreRechazo" for="lblNombreRechazo"></label>
+                </form>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <form class="form-inline">
+                    <div class="btn-group btn-group-s" role="group"></div>
+                    <label id="lblEstadoSol" for="lblEstadoSol">Estado:</label>
+                    <label id="lblEstadoSolicitud" for="lblEstadoSolicitud"></label>
+                </form>
+            </div>
+            <div class="col-lg-2 col-md-6 col-sm-12">
+                <form class="form-inline">
+                    <div class="btn-group btn-group-s" role="group"></div>
+                    <button type="button" class="btn btn-primary btn-primary-eliminar" Id="btnCerrarPanelRechazo" style="display:none" onclick="CerrarPanelIngresoSolicitud();">Cancelar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="solicitudes-panel-2" class="contenido-general row" style="display:none">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="table-responsive">
+                <form class="form-inline">
+                    <div class="btn-group btn-group-s" role="group"></div>
+                    <label id="lbllblMontoMaximo" for="lblMontoMaximo">Monto Máximo: </label>
+                    <label id="lblValMontoMaximo" for="lblValMontoMaximo"></label>
+                    @*<input type="text" class="form-control" id="ROLID" placeholder="ROLID" />*@
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="table-responsive">
+                <form class="form-inline">
+                    <div class="btn-group btn-group-s" role="group"></div>
+                    <label id="lblIdSolictud" for="lblIdSolictud">Solicitud: </label>
+                    <label id="lblValIdSolicitud" for="lblValIdSolicitud"></label>
+                    @*<input type="text" class="form-control" id="ROLID" placeholder="ROLID" />*@
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="solicitudes-panel-3" class="contenido-general" style="display:none">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <form class="form-inline">
+                    <div class="btn-group btn-group-s" role="group"></div>
+                    <label id="lblMontoCredito" for="lblMontoCredito">Monto crédito</label>
+                    <select id="ddlMontoCredito" class="form-control control-editar-usuario" onchange="llenarComboboxPlazoProducto();"></select>
+                    @*<input type="text" class="form-control" id="ROLID" placeholder="ROLID" />*@
+                </form>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <form class="form-inline">
+                    <div class="btn-group btn-group-s" role="group"></div>
+                    <label id="lblPlazoPago" for="lblPlazoPago">Plazo a pagarlo</label>
+                    <select id="ddlPlazoPago" class="form-control control-editar-usuario"></select>
+                    @*<input type="text" class="form-control" id="ROLID" placeholder="ROLID" />*@
+                </form>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <form class="form-inline">
+                    <div class="btn-group btn-group-s" role="group"></div>
+                    <label id="lblFrecuencia" for="lblFrecuencia">Forma de pago</label>
+                    <select id="ddlFrecuencia" class="form-control control-editar-usuario"></select>
+                    @*<input type="text" class="form-control" id="ROLID" placeholder="ROLID" />*@
+                </form>
+            </div>
+            <div class="col-lg-1 col-md-6 col-sm-12">
+            </div>
+            <div class="col-lg-2 col-md-6 col-sm-12">
+                <div class="table-responsive">
+                    <form class="form-inline">
+                        <div class="btn-group btn-group-s" role="group"></div>
+                        <button type="button" class="btn btn-primary btn-primary-eliminar" Id="btnCerrarPanel" onclick="CerrarPanelIngresoSolicitud();">Cancelar</button>
+                        <button type="button" class="btn btn-primary btn-primary-asignar" Id="btnGuardar" onclick="GuardaProductoSolicitud();">Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .player {
+            margin: 50px 0;
+        }
+    </style>
+    <script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+    </script>
+</div>
+<script src="~/Scripts/Proyecto/Colocacion/Colocacion.js"></script>
+<script src="~/Scripts/Proyecto/Colocacion/insertarSolicitudes.js"></script>

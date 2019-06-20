@@ -1,0 +1,56 @@
+﻿@model TwoFunTwoMeFintech.Models.DTO.Roles
+@{
+    ViewBag.Title = "Details";
+    Layout = null;
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <form>
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('input[type="text"]').val('');
+                });
+            </script>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="container">
+                        <div class="row row-cobro">
+                            <div class="container">
+                                <div class="form-group row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.ROLES)
+                                        @Html.TextBox("ROLESNOMBRE", "", new { @class = "form-control", @placeholder = "ROLESNOMBRE", required = "required" })
+                                    </div>
+                                </div>
+                                <div class="form-label-group">
+                                    <div class="form-group col-md-2">
+                                        <input type="submit" class="btn btn-lg btn-primary btn-block" value="Crear" />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </fieldset>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+    <script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+    </script>

@@ -1,0 +1,204 @@
+﻿@{
+    ViewBag.Title = "Ajencias Externas";
+}
+<div id="agencias-externas-wrap">
+
+    <h4 class="accordion-toggle alert alert-info">Gestion de Agencias Externas</h4>
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-toggle="tab" href="#fisrtTab">Nueva</a>
+        </li>
+        <li>
+            <a data-toggle="tab" href="#secondTab">Asignar cuenta</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div id="fisrtTab" class="tab-pane fade in active">
+            <!---  Este es el contenido de nuevo-->
+            <fieldset>
+
+                <div class="input-group py-5">
+                    <label class="input-group-addon" for="txt-nombre-agencia">Nombre Ajencia:</label>
+                    <input class="form-control input-user" id="txt-nombre-agencia" placeholder="Nombre Ajencia" required="required" type="text" maxlength="35">
+                </div>
+                <div class="input-group py-5">
+                    <label class="input-group-addon" for="cedula-juridica">Cedula Juridica:</label>
+                    <input class="form-control input-user" onkeypress="appUtils.validateNumberOnType(event)" id="txt-cedula-juridica" placeholder="Cédula Juridica" required="required" type="text" maxlength="35">
+                </div>
+                <div class="input-group py-5">
+                    <label class="input-group-addon" for="cedula-juridica">Descripcion:</label>
+                    <input class="form-control input-user" id="txt-descripcion" placeholder="Descripcion" required="required" type="text" maxlength="40">
+                </div>
+                <div class="input-group py-5">
+                    <label class="input-group-addon" for="estado">Estado</label>
+                    <select class="form-control input-user" data-val="true" data-val-required="The Rol field is required." id="estado" name="estado">
+                        <option value="1">Activa</option>
+                        <option value="0">Inactiva</option>
+                    </select>
+                    <span class="field-validation-valid text-danger" data-valmsg-for="ROLID" data-valmsg-replace="true"></span>
+
+                </div>
+                <div class="input-group">
+                    <button id="btn-save" type="button" class="btn btn-primary" data-dismiss="modal" onclick="agenciasExternas.guardarAgenciaExterna();">
+                        Crear
+                        <i id="button-loader" class="fas fa-spinner fa-spin" style="display:none"></i>
+                    </button>
+                </div>
+
+            </fieldset>
+        </div>
+        <div id="secondTab" class="tab-pane fade in">
+            <input type="file" id="file-upload">
+            <div class="pt-5">
+                <button id="btn-save-asignacion-agencia" class="btn btn-primary" onclick="agenciasExternas.uploadExcel()">
+                    Guardar
+                    <i class="fas fa-spinner fa-spin" style="display:none"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+    class AgenciasExternas {
+        constructor() {
+            /***
+             Load the excel library
+             */
+            appUtils.loadJS('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.5/xlsx.full.min.js').then(r => {
+                console.log('script for excel loaded');
+            }).catch(e => {
+                throw e;
+            });
+        }
+
+        guardarAgenciaExterna = async () => {
+            try {
+                let id = document.getElementById('txt-cedula-juridica').value;
+                let nombre = document.getElementById('txt-nombre-agencia').value;
+                let descripcion = document.getElementById('txt-descripcion').value;
+                let status = parseInt(document.getElementById('estado').value);
+                toggleButtonLoader(document.getElementById('btn-save'), true);
+                const body = {
+                    id,
+                    nombre,
+                    descripcion,
+                    status
+                };
+
+                const result = await fetch('/AgenciasExternas/guardarAgenciaExterna', {
+                    method: 'POST',
+                    body: JSON.stringify(body),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(function (response) {
+                    return response.json();
+                });
+                if (result.saved) {
+                    alertify.success('Registro guardado correctamente').delay(5);
+                } else {
+                    alertify.error('A ocurrido un error al guardar el registro').delay(5);
+                }
+
+            } catch (e) {
+                alertify.error('A ocurrido un error inesperado').delay(5);
+                throw e;
+            }
+            finally {
+                toggleButtonLoader(document.getElementById('btn-save'));
+            }
+
+        }
+
+        excelUint8ArrayToJson(arraybuffer) {
+
+            /* convert data to binary string */
+            var data = new Uint8Array(arraybuffer);
+            var arr = new Array();
+            for (var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+            var bstr = arr.join("");
+
+            /* Call XLSX */
+            var workbook = XLSX.read(bstr, {
+                type: "binary"
+            });
+
+            /* DO SOMETHING WITH workbook HERE */
+            var first_sheet_name = workbook.SheetNames[0];
+            /* Get worksheet */
+            var worksheet = workbook.Sheets[first_sheet_name];
+            return XLSX.utils.sheet_to_json(worksheet, {
+                raw: true
+            });
+        }
+
+        uploadExcel = () => {
+            let _this = this;
+            let el = document.getElementById('file-upload');
+            var reader = new FileReader();
+            reader.onload = function () {
+
+                let arrayBuffer = this.result;
+                let array = new Uint8Array(arrayBuffer);
+                //binaryString = String.fromCharCode.apply(null, array);
+                _this.guardarAsignacionesAgenciaExterna(_this.excelUint8ArrayToJson(array));
+
+            }
+            reader.readAsArrayBuffer(el.files[0]);
+
+        }
+
+        validarCamposExcel(arr) {
+            for (let row of arr) {
+                if (!row.hasOwnProperty('idt_agenciasexterna')) {
+                    return {
+                        status: 'error',
+                        message: 'Falta el campo idt_agenciasexterna en el excel'
+                    };
+                }
+            }
+
+
+        }
+
+        guardarAsignacionesAgenciaExterna = async (arr) => {
+            let arr1 = arr.map(item => {
+                let item1 = {};
+                for (let i in item) {
+                    item1[i.trim()] = item[i];
+                }
+                return item1;
+            });
+            //debugger;
+            try {
+                toggleButtonLoader(document.getElementById('btn-save-asignacion-agencia'), true);
+                const result = await fetch('/AgenciasExternas/guardarAsignacionesAgenciasExternas', {
+                    method: 'POST',
+                    body: JSON.stringify(arr1),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(function (response) {
+                    return response.json();
+                });
+                if (result.saved) {
+                    alertify.success('Registro guardado correctamente').delay(8);
+                    document.getElementById('file-upload').value = null;
+                } else {
+                    alertify.error('A ocurrido un error al guardar el asignaciones de agencia externa').delay(8);
+                }
+            } catch (e) {
+                alertify.error('A ocurrido un error inesperado').delay(8);
+                throw e;
+            } finally {
+                toggleButtonLoader(document.getElementById('btn-save-asignacion-agencia'), false);
+            }
+
+        }
+    }
+
+    let agenciasExternas = new AgenciasExternas();
+</script>

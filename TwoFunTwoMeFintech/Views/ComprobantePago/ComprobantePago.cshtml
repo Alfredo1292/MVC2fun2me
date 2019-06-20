@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.Title = "ComprobantePago";
+}
+<script src="~/Scripts/Proyecto/ComprobantePago.js"></script>
+<div id="comprobante-pago-container">
+    <h4 class="titulo-general alert alert-info"><strong>Validación: </strong> Comprobante de Pago</h4>
+    <div class="row contenido-general">
+        <div class="col-lg-4">
+            <div class="form-inline">
+                <div class="form-group mb-2">
+                    <div class="orm-group">
+                        <label for="lblBuscar">Identificación:</label>
+                        <input id="txtIdentificacion" type="text" maxlength="15" class="form-control input-sm" name="msg">
+                    </div>
+                </div>
+                <div class="form-group mx-sm-3 mb-2">
+                    <div class="orm-group">
+                        <button type="button" class="btn btn-primary" Id="btnBuscar" onclick="BuscarComprobante();">Buscar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row contenido-general">
+        <div class="col-lg-12">
+            <div class="col-lg-12">
+                <table ID="TableComprobantePago" class="container table table-bordered table-hover no-footer dataTable">
+                    <thead>
+                        <tr class="info">
+                            <th>
+                                Id
+                            </th>
+                            <th>
+                                Crédito
+                            </th>
+                            <th>
+                                Banco
+                            </th>
+                            <th>
+                                # Comprobante
+                            </th>
+                            <th>
+                                Fecha Transferencia
+                            </th>
+                            <th>
+                                Estado
+                            </th>
+                            <th>
+                                Acción
+                                <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody TabComprobantePago"></tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal fade" Id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="margin:10px auto;">
+            <div id="modal-content-comprobante-pago" class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">x</button>
+                <div class="modal-header titulo-modal">
+                    <p class="titulo-modal alert alert-info"><strong>Editar Comprobante de Pago:</strong></p>
+                </div>              
+                <div class="modal-body">
+                    <div id="demo">
+                        <div class="row">
+                            <div class="form-group col-lg-3">
+                                <label for="cod_agente">Id</label>
+                                <input type="text" class="form-control control-editar-usuario" id="txtId" disabled="disabled" />
+                            </div>
+                            <div class="form-group col-lg-3">
+                                <label for="cod_agente">Comprobante</label>
+                                <input type="text" class="form-control control-editar-usuario" id="txtNumComprobante" disabled="disabled" />
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label for="cod_agente">Identificación</label>
+                                <input type="text" class="form-control control-editar-usuario" id="txtIdentificacionPopup" disabled="disabled" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-6">
+                                <label for="nombre">Nombre</label>
+                                <input type="text" class="form-control control-editar-usuario" id="txtNombreCliente" placeholder="nombre" />
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label for="correo">Banco</label>
+                                <select id="ddlBanco" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-6">
+                                <label for="estado">Fecha Transferencia</label>
+                                <input type="text" class="form-control control-editar-usuario" id="txtFechaTransferecia" placeholder="Fecha de Transferencia" />
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label for="Estado">Estado</label>
+                                <select id="ddlEstado" class="form-control">
+                                    <option value="0">No Verificado</option>
+                                    <option value="1">Verificado</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="panel-imgCliente" class="form-group col-lg-12">
+                                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="text-muted">Comprobante</span>
+                                </h4>
+                                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" id="imgCliente" class="img-thumbnail" alt="Cinque Terre">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" Id="btnUpdate" onclick="Update();">Actualizar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+            @if (!User.Identity.IsAuthenticated)
+            {
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+    });
+</script>

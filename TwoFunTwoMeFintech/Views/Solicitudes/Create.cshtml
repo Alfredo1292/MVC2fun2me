@@ -1,0 +1,254 @@
+﻿@model TwoFunTwoMeFintech.Models.DTO.Solicitudes
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Solicitudes</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IdBuro)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IdBuro)
+            @Html.ValidationMessageFor(model => model.IdBuro)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FechaIngreso)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FechaIngreso)
+            @Html.ValidationMessageFor(model => model.FechaIngreso)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FechaModificacion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FechaModificacion)
+            @Html.ValidationMessageFor(model => model.FechaModificacion)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UsrModifica)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UsrModifica)
+            @Html.ValidationMessageFor(model => model.UsrModifica)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IdPersona)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IdPersona)
+            @Html.ValidationMessageFor(model => model.IdPersona)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Status)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Status)
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FechaTransferencia)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FechaTransferencia)
+            @Html.ValidationMessageFor(model => model.FechaTransferencia)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Comentarios)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Comentarios)
+            @Html.ValidationMessageFor(model => model.Comentarios)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UsoCredito)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UsoCredito)
+            @Html.ValidationMessageFor(model => model.UsoCredito)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Consentimiento)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Consentimiento)
+            @Html.ValidationMessageFor(model => model.Consentimiento)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IdProducto)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IdProducto)
+            @Html.ValidationMessageFor(model => model.IdProducto)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IdAgente)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IdAgente)
+            @Html.ValidationMessageFor(model => model.IdAgente)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SoporteTipo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SoporteTipo)
+            @Html.ValidationMessageFor(model => model.SoporteTipo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IdStatusOrden)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IdStatusOrden)
+            @Html.ValidationMessageFor(model => model.IdStatusOrden)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FotoCedula)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FotoCedula)
+            @Html.ValidationMessageFor(model => model.FotoCedula)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Recibo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Recibo)
+            @Html.ValidationMessageFor(model => model.Recibo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Contrato)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Contrato)
+            @Html.ValidationMessageFor(model => model.Contrato)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Pagare)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Pagare)
+            @Html.ValidationMessageFor(model => model.Pagare)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ReciboIngresos)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ReciboIngresos)
+            @Html.ValidationMessageFor(model => model.ReciboIngresos)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CuentaBancaria)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CuentaBancaria)
+            @Html.ValidationMessageFor(model => model.CuentaBancaria)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Selfie)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Selfie)
+            @Html.ValidationMessageFor(model => model.Selfie)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Origen)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Origen)
+            @Html.ValidationMessageFor(model => model.Origen)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IdUsrAsig)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IdUsrAsig)
+            @Html.ValidationMessageFor(model => model.IdUsrAsig)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IdEstadoProc)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IdEstadoProc)
+            @Html.ValidationMessageFor(model => model.IdEstadoProc)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SubStatus)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SubStatus)
+            @Html.ValidationMessageFor(model => model.SubStatus)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MontoMaximo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MontoMaximo)
+            @Html.ValidationMessageFor(model => model.MontoMaximo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Score)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Score)
+            @Html.ValidationMessageFor(model => model.Score)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

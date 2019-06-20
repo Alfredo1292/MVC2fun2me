@@ -1,0 +1,72 @@
+﻿@model TwoFunTwoMeFintech.Models.agente
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>agente</legend>
+
+        @Html.HiddenFor(model => model.cod_agente)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.nombre)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.nombre)
+            @Html.ValidationMessageFor(model => model.nombre)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ConfiguracionBucket)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ConfiguracionBucket)
+            @Html.ValidationMessageFor(model => model.ConfiguracionBucket)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FEC_MODIFICACION)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FEC_MODIFICACION)
+            @Html.ValidationMessageFor(model => model.FEC_MODIFICACION)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.estado)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.estado)
+            @Html.ValidationMessageFor(model => model.estado)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

@@ -1,0 +1,1292 @@
+﻿@model TwoFunTwoMeFintech.Models.agente
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <script src="~/Scripts/Proyecto/ConfigAsignacionOrdenBuckets.js"></script>
+        <link href="~/Styles/DataTable.css" rel="stylesheet" />
+        <link href="~/Styles/DataTabledtr.css" rel="stylesheet" />
+
+        <script src="~/Scripts/Proyecto/DataTables 1.10.15.js"></script>
+        <script src="~/Scripts/Proyecto/DataTable Bootstrap.js"></script>
+        <script src="~/Content/bootstrap-4.0.0/jquery-ui-1.10.3/jquery-ui-1.10.3.custom.min.js"></script>
+        <link href="~/Styles/Site.css" rel="stylesheet" />
+
+        <script>
+
+        $(document).ready(function ()
+        {
+            $(".source, .target").sortable({
+                connectWith: ".connected"
+            }).bind("sortupdate", function () {
+                updateValues();
+                });
+            //llamar metodos de ConfiguracionAsignacionOrdenBuckets.js
+            cargarConFiguracion();
+            cargarConFiguracionReportes();
+            generarColaReporte();
+
+            $("#confagente").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Buckets/Agente",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                //"columnDefs":
+                //[{
+
+                //        className: 'configuraciones',
+                //        visible: false
+                //}],
+
+                "columns": [
+                    { "data": "cod_agente", "name": "cod_agente", "autoWidth": true },
+                    { "data": "nombre", "name": "nombre", "autoWidth": true },
+                    { "data": "estado", "name": "estado", "autoWidth": true },
+                    { "data": "fechacreacion", "name": "fechacreacion", "autoWidth": true },
+                    { "data": "fechamodificacion", "name": "fechamodificacion", "autoWidth": true },
+                    { "data": "configuraciones1", "name": "configuraciones1", "autoWidth": true  ,"visible": false },
+                    { "data": "configuraciones2", "name": "configuraciones2", "autoWidth": true, "visible": false},
+                    { "data": "configuraciones3", "name": "configuraciones3", "autoWidth": true, "visible": false },
+
+                    { "data": "configuraciones4", "name": "configuraciones4", "autoWidth": true, "visible": false },
+                    { "data": "configuraciones5", "name": "configuraciones5", "autoWidth": true, "visible": false },
+                    { "data": "configuraciones6", "name": "configuraciones6", "autoWidth": true, "visible": false },
+                    { "data": "configuraciones7", "name": "configuraciones7", "autoWidth": true, "visible": false },
+                    { "data": "configuraciones8", "name": "configuraciones8", "autoWidth": true, "visible": false },
+                    //{
+                    //    "data": "configuraciones", "name": "configuraciones",
+                    //    "render": function (data, type, full, meta) {
+                    //        return data.cod_agente
+                    //    }
+                    //},
+
+                    //{
+                    //    data: 'configuraciones', "render": function (data, type, row) {
+                    //        return data
+                    //    },
+
+                    //},
+
+
+
+                    {
+                        "render": function (data, type, full, meta)
+                        {
+                            return "<a href='#' class='btn btn-primary btn-primary-editar' onclick=EditeData('" + full.cod_agente + "'); >Editar</a>";
+                        }
+                    },
+                    {
+                        data: null, render: function (data, type, row)
+                        {
+                            return "<a href='#' class='btn  btn-primary btn-primary-eliminar' onclick=DeleteData('" + row.cod_agente + "'); >Eliminar</a>";
+                        }
+                    },
+                    {
+                        data: null, render: function (data, type, row) {
+
+                            estado1 = "";
+                            estado2 = "";
+                            estado3 = "";
+                            estado4 = "";
+                            estado5 = "";
+                            estado6 = "";
+                            estado7 = "";
+                            estado8 = "";
+
+                            if (row.configuraciones1 == "1")
+                                estado1 = "checked";
+
+                            if (row.configuraciones2 == "1")
+                                estado2 = "checked";
+
+                            if (row.configuraciones3 == "1")
+                                estado3 = "checked";
+
+
+                            if (row.configuraciones4 == "1")
+                                estado4 = "checked";
+                            if (row.configuraciones5 == "1")
+                                estado5 = "checked";
+                            if (row.configuraciones6 == "1")
+                                estado6 = "checked";
+                            if (row.configuraciones7 == "1")
+                                estado7 = "checked";
+                            if (row.configuraciones8 == "1")
+                                estado8 = "checked";
+
+
+                            return " <input " + estado1 + " id='" + row.cod_agente + "X" + "' type='checkbox'>1 <input " + estado2 + " id='" + row.cod_agente + "X1" + "' type='checkbox'>2 <input " + estado3 + " id='" + row.cod_agente + "X2" + "' type='checkbox'>3  <input " + estado4 + " id='" + row.cod_agente + "X3" + "' type='checkbox'>4 <input " + estado5 + " id='" + row.cod_agente + "X4" + "' type='checkbox'>5 <input " + estado6 + " id='" + row.cod_agente + "X5" + "' type='checkbox'>6 <input " + estado7 + " id='" + row.cod_agente + "X6" + "' type='checkbox'>7 <input " + estado8 + " id='" + row.cod_agente + "X7" + "' type='checkbox'>8 ";
+                        }
+
+
+
+                    },
+                ]
+
+            });
+
+
+
+            $("#confbucket2").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Buckets/ConfiguracionOrden",
+                    "type": "POST",
+                    "data": { Top: $('.nowrap').val() },
+                    "datatype": "json"
+                },
+                //"columnDefs":
+                //[{
+                //    "targets": [0],
+                //    "visible": true,
+                //    "searchable": true
+                //}],
+
+                "columns": [
+                    { "data": "id", "name": "id", "autoWidth": true },
+                    { "data": "Nombre", "name": "BucketFinal", "autoWidth": true },
+
+
+
+                    {
+                        "render": function (data, type, full, meta) {
+                            return "<a href='#' class='btn btn-primary btn-primary-asignar' onclick=AsignarDetalle('" + full.id + "'); >Asignar</a>";
+                        }
+                    },
+
+                ]
+
+            });
+
+
+
+            $("#confbucket").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Buckets/ConfiguracionBucket",
+                    "type": "POST",
+                    "data": { Top: $('.nowrap').val() },
+                    "datatype": "json"
+                },
+                //"columnDefs":
+                //[{
+                //    "targets": [0],
+                //    "visible": true,
+                //    "searchable": true
+                //}],
+
+                "columns": [
+                    { "data": "id", "name": "id", "autoWidth": true },
+                    { "data": "BucketInicial", "name": "BucketInicial", "autoWidth": true },
+                    { "data": "BucketFinal", "name": "BucketFinal", "autoWidth": true },
+
+
+
+                    {
+                        data: null, render: function (data, type, row) {
+                            estado1 = "";
+                            if (row.PRPRotas == "True")
+                                estado1 = "checked";
+                            return " <input " + estado1 + " id='" + row.id + "Y" + "' type='checkbox'>";
+                        }
+                    },
+                    {
+                        data: null, render: function (data, type, row) {
+                            estado2 = "";
+                            if (row.CeroPagos == "True")
+                                estado2 = "checked";
+                            return " <input " + estado2 + " id='" + row.id + "Y1" + "' type='checkbox'>";
+                        }
+                    },
+                    {
+                        data: null, render: function (data, type, row) {
+                            estado3 = "";
+                            if (row.SaldoAlto == "True")
+                                estado3 = "checked";
+                            return " <input " + estado3 + " id='" + row.id + "Y2" + "' type='checkbox'>";
+                        }
+                    },
+                    {
+                        data: null, render: function (data, type, row) {
+                            estado4 = "";
+                            if (row.SaldoMedio == "True")
+                                estado4 = "checked";
+                            return " <input " + estado4 + " id='" + row.id + "Y3" + "' type='checkbox'>";
+                        }
+                    },
+                    {
+                        data: null, render: function (data, type, row) {
+                            estado5 = "";
+                            if (row.SaldoBajo == "True")
+                                estado5 = "checked";
+                            return " <input " + estado5 + " id='" + row.id + "Y4" + "' type='checkbox'>";
+                        }
+                    },
+
+                    {
+                        data: null, render: function (data, type, row) {
+                            estado6 = "";
+                            if (row.CuentaAlDia == "True")
+                                estado6 = "checked";
+                            return " <input " + estado6 + " id='" + row.id + "Y5" + "' type='checkbox'>";
+                        }
+                    },
+
+
+                    {
+                        "render": function (data, type, full, meta) {
+                            return "<a href='#' class='btn btn-primary btn-primary-editar' onclick=EditeBucket('" + full.id + "'); >Editar</a>";
+                        }
+                    },
+                    {
+                        "render": function (data, type, full, meta) {
+                            return "<a href='#' class='btn btn-primary btn-primary-asignar' onclick=Asignar('" + full.id + "'); >Asignar</a>";
+                        }
+                    },
+
+                ]
+
+            });
+
+
+            $("#cantidadconf").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Buckets/Buckets",
+                    "type": "POST",
+                    "data": { Top: $('.nowrap').val() },
+                    "datatype": "json"
+                },
+                //"columnDefs":
+                //[{
+                //    "targets": [0],
+                //    "visible": true,
+                //    "searchable": true
+                //}],
+
+                "columns": [
+                    { "data": "Bucket", "name": "Bucket", "autoWidth": true },
+                    { "data": "PRPRotas", "name": "PRPRotas", "autoWidth": true },
+                    { "data": "CeroPagos", "name": "CeroPagos", "autoWidth": true },
+                    { "data": "SaldoAlto", "name": "SaldoAlto", "autoWidth": true },
+                    { "data": "SaldoMedio", "name": "SaldoMedio", "autoWidth": true },
+                    { "data": "SaldoBajo", "name": "SaldoBajo", "autoWidth": true },
+                    { "data": "CuentaAlDia", "name": "CuentaAlDia", "autoWidth": true },
+                    { "data": "AgenteAsignado", "name": "AgenteAsignado", "autoWidth": true },
+                    { "data": "Cantidad_Cuentas", "name": "Cantidad_Cuentas", "autoWidth": true },
+                ]
+
+            });
+
+
+            $("#noasignado").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Buckets/Buckets_NoAsignado",
+                    "type": "POST",
+                    "data": { Top: $('.nowrap').val() },
+                    "datatype": "json"
+                },
+                //"columnDefs":
+                //[{
+                //    "targets": [0],
+                //    "visible": true,
+                //    "searchable": true
+                //}],
+
+                "columns": [
+                    { "data": "Bucket", "name": "Bucket", "autoWidth": true },
+                    { "data": "PRPRotas", "name": "PRPRotas", "autoWidth": true },
+                    { "data": "CeroPagos", "name": "CeroPagos", "autoWidth": true },
+                    { "data": "SaldoAlto", "name": "SaldoAlto", "autoWidth": true },
+                    { "data": "SaldoMedio", "name": "SaldoMedio", "autoWidth": true },
+                    { "data": "SaldoBajo", "name": "SaldoBajo", "autoWidth": true },
+                    { "data": "CuentaAlDia", "name": "CuentaAlDia", "autoWidth": true },
+                    { "data": "Cantidad_Cuentas", "name": "Cantidad_Cuentas", "autoWidth": true },
+                ]
+
+            });
+
+
+
+        });
+
+    function DeleteData(cod_agente)
+        {
+        alertify.confirm("¿Esta Seguro de Eliminar el Registro?",
+            function () {
+                Delete(cod_agente);
+            },
+            function () {
+                return false;
+            });
+        }
+
+
+            function Asignar(id) {
+                localStorage.removeItem("FK_Id_AsignacionBuckets");
+                $("ul.target").empty();
+                $("#Pendientes").html("");
+                $("#Asignados").html("");
+                $("#Pendientes").empty();
+                $("#Asignados").empty();
+                $("#Asignadosconf").html("");
+                $("#Pendientesconf").html("");
+                $("#Asignadosconf").empty();
+                $("#Pendientesconf").empty();
+
+                getConfigAsignados(id);
+                getConfigNoAsignados(id);
+                localStorage.setItem("FK_Id_AsignacionBuckets", id);
+                $("#modalAsigna").modal('show');
+
+            }
+
+
+            function AsignarDetalle(id) {
+                $("ul.target").empty();
+                localStorage.removeItem("FK_Id_AsignacionBuckets");
+                $("#Pendientes").html("");
+                $("#Asignados").html("");
+                $("#Pendientes").empty();
+                $("#Asignados").empty();
+                $("#Asignadosconf").html("");
+                $("#Pendientesconf").html("");
+                $("#Asignadosconf").empty();
+                $("#Pendientesconf").empty();
+
+            getConfigAsignados_conf(id);
+            getConfigNoAsignados_conf(id);
+            localStorage.setItem("FK_Id_AsignacionBuckets", id);
+            $("#modalAsignaconf").modal('show');
+        }
+
+
+function EditeBucket(id)
+    {
+            var url = '@Url.Content("~/")' + "Buckets/EditBucket";
+
+
+
+
+            var vv1;
+            if ($("#" + id + "Y" + ":checked").val()) vv1 = true;else vv1 = false;
+
+            var vv2;
+            if ($("#" + id + "Y1" + ":checked").val()) vv2 = true; else vv2 = false;
+
+            var vv3;
+    if ($("#" + id + "Y2" + ":checked").val()) vv3 = true; else vv3 = false;
+
+            var vv4;
+    if ($("#" + id + "Y3" + ":checked").val()) vv4 = true; else vv4 = false;
+
+            var vv5;
+    if ($("#" + id + "Y4" + ":checked").val()) vv5 = true; else vv5 = false;
+
+    var vv6;
+    if ($("#" + id + "Y5" + ":checked").val()) vv6 = true; else vv6 = false;
+
+
+    $.ajax(
+        {
+            url: url,
+            type: "POST",
+            data: {
+                PRPRotas: vv1,
+                CeroPagos: vv2,
+                SaldoAlto: vv3,
+                SaldoMedio: vv4,
+                SaldoBajo: vv5,
+                CuentaAlDia: vv6,
+                id: id,
+                Estado: 0,
+                Asignado: 0,
+                    },
+            success: function (result) {
+                alertify
+                    .alert("Registro Actualizado", function () {
+                        oTable = $('#example').DataTable();
+                        oTable.draw();
+                    });
+                    },
+                    error: function (xhr, status, p3, p4) {
+                        var err = p3;
+                        if (xhr.responseText && xhr.responseText[0] == "{")
+                            err = JSON.parse(xhr.responseText).message;
+                        alert(err);
+                    }
+                });
+                }
+
+
+
+        function EditeData(cod_agente)
+    {
+            var url = '@Url.Content("~/")' + "Buckets/Edit";
+
+
+
+
+            var v1;
+            if ($("#" + cod_agente + "X" + ":checked").val()) v1 = 1;else v1 = 0;
+
+            var v2;
+            if ($("#" + cod_agente + "X1" + ":checked").val()) v2 = 1; else v2 = 0;
+
+            var v3;
+            if ($("#" + cod_agente + "X2" + ":checked").val()) v3 = 1; else v3 = 0;
+
+            var v4;
+            if ($("#" + cod_agente + "X3" + ":checked").val()) v4 = 1; else v4 = 0;
+
+            var v5;
+            if ($("#" + cod_agente + "X4" + ":checked").val()) v5 = 1; else v5 = 0;
+
+            var v6;
+            if ($("#" + cod_agente + "X5" + ":checked").val()) v6 = 1; else v6 = 0;
+
+            var v7;
+            if ($("#" + cod_agente + "X6" + ":checked").val()) v7 = 1; else v7 = 0;
+
+            var v8;
+            if ($("#" + cod_agente + "X7" + ":checked").val()) v8 = 1; else v8 = 0;
+
+            var configuracion = v1 + "|" + v2 + "|" + v3 + "|" + v4 + "|" + v5 + "|" + v6 + "|" + v7 + "|" + v8
+
+
+            $.ajax(
+                {
+                    url: url,
+                    type: "POST",
+                    data: {
+                         ID: cod_agente, configuracion
+                    },
+                    success: function (result) {
+                        alertify
+                            .alert("Registro Actualizado", function () {
+                                oTable = $('#example').DataTable();
+                                oTable.draw();
+                            });
+                        //oTable = $('#example').DataTable();
+                        //oTable.draw();
+                        //bootbox.alert("Correcto!");
+                    },
+                    error: function (xhr, status, p3, p4) {
+                        var err = p3;
+                        if (xhr.responseText && xhr.responseText[0] == "{")
+                            err = JSON.parse(xhr.responseText).message;
+                        alert(err);
+                    }
+                });
+        }
+
+
+         function getConfigAsignados_conf(IdBucket) {
+                var url = '@Url.Content("~/")' + "Buckets/ConfigAsignados_conf";
+                $.ajax(
+                    {
+                        url: url,
+                        type: "POST",
+                        data: {
+                            Id: IdBucket
+                        },
+                        success: function (result) {
+                            var list = $("#Asignadosconf");
+                            list.html('');
+                            $.each(result, function (key, item) {
+                                list.append('<li Value=' + item.Id + '>' + item.Orden+'</li>');
+                            });
+                        },
+                        error: function (xhr, status, p3, p4) {
+                            var err = p3;
+                            if (xhr.responseText && xhr.responseText[0] == "{")
+                                err = JSON.parse(xhr.responseText).message;
+                            alert(err);
+                        }
+                    });
+        }
+
+            function getConfigAsignados(IdBucket) {
+                var url = '@Url.Content("~/")' + "Buckets/ConfigAsignados";
+                $.ajax(
+                    {
+                        url: url,
+                        type: "POST",
+                        data: {
+                            Id: IdBucket
+                        },
+                        success: function (result) {
+                            var list = $("#Asignados");
+                            list.html('');
+                            $.each(result, function (key, item) {
+                                list.append('<li Value=' + item.Id + '>' + item.Orden+'</li>');
+                            });
+                        },
+                        error: function (xhr, status, p3, p4) {
+                            var err = p3;
+                            if (xhr.responseText && xhr.responseText[0] == "{")
+                                err = JSON.parse(xhr.responseText).message;
+                            alert(err);
+                        }
+                    });
+            }
+                        function getConfigNoAsignados(IdBucket) {
+                var url = '@Url.Content("~/")' + "Buckets/ConfigNoAsignados";
+                $.ajax(
+                    {
+                        url: url,
+                        type: "POST",
+                        data: {
+                            Id: IdBucket
+                        },
+                        success: function (result) {
+                            var list = $("#Pendientes");
+                            list.html('');
+                            $.each(result, function (key, item) {
+                                list.append('<li Value=' + item.Id + '>' + item.Orden+'</li>');
+                            });
+                        },
+                        error: function (xhr, status, p3, p4) {
+                            var err = p3;
+                            if (xhr.responseText && xhr.responseText[0] == "{")
+                                err = JSON.parse(xhr.responseText).message;
+                            alert(err);
+                        }
+                    });
+            }
+
+
+          function getConfigNoAsignados_conf(IdBucket) {
+                var url = '@Url.Content("~/")' + "Buckets/ConfigNoAsignados_conf";
+                $.ajax(
+                    {
+                        url: url,
+                        type: "POST",
+                        data: {
+                            Id: IdBucket
+                        },
+                        success: function (result) {
+                            var list = $("#Pendientesconf");
+                            list.html('');
+                            $.each(result, function (key, item) {
+                                list.append('<li Value=' + item.Id + '>' + item.Orden+'</li>');
+                            });
+                        },
+                        error: function (xhr, status, p3, p4) {
+                            var err = p3;
+                            if (xhr.responseText && xhr.responseText[0] == "{")
+                                err = JSON.parse(xhr.responseText).message;
+                            alert(err);
+                        }
+                    });
+        }
+
+
+    function Delete(cod_agente)
+    {
+        var url = '@Url.Content("~/")' + "Buckets/Delete";
+
+        $.ajax(
+            {
+                url: url,
+                type: "POST",
+                data: {
+                    ID: cod_agente
+                },
+                success: function (result) {
+                    oTable = $('#example').DataTable();
+                    oTable.draw();
+
+                },
+                error: function (xhr, status, p3, p4) {
+                    var err = p3;
+                    if (xhr.responseText && xhr.responseText[0] == "{")
+                        err = JSON.parse(xhr.responseText).message;
+                    alert(err);
+                }
+            });
+            }
+            var jsonData = null;
+
+            function guardarConfig() {
+
+                if (jsonData.length == 0) {
+                    var Config_Catalogo_AsignacionBuckets = [];
+                        let catalogo = {};
+                        catalogo.Accion = "Eliminar";
+                        catalogo.FK_Id_AsignacionBuckets = localStorage.getItem("FK_Id_AsignacionBuckets").toString();
+
+                    Config_Catalogo_AsignacionBuckets.push(catalogo);
+                    jsonData = Config_Catalogo_AsignacionBuckets;
+                }
+
+                var url = '@Url.Content("~/")' + "Buckets/GuardarConfiguracion";
+                $.ajax(
+                    {
+                        url: url,
+                        data: JSON.stringify({ 'asignacionBucketsConfigs': jsonData }),
+                        type: "POST",
+                        contentType: "application/json;charset=utf-8",
+                        dataType: "json",
+                        success: function (result) {
+                            if (result.Respuesta == "OK") {
+                                alertify
+                                    .alert("Buckets Actualizado", function () {
+                                        jsonData = null;
+                                    });
+                            }
+                        },
+                        error: function (xhr, status, p3, p4) {
+                            var err = p3;
+                            if (xhr.responseText && xhr.responseText[0] == "{")
+                                err = JSON.parse(xhr.responseText).message;
+                            alert(err);
+                        }
+                    });
+            }
+
+
+
+
+        var jsonData = null;
+            function guardarConfig_config() {
+
+                if (jsonData.length == 0) {
+                    var Config_Catalogo_AsignacionBuckets = [];
+                        let catalogo = {};
+                        catalogo.Accion = "Eliminar";
+                        catalogo.FK_Id_AsignacionBuckets = localStorage.getItem("FK_Id_AsignacionBuckets").toString();
+
+                    Config_Catalogo_AsignacionBuckets.push(catalogo);
+                    jsonData = Config_Catalogo_AsignacionBuckets;
+                }
+
+                var url = '@Url.Content("~/")' + "Buckets/GuardarConfiguracion_conf";
+                $.ajax(
+                    {
+                        url: url,
+                        data: JSON.stringify({ 'asignacionBucketsConfigs': jsonData }),
+                        type: "POST",
+                        contentType: "application/json;charset=utf-8",
+                        dataType: "json",
+                        success: function (result) {
+                            if (result.Respuesta == "OK") {
+                                alertify
+                                    .alert("Buckets Actualizado", function () {
+                                        jsonData = null;
+                                    });
+                            }
+                        },
+                        error: function (xhr, status, p3, p4) {
+                            var err = p3;
+                            if (xhr.responseText && xhr.responseText[0] == "{")
+                                err = JSON.parse(xhr.responseText).message;
+                            alert(err);
+                        }
+                    });
+        }
+
+
+            function updateValues() {
+                jsonData = null;
+                var Config_Catalogo_AsignacionBuckets= [];
+                var cont = 0;
+                $("ul.target").children().each(function () {
+                    cont++;
+                    let catalogo = {};
+                    catalogo.FK_Cat_AsignacionBuckets = $(this).val().toString();
+                    catalogo.FK_Id_AsignacionBuckets = localStorage.getItem("FK_Id_AsignacionBuckets").toString();
+                    catalogo.OrdenDatos = cont.toString();
+                    //catalogo.Accion = "";
+                    Config_Catalogo_AsignacionBuckets.push(catalogo);
+                });
+                jsonData =  Config_Catalogo_AsignacionBuckets; //JSON.stringify( Config_Catalogo_AsignacionBuckets);
+                };
+
+            function aplicarConfig() {
+                var url = '@Url.Content("~/")' + "Buckets/AplicarConfigCobros/?OPCION=false";
+                $.ajax(
+                    {
+                        url: url,
+                        //data:"0", //JSON.stringify({ 'asignacionBucketsConfigs': jsonData }),
+                        type: "POST",
+                        contentType: "application/json;charset=utf-8",
+                        dataType: "json",
+                        success: function (result) {
+                            if (result.Respuesta == "OK") {
+                                alertify
+                                    .alert("Configuración Aplicada", function () {
+                                    });
+                            }
+                        },
+                        error: function (xhr, status, p3, p4) {
+                            var err = p3;
+                            if (xhr.responseText && xhr.responseText[0] == "{")
+                                err = JSON.parse(xhr.responseText).message;
+                            alertify
+                                .alert("Ocurrio un Error", function () {
+                                });
+                        }
+                    });
+            }
+
+    function revertirConfig() {
+        var url = '@Url.Content("~/")' + "Buckets/AplicarConfigCobros/?OPCION=true";
+                $.ajax(
+                    {
+                        url: url,
+                       // data: JSON.stringify({ 'asignacionBucketsConfigs': jsonData }),
+                        type: "POST",
+                        contentType: "application/json;charset=utf-8",
+                        dataType: "json",
+                        success: function (result) {
+                            if (result.Respuesta == "OK") {
+                                alertify
+                                    .alert("Configuración Aplicada", function () {
+                                    });
+                            }
+                        },
+                        error: function (xhr, status, p3, p4) {
+                            var err = p3;
+                            if (xhr.responseText && xhr.responseText[0] == "{")
+                                err = JSON.parse(xhr.responseText).message;
+                            alertify
+                                .alert("Ocurrio un Error", function () {
+                                });
+                        }
+                    });
+    }
+
+        </script>
+
+        @*<ul class="nav nav-pills">
+                <li class="active"><button type="button" onclick="MostrarBucket()" class="btn btn-primary">Buckets</button></li>
+                <li><button type="button" onclick="MostrarAgente()" class="btn btn-primary">Agentes</button></li>
+                <li><a href="#">Mensajes</a></li>
+            </ul>*@
+
+
+
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#fisrtTab">Buckets</a></li>
+            <li><a data-toggle="tab" href="#secondTab">Agentes</a></li>
+            <li><a data-toggle="tab" href="#TresTab">Cuentas Asignadas</a></li>
+            <li><a data-toggle="tab" href="#CuatroTab">Pendientes Asignar</a></li>
+            <li><a data-toggle="tab" href="#ConfigAsigTab">Configuración Asignación</a></li>
+            <li><a data-toggle="tab" href="#ConfigAsigTabNuevo">Nuevo Ordenamiento de Asignación</a></li>
+            <li><a data-toggle="tab" href="#ConfigCola">Orden Cola Cobros</a></li>
+            <li><a data-toggle="tab" href="#ConfigReportesTab" style="display: none">Reportes</a></li>
+        </ul>
+
+        <div>
+            <div id='ModGeneral' class="alert alert-warning" style='display:none;'>
+                <strong>General!</strong> Configuración General.
+            </div>
+            @*<div class="btn-group">
+                    <button type="button" onclick="MostrarBucket()" class="btn btn-primary">Buckets</button>
+                    <button type="button" onclick="MostrarAgente()" class="btn btn-primary">Agentes</button>
+                    <button type="button" onclick="Ambos()" class="btn btn-primary" name="B1"><span class="glyphicon glyphicon-cog"></span></button>
+                </div>*@
+        </div>
+        <div class="tab-content">
+            <div id="fisrtTab" class="tab-pane fade in active">
+                <h4 id='ModBucket' class="titulo-tesoreria accordion-toggle alert alert-info"><strong>Bucket!</strong> Configuración Buckets.</h4>
+                <div id='Buckets'>
+                    @*<div class="alert alert-info">
+                        <strong>Info Buckets!</strong> aqui info*@
+                    @*</div>*@
+                    <div>
+                        <div style=" margin:0 auto;">
+                            <table id="confbucket" class="container table table-bordered table-hover no-footer dataTable" cellspacing="0">
+                                <thead>
+                                    <tr class="info">
+                                        <th>Bucket</th>
+                                        <th>Mora Inicial</th>
+                                        <th>Mora Final</th>
+                                        <th>PRPRotas</th>
+                                        <th>CeroPagos</th>
+                                        <th>SaldoAlto</th>
+                                        <th>SaldoMedio</th>
+                                        <th>SaldoBajo</th>
+                                        <th>CuentaAlDia</th>
+                                        <th>Editar</th>
+                                        <th>Asignar</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="secondTab" class="tab-pane fade in">
+                <h4 id='ModAgente' class="titulo-tesoreria accordion-toggle alert alert-info"><strong>Agente!</strong> Configuración Agente.</h4>
+                <div>
+                    <div id='Agentes'>
+                        <div style="width:95%; margin:0 auto;">
+                            <table id="confagente" class="container table table-bordered table-hover no-footer dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr class="info">
+                                        <th>Codigo</th>
+                                        <th>Agente</th>
+                                        <th>Estado</th>
+                                        <th>Fecha Creacion</th>
+                                        <th>Fecha Modificacion</th>
+                                        <th>Estados</th>
+                                        <th>Codigo</th>
+                                        <th>Agente</th>
+                                        <th>Estados</th>
+                                        <th>Estados</th>
+                                        <th>Estados</th>
+                                        <th>Fecha Creacion</th>
+                                        <th>Fecha Modificacion</th>
+                                        <th>Editar</th>
+                                        <th>Eliminar</th>
+                                        <th>Configuracion Bucket</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div id="TresTab" class="tab-pane fade in">
+
+                <h4 class="titulo-tesoreria accordion-toggle alert alert-success"><strong>Bucket!</strong> Cantidad Cuentas Asignadas.</h4>
+                <div>
+                    @*<div class="alert alert-info">
+                        <strong>Info Buckets!</strong> aqui info*@
+                    @*</div>*@
+
+                    <div>
+                        <div style="width:100%; margin:0 auto;">
+                            <table id="cantidadconf" class="container table table-bordered table-hover no-footer dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr class="info">
+                                        <th>Bucket</th>
+                                        <th>PRPRotas</th>
+                                        <th>CeroPagos</th>
+                                        <th>SaldoAlto</th>
+                                        <th>SaldoMedio</th>
+                                        <th>SaldoBajo</th>
+                                        <th>CuentaAlDia</th>
+                                        <th>AgenteAsignado</th>
+                                        <th>Cantidad_Cuentas</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+            <div id="CuatroTab" class="tab-pane fade in">
+                <h4 class="titulo-tesoreria accordion-toggle alert alert-warning"><strong>Bucket!</strong> Cantidad Cuentas Pendientes Asignar.</h4>
+                <div>
+                    @*<div class="alert alert-info">
+                        <strong>Info Buckets!</strong> aqui info*@
+                    @*</div>*@
+                    <div>
+                        <table id="noasignado" class="table table-bordered table-hover no-footer dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr class="info">
+                                    <th>Bucket</th>
+                                    <th>PRPRotas</th>
+                                    <th>CeroPagos</th>
+                                    <th>SaldoAlto</th>
+                                    <th>SaldoMedio</th>
+                                    <th>SaldoBajo</th>
+                                    <th>CuentaAlDia</th>
+                                    <th>Cantidad_Cuentas</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+            <div id="ConfigAsigTab" class="tab-pane fade in">
+                <h4 class="titulo-tesoreria accordion-toggle alert alert-warning"><strong>Bucket!</strong> Configuración de Asignación.</h4>
+                <div>
+                    <div>
+                        <div style="margin:0 auto;">
+                            <table id="TblConfigAsig" class="container table table-bordered  table-hover" cellspacing="0">
+                                <thead>
+                                    <tr class="info">
+                                        <th>Id</th>
+                                        <th>Nombre</th>
+                                        <th>Estado</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tbody ConfigAsig"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div id="ConfigAsigTabNuevo" class="tab-pane fade in">
+                <h4 class="titulo-tesoreria accordion-toggle alert alert-warning"><strong>Bucket!</strong>Nueva Configuración de Asignación.</h4>
+                <div>
+                    <div>
+                        <div class="row">
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="NombreNuevo">Nombre</label>
+                                        <input type="text" class="form-control" id="NombreNuevo" placeholder="Nombre" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Estado">Estado</label>
+                                        <select id="ddlEstadoNuevo" class="form-control" required>
+                                            <option value="1">Activo</option>
+                                            <option value="2">Inactivo</option>
+                                        </select>
+                                    </div>
+                                    <div class="orm-group">
+                                        <button type="submit" class="btn btn-primary" Id="btnGuardar" onclick="GaurdarNuevo();">Guardar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="ConfigCola" class="tab-pane fade in">
+                <h4 class="titulo-tesoreria accordion-toggle alert alert-warning"><strong>Bucket!</strong>Nueva Configuración de Orden Cola.</h4>
+                <div>
+                    <div>
+                        <div class="row">
+                            <div class="modal-body">
+                                <form>
+                                    @*<div class="form-group">
+                                            <label for="NombreNuevo">Nombre</label>
+                                            <input type="text" class="form-control" id="NombreNuevo" placeholder="Nombre" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Estado">Estado</label>
+                                            <select id="ddlEstadoNuevo" class="form-control" required>
+                                                <option value="1">Activo</option>
+                                                <option value="2">Inactivo</option>
+                                            </select>
+                                        </div>*@
+                                    @*<div class="orm-group">
+                                            <button type="button" class="btn btn-primary" Id="btnGuardarcola" onclick="return Asignar(1);">Asignacion Principal</button>
+                                        </div>
+                                        <div class="orm-group">
+                                            <button type="button" class="btn btn-danger" Id="btnAsignar" onclick="return aplicarConfig();">Aplicar</button>
+                                        </div>
+                                        <div class="orm-group">
+                                            <button type="button" class="btn btn-success" Id="btnRevertir" onclick="return revertirConfig();">Reversar</button>
+                                        </div>*@
+
+                                    <div class="form-inline">
+                                        <div class="form-group mb-2">
+                                            <div class="orm-group">
+                                                <button type="button" class="btn btn-primary" Id="btnGuardarcola" onclick="return Asignar(1);">Asignacion Principal</button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mx-sm-3 mb-2">
+                                            <div class="orm-group">
+                                                <button type="button" class="btn btn-danger" Id="btnAsignar" onclick="return aplicarConfig();">Aplicar</button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mx-sm-4 mb-3">
+                                            <div class="orm-group">
+                                                <button type="button" class="btn btn-success" Id="btnRevertir" onclick="return revertirConfig();">Reversar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div style=" margin:0 auto;">
+                            <table id="confbucket2" class="container table table-bordered table-hover no-footer dataTable" cellspacing="0">
+                                <thead>
+                                    <tr class="info">
+                                        <th>Id</th>
+                                        <th>Detalle Bucket</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div id="ConfigReportesTab" class="tab-pane fade in">
+                <h4 class="titulo-tesoreria accordion-toggle alert alert-warning"><strong>Bucket!</strong> Configuracion de Reportes</h4>
+                <div>
+                    <div>
+                        <div style="margin:0 auto;">
+                            <table id="TblConfigReportes" class="table table-bordered  table-hover" cellspacing="0">
+                                <thead>
+                                    <tr class="info">
+                                        <th>Id</th>
+                                        <th>Nombre</th>
+                                        <th>Nombre Archivo</th>
+                                        <th>Area</th>
+                                        <th>Generar</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tbody ConfigReportes"></tbody>
+                            </table>
+                            <table id="TblColaReportes" class="container table table-bordered  table-hover" cellspacing="0">
+                                <thead>
+                                    <tr class="info">
+                                        <th>Id</th>
+                                        <th>Nombre Archivo</th>
+                                        <th>Estado</th>
+                                        <th>Usuario Creacion</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tbody ColaReportes"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" Id="ModalEditConfig" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        @*<button type="button" class="close" data-dissmiss="modal"><span aria-hidden="true">×</span></button>*@
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+
+                    </div>
+                    <div class="modal-body">
+
+                        <div id="demo">
+
+
+                            <div>
+                                <form>
+                                    <div class="form-group">
+                                        <label for="ID">ID</label>
+                                        <input type="text" class="form-control" id="ID" placeholder="ID" disabled="disabled" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Nombre">Nombre</label>
+                                        <input type="text" class="form-control" id="Nombre" placeholder="CodigoAgente" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Estado">Estado</label>
+                                        <select id="ddlEstado" class="form-control">
+                                            <option value="1">Activo</option>
+                                            <option value="2">Inactivo</option>
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" Id="btnUpdate" onclick="Update();">Actualizar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" Id="modalAsigna" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        @*<button type="button" class="close" data-dissmiss="modal"><span aria-hidden="true">×</span></button>*@
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+
+                    </div>
+                    <div class="modal-body">
+
+                        <div id="demo">
+
+                            <div class="sideBySide">
+                                <div id='ModBucketAsig' class="alert alert-warning">
+                                    <strong>Sin Asignar</strong>
+                                    <div class="left">
+                                        <ul id="Pendientes" class="source connected"></ul>
+                                    </div>
+                                </div>
+
+                                <div id='ModBucketNoAsig' class="alert alert-success">
+                                    <strong>Asignados</strong>
+                                    <div class="right">
+                                        <ul id="Asignados" class="target connected"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        @*<button type="button" class="btn btn-primary" Id="btnUpdate" style="display:none;" onclick="Update();">Actualizar</button>*@
+                        <button type="button" class="btn btn-primary" onclick="guardarConfig();" data-dismiss="modal">Guardar</button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" Id="modalAsignaconf" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        @*<button type="button" class="close" data-dissmiss="modal"><span aria-hidden="true">×</span></button>*@
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+
+                    </div>
+                    <div class="modal-body">
+
+                        <div id="demo">
+
+                            <div class="sideBySide">
+                                <div id='ModBucketAsigconf' class="alert alert-warning">
+                                    <strong>Sin Asignar</strong>
+                                    <div class="left">
+                                        <ul id="Pendientesconf" class="source connected"></ul>
+                                    </div>
+                                </div>
+
+                                <div id='ModBucketNoAsigconf' class="alert alert-success">
+                                    <strong>Asignados</strong>
+                                    <div class="right">
+                                        <ul id="Asignadosconf" class="target connected"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        @*<button type="button" class="btn btn-primary" Id="btnUpdate" style="display:none;" onclick="Update();">Actualizar</button>*@
+                        <button type="button" class="btn btn-primary" onclick="guardarConfig_config();" data-dismiss="modal">Guardar</button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            $(function () {
+                $(".source, .target").sortable({
+                    connectWith: ".connected"
+                });
+            });
+        </script>
+
+        <style>
+            ul.source, ul.target {
+                min-height: 50px;
+                margin: 0px 25px 10px 0px;
+                padding: 2px;
+                border-width: 1px;
+                border-style: solid;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+                border-radius: 3px;
+                list-style-type: none;
+                list-style-position: inside;
+            }
+
+            ul.source {
+                border-color: #f8e0b1;
+            }
+
+            ul.target {
+                border-color: #add38d;
+            }
+
+            .source li, .target li {
+                margin: 5px;
+                padding: 5px;
+                -webkit-border-radius: 4px;
+                -moz-border-radius: 4px;
+                border-radius: 4px;
+                text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+            }
+
+            .source li {
+                background-color: #FCF8EC;
+                border: 1px solid #fbeed5;
+                color: #c09853;
+            }
+
+            .target li {
+                background-color: #ebf5e6;
+                border: 1px solid #d6e9c6;
+                color: #468847;
+            }
+
+            .sortable-dragging {
+                border-color: #ccc !important;
+                background-color: #fafafa !important;
+                color: #bbb !important;
+            }
+
+            .sortable-placeholder {
+                height: 40px;
+            }
+
+            .source .sortable-placeholder {
+                border: 2px dashed #f8e0b1 !important;
+                background-color: #fefcf5 !important;
+            }
+
+            .target .sortable-placeholder {
+                border: 2px dashed #add38d !important;
+                background-color: #f6fbf4 !important;
+            }
+        </style>
+
+
+    </fieldset>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

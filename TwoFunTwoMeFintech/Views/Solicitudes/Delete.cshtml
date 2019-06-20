@@ -1,0 +1,218 @@
+﻿@model TwoFunTwoMeFintech.Models.DTO.Solicitudes
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Solicitudes</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IdBuro)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdBuro)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaIngreso)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaIngreso)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaModificacion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaModificacion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UsrModifica)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UsrModifica)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IdPersona)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdPersona)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Status)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Status)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaTransferencia)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaTransferencia)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Comentarios)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Comentarios)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UsoCredito)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UsoCredito)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Consentimiento)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Consentimiento)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IdProducto)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdProducto)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IdAgente)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdAgente)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SoporteTipo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SoporteTipo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IdStatusOrden)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdStatusOrden)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FotoCedula)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FotoCedula)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Recibo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Recibo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Contrato)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Contrato)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Pagare)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Pagare)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ReciboIngresos)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ReciboIngresos)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CuentaBancaria)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CuentaBancaria)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Selfie)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Selfie)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Origen)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Origen)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IdUsrAsig)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdUsrAsig)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IdEstadoProc)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdEstadoProc)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SubStatus)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SubStatus)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MontoMaximo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MontoMaximo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Score)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Score)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+    <script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+    </script>

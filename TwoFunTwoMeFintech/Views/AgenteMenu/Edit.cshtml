@@ -1,0 +1,74 @@
+﻿@model TwoFunTwoMeFintech.Models.DTO.AgenteMenu
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>AgenteMenu</legend>
+
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.COD_AGENTE)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.COD_AGENTE)
+            @Html.ValidationMessageFor(model => model.COD_AGENTE)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IDSUBMENU)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IDSUBMENU)
+            @Html.ValidationMessageFor(model => model.IDSUBMENU)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Mensaje)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Mensaje)
+            @Html.ValidationMessageFor(model => model.Mensaje)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ACCION)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ACCION)
+            @Html.ValidationMessageFor(model => model.ACCION)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>
