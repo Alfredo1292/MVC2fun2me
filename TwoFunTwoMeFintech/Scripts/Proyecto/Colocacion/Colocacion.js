@@ -581,28 +581,26 @@ function mostrarDatosLoop(idSolicitud) {
         contentType: "application/json;charset=utf-8",
         dataType: "json",
         success: function (result) {
-            var html = '';
             var d = new Date();
             ocultarBloqueo();
             $.each(result, function (key, item) {
-
-                html += '<tr>';
-
-                //<td><img src="@Url.Content(item.UrlFotoCedula)" alt="Image" width="100px" height="100px" /><br /><a class="btn btn-success" href="@Url.Content(item.UrlFotoCedula)" target="_blank">Descargar</a></td>
-                //    <td><img src="@Url.Content(item.UrlFotoSelfie)" alt="Image" width="100px" height="100px" /><br /><a class="btn btn-success" href="@Url.Content(item.UrlFotoSelfie)" target="_blank">Descargar</a></td>
-                //    <td><img src="@Url.Content(item.UrlFotoCedulaTrasera)" alt="Image" width="100px" height="100px" /><br /><a class="btn btn-success" href="@Url.Content(item.UrlFotoCedulaTrasera)" target="_blank">Descargar</a></td>
-                //    <td><img src="@Url.Content(item.UrlFotoFirma)" alt="Image" width="50px" height="50px" /><br /><a class="btn btn-success" href="@Url.Content(item.UrlFotoFirma)" target="_blank">Descargar</a></td>
-                //    <td><a href="@Url.Content(item.UrlDirectorioPagare) " class="btn btn-success" target="_blank">Descargar</a></td>
+                let porcentajeMacheo = item.PorcentMatched != null ? item.PorcentMatched : 0;
                 //imagen cedula frontal
-                $('#imagen-cedula-frontal').html('<img id="UrlFotoCedula" src=' + item.UrlFotoCedula.substring(1) + '?' + d.getTime() + ' alt="Image" width="100px" height="100px" />');
+                $('#imagen-cedula-frontal').html(`<img id="UrlFotoCedula" src="${item.UrlFotoCedula.substring(1) + '?' + d.getTime()}"  alt="Image" width="100px" height="100px" />
+                <div style='padding:5px;'>${item.cedulaFrontalOk ? "<i style='color: green;' class='fas fa-check fa-2x'></i>" : "<i style='color:#EE8282;' class='fas fa-times fa-2x'></i>"}</div>`);
                 $('#descargar-frontal').html('<a class="btn btn-primary btn-primary-eliminar" href=' + item.UrlFotoCedula.substring(1) + '?' + d.getTime() + ' target="_blank"><span class="glyphicon glyphicon-download-alt"></span><span class="tooltiptexMenu">Descargar</span></a>');
                 $('#girar-frontal').html('<a class="btn btn-primary" target="_blank" onclick="GirarFotoCedula();"><span class="glyphicon glyphicon-repeat"></span><span class="tooltiptexMenu">Girar</span></a>');
 
-                $('#imagen-selfie').html('<img id="UrlFotoSelfie" src=' + item.UrlFotoSelfie.substring(1) + '?' + d.getTime() + ' alt="Image" width="100px" height="100px" />');
+                $('#imagen-selfie').html('<img id="UrlFotoSelfie" src=' + item.UrlFotoSelfie.substring(1) + '?' + d.getTime() + ' alt="Image" width="100px" height="100px" />' +
+                    '<div style="padding: 5px;"><p>Porcentaje de macheo</p>' +
+                    '<p><strong>' + porcentajeMacheo + '%</strong></p></div>');
                 $('#descargar-selfie').html('<a class="btn btn-primary btn-primary-eliminar" href=' + item.UrlFotoSelfie.substring(1) + '?' + d.getTime() + ' target="_blank"><span class="glyphicon glyphicon-download-alt"></span><span class="tooltiptexMenu">Descargar</span></a>');
                 $('#girar-selfie').html('<a class="btn btn-primary" target="_blank" onclick="GirarFotoSelfie();"><span class="glyphicon glyphicon-repeat"></span><span class="tooltiptexMenu">Girar</span></a>');
 
-                $('#imagen-cedula-trasera').html('<img id="UrlFotoCedulaTrasera" src=' + item.UrlFotoCedulaTrasera.substring(1) + '?' + d.getTime() + ' alt="Image" width="100px" height="100px" />');
+                //Cedula tracera
+
+                $('#imagen-cedula-trasera').html(`<img id="UrlFotoCedulaTrasera" src="${item.UrlFotoCedulaTrasera.substring(1) + '?' + d.getTime()}" alt="Image" width="100px" height="100px" />
+                <div style='padding:5px;'>${item.cedulaTraceraOk ? "<i style='color: green;' class='fas fa-check fa-2x'></i>" : "<i style='color: #EE8282;' class='fas fa-times fa-2x'></i>"}</div>`);
                 $('#descargar-trasera').html('<a class="btn btn-primary btn-primary-eliminar" href=' + item.UrlFotoCedulaTrasera.substring(1) + '?' + d.getTime() + ' target="_blank"><span class="glyphicon glyphicon-download-alt"></span><span class="tooltiptexMenu">Descargar</span></a>');
                 $('#girar-trasera').html('<a class="btn btn-primary" target="_blank" onclick="GirarFotoCedulaDorso();"><span class="glyphicon glyphicon-repeat"></span><span class="tooltiptexMenu">Girar</span></a>');
 

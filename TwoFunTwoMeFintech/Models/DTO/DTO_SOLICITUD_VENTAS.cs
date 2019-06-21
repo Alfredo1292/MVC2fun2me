@@ -129,7 +129,12 @@ namespace TwoFunTwoMeFintech.Models.DTO
 		public int IdPlazoCredito { get; set; }
 
 		public int IdFrecuencia { get; set; }
-	}
+
+        public bool cedulaFrontalOk { get; set; }
+
+        public bool cedulaTraseraOk { get; set; }
+
+    }
 
 
 }
