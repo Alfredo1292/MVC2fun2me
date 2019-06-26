@@ -1606,6 +1606,7 @@
     <Content Include="Content\menu\iconos\cobros.png" />
     <Content Include="Content\menu\iconos\Fenix -Favicon.png" />
     <Content Include="Content\menu\iconos\Fenix-atomo.png" />
+    <Content Include="Content\menu\iconos\Fenix-logo-alternativo.png" />
     <Content Include="Content\menu\iconos\Fenix-nombre.png" />
     <Content Include="Content\menu\iconos\Fenix-Principal.png" />
     <Content Include="Content\menu\iconos\finanzas-hover.png" />
