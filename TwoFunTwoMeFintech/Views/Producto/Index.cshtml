@@ -1,0 +1,396 @@
+﻿@*@{
+		ViewBag.Title = "Index";
+	}*@
+<script src="~/Scripts/Proyecto/Producto.js"></script>
+
+<ul class="nav nav-tabs">
+	<li class="active"><a data-toggle="tab" href="#fisrtTab">Productos</a></li>
+	<li><a data-toggle="tab" href="#secondTab">Nuevo</a></li>
+</ul>
+<div class="tab-content">
+	<div id="fisrtTab" class="tab-pane fade in active">
+		<div class="table-responsive">
+			<div class="col-lg-3 col-md-6 col-sm-12">
+				<form class="form-inline">
+					<div class="btn-group btn-group-s" role="group"></div>
+					<label id="lblMontoCredito" for="lblMontoCredito">Monto crédito</label>
+					<select id="ddlMontoCredito" class="form-control control-editar-usuario" onchange="loadData();"></select>
+					@*<input type="text" class="form-control" id="ROLID" placeholder="ROLID" />*@
+				</form>
+			</div>
+			<table ID="ProductosTable" class="table table-bordered  table-hover">
+				<thead>
+					<tr class="info">
+						<th scope="row">
+							Id
+						</th>
+						<th scope="row">
+							Nombre
+						</th>
+						<th scope="row">
+							Monto
+						</th>
+						<th scope="row">
+							PlazoDias
+						</th>
+						<th scope="row">
+							Frecuencia
+						</th>
+						<th scope="row">
+							Frecuencia Dias
+						</th>
+						<th scope="row">
+							Cantidad de Cuotas
+						</th>
+						<th scope="row">
+							Originación
+						</th>
+						<th scope="row">
+							Tasa
+						</th>
+						<th scope="row">
+							Tasa Diaria
+						</th>
+						<th scope="row">
+							Cuota
+						</th>
+						<th scope="row">
+							Originación 2
+						</th>
+						<th scope="row">
+							Monto x Mora
+						</th>
+						<th scope="row">
+							Dias X Mora
+						</th>
+						<th scope="row">
+							Activo
+						</th>
+						<th>
+							Acción
+							<i class="fa fa-sort float-right" aria-hidden="true"></i>
+						</th>
+					</tr>
+				</thead>
+				<tbody class="tbody Producto"></tbody>
+			</table>
+		</div>
+	</div>
+	<div id="secondTab" class="tab-pane fade in">
+		<div>
+			<div class="row">
+				<div class="col-lg-4 col-md-6 col-sm-12">
+					<div class="table-responsive">
+						<form class="form-inline">
+							<label for="lblNuevoNombreProducto">Nombre del Producto</label>
+							<input type="text" class="form-control" id="txtNuevoNombreProducto" placeholder="Nombre del Producto" />
+						</form>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12">
+					<div class="table-responsive">
+						<form class="form-inline">
+							<label for="lblNuevoMontoDelProducto">Monto del Producto</label>
+							<input type="number" class="form-control" id="txtNuevoMontoProducto" placeholder="Monto del Producto" />
+						</form>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12">
+					<div class="table-responsive">
+						<form class="form-inline">
+							<label for="lblNuevoPlazoDias">Plazo en Dias</label>
+							<input type="number" class="form-control" id="txtNuevoPlazoDias" placeholder="Plazo dias" />
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				</br>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 col-md-6 col-sm-12">
+					<div class="table-responsive">
+						<form class="form-inline" onSubmit="return false;">
+							<label id="lblnuevaFrecuencia" for="ddlNuevoFrecuencia">Frecuencia</label>
+							<select id="ddlNuevoFrecuencia" class="form-control control-editar-usuario">
+								<option value="">--Seleccionar--</option>
+								<option value="SEMANAL">SEMANAL</option>
+								<option value="QUINCENAL">QUINCENAL</option>
+								<option value="MENSUAL">MENSUAL</option>
+							</select>
+						</form>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12">
+					<div class="table-responsive">
+						<form class="form-inline" onSubmit="return false;">
+							<label id="lblnuevaFrecuenciaDias" for="txtnuevaFrecuenciaDias">Frecuencia en dias</label>
+							<input type="number" class="form-control" id="txtnuevaFrecuenciaDias" placeholder="Frecuencia en dias" />
+						</form>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12">
+					<div class="table-responsive">
+						<form class="form-inline" onSubmit="return false;">
+							<label id="lblnuevaCantidadCuotas" for="txtNuevaCantidadCuotas">Cantidad de Cuotas</label>
+							<input type="number" class="form-control" id="txtNuevaCantidadCuotas" placeholder="Cantidad de Cuotas" />
+						</form>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12">
+				</div>
+			</div>
+			<div class="row">
+				</br>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 col-md-6 col-sm-12">
+					<div class="table-responsive">
+						<form class="form-inline" onSubmit="return false;">
+							<label id="lblnuevaOriginacion" for="txtNuevaOriginacion">Originación</label>
+							<input type="number" class="form-control" id="txtNuevaOriginacion" placeholder="Originación" />
+						</form>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12">
+					<div class="table-responsive">
+						<form class="form-inline" onSubmit="return false;">
+							<label id="lblNuevaTasa" for="txtNuevaTasa">Tasa</label>
+							<input type="number" class="form-control" id="txtNuevaTasa" placeholder="Tasa" />
+						</form>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12">
+					<div class="table-responsive">
+						<form class="form-inline" onSubmit="return false;">
+							<label id="lblnuevaTasaDiaria" for="txtNuevaTasaDiaria">Tasa Diaria</label>
+							<input type="number" class="form-control" id="txtNuevaTasaDiaria" placeholder="Tasa Diaria" />
+						</form>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12">
+				</div>
+			</div>
+			<div class="row">
+				</br>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 col-md-6 col-sm-12">
+					<div class="table-responsive">
+						<form class="form-inline" onSubmit="return false;">
+							<label id="lblNuevaCouta" for="txtnuevaCuota">Cuota</label>
+							<input type="number" class="form-control" id="txtnuevaCuota" placeholder="Cuota" />
+						</form>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12">
+					<div class="table-responsive">
+						<form class="form-inline" onSubmit="return false;">
+							<label id="lblnuevaOriginacion2" for="txtnuevaOriginacion2">Originación 2</label>
+							<input type="number" class="form-control" id="txtnuevaOriginacion2" placeholder="Originación 2" />
+						</form>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12">
+					<div class="table-responsive">
+						<form class="form-inline" onSubmit="return false;">
+							<label id="lblNuevoMontoCargoMora" for="txtNuevoMontoCargoMora">Monto x Cargo Mora</label>
+							<input type="number" class="form-control" id="txtNuevoMontoCargoMora" placeholder="Monto x Cargo Mora" />
+						</form>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12">
+				</div>
+			</div>
+			<div class="row">
+				</br>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 col-md-6 col-sm-12">
+					<div class="table-responsive">
+						<form class="form-inline" onSubmit="return false;">
+							<label id="lblNuevaDiasMora" for="txtnuevaDiasMora">Dias Para Mora</label>
+							<input type="number" class="form-control" id="txtnuevaDiasMora" placeholder="Dias Para Mora" />
+						</form>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12">
+				</div>
+			</div>
+			<div class="row" style="margin-top:5px">
+				<div class="col-lg-4 col-md-6 col-sm-12">
+					<div class="table-responsive">
+						<form class="form-inline" onSubmit="return false;">
+							<button id="crearNuevoProducto" type="button" class="btn btn-primary" onclick="CrearProducto();">Crear</button>
+						</form>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12">
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" Id="myModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					@*<button type="button" class="close" data-dissmiss="modal"><span aria-hidden="true">×</span></button>*@
+					<button type="button" class="close" data-dismiss="modal">×</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="row">
+							<div class="col-lg-4 col-md-6 col-sm-12">
+								<div class="table-responsive">
+									<label for="lblEditIdProducto">Id Producto</label>
+									<input type="text" class="form-control" id="txtEditIdProducto" placeholder="Id Producto" disabled/>
+								</div>
+							</div>
+							</br>
+						</div>
+						<div class="row">
+							<div class="col-lg-4 col-md-6 col-sm-12">
+								<div class="table-responsive">
+									<label for="lblEditNombreProducto">Nombre del Producto</label>
+									<input type="text" class="form-control" id="txtEditNombreProducto" placeholder="Nombre del Producto" />
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-6 col-sm-12">
+								<div class="table-responsive">
+									<label for="lblEditMontoDelProducto">Monto del Producto</label>
+									<input type="number" class="form-control" id="txtEditMontoProducto" placeholder="Monto del Producto" />
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-6 col-sm-12">
+								<div class="table-responsive">
+									<label for="lblEditPlazoDias">Plazo Dias</label>
+									<input type="number" class="form-control" id="txtEditPlazoDias" placeholder="Plazo dias" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							</br>
+						</div>
+						<div class="row">
+							<div class="col-lg-4 col-md-6 col-sm-12">
+								<div class="table-responsive">
+									<label id="lblEditFrecuencia" for="ddlEditFrecuencia">Frecuencia</label>
+									<select id="ddlEditFrecuencia" class="form-control control-editar-usuario">
+										<option value="">--Seleccionar--</option>
+										<option value="SEMANAL">SEMANAL</option>
+										<option value="QUINCENAL">QUINCENAL</option>
+										<option value="MENSUAL">MENSUAL</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-6 col-sm-12">
+								<div class="table-responsive">
+									<label id="lblEditFrecuenciaDias" for="txtEditFrecuenciaDias">Frecuencia en dias</label>
+									<input type="number" class="form-control" id="txtEditFrecuenciaDias" placeholder="Frecuencia en dias" />
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-6 col-sm-12">
+								<div class="table-responsive">
+									<label id="lblEditCantidadCuotas" for="txtEditCantidadCuotas">Cantidad de Cuotas</label>
+									<input type="number" class="form-control" id="txtEditCantidadCuotas" placeholder="Cantidad de Cuotas" />
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-6 col-sm-12">
+							</div>
+						</div>
+						<div class="row">
+							</br>
+						</div>
+						<div class="row">
+							<div class="col-lg-4 col-md-6 col-sm-12">
+								<div class="table-responsive">
+									<label id="lblEditOriginacion" for="txtEditOriginacion">Originación</label>
+									<input type="number" class="form-control" id="txtEditOriginacion" placeholder="Originación" />
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-6 col-sm-12">
+								<div class="table-responsive">
+									<label id="lblEditTasa" for="txtEditTasa">Tasa</label>
+									<input type="number" class="form-control" id="txtEditTasa" placeholder="Tasa" />
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-6 col-sm-12">
+								<div class="table-responsive">
+									<label id="lblEditTasaDiaria" for="txtEditTasaDiaria">Tasa Diaria</label>
+									<input type="number" class="form-control" id="txtEditTasaDiaria" placeholder="Tasa Diaria" />
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-6 col-sm-12">
+							</div>
+						</div>
+						<div class="row">
+							</br>
+						</div>
+						<div class="row">
+							<div class="col-lg-4 col-md-6 col-sm-12">
+								<div class="table-responsive">
+									<label id="lblEditCouta" for="txtEditCuota">Cuota</label>
+									<input type="number" class="form-control" id="txtEditCuota" placeholder="Cuota" />
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-6 col-sm-12">
+								<div class="table-responsive">
+									<label id="lblEditOriginacion2" for="txtEditOriginacion2">Originación 2</label>
+									<input type="number" class="form-control" id="txtEditOriginacion2" placeholder="Originación 2" />
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-6 col-sm-12">
+								<div class="table-responsive">
+									<label id="lblEditMontoCargoMora" for="txtEditMontoCargoMora">Monto x Cargo Mora</label>
+									<input type="number" class="form-control" id="txtEditMontoCargoMora" placeholder="Monto x Cargo Mora" />
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-6 col-sm-12">
+							</div>
+						</div>
+						<div class="row">
+							</br>
+						</div>
+						<div class="row">
+							<div class="col-lg-4 col-md-6 col-sm-12">
+								<div class="table-responsive">
+									<label id="lblEditDiasMora" for="txtEditDiasMora">Dias Para Mora</label>
+									<input type="number" class="form-control" id="txtEditDiasMora" placeholder="Dias Para Mora" />
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-6 col-sm-12">
+								<div class="table-responsive">
+									@*<label id="lblEditActivo" for="ddlEditActivo">Activo </label>*@
+									<input type="checkbox" id="ChkEditActivo" name="ChkEditActivo" checked> Activo<br>
+									@*<select id="ddlEditActivo" class="form-control control-editar-usuario">
+										<option value="">--Seleccionar--</option>
+										<option value="1">Activo</option>
+										<option value="0">Inactivo</option>
+									</select>*@
+								</div>
+							</div>
+						</div>
+
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" Id="btnEditUpdate" style="display:none;" onclick="ActualizarProducto();">Actualizar</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

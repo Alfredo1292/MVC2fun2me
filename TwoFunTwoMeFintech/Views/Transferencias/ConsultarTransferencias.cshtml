@@ -1,0 +1,125 @@
+﻿
+<link href="~/Styles/DataTable.css" rel="stylesheet" />
+<link href="~/Styles/DataTabledtr.css" rel="stylesheet" />
+
+<script src="~/Scripts/Proyecto/DataTables 1.10.15.js"></script>
+<script src="~/Scripts/Proyecto/DataTable Bootstrap.js"></script>
+
+<link href="~/Styles/Site.css" rel="stylesheet" />
+<script src="~/Scripts/Proyecto/Transferencia.js"></script>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+<fieldset>
+    @*<div class="row form-inline">
+
+
+            <div class="col-lg-6 col-md-6 col-sm-6  col-xs-12">
+                <div class="form-group ">
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-addon" id="inputGroup-sizing-sm">Fecha Inicio:</span>
+                        </div>
+
+                    </div>
+
+                    <input type="date" class="form-control" data-date="" data-date-format="YYYY MMMM DD" id="txtFechaInicio" required>
+                </div>
+                <div class="form-group ">
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-addon" id="inputGroup-sizing-sm">Fecha Fin:</span>
+                        </div>
+
+                    </div>
+                    <input type="date" class="form-control" data-date="" data-date-format="YYYY MMMM DD" id="txtFechaFin">
+                </div>
+
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" onclick="return buscarTransferencia();">Buscar</button>
+            </div>
+        </div>*@
+    <h4 class="titulo-tesoreria accordion-toggle alert alert-info">Tranferencias</h4>
+    <div class=" table table-responsive-sm">
+        <div class="row h-auto">
+            <table ID="TransTable" style="display:none" class="table table-responsive-sm table-bordered  table-hover">
+                <thead>
+                    <tr class="info">
+                        <th style="width:40%;">
+                            Nombre
+                        </th>
+                        @*<th style="width:5%;">
+                                Producto
+                            </th>*@
+                        <th style="width:10%;">
+                            Monto
+                        </th>
+                        <th style="width:15%;">
+                            Banco
+                        </th>
+                        <th style="width:5%;">
+                            Cuenta
+                        </th>
+                        <th style="width:15%;">
+                            Cuenta Sinpe
+                        </th>
+                        <th style="width:15%;">
+                            Fecha Solicitud
+                        </th>
+                        @*<th  style="width:5%;">
+                                Usuario
+                            </th>*@
+                    </tr>
+                </thead>
+                <tbody class="tbody transfer"></tbody>
+            </table>
+            <div class="form-group" id="divTransfer" style="display:none;margin-left: 15px;margin-bottom:0;">
+                <label id="lblTotal">Total:</label><label id="lblTotalTransferencia"></label>
+            </div>
+        </div>
+    </div>
+
+    <div class=" table table-responsive-sm">
+        <h4 class="titulo-tesoreria accordion-toggle alert alert-info">Total por Banco</h4>
+        <div class="row h-auto">
+            <table ID="TotBancoTable" class="table table-responsive-sm table-bordered  table-hover">
+                <thead>
+                    <tr class="info">
+                        <th style="width:40%;">
+                            Banco
+                        </th>
+
+                        <th style="width:40%;">
+                            Cantidad
+                        </th>
+
+                        <th style="width:10%;">
+                            Total
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="tbody totalBanco"></tbody>
+            </table>
+            <div class="form-group" id="divTransfer" style="display:inline;margin-left:15px;">
+                <label id="lblTotal">Total:</label><label id="lblTotalTransferencia"></label>
+            </div>
+        </div>
+    </div>
+</fieldset>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

@@ -837,7 +837,6 @@
 .alertify-notifier {
   position: fixed;
   width: 0;
-  overflow: visible;
   z-index: 1982;
   -webkit-transform: translate3d(0, 0, 0);
           transform: translate3d(0, 0, 0);

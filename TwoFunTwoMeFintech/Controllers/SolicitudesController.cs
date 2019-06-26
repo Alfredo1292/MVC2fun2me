@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web.Mvc;
@@ -19,6 +20,13 @@ namespace TwoFunTwoMeFintech.Controllers
         {
             return View();
         }
+        public ActionResult CargarResultadoScore(Score score)
+        {
+            ManagerUser mang = new ManagerUser();
+            var res = mang.ConsultaResultadoScore(score);
+
+            return Json(res);
+        }
 
         //
         // GET: /Solicitudes/Details/5
@@ -29,6 +37,7 @@ namespace TwoFunTwoMeFintech.Controllers
             solicitudes.ListSolicitudes = new System.Collections.Generic.List<Solicitudes>();
             solicitudes.ListProductos = new List<productos>();
             solicitudes.ListTipos = new List<Tipos>();
+            solicitudes.ListadoScore = new List<Score>();
             //solicitudes.ListSolicitudes.Add(solicitudes);
 
             //ManagerUser manage = new ManagerUser();
@@ -58,11 +67,16 @@ namespace TwoFunTwoMeFintech.Controllers
                     ManagerUser mang = new ManagerUser();
                     solicitudes.Id = id;
                     solicitudes.ListSolicitudes = mang.CargarSolicitudBuro(solicitudes);
-                    solicitudes.ListProductos = mang.CargarProductos();
+                    solicitudes.ListProductos = mang.CargarProductos(solicitudes);
                     solicitudes.ListTipos = mang.CargarTipos("5");
+                    var score = new Score
+                    {
+                        Identificacion = solicitudes.ListSolicitudes.FirstOrDefault().Identificacion
+                    };
+                    solicitudes.ListadoScore = mang.ConsultaResultadoScore(score);
                 }
             }
-            catch
+            catch (ArgumentException)
             {
                 solicitudes.Respuesta = "Ocurrio un Error";
             }

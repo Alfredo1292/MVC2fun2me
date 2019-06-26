@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Data;
 using System.Web.Mvc;
-using TwoFunTwoMeFintech.Models.DTO;
-using TwoFunTwoMeFintech.Models;
 using TwoFunTwoMe.Models.Manager;
+using TwoFunTwoMeFintech.Models;
+using TwoFunTwoMeFintech.Models.DTO;
 
 namespace TwoFunTwoMeFintech.Controllers
 {

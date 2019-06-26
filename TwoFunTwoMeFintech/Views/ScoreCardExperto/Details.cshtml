@@ -1,18 +1,17 @@
 ﻿@model TwoFunTwoMeFintech.Models.DTO.ScoreCardExperto
-<script src="~/Scripts/Proyecto/DataTables 1.10.15.js"></script>
-<link href="~/Styles/DataTable.css" rel="stylesheet" />
-<link href="~/Styles/DataTabledtr.css" rel="stylesheet" />
-<script src="~/Scripts/Proyecto/DataTable Bootstrap.js"></script>
+@{ 
+    Layout = null;
+}
 <script src="~/Scripts/Proyecto/ScoreCare.js"></script>
-<div class="container">
+<div>
 	<div class="form-group pull-right">
 		<input id="Buscar" type="text" class="search form-control" placeholder="Buscar">
 	</div>
 	<span class="counter pull-right"></span>
 
-	<table id="dtBasicExample" class="table table-hover table-bordered results" cellspacing="0">
+	<table id="dtBasicExample" class="container table table-bordered table-hover no-footer dataTable" cellspacing="0">
 		<thead>
-			<tr>
+			<tr class="info">
 				<th class="th-sm">
 					@Html.LabelFor(model => model.Id)
 					<i class="fa fa-sort float-right" aria-hidden="true"></i>
@@ -86,3 +85,13 @@
 	</div>
 
 </div>
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

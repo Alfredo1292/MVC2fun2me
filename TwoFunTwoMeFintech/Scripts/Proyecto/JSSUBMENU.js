@@ -1,7 +1,8 @@
 ﻿
 //Load Data in Table when documents is ready
 $(document).ready(function () {
-	loadData();
+    loadData();
+    $('body').css("background-image", "none");
 	//$('#example').dataTable();
 });
 
@@ -27,12 +28,11 @@ function loadData() {
 				html += '<td>' + item.descMAINMENUID + '</td>';
 				html += '<td>' + item.descROLEID + '</td>';
 				html += '<td>' + item.ACTION + '</td>';
-				html += '<td><a href="#" class="btn btn-primary" onclick="return getbyID(' + item.ID + ')"> Editar </a> | <a class="btn btn-primary"  href="#" onclick="Delele(' + item.ID + ')">Eliminar</a></td>';
+                html += '<td><a href="#" class="btn btn-primary btn-primary-editar" onclick="return getbyID(' + item.ID + ')"> Editar </a> | <a class="btn btn-primary btn-primary-eliminar"  href="#" onclick="Delele(' + item.ID + ')">Eliminar</a></td>';
 				html += '</tr>';
 			});
 
 			$('.tbody').html(html);
-			$.noConflict();
 			$('#SUBMENUTable').DataTable();
 
 		},

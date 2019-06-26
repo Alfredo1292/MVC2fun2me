@@ -1,19 +1,15 @@
 ﻿@*@model TwoFunTwoMeFintech.Models.DTO.clsSUBMENU*@
-
+@{ 
+    Layout = null;
+}
 <script src="~/Scripts/Proyecto/JSSUBMENU.js"></script>
-<link href="~/Styles/DataTable.css" rel="stylesheet" />
-<link href="~/Styles/DataTabledtr.css" rel="stylesheet" />
-
-<script src="~/Scripts/Proyecto/DataTables 1.10.15.js"></script>
-<script src="~/Scripts/Proyecto/DataTable Bootstrap.js"></script>
-
-<div class="container">
+<div>
 	<div class="form-group">
 
 	</div>
-	<table ID="SUBMENUTable" class="table table-bordered table-hover">
+	<table ID="SUBMENUTable" class="container table table-bordered table-hover no-footer dataTable">
 		<thead>
-			<tr>
+			<tr class="info">
 				<th>
 					ID
 				</th>
@@ -37,7 +33,7 @@
 				</th>
 			</tr>
 		</thead>
-		<tbody class="tbody"></tbody>
+		<tbody class="tbody" id="SUBMENUTableBody"></tbody>
 	</table>
 </div>
 <div class="modal fade" Id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -87,3 +83,13 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

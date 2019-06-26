@@ -2,6 +2,7 @@
 $(document).ready(function () {
     loadData();
     buscarGrid();
+    $('body').css("background-image", "none");
    // $("#dtBasicExample").DataTable();
 });
 
@@ -53,11 +54,10 @@ function loadData() {
                 html += '<td>' + item.RangoInicial + '</td>';
                 html += '<td>' + item.RangoFinal + '</td>';
                 html += '<td>' + item.Puntaje + '</td>';
-                html += '<td><a href="#" class="btn btn-primary" onclick="return Editar(' + item.Id + ')"> Editar </a> | <a class="btn btn-primary"  href="#" onclick="Delele(' + item.Id + ')">Eliminar</a></td>';
+                html += '<td><a href="#" class="btn btn-primary btn-primary-editar" onclick="return Editar(' + item.Id + ')"> Editar </a> | <a class="btn btn-primary btn-primary-eliminar"  href="#" onclick="Delele(' + item.Id + ')">Eliminar</a></td>';
                 html += '</tr>';
             });
 			$('.tbody').html(html);
-			$.noConflict();		
 	        $('#dtBasicExample').DataTable();
         },
         error: function (errormessage) {

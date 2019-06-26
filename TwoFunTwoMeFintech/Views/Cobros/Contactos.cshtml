@@ -1,31 +1,21 @@
-﻿@*@{
+﻿@{
     Layout = null;
-}*@
-
-<script src="~/Scripts/Proyecto/ColaCobros.js"></script>
-<link href="~/Styles/DataTable.css" rel="stylesheet" />
-<link href="~/Styles/DataTabledtr.css" rel="stylesheet" />
-
-<script src="~/Scripts/Proyecto/DataTables 1.10.15.js"></script>
-<script src="~/Scripts/Proyecto/DataTable Bootstrap.js"></script>
-
-<link href="~/Styles/Site.css" rel="stylesheet" />
-
+}
 <div class="table">
     <div class="form-group">
-
+		<button type="button" class="btn btn-primary" Id="btnUpdate" onclick="MostrarModalNuevoTelefono();">Nuevo</button>
     </div>
-    <table ID="ContacTable" class="table table-bordered  table-hover">
+    <table ID="ContacTable" class="container table table-bordered table-hover no-footer dataTable">
         <thead>
             <tr class="info">
+                <th>
+                   Tipo
+                </th>
                 <th>
                     Fuente
                 </th>
                 <th>
-                    Tipo
-                </th>
-                <th>
-                    Relación
+                    Descripción
                 </th>
                 <th>
                     Teléfono
@@ -33,8 +23,111 @@
                 <th>
                     Fecha
                 </th>
+                <th>Calificación</th>
+                <th>
+                    Acción
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
             </tr>
         </thead>
         <tbody class="tbody contact"></tbody>
     </table>
 </div>
+<div class="modal fade" Id="myModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			@*<button type="button" class="close" data-dissmiss="modal"><span aria-hidden="true">×</span></button>*@
+			<button type="button" class="close" data-dismiss="modal">×</button>
+		</div>
+		<div class="modal-body">
+			<form>
+				<div class="form-group" style="display:none;" >
+					<label for="EditId">Id</label>
+					<input type="text" class="form-control" id="EditId" placeholder="IdTelefono" disabled="disabled" />
+				</div>
+				<div class="table-responsive">
+					<label for="lblEditPredeterminado">Tipo</label>
+					<select id="ddlEditPredeterminado" class="form-control control-editar-usuario">
+					</select>
+				</div>
+				@*<div class="form-group">
+					<label for="EditFuenteDatos">Fuente de Datos</label>
+					<input type="text" class="form-control" id="EditFuenteDatos" placeholder="Fuente de Datos" />
+				</div>*@
+				@*<div class="form-group">
+					<label for="EditTipo">Tipo</label>
+					<input type="text" class="form-control" id="EditTipo" placeholder="Tipo" />
+				</div>*@
+				<div class="form-group">
+					<label for="EditRelacion">Relación</label>
+					<input type="text" class="form-control" id="EditRelacion" placeholder="Relación" />
+				</div>
+				<div class="form-group">
+					<label for="EditTelefono">Teléfono</label>
+					<input type="number" class="form-control" id="EditTelefono" max="99999999999" placeholder="Teléfono" />
+				</div>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-primary" Id="btnEditUpdate" style="display:none;" onclick="ActualizarTelefono();">Actualizar</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+		</div>
+	</div>
+</div>
+</div>
+<div class="modal fade" Id="myModalNuevo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				@*<button type="button" class="close" data-dissmiss="modal"><span aria-hidden="true">×</span></button>*@
+				<button type="button" class="close" data-dismiss="modal">×</button>
+			</div>
+			<div class="modal-body">
+				<form>		
+					<div class="table-responsive">
+						<label for="lblNuevoPredeterminado">Predeterminado</label>
+						<select id="ddlNuevoPredeterminado" class="form-control control-editar-usuario">
+						</select>
+					</div>
+					@*<div class="form-group">
+						<label for="NuevoFuenteDatos">Fuente Datos</label>
+						<input type="text" class="form-control" id="NuevoFuenteDatos" placeholder="Fuente de Datos" />
+					</div>*@
+					<div class="form-group">
+						<label for="ddlNuevoTipoTEL">Tipo</label>
+						<select id="ddlNuevoTipoTEL" class="form-control control-editar-usuario">
+							<option value="">--Seleccionar--</option>
+							<option value="Celular">Celular</option>
+							<option value="Casa">Casa</option>
+							<option value="Trabajo">Trabajo</option>
+							<option value="Otro">Otro</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="NuevoRelacion">Relación</label>
+						<input type="text" class="form-control" id="NuevoRelacion" placeholder="Relación" />
+					</div>
+					<div class="form-group">
+						<label for="NuevoTelefono">Numero de Teléfono</label>
+						<input type="number" class="form-control" id="NuevoTelefono" maxlength="11" placeholder="Teléfono" />
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" Id="btnCrear" style="display:none;" onclick="CrearTelefonoNuevo();">Crear</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

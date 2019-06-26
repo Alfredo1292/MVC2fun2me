@@ -1,21 +1,11 @@
-﻿@model TwoFunTwoMeFintech.Models.DTO.BucketCobros
+﻿@*@model TwoFunTwoMeFintech.Models.DTO.BucketCobros*@
 
-@*@{
+@{
     Layout = null;
-}*@
-
-<script src="~/Scripts/Proyecto/ColaCobros.js"></script>
-<link href="~/Styles/DataTable.css" rel="stylesheet" />
-<link href="~/Styles/DataTabledtr.css" rel="stylesheet" />
-
-<script src="~/Scripts/Proyecto/DataTables 1.10.15.js"></script>
-<script src="~/Scripts/Proyecto/DataTable Bootstrap.js"></script>
-
-<link href="~/Styles/Site.css" rel="stylesheet" />
-
+}
 <div class="table">
  
-    <table ID="PromPagTable" class="table table-bordered">
+    <table ID="PromPagTable" class="container table table-bordered table-hover no-footer dataTable">
         <thead>
             <tr class="info">
                 <th>
@@ -39,8 +29,25 @@
                 <th>
                     Respuesta Gestion
                 </th>
+                <th>
+                    Usuario
+                </th>
+                <th>
+                    Estado
+                </th>
             </tr>
         </thead>
         <tbody class="tbody HistoPag"></tbody>
     </table>
 </div>
+<script src="~/Scripts/Proyecto/ColaCobros.js"></script>
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

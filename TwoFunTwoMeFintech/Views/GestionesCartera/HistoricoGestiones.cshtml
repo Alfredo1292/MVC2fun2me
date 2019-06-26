@@ -1,0 +1,46 @@
+﻿@{
+        Layout = null;
+    }
+<div class="table">
+    <div class="form-group">
+
+    </div>
+    <table ID="HistoTable" class="container table table-bordered table-hover no-footer dataTable">
+        <thead>
+            <tr class="info">
+                <th>
+                    Crédito
+                </th>
+                <th>
+                    Gestión
+                </th>
+                <th>
+                    Fecha Ingreso
+                </th>
+                <th>
+                    Usuario Ingreso
+                </th>
+                <th>
+                    Fecha Aprobación
+                </th>
+                <th>
+                    Usuario Aprobación
+                </th>
+                <th>
+                    Estado
+                </th>
+            </tr>
+        </thead>
+        <tbody class="tbody Histo"></tbody>
+    </table>
+</div>
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

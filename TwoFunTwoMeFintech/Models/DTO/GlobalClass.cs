@@ -13,8 +13,9 @@ namespace TwoFunTwoMe.Models.Utility
         public static ConcurrentDictionary<string, string> connectionString = new ConcurrentDictionary<string, string>();
         public static string connectionStringGlobal { set; get; }
         public static ConcurrentDictionary<string, string> blazeUri = new ConcurrentDictionary<string, string>();
-        //public static string blazeUri { set; get; }
         public static string STR_PAIS { get; set; }
+        public static string Aplicativo = ConfigurationManager.AppSettings["IdApps"].ToString();
+        public static string Origen_Apps { get; set; }
     }
 
     public class InfoClass

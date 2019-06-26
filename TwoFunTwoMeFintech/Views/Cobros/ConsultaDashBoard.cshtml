@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "ConsultaDashBoard";
+}
+
+<script src="~/Scripts/Proyecto/ConsultaDashBoard.js"></script>
+<link href="~/Styles/DataTable.css" rel="stylesheet" />
+<link href="~/Styles/DataTabledtr.css" rel="stylesheet" />
+
+<script src="~/Scripts/Proyecto/DataTables 1.10.15.js"></script>
+<script src="~/Scripts/Proyecto/DataTable Bootstrap.js"></script>
+
+<link href="~/Styles/Site.css" rel="stylesheet" />
+
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#Cantidad">Cantidad por Agente</a></li>
+    <li><a data-toggle="tab" href="#Detallado">Detallado</a></li>
+
+</ul>
+
+<div class="tab-content">
+    <div id="Cantidad" class="tab-pane fade in active">
+        <div class="table">
+            <div class="form-inline" style="display:none">
+                <div class="form-group mb-2">
+                    <div class="form-group-sm">
+                        <div class="input-group">
+                            <label class="input-group-addon" for="Fecha Asignación">Fecha Asignación:</label>
+                            <input type="date" class="form-control" id="txtFechaBusqueda" />
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mb-2" onclick="ConsultarDashBoard();">Buscar</button>
+            </div>
+            <table ID="DashBoardTable" class="table table-bordered  table-hover">
+                <thead>
+                    <tr class="info">
+                        <th>
+                            Agente
+                        </th>
+                        <th>
+                            Nombre
+                        </th>
+                        <th>
+                            Cantidad
+                        </th>
+                        <th>
+                            Ación
+                        </th>
+                        <th>
+                            Fecha Asignación
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="tbody DashBoard"></tbody>
+            </table>
+        </div>
+    </div>
+    <div id="Detallado" class="tab-pane fade">
+        <table ID="DashBoardDetalladoTable" class="container table table-bordered table-hover no-footer dataTable">
+            <thead>
+                <tr class="info">
+                    <th>
+                        Orden
+                    </th>
+                    <th>
+                        Credito
+                    </th>
+                    <th>
+                        Identificación
+                    </th>
+                    <th>
+                        Dias Mora
+                    </th>
+                    <th>
+                        Total Mora
+                    </th>
+                    <th>
+                        Acción
+                    </th>
+                    <th>
+                        Fecha ultimo pago
+                    </th>
+                    <th>
+                        Fecha ultimo gestión
+                    </th>
+                    <th>
+                        Usuario
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="tbody DashBoardDetalaldo"></tbody>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

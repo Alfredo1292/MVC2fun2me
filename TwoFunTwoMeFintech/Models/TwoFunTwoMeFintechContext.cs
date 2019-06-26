@@ -28,7 +28,6 @@ namespace TwoFunTwoMeFintech.Models
 
         public DbSet<Solicitudes> Solicitudes { get; set; }
 
-        object temporaryVariable;
         public DbSet<ScoreCardExperto> ScoreCardExpertoes { get; set; }
 
         public DbSet<Roles> Roles { get; set; }
@@ -38,5 +37,12 @@ namespace TwoFunTwoMeFintech.Models
 		public DbSet<Rules> Rules { get; set; }
 
 		public DbSet<clsSUBMENU> clsSUBMENUs { get; set; }
+
+		public DbSet<clsMAINMENU> clsMAINMENUs { get; set; }
+
+		public DbSet<AgenteMenu> AgenteMenus { get; set; }
+
+		public DbSet<GestionGeneral> GestionGenerals { get; set; }
+
 	}
 }

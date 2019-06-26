@@ -1,0 +1,700 @@
+﻿@model TwoFunTwoMeFintech.Models.DTO.DTO_SOLICITUD_VENTAS
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+<fieldset>
+    <h4 class="titulo-tesoreria accordion-toggle alert alert-info"><strong>Revision Documentos</strong></h4>
+
+    <script src="~/Scripts/Proyecto/SolicitudesVentas.js"></script>
+    <script src="~/Scripts/jquery-2.0.3.min.js"></script>
+    <script src="~/Scripts/Proyecto/download.js"></script>
+    <form>
+        <div>
+            <div class="row">
+                <div class="input-group col-xs-5">
+
+                    <span class="input-group-addon">Solicitud</span>
+                    <input type="text" class="form-control" id="SolicitudBuscar" aria-describedby="emailHelp" placeholder="Digite">
+                    <a style="margin-left: 20px;" class="btn-primary-editar btn btn-primary" href="#" onclick="retornarUrl(0);">Buscar</a>
+
+                    @*@if (@Model.ListTipos != null)
+                        {
+                            <select id="ddlEstados" class="form-control" style="margin-top: 2px;">
+
+                                @foreach (var itemTipo in @Model.ListTipos)
+                                {
+                                    if ((itemTipo.ID_ESTADO.ToString() == "38") ||
+                                    (itemTipo.ID_ESTADO.ToString() == "39") ||
+                                    (itemTipo.ID_ESTADO.ToString() == "55"))
+                                    {
+                                        <option value="@itemTipo.ID_ESTADO" selected>@itemTipo.Descripcion</option>
+                                    }
+                                }
+
+                            </select>
+                        }
+
+                        @if ((Model.Solicitud != null) && (Model.ListSolicitud != null))
+                        {
+                            if (!String.IsNullOrEmpty(@Model.Solicitud.ToString()))
+                            {
+                                <input style="margin-left: 20px; margin-top: 5px;" class="btn-primary-editar btn btn-primary" id="btnAplicar" type="button" value="Aplicar" onclick="ActualizarSolicitud(@Model.Solicitud,$('#ddlEstados option:selected').val());" />
+
+                            }
+                        }*@
+                </div>
+                <br />
+                <table class="container">
+                    <thead>
+                        <tr class="info">
+                            <th><button id="btniniciarcola" display="none" type="button" class="btn btn-primary" onclick="TraeEncabezado()"><span class="glyphicon glyphicon-play-circle"></span> Iniciar</button></th>
+                            <th><button id="btnsol" display="none" type="button" class="btn btn-primary" onclick="mostrarsolicitudes()">Lista Solicitudes</button></th>
+                            <th><button id="btnpend" type="button" class="btn btn-warning" onclick="ActualizarSolicitud(@Model.Solicitud, 39)">Pendiente Documentos</button>  <button id="btnrechaz" type="button" class="btn btn-danger" onclick="ActualizarSolicitud(@Model.Solicitud, 55)">Rechazado</button></th>
+                            <th><button id="btnaprob" display="none" type="button" class="btn btn-success right" onclick="ActualizarSolicitud(@Model.Solicitud, 38)">Aprobado</button></th>
+                        </tr>
+                    </thead>
+                </table>
+                <span id="spnMensaje" class="badge badge-primary"></span>
+                <span id="spnMensajeError" class="badge badge-danger"></span>
+                <br />
+                <div class="w3-container w3-teal">
+                        <div class="table-responsive">
+                            <div id="Documentos">
+                                <h4 class="titulo-tesoreria accordion-toggle alert alert-info">Documentos</h4>
+                                <br />
+                                <table id="tblEncabezado" class="table table-bordered table-hover no-footer dataTable">
+                                    <thead>
+                                        <tr class="info">
+                                            <th>@Html.LabelFor(model => model.Solicitud)</th>
+                                            <th>@Html.LabelFor(model => model.Identificacion)</th>
+                                            <th>@Html.LabelFor(model => model.Nombre)</th>
+                                            <th>Estado Solicitud</th>
+                                            <th>PorcentMatched</th>
+                                            <th>UnMatchedFace</th>
+                                            <th>Usuario</th>
+                                            <th>MontoAprobado</th>
+                                            <th>MontoProducto</th>
+                                            <th>Accion</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if ((Model.Solicitud != null) && (Model.ListSolicitud != null))
+                                        {
+                                            if (!String.IsNullOrEmpty(Model.ListSolicitud.FirstOrDefault().UrlFotoCedula.ToString()))
+                                            {
+                                                foreach (var item in @Model.ListSolicitud)
+                                                {
+
+                                                    <tr>
+                                                        <td>@item.Solicitud</td>
+                                                        <td>@item.Identificacion</td>
+                                                        <td>@item.Nombre</td>
+                                                        <td>@item.EstadoDeProcesoSol</td>
+                                                        <td>@item.PorcentMatched</td>
+                                                        <td>@item.UnMatchedFace</td>
+                                                        <td>@item.Usuario</td>
+                                                        <td>@item.MontoMaximo</td>
+                                                        <td>@item.MontoProducto</td>
+                                                        <th><button type="button" class="btn btn-primary" onclick="versolicitud(@item.Solicitud)">Verificar</button></th>
+                                                    </tr>
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                                <table id="tblBuscar" class="table table-bordered table-hover no-footer dataTable">
+                                    <thead>
+                                        <tr class="info">
+                                            <th>Identificaci&oacuten frontal</th>
+                                            <th>Selfie</th>
+                                            <th>Identificaci&oacuten trasera</th>
+                                            <th>Firma</th>
+                                            <th>Pagar&eacute</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if ((Model.Solicitud != null) && (Model.ListSolicitud != null))
+                                        {
+                                            if (!String.IsNullOrEmpty(Model.ListSolicitud.FirstOrDefault().UrlFotoCedula.ToString()))
+                                            {
+                                                foreach (var item in @Model.ListSolicitud)
+                                                {
+                                                    if (@item.mostrarimagenes == 1)
+                                                    {
+                                                        <tr>
+                                                            <td><img src="@Url.Content(item.UrlFotoCedula)" alt="Image" width="100px" height="100px" /><br /><a class="btn btn-success" href="@Url.Content(item.UrlFotoCedula)" target="_blank">Descargar</a></td>
+                                                            <td><img src="@Url.Content(item.UrlFotoSelfie)" alt="Image" width="100px" height="100px" /><br /><a class="btn btn-success" href="@Url.Content(item.UrlFotoSelfie)" target="_blank">Descargar</a></td>
+                                                            <td><img src="@Url.Content(item.UrlFotoCedulaTrasera)" alt="Image" width="100px" height="100px" /><br /><a class="btn btn-success" href="@Url.Content(item.UrlFotoCedulaTrasera)" target="_blank">Descargar</a></td>
+                                                            <td><img src="@Url.Content(item.UrlFotoFirma)" alt="Image" width="50px" height="50px" /><br /><a class="btn btn-success" href="@Url.Content(item.UrlFotoFirma)" target="_blank">Descargar</a></td>
+                                                            <td><a href="@Url.Content(item.UrlDirectorioPagare) " class="btn btn-success" target="_blank">Descargar</a></td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                                <br />
+                            </div>
+
+                            @*@if (Model.MuestraPasosCredito == "true")
+                                {*@
+                            <div id="Pasos_Credito" style="display:block;">
+                                <div id="Paso1">
+                                    <div class="titulo-tabla alert alert-info">
+                                        <strong>Paso 1</strong>
+                                    </div>
+
+                                    <table id="tblPaso1" class="container table table-bordered table-hover no-footer dataTable">
+                                        <thead>
+                                            <tr class="info">
+                                                <th>Identificaci&oacuten</th>
+                                                <th>Telefono</th>
+                                                <th>Correo</th>
+                                                <th>Producto</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if ((Model.Solicitud != null) && (Model._PasosCredito != null))
+                                            {
+                                                //if (!String.IsNullOrEmpty(Model.ListSolicitud.FirstOrDefault().UrlFotoCedula.ToString()))
+                                                //{
+                                                foreach (var item in @Model._PasosCredito)
+                                                {
+                                                    <tr>
+                                                        <td>@item.Identificacion</td>
+                                                        <td>@item.Telefono_celuar</td>
+                                                        <td>@item.Correo</td>
+                                                        <td>@item.idProducto</td>
+                                                    </tr>
+                                                }
+                                                //}
+                                            }
+                                        </tbody>
+                                    </table>
+                                    <br />
+                                </div>
+
+                                <div id="Paso2">
+                                    <div class="alert alert-info titulo-tabla">
+                                        <strong>Paso 2</strong>
+                                    </div>
+
+                                    <table id="tblPaso2" class="container table table-bordered table-hover no-footer dataTable">
+                                        <thead>
+                                            <tr class="info">
+                                                <th>Pin</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if ((Model.Solicitud != null) && (Model._PasosCredito != null))
+                                            {
+                                                //if (!String.IsNullOrEmpty(Model.ListSolicitud.FirstOrDefault().UrlFotoCedula.ToString()))
+                                                //{
+                                                foreach (var item in @Model._PasosCredito)
+                                                {
+                                                    <tr>
+                                                        <td>@item.pin</td>
+                                                    </tr>
+                                                }
+                                                //}
+                                            }
+                                        </tbody>
+                                    </table>
+
+                                    <br />
+                                </div>
+
+                                <div id="Paso3">
+                                    <div class="alert alert-info titulo-tabla">
+                                        <strong>Paso 3</strong>
+                                    </div>
+                                    <table id="tblPaso3" class="container table table-bordered table-hover no-footer dataTable">
+                                        <thead>
+                                            <tr class="info">
+                                                <th>Video</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if ((Model.Solicitud != null) && (Model._PasosCredito != null))
+                                            {
+                                                //if (!String.IsNullOrEmpty(Model.ListSolicitud.FirstOrDefault().UrlFotoCedula.ToString()))
+                                                //{
+                                                foreach (var item in @Model._PasosCredito)
+                                                {
+                                                    <tr>
+                                                        <td>@item.Video</td>
+                                                    </tr>
+                                                }
+                                                //}
+                                            }
+                                        </tbody>
+                                    </table>
+                                    <br />
+                                </div>
+
+                                <div id="Paso4">
+                                    <div class="alert alert-info titulo-tabla">
+                                        <strong>Paso 4</strong>
+                                    </div>
+                                    <table id="tblPaso4" class="container table table-bordered table-hover no-footer dataTable">
+                                        <thead>
+                                            <tr class="info">
+                                                <th>Credito Aprobado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if ((Model.Solicitud != null) && (Model._PasosCredito != null))
+                                            {
+                                                //if (!String.IsNullOrEmpty(Model.ListSolicitud.FirstOrDefault().UrlFotoCedula.ToString()))
+                                                //{
+                                                foreach (var item in @Model._PasosCredito)
+                                                {
+                                                    <tr>
+                                                        <td>@item.Credito_Aprobado</td>
+                                                    </tr>
+                                                }
+                                                //}
+                                            }
+                                        </tbody>
+                                    </table>
+
+                                    <br />
+                                </div>
+
+                                <div id="Paso5">
+                                    <div class="alert alert-info titulo-tabla">
+                                        <strong>Paso 5</strong>
+                                    </div>
+                                    <table id="tblPaso5" class="container table table-bordered table-hover no-footer dataTable">
+                                        <thead>
+                                            <tr class="info">
+                                                <th>Foto Identificacion</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if ((Model.Solicitud != null) && (Model._PasosCredito != null))
+                                            {
+                                                //if (!String.IsNullOrEmpty(Model.ListSolicitud.FirstOrDefault().UrlFotoCedula.ToString()))
+                                                //{
+                                                foreach (var item in @Model._PasosCredito)
+                                                {
+                                                    <tr>
+                                                        <td>@item.Foto_identificacion</td>
+                                                    </tr>
+                                                }
+                                                //}
+                                            }
+                                        </tbody>
+                                    </table>
+
+                                    <br />
+                                </div>
+
+                                <div id="Paso6">
+                                    <div class="alert alert-info titulo-tabla">
+                                        <strong>Paso 6</strong>
+                                    </div>
+                                    <table id="tblPaso6" class="container table table-bordered table-hover no-footer dataTable">
+                                        <thead>
+                                            <tr class="info">
+                                                <th>Foto Identificacion Trasera</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if ((Model.Solicitud != null) && (Model._PasosCredito != null))
+                                            {
+                                                //if (!String.IsNullOrEmpty(Model.ListSolicitud.FirstOrDefault().UrlFotoCedula.ToString()))
+                                                //{
+                                                foreach (var item in @Model._PasosCredito)
+                                                {
+                                                    <tr>
+                                                        <td>@item.Foto_identificacion_Trasera</td>
+                                                    </tr>
+                                                }
+                                                //}
+                                            }
+                                        </tbody>
+                                    </table>
+
+                                    <br />
+                                </div>
+
+                                <div id="Paso7">
+                                    <div class="alert alert-info titulo-tabla">
+                                        <strong>Paso 7</strong>
+                                    </div>
+                                    <table id="tblPaso7" class="container table table-bordered table-hover no-footer dataTable">
+                                        <thead>
+                                            <tr class="info">
+                                                <th>Selfie</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if ((Model.Solicitud != null) && (Model._PasosCredito != null))
+                                            {
+                                                //if (!String.IsNullOrEmpty(Model.ListSolicitud.FirstOrDefault().UrlFotoCedula.ToString()))
+                                                //{
+                                                foreach (var item in @Model._PasosCredito)
+                                                {
+                                                    <tr>
+                                                        <td>@item.Selfie_identificacion</td>
+                                                    </tr>
+                                                }
+                                                //}
+                                            }
+                                        </tbody>
+                                    </table>
+
+                                    <br />
+                                </div>
+
+                                <div id="Paso8">
+                                    <div class="alert alert-info titulo-tabla">
+                                        <strong>Paso 8</strong>
+                                    </div>
+                                    <table id="tblPaso8" class="container table table-bordered table-hover no-footer dataTable">
+                                        <thead>
+                                            <tr class="info">
+                                                <th>Cuenta Cliente</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if ((Model.Solicitud != null) && (Model._PasosCredito != null))
+                                            {
+                                                //if (!String.IsNullOrEmpty(Model.ListSolicitud.FirstOrDefault().UrlFotoCedula.ToString()))
+                                                //{
+                                                foreach (var item in @Model._PasosCredito)
+                                                {
+                                                    <tr>
+                                                        <td>@item.Cuenta_cliente</td>
+                                                    </tr>
+                                                }
+                                                //}
+                                            }
+                                        </tbody>
+                                    </table>
+
+                                    <br />
+                                </div>
+
+                                <div id="Paso9">
+                                    <div class="alert alert-info titulo-tabla">
+                                        <strong>Paso 9</strong>
+                                    </div>
+                                    <table id="tblPaso9" class="container table table-bordered table-hover no-footer dataTable">
+                                        <thead>
+                                            <tr class="info">
+                                                <th>Consulta Pagare</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if ((Model.Solicitud != null) && (Model._PasosCredito != null))
+                                            {
+                                                //if (!String.IsNullOrEmpty(Model.ListSolicitud.FirstOrDefault().UrlFotoCedula.ToString()))
+                                                //{
+                                                foreach (var item in @Model._PasosCredito)
+                                                {
+                                                    <tr>
+                                                        <td>@item.ConsultaDatosContratoPagare</td>
+                                                    </tr>
+                                                }
+                                                //}
+                                            }
+                                        </tbody>
+                                    </table>
+
+                                    <br />
+                                </div>
+
+                                <div id="Paso10" style="display:block;">
+                                    <div class="alert alert-info titulo-tabla">
+                                        <strong>Paso 10</strong>
+                                    </div>
+                                    <table id="tblPaso10" class="container table table-bordered table-hover no-footer dataTable">
+                                        <thead>
+                                            <tr class="info">
+                                                <th>Firma</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if ((Model.Solicitud != null) && (Model._PasosCredito != null))
+                                            {
+                                                //if (!String.IsNullOrEmpty(Model.ListSolicitud.FirstOrDefault().UrlFotoCedula.ToString()))
+                                                //{
+                                                foreach (var item in @Model._PasosCredito)
+                                                {
+                                                    <tr>
+                                                        <td>@item.Firma</td>
+                                                    </tr>
+                                                }
+                                                //}
+                                            }
+                                        </tbody>
+                                    </table>
+
+                                    <br />
+                                </div>
+
+                                <div id="Paso11" style="display:block;">
+                                    <div class="alert alert-info titulo-tabla">
+                                        <strong>Paso 11</strong>
+                                    </div>
+                                    <table id="tblPaso11" class="container table table-bordered table-hover no-footer dataTable">
+                                        <thead>
+                                            <tr class="info">
+                                                <th>Genera Pagare</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if ((Model.Solicitud != null) && (Model._PasosCredito != null))
+                                            {
+                                                //if (!String.IsNullOrEmpty(Model.ListSolicitud.FirstOrDefault().UrlFotoCedula.ToString()))
+                                                //{
+                                                foreach (var item in @Model._PasosCredito)
+                                                {
+                                                    <tr>
+                                                        <td>@item.GeneraContratoPagare</td>
+                                                    </tr>
+                                                }
+                                                //}
+                                            }
+                                        </tbody>
+                                    </table>
+
+                                    <br />
+                                </div>
+
+                                <div id="Paso12" style="display:block;">
+                                    <div class="alert alert-info titulo-tabla">
+                                        <strong>PASO 12</strong>
+                                    </div>
+                                    <table id="tblPaso12" class="container table table-bordered table-hover no-footer dataTable">
+                                        <thead>
+                                            <tr class="info">
+                                                <th>Empresa</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if ((Model.Solicitud != null) && (Model._PasosCredito != null))
+                                            {
+                                                //if (!String.IsNullOrEmpty(Model.ListSolicitud.FirstOrDefault().UrlFotoCedula.ToString()))
+                                                //{
+                                                foreach (var item in @Model._PasosCredito)
+                                                {
+                                                    <tr>
+                                                        <td>@item.Empresa</td>
+                                                    </tr>
+                                                }
+                                                //}
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            @*//}*@
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+</fieldset>
+}
+
+
+<script type="text/javascript">
+
+    var baseUrl = '@Url.Content("~/")';
+
+
+
+
+    function TraeEncabezado(id) {
+
+        alertify.confirm("¿Desea Iniciar la Cola?.",
+            function () {
+
+
+
+                var empObj = {
+                    IdCredito: id
+                };
+
+                $.ajax({
+                    processing: true, // for show progress bar
+                    // progress=mostrarBloqueo(),
+                    serverSide: true, // for process server side
+                    filter: true, // this is for disable filter (search box)
+                    orderMulti: false, // for disable multiple column at once
+                    url: "/SolicitudesVentas/Encabezado",
+                    async: true,
+                    type: "POST",
+                    data: JSON.stringify(empObj),
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    success: function (result) {
+                        //mostrarBloqueo();
+                        retornarUrl(result["0"].Solicitud);
+                    },
+                    error: function (errormessage) {
+                        alertify.error(errormessage.responseText);
+                    },
+                    //complete: function () {
+
+                    //    ocultarBloqueo();
+
+                    //}
+                });
+
+
+
+            });
+
+        
+    }
+
+    function mostrarsolicitudes() {
+    
+            window.location.href = "/SolicitudesVentas/BuscarDocumentos?id=" + 0 + " &tipo=" + 2;
+
+            return false;
+
+    }
+    function versolicitud(solicitud) {
+
+        window.location.href = "/SolicitudesVentas/BuscarDocumentos?id=" + solicitud + " &tipo=" + 1;
+
+        return false;
+
+    }
+
+
+        function retornarUrl(id) {
+
+        if (document.getElementById("SolicitudBuscar").value == "") {
+
+            window.location.href = "/SolicitudesVentas/BuscarDocumentos?id=" + id + " &tipo=" +  0;
+
+			return false;
+		}
+        else {
+
+            window.location.href = "/SolicitudesVentas/BuscarDocumentos?id=" + document.getElementById("SolicitudBuscar").value + " &tipo=" + 1;
+
+			return false;
+            }
+
+
+
+    }
+
+    $(document).ready(function () {
+
+        $('#tblEncabezado').dataTable({
+            "paging": true,
+            "ordering": false,
+            "info": true,
+            "searching": true
+        });
+        $('#tblBuscar').dataTable({
+            "paging": false,
+            "ordering": false,
+            "info": false,
+            "searching": false
+        });
+        $('#tblPaso1').dataTable({
+            "paging": false,
+            "ordering": false,
+            "info": false,
+            "searching": false
+        });
+        $('#tblPaso2').dataTable({
+            "paging": false,
+            "ordering": false,
+            "info": false,
+            "searching": false
+        });
+        $('#tblPaso3').dataTable({
+            "paging": false,
+            "ordering": false,
+            "info": false,
+            "searching": false
+        });
+        $('#tblPaso4').dataTable({
+            "paging": false,
+            "ordering": false,
+            "info": false,
+            "searching": false
+        });
+        $('#tblPaso5').dataTable({
+            "paging": false,
+            "ordering": false,
+            "info": false,
+            "searching": false
+        });
+        $('#tblPaso6').dataTable({
+            "paging": false,
+            "ordering": false,
+            "info": false,
+            "searching": false
+        });
+        $('#tblPaso7').dataTable({
+            "paging": false,
+            "ordering": false,
+            "info": false,
+            "searching": false
+        });
+        $('#tblPaso8').dataTable({
+            "paging": false,
+            "ordering": false,
+            "info": false,
+            "searching": false
+        });
+        $('#tblPaso9').dataTable({
+            "paging": false,
+            "ordering": false,
+            "info": false,
+            "searching": false
+        });
+        $('#tblPaso10').dataTable({
+            "paging": false,
+            "ordering": false,
+            "info": false,
+            "searching": false
+        });
+        $('#tblPaso11').dataTable({
+            "paging": false,
+            "ordering": false,
+            "info": false,
+            "searching": false
+        });
+        $('#tblPaso12').dataTable({
+            "paging": false,
+            "ordering": false,
+            "info": false,
+            "searching": false
+        });
+    });
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

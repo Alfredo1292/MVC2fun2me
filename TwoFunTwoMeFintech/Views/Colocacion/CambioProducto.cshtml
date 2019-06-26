@@ -1,0 +1,137 @@
+﻿
+<div>
+    <h4 class="titulo-tesoreria alert alert-info"><strong>Cambio Producto</strong></h4>
+    <div class="row contenido-general">
+        <div class="col-lg-6">
+            <from lass="form-inline">
+                <label for="lblBuscar">Identificación:</label>
+                <input id="txtIdentificacion" type="text" name="msg">
+                <button type="button" class="btn btn-primary" Id="btnBuscar" onclick="return BuscarProductos();">Buscar</button>
+                <button type="button" class="btn btn-primary btn-primary-eliminar" Id="btnCerrar" onclick="cerrarTablaProductos();">Cerrar Tabla</button>
+            </from>
+        </div>
+        <div class="col-lg-6"></div>
+    </div>
+    <div id="contenido-tabla-producto" class="row contenido-general" style="display:none">
+        <div class="col-lg-12">
+            <table id="TableProducto" class="container table table-bordered table-hover dataTable">
+                <thead>
+                    <tr class="info">
+                        <th>
+                            Solicitud
+                        </th>
+                        <th>
+                            Crédito
+                        </th>
+                        <th>
+                            Monto crédito
+                        </th>
+                        <th>
+                            Plazo de pago
+                        </th>
+                        <th>
+                            Forma de pago
+                        </th>
+                        <th>
+                            Monto Máximo
+                        </th>
+                        <th>
+                            Producto
+                        </th>
+                        <th>
+                            Cuota
+                        </th>
+                        <th>
+                            Acciones
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="tbody" id="tblProducto"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalCambioProductoCredito" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal">x</button>
+            <div class="modal-header titulo-modal">
+                <p id="titulo-coment-repro" class="alert alert-success"><strong>Ingrese lo informacion del nuevo producto de la solicitud:</strong></p>
+            </div>
+            <div class="modal-body">
+                <div id="demo">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <form class="form-inline">
+                                <div class="btn-group btn-group-s" role="group"></div>
+                                <label id="lblIdSolicitud" for="lblIdSolicitud">Solicitud</label>
+                                <input id="txtIdSolicitud" class="form-control" readonly>
+                            </form>
+                        </div>
+                        <div class="col-lg-6">
+                            <form class="form-inline">
+                                <div class="btn-group btn-group-s" role="group"></div>
+                                <label id="lblIdCredito" for="lblIdCredito">Credito</label>
+                                <input id="txtIdCredito" class="form-control" readonly>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <form class="form-inline">
+                                <div class="btn-group btn-group-s" role="group"></div>
+                                <label id="lblMontoCredito" for="lblMontoCredito">Monto crédito</label>
+                                <input id="ddlMontoCredito" class="form-control" readonly>
+                            </form>
+                        </div>
+                        <div class="col-lg-6">
+                            <form class="form-inline">
+                                <div class="btn-group btn-group-s" role="group"></div>
+                                <label id="lblMontoMaximo">Monto maximo: </label>
+                                <input id="txtMontoMaximo" type="text" class="form-control input-sm" name="msg" readonly>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <form class="form-inline">
+                                <div class="btn-group btn-group-s" role="group"></div>
+                                <label id="lblPlazoPago" for="lblPlazoPago">Plazo a pagarlo</label>
+                                <select id="ddlPlazoPago" class="form-control" onchange="calcularProducto();"></select>
+                            </form>
+                        </div>
+                        <div class="col-lg-6">
+                            <form class="form-inline">
+                                <div class="btn-group btn-group-s" role="group"></div>
+                                <label id="lblProducto">Producto: </label>
+                                <input id="ddlProducto" type="text" class="form-control input-sm" name="msg" readonly>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <form class="form-inline">
+                                <div class="btn-group btn-group-s" role="group"></div>
+                                <label id="lblFrecuencia" for="lblFrecuencia">Forma de pago</label>
+                                <select id="ddlFrecuencia" class="form-control control-editar-usuario" onchange="calcularProducto();"></select>
+                            </form>
+                        </div>
+                        <div class="col-lg-6">
+                            <form class="form-inline">
+                                <div class="btn-group btn-group-s" role="group"></div>
+                                <label id="lblCuota">Cuota: </label>
+                                <input id="textCuota" type="text" class="form-control input-sm" name="msg" readonly>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" Id="btnUpdate" onclick="GuardarProductoSolicitud();">Actualizar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="return cerrarModal();">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/Proyecto/Colocacion/CambioProducto.js"></script>

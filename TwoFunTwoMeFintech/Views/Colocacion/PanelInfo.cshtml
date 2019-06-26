@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "PanelInfo";
+    Layout = null;
+}
+<div id="panel-rigth">
+    <div id="panel-acordion" class="panelPasosAgente mostrar">
+        <h4 id="titulo-panel" class="panel-acordion-toggle"><span class="glyphicon glyphicon-bell"></span><span id="btn-cerrar-pasos" class="glyphicon glyphicon-remove-sign"></span></h4>
+        <div class="panel-acordion-content default">
+            <table Id="tablePasosXAgentes" class="">
+                <thead>
+                    <tr class="info"></tr>
+                </thead>
+                <tbody class="tbody" id="tblPasosXAgentes"></tbody>
+            </table>
+            <div id="hideAll">
+                <p>Ocultar Completos</p>
+                <input id="ddHideAll" type="checkbox" name="hideAll" value="hide" />
+            </div>
+        </div>
+        <img src="~/Images/pasos-agente.png" />
+    </div>
+    <div id="panel-acordion-dashboard" class="panelDashboard ocultar-dashboard">
+        <h4 id="titulo-panel" class="panel-acordion-toggle-dashboard"><span class="glyphicon glyphicon-user"></span><span id="btn-cerrar-dash" class="hide glyphicon glyphicon-remove-sign"></span></h4>
+        <div id="panel-dashboard" class="row panel-acordion-content default" style="display: none;">
+            <div id="tablas-dashboard">
+            </div>
+
+            <div id="info-metas">
+                <table id="tableInfoMetas"></table>
+            </div>
+        </div>
+        <img class="hide" src="~/Images/info-agente.png" />
+    </div>
+    <div id="panel-acordion-guion" class="panelGuion ocultar-guion">
+        <h4 id="titulo-panel" class="panel-acordion-toggle-guion"><span class="glyphicon glyphicon-comment"></span><span id="btn-cerrar-guion" class="hide glyphicon glyphicon-remove-sign"></span></h4>
+        <div id="panel-guion" class="row panel-acordion-content default" style="display: none;">
+            <div id="texto-guion"></div>
+        </div>
+        <img class="hide" src="~/Images/dialogo-guion.png" />
+    </div>
+</div>

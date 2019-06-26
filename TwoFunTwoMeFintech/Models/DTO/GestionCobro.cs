@@ -10,5 +10,7 @@
         public string AccionLlamada { get; set; }
         public string RespuestaGestion { get; set; }
         public string UsrModifica { get; set; }
+        public string NotaPermanente { get; set; }
+        public string MensajeSalida { get; set; }
     }
 }

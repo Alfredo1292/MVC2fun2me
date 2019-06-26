@@ -1,19 +1,9 @@
-﻿@*@{
+﻿@{
     Layout = null;
-}*@
-
-<script src="~/Scripts/Proyecto/ColaCobros.js"></script>
-<link href="~/Styles/DataTable.css" rel="stylesheet" />
-<link href="~/Styles/DataTabledtr.css" rel="stylesheet" />
-
-<script src="~/Scripts/Proyecto/DataTables 1.10.15.js"></script>
-<script src="~/Scripts/Proyecto/DataTable Bootstrap.js"></script>
-
- 
-
+}
 <div class="table" >
 
-    <table ID="HistoPromPagoTable" class="table table-bordered">
+    <table ID="HistoPromPagoTable" class="container table table-bordered table-hover no-footer dataTable">
         <thead>
             <tr class="info">
                 <th >
@@ -36,3 +26,51 @@
         <tbody class="tbody HistoPromPago"></tbody>
     </table>
 </div>
+<div class="table">
+    <table ID="PlanPagoTable" class="container table table-bordered table-hover no-footer dataTable">
+        <thead>
+			<tr class="info">
+				<th>
+					Crédito
+				</th>
+				<th>
+					Cuota
+				</th>
+				<th>
+					Fecha Vencimiento
+				</th>
+				<th>
+					Monto Capital
+				</th>
+				<th>
+					Monto Interés
+				</th>
+				<th>
+					Monto Originación
+				</th>
+				<th>
+					Monto Intetrés Mora
+				</th>
+				<th>
+					Monto Cobrado
+				</th>
+				<th>
+					Monto x Mora
+				</th>
+			</tr>
+        </thead>
+        <tbody class="tbody planPagos"></tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/Proyecto/ColaCobros.js"></script>
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

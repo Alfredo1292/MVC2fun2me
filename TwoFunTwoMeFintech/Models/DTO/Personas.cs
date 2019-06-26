@@ -72,5 +72,21 @@ namespace TwoFunTwoMeFintech.Models.DTO
 
         public int? IdStatusOrden { get; set; }
         public string CapitalPendiente { get; set; }
+
+
+        //icortes nuevos datos para la persona
+
+        public int IdSolicitud { get; set; }
+        public int intIdProducto { get; set; }
+        public string UsoCredito { get; set; }
+        public string OrdenPatronal { get; set; }
+        public int IdTipRefFamiliar { get; set; }
+        public string NombreCompleto { get; set; }
+        public string TelefonoFamiliar { get; set; }
+        public string Empresa { get; set; }
+        public string TelefonoEmpresa { get; set; }
+        public string SupervisorDirecto { get; set; }
+        public string NombreCompletoPersonal { get; set; }
+        public string TelefonoPersonal { get; set; }
     }
 }

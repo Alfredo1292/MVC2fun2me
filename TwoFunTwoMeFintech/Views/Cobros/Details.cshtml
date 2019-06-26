@@ -1,10 +1,7 @@
-﻿@model TwoFunTwoMeFintech.Models.DTO.BucketCobros
-
+﻿@*@model TwoFunTwoMeFintech.Models.DTO.BucketCobros*@
 @{
-    ViewBag.Title = "Details";
+    Layout = null;
 }
-<script src="~/Scripts/Proyecto/ColaCobros.js"></script>
-
 <div class="well mx-auto w-50 p-3 leftspan">
     <div class="container-fluid">
         <div class="input-group">
@@ -23,9 +20,24 @@
         </div>
         <div class="input-group">
             <span class="input-group-addon m-sm">Detalle:</span>
-            <textarea class="form-control" rows="8" cols="100" id="txtDetalle" required></textarea>
+            <textarea class="form-control" rows="8" cols="100" id="txtDetalle" maxlength="500"  required style="margin: 0px; width: 880px; height: 128px;"></textarea>
         </div>
     </div>
 
     <button type="button" id="btnGuardar" onclick="return guardar();" class="btn btn-primary">Guardar</button>
+    @*//INICIO FCAMACHO 22/05/2019 GENERACION DE DOCUMENTO DE NOTIFICACION DE COBRO*@
+    <div style="text-align:right">
+        <button type="button" id="btnImprimirNotifCobro" onclick="return imprimirNotifCobro();" class="btn btn-primary">Notif. Cobro</button>
+    </div>
+    @*//FIN FCAMACHO 22/05/2019 GENERACION DE DOCUMENTO DE NOTIFICACION DE COBRO*@
 </div>
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

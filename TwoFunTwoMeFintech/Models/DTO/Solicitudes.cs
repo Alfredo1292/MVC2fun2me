@@ -8,7 +8,7 @@ namespace TwoFunTwoMeFintech.Models.DTO
     public class Solicitudes
     {
         [Key]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [DataMember]
         public List<Solicitudes> ListSolicitudes { get; set; }
@@ -19,6 +19,7 @@ namespace TwoFunTwoMeFintech.Models.DTO
 
         public int? ID_ESTADO { get; set; }
 
+        public List<Score> ListadoScore { get; set; }
 
         public string Respuesta { get; set; }
 
@@ -27,7 +28,9 @@ namespace TwoFunTwoMeFintech.Models.DTO
 
         [Display(Name = "Producto")]
         public string NombreProducto { get; set; }
+        public decimal Cuota { get; set; }
 
+        public string Cliente { get; set; }
 
         [Display(Name = "Fecha Ingreso")]
         public DateTime? FechaIngreso { get; set; }
@@ -41,6 +44,8 @@ namespace TwoFunTwoMeFintech.Models.DTO
         public string MensajeError { get; set; }
 
         public int? IdPersona { get; set; }
+
+        public int? ROLID { get; set; }
 
         public int? Status { get; set; }
 
@@ -86,6 +91,8 @@ namespace TwoFunTwoMeFintech.Models.DTO
 
         public int? Score { get; set; }
 
+        public string ScoreGini { get; set; }
+
         [Display(Name = "Numero de Solicitud:"), Required]
         public int ID_SOLICITUD { get; set; }
 
@@ -110,6 +117,11 @@ namespace TwoFunTwoMeFintech.Models.DTO
 
         [Display(Name = "Estado CREDID")]
         public string ESTADO_CREDID { get; set; }
+
+        [Display(Name = "EQUIFAX")]
+        public string XML_EQUIFAX { get; set; }
+
+        public string FECHA_INGRESO_EQUIFAX { get; set; }
 
         public int? IdTipoIdentificacion { get; set; }
 
@@ -154,10 +166,55 @@ namespace TwoFunTwoMeFintech.Models.DTO
 
         public string DetalleDireccion { get; set; }
 
-       public bool forzamiento_solicitud { get; set; }
+        public bool forzamiento_solicitud { get; set; }
 
         public string USUARIO_MODIFICACION { get; set; }
-        
 
+        public decimal? Monto { get; set; }
+        public string UrlFoto { get; set; }
+
+        public string UrlFotoCedula { get; set; }
+
+        public string UrlFotoSelfie { get; set; }
+
+        public string UrlFotoFirma { get; set; }
+
+        public string UrlDirectorioPagare { get; set; }
+
+        public int IdSolicitud { get; set; }
+
+        public string UrlFotoCedulaTrasera { get; set; }
+
+        public float? UnMatchedFace { get; set; }
+
+        public string ImageRotationSource { get; set; }
+
+        public string ImageRotationTarget { get; set; }
+
+        public string MatchedFace { get; set; }
+
+        public float? PorcentMatched { get; set; }
+
+        public float? PorcentUnmatched { get; set; }
+
+        public float? PositionTop { get; set; }
+
+        public float? PositionLeft { get; set; }
+
+        public string ResultTextCed { get; set; }
+
+        public string DetectedText { get; set; }
+
+        public bool Result { get; set; }
+
+        public int? TipoFoto { get; set; }
+
+        public byte[] arrImageCedulaFrontal { get; set; }
+
+        public byte[] arrImageSelfie { get; set; }
+		public int? Dia { get; set; }
+		public int? Mes { get; set; }
+		public int? Anio { get; set; }
+		public bool VigenciaCed { get; set; }
     }
 }

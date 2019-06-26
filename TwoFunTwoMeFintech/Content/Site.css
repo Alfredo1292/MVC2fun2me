@@ -754,3 +754,7 @@ tr.pager td {
             margin: 0;
         }
 }
+
+.player {
+    margin: 50px 0;
+}

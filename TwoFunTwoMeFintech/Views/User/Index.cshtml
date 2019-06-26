@@ -1,13 +1,13 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-
+<h4 class="titulo-tesoreria accordion-toggle alert alert-info">Administración de Usuarios</h4>
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#fisrtTab">Usuarios</a></li>
     <li><a data-toggle="tab" href="#secondTab">Nuevo</a></li>
 </ul>
 <div class="tab-content">
-    <div id="fisrtTab" class="tab-pane fade in active" >
+    <div id="fisrtTab" class="tab-pane fade in active">
         @Html.Action("Details")
     </div>
     <div id="secondTab" class="tab-pane fade in">
@@ -16,3 +16,13 @@
 </div>
 <link href="~/Styles/Site.css" rel="stylesheet" />
 <script src="~/Scripts/Proyecto/dto_Login.js"></script>
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

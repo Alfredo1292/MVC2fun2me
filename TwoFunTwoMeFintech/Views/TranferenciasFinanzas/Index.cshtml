@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<h4 class="titulo-tesoreria accordion-toggle alert alert-info">Tranferencias realizadas</h4>
+<h4 id="mensajeAccion" class="titulo-tesoreria accordion-toggle alert" style="display:none"></h4>
+
+<div class="tranferencias-finanzas">
+    <div class="row">
+        <div class="col-lg-3 fechas-tranferencias">
+            <label id="lblFechaFinal">Fecha de Inicio</label>
+            <input id="txtFechaInicio" type="date" data-date="" data-date-format="YYYY MMMM DD" class="form-control input-sm" name="msg">
+        </div>
+        <div class="col-lg-3 fechas-tranferencias">
+            <label id="lblFechaFinal">Fecha del Final</label>
+            <input id="txtFechaFinal" type="date" data-date="" data-date-format="YYYY MMMM DD" class="form-control input-sm" name="msg">
+        </div>
+        <div class="col-lg-6 alinear-derecha">
+            <label id="reporte"></label>
+            <button type="button" onclick="getTransferenciasFinanzas()" id="btnGenerarReporte" class="btn btn-primary btn-primary-editar"><span class="glyphicon glyphicon-list-alt"></span>   Generar Reporte</button>
+            <label id="descarga"></label>
+            <button type="button" onclick="descargarReporteExcel()" id="btnDescargarReporte" class="btn btn-desabilitado "><span class="glyphicon glyphicon-download-alt"></span>   Descargar Reporte</button>
+        </div>
+    </div>
+    <table Id="tableTransferenciasFinanzas" class="container table table-bordered table-hover  dataTable">
+        <thead>
+            <tr class="info">
+                <th>
+                    Cedula
+                </th>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Producto
+                </th>
+                <th>
+                    Monto
+                </th>
+                <th>
+                    Banco
+                </th>
+                <th>
+                    Cuenta
+                </th>
+                <th>
+                    Sinpe
+                </th>
+                <th>
+                    Fecha
+                </th>
+            </tr>
+        </thead>
+        <tbody class="tbody" id="tblTransferenciasFinanzas"></tbody>
+    </table>
+</div>
+<script src="~/Scripts/Proyecto/TransferenciasFinanzas.js"></script>
+
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

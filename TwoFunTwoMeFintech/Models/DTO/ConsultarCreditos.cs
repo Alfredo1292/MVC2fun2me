@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace TwoFunTwoMeFintech.Models.DTO
+﻿namespace TwoFunTwoMeFintech.Models.DTO
 {
     public class ConsultarCreditos
     {
@@ -35,6 +30,8 @@ namespace TwoFunTwoMeFintech.Models.DTO
         public string TrabajoNombre { get; set; }
         public string Conyugue { get; set; }
         public string IdCredito { get; set; }
-
+        public string Mensaje { get; set; }
+        public string Usuario { get; set; }
+        public string NotaPermanente { get; set; }
     }
 }

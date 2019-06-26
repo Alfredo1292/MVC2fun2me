@@ -42,14 +42,24 @@ namespace TwoFunTwoMeFintech.Models
 
         [Display(Name = "Rol"), Required]
         public int? ROLID { get; set; }
-
-        public string ROLES { get; set; }
+		public int? IdCatDisponibilidad { get; set; }
+		public string ROLES { get; set; }
         public int ConfirmPassword { get; set; }
         public string ConfiguracionBucket { get; set; }
         public List<dto_login> listadoDto_login { get; set; }
 
         public List<Roles> ListRoles { get; set; }
+        public List<UserAgencias>ListaAgencias { get; set; }
         public bool esTemporal { get; set; }
+        public string Extencion { get; set; }
+
+		public string Respuesta { get; set; }
+
+		[Display(Name = "Asignacion"), Required]
+        public int? TipoCola { get; set; }
+        [Display(Name = "Agencia"), Required]
+        public int? IdAgencia { get; set; }
+        public string NombreAgencia { get; set; }
     }
 
 
@@ -106,7 +116,7 @@ namespace TwoFunTwoMeFintech.Models
     {
         public int Cantidad_Cuentas { get; set; }
 
-        public int AgenteAsignado { get; set; }
+        public string AgenteAsignado { get; set; }
 
         public String Bucket { get; set; }
 
@@ -128,4 +138,9 @@ namespace TwoFunTwoMeFintech.Models
     }
 
 
+    public class dto_Configuracion
+    {
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+    }
 }

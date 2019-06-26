@@ -2,52 +2,88 @@
 <html lang="en">
 <head>
 
-    @*This CDN links I got from w3 school for Bootstrap Menu*@
-    <title>Fintech</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="~/Content/bootstrap-4.0.0/menu/jquery.min.js"></script>
-    <link href="~/Content/bootstrap-4.0.0/menu/bootstrap.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap-4.0.0/menu/bootstrap.min.css" rel="stylesheet" />
-    <script src="~/Content/bootstrap-4.0.0/menu/bootstrap.min.js"></script>
+	@*This CDN links I got from w3 school for Bootstrap Menu*@
+	<link rel="icon" type="image/png" href="~/Content/menu/iconos/Fenix-atomo.png">
+	<title>Fenix</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="~/Content/bootstrap-4.0.0/menu/jquery.min.js"></script>
+	<link href="~/Content/bootstrap-4.0.0/menu/bootstrap.css" rel="stylesheet" />
+	<script src="~/Content/bootstrap-4.0.0/menu/bootstrap.min.js"></script>
+	<script src="~/Scripts/Proyecto/Utilitarios.js"></script>
+	<script src="~/Scripts/Proyecto/Bloqueo.js"></script>
+	<link href="~/Styles/DataTable.css" rel="stylesheet" />
+	<link href="~/Styles/DataTabledtr.css" rel="stylesheet" />
+	<link href="~/Styles/Site.css" rel="stylesheet" />
+	<link href="~/Content/menu/estilos-menu.css" rel="stylesheet" />
 
-    @*<script>
-            window.onload = function () {
-                $('#myModal').modal("show");
-                $('.modal-header h3').html('Processing...')
-            };
-    </script>*@
-
-    <meta name="viewport" content="width=device-width" />
+	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.5.0/css/all.css' integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU' crossorigin='anonymous'>
+	
+	<meta name="viewport" content="width=device-width" />
 </head>
 <body>
-
-    <nav>
-        @Html.Partial("_MenuPartial")
-    </nav>
-    <div id="body">
-        @RenderSection("featured", required: false)
-        <div class="container">
-            @RenderBody()
-        </div>
-    </div>
-    @RenderSection("scripts", required: false)
+	<div class="row>">
+		<nav>
+			@Html.Partial("_MenuPartial")
+		</nav>
+		<div id="body">
+			@RenderSection("featured", required: false)
+			<div class="container container-menu-abierto">
+				@RenderBody()
+			</div>
+		</div>
+		@RenderSection("scripts", required: false)
+	</div>
 </body>
 </html>
-@*<div id="myModal" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 style="margin:0;">
-                    Favor espere...
-                </h3>
-            </div>
-            <div class="modal-body">
-                <div class="progress progress-striped active" style="margin-bottom:0;">
-                    <div class="progress-bar progress-bar-success" style="width: 100%">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>*@
+<div id="ModalBlock" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 style="margin:0;">
+					Favor espere...
+				</h3>
+			</div>
+			<div class="modal-body">
+				<div class="progress progress-striped active" style="margin-bottom:0;">
+					<div class="progress-bar progress-bar-success" style="width: 100%">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="~/Scripts/Proyecto/DataTables 1.10.15.js"></script>
+<script src="~/Scripts/Proyecto/DataTable Bootstrap.js"></script>
+<script>
+    function getBackdrop(content = '') {
+        let backdrop = `<div id="backdrop" style="top: 0;left: 0;position: fixed;z-index: 1000;width: 100%;height: 100%;background-color: rgba(255, 2555, 255, 0.6);">${content}</div>`;
+        return backdrop;
+    }
+
+    function loaderv1() {
+        let html = `<div id='loader-v1' style='position: absolute;top: 50%;transform: translateY(-50%);text-align: center;padding-top: 40px;padding-bottom: 40px;left: 5%;right: 5%;color: black;z-index: 101;'>
+            <i id="spinner" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+          </div>`;
+        return getBackdrop(html);
+    }
+
+    const showLoader = () => {
+        document.querySelector('body').innerHTML += loaderv1();
+    }
+    hideLoaderv1 = () => {
+        $('#backdrop').remove();
+    }
+
+    const toggleButtonLoader = (el,f = false) => {
+        if (f) {
+            el.setAttribute('disabled', true);
+            el.querySelector('.fa-spin').style.display = 'inline-block';
+        } else {
+            el.removeAttribute('disabled');
+           el.querySelector('.fa-spin').style.display = 'none';
+        }
+
+    }
+
+</script>

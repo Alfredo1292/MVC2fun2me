@@ -1,12 +1,13 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Web;
+using System.Reflection;
 using System.Web.Mvc;
 using TwoFunTwoMe.Models.Manager;
+using TwoFunTwoMe.Models.Utility;
+using TwoFunTwoMe_DataAccess;
 using TwoFunTwoMeFintech.Models;
 using TwoFunTwoMeFintech.Models.DTO;
 
@@ -17,6 +18,11 @@ namespace TwoFunTwoMeFintech.Controllers
         private TwoFunTwoMeFintechContext db = new TwoFunTwoMeFintechContext();
 
         public object JSonConvert { get; private set; }
+        private InfoClass infDto = new InfoClass
+        {
+            STR_COD_PAIS = "506"
+        };
+
 
         //
         // GET: /Buckets/
@@ -165,6 +171,114 @@ namespace TwoFunTwoMeFintech.Controllers
             }
 
         }
+
+
+
+
+        public ActionResult ConfiguracionOrden()
+        {
+
+
+            try
+            {
+                var draw = HttpContext.Request.Form["draw"];
+                var start = Request.Form["start"];
+                // Paging Length 10,20
+                var length = Request.Form["length"];
+                // Sort Column Name
+                var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"];
+                // Sort Column Direction ( asc ,desc)
+                var sortColumnDirection = Request.Form["order[0][dir]"];
+                // Search Value from (Search box)
+                var searchValue = Request.Form["search[value]"];
+
+                //Paging Size (10,20,50,100)
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                int skip = start != null ? Convert.ToInt32(start) : 0;
+                int recordsTotal = 0;
+
+                ManagerUser mang = new ManagerUser();
+                var agenteSession = Session["LoginCredentials"] as List<dto_Configuracion>;
+                var bucket = mang.AsignaConfiguracion();
+
+                // Getting all Customer data
+                var customerData = (from tempcustomer in bucket
+                                    select new
+                                    {
+                                        id = tempcustomer.Id.ToString(),
+                                        Nombre = tempcustomer.Nombre.ToString()
+                                    });
+
+                if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection)))
+                {
+                    switch (sortColumn)
+                    {
+
+                        case "Id":
+                            if (sortColumnDirection == "desc")
+                            {
+
+                                customerData = (from foobars in customerData
+                                                orderby foobars.id descending
+                                                select foobars
+                                                 );
+                            }
+                            else
+                            {
+
+                                customerData = (from foobars in customerData
+                                                orderby foobars.id ascending
+                                                select foobars
+                                                );
+                            }
+                            break;
+                        case "Nombre":
+                            if (sortColumnDirection == "desc")
+                            {
+
+                                customerData = (from foobars in customerData
+                                                orderby foobars.Nombre descending
+                                                select foobars
+                                                 );
+                            }
+                            else
+                            {
+
+                                customerData = (from foobars in customerData
+                                                orderby foobars.Nombre ascending
+                                                select foobars
+                                                );
+                            }
+                            break;
+                    }
+                    //customerData = customerData.OrderBy(x =>x.cod_agente);
+
+
+                }
+                //Search
+                if (!string.IsNullOrEmpty(searchValue))
+                {
+                    customerData = customerData.Where(m => m.id.ToLower().Contains(searchValue.ToLower()) || m.Nombre.ToLower().Contains(searchValue.ToLower()));
+                }
+
+                //total number of rows count 
+                recordsTotal = customerData.Count();
+                //Paging 
+                var data = customerData.Skip(skip).Take(pageSize).ToList();
+
+                return Json(new { draw = draw, recordsFiltered = customerData.Count(), recordsTotal = customerData.Count(), data = data });
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
+
+
+
 
         public ActionResult ConfiguracionBucket()
         {
@@ -403,7 +517,15 @@ namespace TwoFunTwoMeFintech.Controllers
 
         public ActionResult Buckets()
         {
-
+            string xClase = string.Format("{0}|{1}", MethodBase.GetCurrentMethod().Module.Name, MethodBase.GetCurrentMethod().DeclaringType.Name);
+            string xProceso = MethodBase.GetCurrentMethod().Name;
+            var dto_excepcion = new UTL_TRA_EXCEPCION
+            {
+                STR_CLASE = xClase,
+                STR_EVENTO = xProceso,
+                STR_APLICATIVO = ConfigurationManager.AppSettings["Aplicativo"],
+                STR_SERVIDOR = System.Net.Dns.GetHostName()
+            };
 
             try
             {
@@ -503,8 +625,6 @@ namespace TwoFunTwoMeFintech.Controllers
                             break;
                     }
                     //customerData = customerData.OrderBy(x =>x.cod_agente);
-
-
                 }
                 //Search
                 if (!string.IsNullOrEmpty(searchValue))
@@ -522,6 +642,9 @@ namespace TwoFunTwoMeFintech.Controllers
             }
             catch (Exception ex)
             {
+                dto_excepcion.STR_MENSAJE = ex.Message;
+                dto_excepcion.STR_DETALLE = ex.StackTrace;
+                TwoFunTwoMe_DataAccess.Utility.guardaExcepcion(dto_excepcion, GlobalClass.connectionString.Where(a => a.Key == infDto.STR_COD_PAIS).FirstOrDefault().Value);
                 throw;
             }
 
@@ -675,6 +798,213 @@ namespace TwoFunTwoMeFintech.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+
+
+        public ActionResult ConfigAsignados(Catalogo_AsignacionBuckets catalogo)
+        {
+            ManagerUser manage = new ManagerUser();
+            try
+            {
+                var dto_result = manage.GetAsignados(catalogo);
+                return Json(dto_result);
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
+        public ActionResult ConfigAsignados_conf(Catalogo_AsignacionBuckets_conf catalogo)
+        {
+            ManagerUser manage = new ManagerUser();
+            try
+            {
+                var dto_result = manage.GetAsignados_conf(catalogo);
+                return Json(dto_result);
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
+        public ActionResult ConfigNoAsignados(Catalogo_AsignacionBuckets catalogo)
+        {
+            ManagerUser manage = new ManagerUser();
+            try
+            {
+                var dto_result = manage.GetNoAsignados(catalogo);
+                return Json(dto_result);
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
+
+        public ActionResult ConfigNoAsignados_conf(Catalogo_AsignacionBuckets_conf catalogo)
+        {
+            ManagerUser manage = new ManagerUser();
+            try
+            {
+                var dto_result = manage.GetNoAsignados_conf(catalogo);
+                return Json(dto_result);
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+        public ActionResult GuardarConfiguracion_conf(List<AsignacionBucketsConfig> asignacionBucketsConfigs)
+        {
+            ManagerUser manage = new ManagerUser();
+            var dto_result = new AsignacionBucketsConfig();
+            try
+            {
+                if (!string.IsNullOrEmpty(asignacionBucketsConfigs.FirstOrDefault().Accion) && asignacionBucketsConfigs.FirstOrDefault().Accion.Equals("Eliminar"))
+                {
+                    manage.BorraConfiguracion_conf(asignacionBucketsConfigs.FirstOrDefault());
+                }
+                else
+                {
+                    manage.BorraConfiguracion_conf(asignacionBucketsConfigs.FirstOrDefault());
+
+                    asignacionBucketsConfigs.ForEach(x =>
+                    {
+                        manage.GuardaConfiguracion_conf(x);
+                    }
+                    );
+                }
+                dto_result.Respuesta = "OK";
+
+
+            }
+            catch (Exception ex)
+            {
+                dto_result.Respuesta = ex.Message;
+
+            }
+            return Json(dto_result);
+        }
+        public ActionResult GuardarConfiguracion(List<AsignacionBucketsConfig> asignacionBucketsConfigs)
+        {
+            ManagerUser manage = new ManagerUser();
+            var dto_result = new AsignacionBucketsConfig();
+            try
+            {
+                if (!string.IsNullOrEmpty(asignacionBucketsConfigs.FirstOrDefault().Accion) && asignacionBucketsConfigs.FirstOrDefault().Accion.Equals("Eliminar"))
+                {
+                    manage.BorraConfiguracion(asignacionBucketsConfigs.FirstOrDefault());
+                }
+                else
+                {
+                    manage.BorraConfiguracion(asignacionBucketsConfigs.FirstOrDefault());
+
+                    asignacionBucketsConfigs.ForEach(x =>
+                    {
+                        manage.GuardaConfiguracion(x);
+                    }
+                    );
+                }
+                dto_result.Respuesta = "OK";
+
+
+            }
+            catch (Exception ex)
+            {
+                dto_result.Respuesta = ex.Message;
+
+            }
+            return Json(dto_result);
+        }
+        public ActionResult MantenimientoConfiguracion(Catalogo_AsignacionBuckets asignacionBucketsConfigs)
+        {
+            ManagerUser manage = new ManagerUser();
+            var dto_result = new List<Catalogo_AsignacionBuckets>();
+            try
+            {
+                dto_result = manage.Mantenimiento_Catalogo_AsignacionBucketsn(asignacionBucketsConfigs);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+
+            }
+            return Json(dto_result);
+        }
+        public ActionResult ConfiguracionReportes(ConfiguracionReportes config)
+        {
+            ManagerUser manage = new ManagerUser();
+            var dto_result = new List<ConfiguracionReportes>();
+            try
+            {
+                dto_result = manage.ConsultaConfiguracionReportes(config);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+
+            }
+            return Json(dto_result);
+        }
+        public ActionResult ColaReportes(ColaReporte reporte)
+        {
+            ManagerUser manage = new ManagerUser();
+            var dto_result = new List<ColaReporte>();
+            try
+            {
+                dto_result = manage.ConsultaColaReportes(reporte);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+
+            }
+            return Json(dto_result);
+        }
+        public ActionResult InsertaColaReportes(ColaReporte reporte)
+        {
+            ManagerUser manage = new ManagerUser();
+            var agenteSession = Session["LoginCredentials"] as List<dto_login>;
+            var dto_result = reporte;
+            reporte.UsuarioCreacion = agenteSession[0].cod_agente;
+            Boolean inserta = false;
+            try
+            {
+                inserta = manage.InsertaColaReportes(reporte);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+
+            }
+            return Json(dto_result);
+        }
+
+        public ActionResult AplicarConfigCobros(bool OPCION)
+        {
+            ManagerUser manage = new ManagerUser();
+            try
+            {
+                manage.aplicaConfigCobros(OPCION);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+
+            }
+            return Json(new { Respuesta = "OK" });
         }
     }
 }

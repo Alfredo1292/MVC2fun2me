@@ -1,22 +1,15 @@
-﻿@{
-    ViewBag.Title = "consultarPrestamosCliente";
+﻿@{ 
+    Layout = null;
 }
-
-<script src="~/Scripts/Proyecto/ColaCobros.js"></script>
-<link href="~/Styles/DataTable.css" rel="stylesheet" />
-<link href="~/Styles/DataTabledtr.css" rel="stylesheet" />
-
-<script src="~/Scripts/Proyecto/DataTables 1.10.15.js"></script>
-<script src="~/Scripts/Proyecto/DataTable Bootstrap.js"></script>
-
-<link href="~/Styles/Site.css" rel="stylesheet" />
-
 <div class="table">
   
-    <table ID="PrestamosClientesTable" class="table table-bordered" cellspacing="0">
+    <table ID="PrestamosClientesTable" class="container table table-bordered table-hover no-footer dataTable" cellspacing="0">
         <thead>
             <tr class="info">
-                <th >
+                <th>
+                    Crédito
+                </th>
+                <th>
                     Solicitud
                 </th>
                 <th>
@@ -38,11 +31,22 @@
                     Monto Cuota
                 </th>
                 <th>
-                   Cap. Pendiente
+                    Cap. Pendiente
                 </th>
-                
+
             </tr>
         </thead>
         <tbody class="tbody GridPrestamos"></tbody>
     </table>
 </div>
+<!---<script src="~/Scripts/Proyecto/ColaCobros.js"></script>-->
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

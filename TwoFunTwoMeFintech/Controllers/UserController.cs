@@ -1,11 +1,5 @@
-﻿using ModeAuthentication.Models.Utilitarios;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using TwoFunTwoMe.Models.Manager;
 using TwoFunTwoMeFintech.Models;
@@ -61,10 +55,12 @@ namespace TwoFunTwoMeFintech.Controllers
             };
             var ret = mang.ConsultaUsuarios(log);
             var ret1 = mang.GetUserRoles();
+            var ret2 = mang.GetUserAgencias();
             if (ret.Any())
             {
                 dto_login.listadoDto_login = ret;
                 dto_login.ListRoles = ret1;
+                dto_login.ListaAgencias = ret2;
             }
 
             return Json(dto_login.listadoDto_login, JsonRequestBehavior.AllowGet);
@@ -92,11 +88,14 @@ namespace TwoFunTwoMeFintech.Controllers
 			ManagerUser mang = new ManagerUser();
 			dto_login dto_login = new dto_login();			
 			dto_login.ListRoles = new List<Roles>();
+            dto_login.ListaAgencias = new List<UserAgencias>();
 			Limpiar();
 			var ret = mang.GetUserRoles();
+            var ret2 = mang.GetUserAgencias();
 			if (ret.Any())
 			{				
 				dto_login.ListRoles = ret;
+                dto_login.ListaAgencias = ret2;
 			}
 			return View(dto_login);
         }
@@ -113,7 +112,7 @@ namespace TwoFunTwoMeFintech.Controllers
 
                 ManagerUser mang = new ManagerUser();						
 				dto_login.ListRoles = new List<Roles>();				
-				dto_login.pass = Cryption.Encrypt(dto_login.pass, ConfigurationManager.AppSettings["claveEncriptacion"]);
+				dto_login.pass = TwoFunTwoMe_DataAccess.Utility.Encrypt(dto_login.pass);
 
                 mang.Registrar(dto_login);
 				dto_login = Limpiar();
@@ -133,15 +132,18 @@ namespace TwoFunTwoMeFintech.Controllers
 
 				ManagerUser mang = new ManagerUser();
 				dto_login.ListRoles = new List<Roles>();
-				dto_login.pass = Cryption.Encrypt(dto_login.pass, ConfigurationManager.AppSettings["claveEncriptacion"]);
+                dto_login.ListaAgencias = new List<UserAgencias>();
+				dto_login.pass = TwoFunTwoMe_DataAccess.Utility.Encrypt(dto_login.pass);
 
 				mang.Registrar(dto_login);
 				dto_login = Limpiar();
 
 				var ret = mang.GetUserRoles();
+                var ret2 = mang.GetUserAgencias();
 				if (ret.Any())
 				{
 					dto_login.ListRoles = ret;
+                    dto_login.ListaAgencias = ret2;
 				}
 			}
 			return Json(dto_login);
@@ -162,7 +164,7 @@ namespace TwoFunTwoMeFintech.Controllers
             };
             var ret = mang.ConsultaUsuarios(log);
             dto_login.ListRoles = mang.GetUserRoles();
-
+            dto_login.ListaAgencias = mang.GetUserAgencias();
 
             if (ret.Any())
             {
@@ -246,6 +248,8 @@ namespace TwoFunTwoMeFintech.Controllers
 			dto_Login.pass = "";
 			dto_Login.ROLID = 0;
 			dto_Login.vendedor = "";
+            dto_Login.IdAgencia = 0;
+            dto_Login.NombreAgencia = "";
 
 			return dto_Login;
 		}

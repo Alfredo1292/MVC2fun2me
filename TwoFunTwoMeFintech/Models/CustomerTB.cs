@@ -12,9 +12,10 @@ namespace TwoFunTwoMeFintech.Models
         private DateTime FEC_CREACION { get; set; }
         public DateTime FEC_MODIFICACION { get; set; }
         public string estado { get; set; }
+        public string Extencion { get; set; }
+        public int IdCredito { get; set; }
+        public string IdentificacionCliente { get; set; }
+        public string TelefonoCelCliente { get; set; }
+        
     }
-
-
-    
-
 }

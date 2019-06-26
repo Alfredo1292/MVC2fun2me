@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "Details";
+    Layout = null;
+}
+<h4 class="titulo-tesoreria accordion-toggle alert alert-info">Verificación de Cuentas Bancarias</h4>
+<h4 id="mensajeAccion" class="titulo-tesoreria accordion-toggle alert" style="display:none"></h4>
+<div class="container">
+    <div class="form-group">
+    </div>
+    <table ID="tableAprobadoVerificacionTesoreria" class="container table table-bordered table-hover  dataTable">
+        <thead>
+            <tr class="info">
+                <th>
+                    ID
+                </th>
+                <th>
+                    Cédula
+                </th>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Producto
+                </th>
+                <th>
+                    Monto
+                </th>
+                <th>
+                    Banco
+                </th>
+                <th>
+                    Cuenta
+                </th>
+                <th>
+                    Sinpe
+                </th>
+                <th>
+                    Correo
+                </th>
+                <th>
+                    Imagen
+                </th>
+                <th>
+                    Gestiones
+                </th>
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tbody class="tbody" id="tblAprobadoVerificacionTesoreria"></tbody>
+    </table>
+</div>
+
+<!--Ventanas Modales-->
+<div class="modal fade" Id="ImagenSinpe" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal">x</button>
+            <div class="modal-header titulo-modal">
+                <p class="titulo-ventana-modal"><strong>Imagen Sinpe</strong></p>
+            </div>
+            <div class="modal-body">
+                <div id="imagen-sinpe">
+                    <img/>
+                </div>              
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-lg-10">
+
+                    </div>
+                    <div class="col-lg-1">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/Proyecto/AprobadoVerificacionTesoreria.js"></script>
+<script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+</script>

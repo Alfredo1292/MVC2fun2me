@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Create";
+    Layout = null;
 }
 <script type="text/javascript">
 $(document).ready(function () {
@@ -69,3 +70,13 @@ $('input[type="text"]').val('');
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+    <script type="text/javascript">
+            @if (!User.Identity.IsAuthenticated)
+            {
+
+                System.Web.Security.FormsAuthentication.SignOut();
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect(FormsAuthentication.LoginUrl, true);
+            }
+
+    </script>
