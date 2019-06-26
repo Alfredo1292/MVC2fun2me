@@ -42,6 +42,7 @@ namespace TwoFunTwoMeFintech.Models
 
         [Display(Name = "Rol"), Required]
         public int? ROLID { get; set; }
+<<<<<<< HEAD
 		public int? IdCatDisponibilidad { get; set; }
 		public string ROLES { get; set; }
         public int ConfirmPassword { get; set; }
@@ -60,6 +61,16 @@ namespace TwoFunTwoMeFintech.Models
         [Display(Name = "Agencia"), Required]
         public int? IdAgencia { get; set; }
         public string NombreAgencia { get; set; }
+=======
+
+        public string ROLES { get; set; }
+        public int ConfirmPassword { get; set; }
+        public string ConfiguracionBucket { get; set; }
+        public List<dto_login> listadoDto_login { get; set; }
+
+        public List<Roles> ListRoles { get; set; }
+        public bool esTemporal { get; set; }
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     }
 
 

@@ -53,6 +53,7 @@ ul.nav.nav-tabs li.active a {
     padding: 8px;
     color: #ccc;
 }
+<<<<<<< HEAD
 
 .tab-content .navbar-inverse {
     display: none;
@@ -1445,3 +1446,7 @@ a:hover .tooltiptexMenu {
         padding: 12px 20px;
     }
 }
+=======
+.tab-content .navbar-inverse {
+    display: none;
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851

@@ -1,4 +1,5 @@
 ﻿@{
+<<<<<<< HEAD
     ViewBag.Title = "Index";
 }
 <h4 class="titulo-tesoreria accordion-toggle alert alert-info">Administración de Sub-Menus</h4>
@@ -25,3 +26,20 @@
             }
 
 </script>
+=======
+	ViewBag.Title = "Index";
+}
+<ul class="nav nav-tabs">
+	<li class="active"><a data-toggle="tab" href="#fisrtTab">Submenús</a></li>
+	<li><a data-toggle="tab" href="#secondTab">Nuevo</a></li>
+</ul>
+<div class="tab-content">
+	<div id="fisrtTab" class="tab-pane fade in active">
+		@Html.Action("Details")
+	</div>
+	<div id="secondTab" class="tab-pane fade in">
+		@Html.Action("Create")
+	</div>
+</div>
+<link href="~/Styles/Site.css" rel="stylesheet" />
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851

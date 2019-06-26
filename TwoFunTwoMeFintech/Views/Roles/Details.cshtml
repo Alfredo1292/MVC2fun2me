@@ -1,12 +1,17 @@
 ﻿@model TwoFunTwoMeFintech.Models.DTO.Roles
 
 @{
+<<<<<<< HEAD
     ViewBag.Title = "Details";
     //Layout = null;
+=======
+	ViewBag.Title = "Details";
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 }
 
 
 <script src="~/Scripts/Proyecto/Roles.js"></script>
+<<<<<<< HEAD
 <div class="row">
     <div class="col-sm-4">
         <div class="container">
@@ -79,3 +84,59 @@
             }
 
 </script>
+=======
+
+<div class="container">
+	<div class="form-group">
+
+	</div>
+	<table ID="RolesTable" class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>
+					ID
+				</th>
+				<th>
+					ROLES
+				</th>
+				<th>
+					Accion
+				</th>
+			</tr>
+		</thead>
+		<tbody class="tbody"></tbody>
+	</table>
+</div>
+<script src="~/Scripts/Proyecto/DataTables 1.10.15.js"></script>
+<link href="~/Styles/DataTable.css" rel="stylesheet" />
+<link href="~/Styles/DataTabledtr.css" rel="stylesheet" />
+<script src="~/Scripts/Proyecto/DataTable Bootstrap.js"></script>
+
+<div class="modal fade" Id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				@*<button type="button" class="close" data-dissmiss="modal"><span aria-hidden="true">×</span></button>*@
+				<button type="button" class="close" data-dismiss="modal">×</button>
+
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="form-group">
+						<label for="ID">Rol ID</label>
+						<input type="text" class="form-control" id="ID" placeholder="ROL ID" disabled="disabled" />
+					</div>
+					<div class="form-group">
+						<label for="ROLES">Nombre</label>
+						<input type="text" class="form-control" id="ROL" placeholder="ROLES" />
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" Id="btnUpdate" style="display:none;" onclick="Update();">Actualizar</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+			</div>
+		</div>
+	</div>
+</div>
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851

@@ -18,7 +18,10 @@
         public string RespuestaGestion { get; set; }
         public string MontoPromesaPago { get; set; }
         public string FechaPromesaPago { get; set; }
+<<<<<<< HEAD
         public string EstadoPromesaPago { get; set; }
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
         public string FechaCobro { get; set; }
         public string FechaAplica { get; set; }
         public string TotalCobro { get; set; }
@@ -28,11 +31,14 @@
         public string cod_agente { get; set; }
         public string total_promesas { get; set; }
         public string PROCESADOS { get; set; }
+<<<<<<< HEAD
         public string Fecha { get; set; }
         public string TotalMora { get; set; }
         public string Dias_Mora { get; set; }
         public string TotalCancela { get; set; }
 
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 
 
 

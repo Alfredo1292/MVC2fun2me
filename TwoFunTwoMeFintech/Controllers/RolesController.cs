@@ -1,8 +1,21 @@
+<<<<<<< HEAD
 ﻿using System.Data;
 using System.Web.Mvc;
 using TwoFunTwoMe.Models.Manager;
 using TwoFunTwoMeFintech.Models;
 using TwoFunTwoMeFintech.Models.DTO;
+=======
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using TwoFunTwoMeFintech.Models.DTO;
+using TwoFunTwoMeFintech.Models;
+using TwoFunTwoMe.Models.Manager;
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 
 namespace TwoFunTwoMeFintech.Controllers
 {

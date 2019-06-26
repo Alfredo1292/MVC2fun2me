@@ -14,7 +14,10 @@ namespace TwoFunTwoMeFintech.Models.DTO
         public string CapitalPendiente { get; set; }
         public string IntCorriente { get; set; }
         public string IntMoraPendiente { get; set; }
+<<<<<<< HEAD
 		public string MontoCargoMora { get; set; }
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
         public string MoraDesde { get; set; }
         public string UltimaFechaAlDia { get; set; }
         public string FechaUltPago { get; set; }

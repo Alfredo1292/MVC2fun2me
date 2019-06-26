@@ -2,8 +2,12 @@
 {
     public class Prestamos
     {
+<<<<<<< HEAD
         public int IdCredito { get; set; }
         public string Identificacion { get; set; }
+=======
+       public string Identificacion { get; set; }
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
         public int IdSolicitud { get; set; }
         public string nombreProducto { get; set; }
         public decimal? MontoProducto { get; set; }

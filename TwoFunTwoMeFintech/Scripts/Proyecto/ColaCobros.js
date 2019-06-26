@@ -1,5 +1,8 @@
 ﻿
+<<<<<<< HEAD
 var resultadoBusqueda = null;
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
     e.target // newly activated tab
     e.relatedTarget // previous active tab
@@ -18,19 +21,27 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 $(document).ready(function () {
     CargarPendientesMontoCola();
     CargarProcesadoMontoCola();
+<<<<<<< HEAD
     $('body').css("background-image", "none");
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 });
 
 $("#btnSaltar").click(function () {
     alertify.confirm("¿Desea Saltar la cola?.",
         function () {
+<<<<<<< HEAD
             actualizarColaAutomaticaSig();
+=======
+            actualizarColaAutomatica();
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
         });
 });
 $("#btnIniciarCola").click(function () {
     iniciarCola();
 });
 
+<<<<<<< HEAD
 //$("#txIdentificacion").keyup(function (e) {
 //    if (e.keyCode == 13) {
 //        buscar();
@@ -52,6 +63,9 @@ function buscarColaKey(e) {
 }
 
 function buscar(origen=null) {
+=======
+function buscar() {
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     if ($("#txIdentificacion").val() == "") {
         alertify.set('notifier', 'position', 'top-center');
         alertify
@@ -64,6 +78,7 @@ function buscar(origen=null) {
         DetenerCola();
     } else {
 
+<<<<<<< HEAD
         TraeEncabezado($("#txIdentificacion").val(), null, origen);
     }
 }
@@ -79,6 +94,9 @@ function buscarConsulta(origen = null) {
         DetenerCola();
     } else {
         TraeEncabezado($("#txIdentificacionConsulta").val(), null, origen);
+=======
+        TraeEncabezado($("#txIdentificacion").val(), null);
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     }
 }
 
@@ -95,6 +113,7 @@ function iniciarCola() {
 
 function guardar() {
 
+<<<<<<< HEAD
 	//if ($("#ddlResultadoLlamada option:selected").val() == "PRP") {
 	//	var res = ValidaFecha();
 	//	if (res == false) {
@@ -108,12 +127,17 @@ function guardar() {
         return;
     }
 
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     var empObj = {
         IdCredito: localStorage.getItem("IdCredito"),
         FechaPP: $("#txtFechaPP").val(),
         MontoPP: $("#txtMontoPP").val(),
         Detalle: $("#txtDetalle").val(),
+<<<<<<< HEAD
         NotaPermanente: $("#txtComentario").val(),
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
         AccionLlamada: $("#ddlAccionLlamada option:selected").val(),
         RespuestaGestion: $("#ddlResultadoLlamada option:selected").val(),
     };
@@ -129,6 +153,7 @@ function guardar() {
         contentType: "application/json;charset=utf-8",
         dataType: "json",
         success: function (result) {
+<<<<<<< HEAD
             if (result.Mensaje == "ErrFecDias") {
                 alertify.error("Ha seleccionado una fecha de promesa de pago mayor a 40 dias!!!!!!");
             }
@@ -238,6 +263,22 @@ function actualizarColaAutomatica_Reprogramar() {
             if ($("#ColaIniciada").val() == "1") {
                 buscarCola();
             }
+=======
+
+            alertify.confirm("¡¡Gestión Realizada!!, ¿Desea continuar?.",
+                function () {
+                    if ($("#ColaIniciada").val() == "1") {
+                        actualizarColaAutomatica();
+                        clearAll();
+                        CargarPendientesMontoCola();
+                        CargarProcesadoMontoCola();
+                    }
+                },
+                function () {
+                    $("#ColaIniciada").val("0");
+                });
+
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
         },
         error: function (errormessage) {
             alertify.error(errormessage.responseText);
@@ -248,8 +289,12 @@ function actualizarColaAutomatica_Reprogramar() {
 function actualizarColaAutomatica() {
 
     var empObj = {
+<<<<<<< HEAD
         IdCredito: localStorage.getItem("IdCredito"),
         Bandera: 2
+=======
+        IdCredito: localStorage.getItem("IdCredito")
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     };
 
     localStorage.removeItem("IdCredito");
@@ -278,6 +323,7 @@ function actualizarColaAutomatica() {
 function DetenerCola() {
     alertify.confirm("¿Desea Detener la cola?.",
         function () {
+<<<<<<< HEAD
             //INICIO FCAMACHO 04/12/2018 
             //PROCESO DE GUARDAR EN TABLA LOS DATOS OBTENIDOS PREVIAMENTE ANTES DE DETENER LA COLA 
             if ($("#ColaIniciada").val() == "1")//SI ESTA EN GESTION DE COLA
@@ -285,6 +331,8 @@ function DetenerCola() {
                 guardarTemp();
             }
             //FIN FCAMACHO 04/12/2018
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
             $("#ColaIniciada").val("0");
 
             TraeEncabezado($("#txIdentificacion").val(), null);
@@ -305,7 +353,11 @@ function buscarCola() {
         contentType: "application/json;charset=utf-8",
         dataType: "json",
         success: function (result) {
+<<<<<<< HEAD
             if (result.length == 0) {
+=======
+            if (result.length==0) {
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
                 alertify
                     .alert("La cola está vacía, favor ingresar datos en la cola.", function () {
                         $("#ColaIniciada").val("0");
@@ -321,6 +373,7 @@ function buscarCola() {
     });
 }
 
+<<<<<<< HEAD
 function TraeEncabezado(ident, idCred,origen=null) {
 
 
@@ -331,21 +384,34 @@ function TraeEncabezado(ident, idCred,origen=null) {
         IdCredito: idCred,
         TIPO_COLA: $("#ColaIniciada").val() == '0' ? null : $("#ColaIniciada").val(),
         TipoConsulta: origen
+=======
+function TraeEncabezado(ident, idCred) {
+    var empObj = {
+        Identificacion: ident,
+        IdCredito: idCred
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     };
     localStorage.setItem("IdCredito", idCred);
     $.ajax({
         processing: true, // for show progress bar
+<<<<<<< HEAD
         // progress=mostrarBloqueo(),
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
         serverSide: true, // for process server side
         filter: true, // this is for disable filter (search box)
         orderMulti: false, // for disable multiple column at once
         url: "/Cobros/BuscarCliente",
+<<<<<<< HEAD
         async: true,
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
         type: "POST",
         data: JSON.stringify(empObj),
         contentType: "application/json;charset=utf-8",
         dataType: "json",
         success: function (result) {
+<<<<<<< HEAD
             if (result == null || result.length == 0) {
                 alertify.error("No existen datos para ese criterio de busqueda.");
                 clearAll();
@@ -371,6 +437,39 @@ function TraeEncabezado(ident, idCred,origen=null) {
         //    ocultarBloqueo();
 
         //}
+=======
+            $("#txtNombre").val(result.Nombre);
+            $("#txIdentificacion").val(result.Identificacion);
+            $("#txtDirecion").val(result.DetalleDireccion);
+            $("#lblCodCliente").text(result.cod_cliente);
+            $("#lblApertura").text(result.Apertura);
+            $("#lblTelMovil").text(result.TelefonoCel);
+            $("#lblTelCasa").text(result.TelefonoFijo);
+            $("#lblEstadoCivil").text(result.EstadoCivil);
+            $("#lblTrabajoNombre").val(result.TrabajoNombre);
+            $("#lblTelTrabajo").text(result.TelefonoLaboral);
+            $("#txtDirecionTrabajo").val(result.DireccionRelacionada);
+            $("#lblFecMod").text(result.FechaModificacion);
+            $("#lblUsuarioMod").text(result.UsrModifica);
+            $("#lblConyugue").text(result.Conyugue);
+            $("#lblidentificacion").text(result.Identificacion);
+            $("#lblNombre").text(result.Nombre);
+            ResultLlamada();
+            comboTipos();
+            cargarContactos(result.Identificacion);
+            cargarHistoricosGestiones(result.IdCredito);
+            cargarPromesasPagos(result.IdCredito);
+            cargarPagos(result.IdCredito);
+            cargarDatosCredito(result.IdCredito);
+            cargarImage(result.Identificacion);
+            cargarGridCobro(result.IdCredito);
+            cargarPrestamoCliente(result.Identificacion);
+            cargarPrestamoParientes(result.Identificacion);
+        },
+        error: function (errormessage) {
+            alertify.error(errormessage.responseText);
+        }
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     });
 }
 
@@ -428,6 +527,7 @@ function clearAll() {
     $('#ddlAccionLlamada option:eq(-1)').attr('selected', 'selected');
     $('#ddlResultadoLlamada option:eq(-1)').attr('selected', 'selected');
     $("#txtDetalle").val("");
+<<<<<<< HEAD
     $('input[type="text"]').val('');
     $("#lblidentificacion").text("");
     $("#lblNombre").text("");
@@ -544,6 +644,10 @@ function renderizarTablaTelefonos(arr,cedula) {
     $("#ContacTable").DataTable();
     $("select[name*='UserTable_length']").change();
 }
+=======
+}
+
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 function cargarContactos(ident) {
 
     var empObj = {
@@ -562,6 +666,7 @@ function cargarContactos(ident) {
         data: JSON.stringify(empObj),
         contentType: "application/json;charset=utf-8",
         dataType: "json",
+<<<<<<< HEAD
         success: function (r) {
             renderizarTablaTelefonos(r, ident);
 
@@ -570,10 +675,33 @@ function cargarContactos(ident) {
         },
         error: function (errormessage) {
             alertify.error('Ocurrio un Error al Cargar los Contactos');
+=======
+        success: function (data) {
+            var html = '';
+            $.each(data, function (key, item) {
+                html += '<tr>';
+                html += '<td>' + item.FuenteDatos + '</td>';
+                html += '<td>' + item.Tipo + '</td>';
+                html += '<td>' + item.Relacion + '</td>';
+                html += '<td>' + item.Telefono + '</td>';
+                html += '<td>' + item.FechaDato + '</td>';
+                // html += '<td><a href="#" class="btn btn-primary" onclick="return getbyID(' + item.cod_agente + ')"> Editar </a> | <a class="btn btn-primary"  href="#" onclick="Delele(' + item.cod_agente + ')">Eliminar</a></td>';
+                html += '</tr>';
+            });
+
+            $('.contact').html(html);
+
+            $("#ContacTable").DataTable();
+            $("select[name*='UserTable_length']").change();
+        },
+        error: function (errormessage) {
+            alertify.error('Ocurrion un Error');
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 
         }
     });
 }
+<<<<<<< HEAD
 //AVARGAS - 23/01/2019 - Mantenimiento de Teléfonos del cliente --INICIO--
 function getCatalogoTelefono() {
     var id = 0;
@@ -761,6 +889,9 @@ function DeleleTelefono(ID) {
         });
 }
 //AVARGAS - 23/01/2019 - Mantenimiento de Teléfonos del cliente --FINAL--
+=======
+
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 function cargarHistoricosGestiones(ident) {
 
     var empObj = {
@@ -787,19 +918,29 @@ function cargarHistoricosGestiones(ident) {
                 html += '<td>' + item.Detalle + '</td>';
                 html += '<td>' + item.Accion + '</td>';
                 html += '<td>' + item.RespuestaGestion + '</td>';
+<<<<<<< HEAD
                 html += '<td>' + item.Usuario + '</td>';
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
                 // html += '<td><a href="#" class="btn btn-primary" onclick="return getbyID(' + item.cod_agente + ')"> Editar </a> | <a class="btn btn-primary"  href="#" onclick="Delele(' + item.cod_agente + ')">Eliminar</a></td>';
                 html += '</tr>';
             });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
             $('.Histo').html(html);
 
             $("#HistoTable").DataTable();
             $("select[name*='UserTable_length']").change();
         },
         error: function (errormessage) {
+<<<<<<< HEAD
             alertify.error('Ocurrio un Error con la Carga del Historico de Gestiones');
+=======
+            alertify.error('Ocurrion un Error');
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 
         }
     });
@@ -833,8 +974,11 @@ function cargarPromesasPagos(ident) {
                 html += '<td>' + item.FechaPromesaPago + '</td>';
                 html += '<td>' + item.Accion + '</td>';
                 html += '<td>' + item.RespuestaGestion + '</td>';
+<<<<<<< HEAD
                 html += '<td>' + item.Usuario + '</td>';
                 html += '<td class="Promesa ' + item.EstadoPromesaPago +'">' + item.EstadoPromesaPago + '</td>';
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
                 // html += '<td><a href="#" class="btn btn-primary" onclick="return getbyID(' + item.cod_agente + ')"> Editar </a> | <a class="btn btn-primary"  href="#" onclick="Delele(' + item.cod_agente + ')">Eliminar</a></td>';
                 html += '</tr>';
             });
@@ -845,7 +989,11 @@ function cargarPromesasPagos(ident) {
             $("select[name*='UserTable_length']").change();
         },
         error: function (errormessage) {
+<<<<<<< HEAD
             alertify.error('Ocurrio un Error con la Carga de Promesas de Pago');
+=======
+            alertify.error('Ocurrion un Error');
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 
         }
     });
@@ -881,14 +1029,21 @@ function cargarPagos(ident) {
                 html += '</tr>';
             });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
             $('.HistoPromPago').html(html);
 
             $("#HistoPromPagoTable").DataTable();
             $("select[name*='UserTable_length']").change();
         },
         error: function (errormessage) {
+<<<<<<< HEAD
             alertify.error('Ocurrio un Error al Cargar los Pagos');
+=======
+            alertify.error('Ocurrion un Error');
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 
         }
     });
@@ -911,7 +1066,11 @@ function CargarPendientesMontoCola() {
             $("#lblMontoPendiete").text(data.SALDO_PENDIENTE);
         },
         error: function (errormessage) {
+<<<<<<< HEAD
             alertify.error('Ocurrio un Error al cargar los Pendientes Monto Cola');
+=======
+            alertify.error('Ocurrion un Error');
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 
         }
     });
@@ -934,7 +1093,11 @@ function CargarProcesadoMontoCola() {
             $("#lblCantidadProcesada").text(data.PROCESADOS);
         },
         error: function (errormessage) {
+<<<<<<< HEAD
             alertify.error('Ocurrio un Error al Procesar Monto Cola');
+=======
+            alertify.error('Ocurrion un Error');
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 
         }
     });
@@ -973,7 +1136,10 @@ function cargarDatosCredito(ident) {
 
                 html += '<td>' + item.IntCorriente + '</td>';
                 html += '<td>' + item.IntMoraPendiente + '</td>';
+<<<<<<< HEAD
 				html += '<td>' + item.MontoCargoMora + '</td>';
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
                 html += '<td>' + item.MoraDesde + '</td>';
                 html += '<td>' + item.FechaUltPago + '</td>';
                 html += '<td>' + item.MontoUltPago + '</td>';
@@ -981,14 +1147,21 @@ function cargarDatosCredito(ident) {
                 html += '</tr>';
             });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
             $('.HistoDatosCreditos').html(html);
 
             //$("#tblDatosCreditos").DataTable();
             $("select[name*='UserTable_length']").change();
         },
         error: function (errormessage) {
+<<<<<<< HEAD
             alertify.error('Ocurrio un Error con la Carga de Datos de Credito');
+=======
+            alertify.error('Ocurrion un Error');
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 
         }
     });
@@ -1016,6 +1189,7 @@ function cargarImage(ident) {
             if (data.Fotografia != "" && data.Fotografia != null) {
                 var image = "data:image/png;base64," + data.Fotografia + "";
 
+<<<<<<< HEAD
                 $("#imgClienteCartera").attr('src', image);
 
 
@@ -1023,6 +1197,15 @@ function cargarImage(ident) {
         },
         error: function (errormessage) {
             alertify.error('Ocurrio un Error la Cargar la Imagen');
+=======
+                $("#imgCliente").attr('src', image);
+
+                $("#imgCliente").prop("alt", data.FiliacionFisica.Nombre);
+            } else $("#imgCliente").attr('src', "/Images/noImage.jpg");
+        },
+        error: function (errormessage) {
+            alertify.error('Ocurrion un Error');
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 
         }
     });
@@ -1097,7 +1280,11 @@ function cargarGridCobro(ident) {
             $("select[name*='UserTable_length']").change();
         },
         error: function (errormessage) {
+<<<<<<< HEAD
             alertify.error('Ocurrio un Error con la Carga del Grid de Cobro');
+=======
+            alertify.error('Ocurrion un Error');
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 
         }
     });
@@ -1123,7 +1310,11 @@ function cargarPrestamoCliente(ident) {
             var html = '';
             $.each(data, function (key, item) {
                 html += '<tr>';
+<<<<<<< HEAD
                 html += '<td>' + item.IdCredito + '</td>';
+=======
+                //html += '<td>' + item.Moneda + '</td>';
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
                 html += '<td>' + item.IdSolicitud + '</td>';
                 html += '<td>' + item.nombreProducto + '</td>';
                 html += '<td>' + item.MontoProducto + '</td>';
@@ -1138,15 +1329,22 @@ function cargarPrestamoCliente(ident) {
                 // html += '<td><a href="#" class="btn btn-primary" onclick="return getbyID(' + item.cod_agente + ')"> Editar </a> | <a class="btn btn-primary"  href="#" onclick="Delele(' + item.cod_agente + ')">Eliminar</a></td>';
                 html += '</tr>';
             });
+<<<<<<< HEAD
             $("#PrestamosClientesTable").dataTable().fnClearTable();
             $("#PrestamosClientesTable").dataTable().fnDestroy();
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 
             $('.GridPrestamos').html(html);
             $("#PrestamosClientesTable").DataTable();
             $("select[name*='UserTable_length']").change();
         },
         error: function (errormessage) {
+<<<<<<< HEAD
             alertify.error('Ocurrio un Error al Cargar los Prestamos del Cliente');
+=======
+            alertify.error('Ocurrion un Error');
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 
         }
     });
@@ -1189,6 +1387,7 @@ function cargarPrestamoParientes(ident) {
             $("select[name*='UserTable_length']").change();
         },
         error: function (errormessage) {
+<<<<<<< HEAD
             alertify.error('Ocurrio un Error al Cargar Los Prestamos de Parientes');
 
         }
@@ -2202,4 +2401,10 @@ function actualizarCalificacion(idTelefono, calificacion,elId,cedula) {
             alertify.error('A ocurrido un error inesperado');
             throw e;
         });
+=======
+            alertify.error('Ocurrion un Error');
+
+        }
+    });
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 }

@@ -1,0 +1,80 @@
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
+
+<script src="assets/js/jquery.easing.min.js"></script>
+<script src="assets/js/mobile-detect.min.js"></script>
+<script src="assets/js/sign_pad.js" async></script> <!-- firma -->
+<script src="assets/js/bootstrap-slider.js?v=1" async></script>
+<script src="assets/js/jquery.inputmask.bundle.js" async></script> <!-- mascaras para los bancos -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" async></script>
+<script src="assets/js/message.js"></script>
+<script>
+    (async () => {
+        let randVal = 1;// return the same in production
+        if (env == 'dev') {
+            console.log('Ambiente de desarrollo');
+            randVal = Math.floor(Math.random() * 10000000);
+        }
+        for await (let url of [
+            `assets/js/calcu.js?v=${randVal}`,
+            `assets/js/metodos_api.js?v=${randVal}`,
+            `assets/js/validar.js?v=${randVal}`]) {
+            utils.loadJS({
+                url, callback: (val) => {
+                    console.log(url + ' cargado');
+                }
+            });
+        }
+    })();
+</script>
+<!--Google analitycs-->
+<script>
+    'use strict';
+    if (env == 'prd') {
+        utils.loadJS({
+            url: 'https://www.googletagmanager.com/gtag/js?id=UA-131836164-1', callback: () => {
+                console.info('Codigo de google analytics leido')
+                window.dataLayer = window.dataLayer || [];
+
+                function gtag() {
+                    dataLayer.push(arguments);
+                }
+                gtag('js', new Date());
+
+                gtag('config', 'UA-131836164-1');
+            }
+        });
+    }
+</script>
+<!--Facebook pixel-->
+<script>
+    if (env == 'prd') {
+        ! function (f, b, e, v, n, t, s) {
+            if (f.fbq)
+                return;
+            n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq)
+                f._fbq = n;
+            n.push = n;
+            n.loaded = !0;
+            n.version = '2.0';
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = !0;
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1961337630863600');
+        fbq('track', 'PageView');
+        fbq('track', 'CompleteRegistration');
+    }
+</script>

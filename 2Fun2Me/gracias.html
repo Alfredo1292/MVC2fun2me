@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="assets/js/utils.js"></script>
+    <style>
+        #text-gracias {
+
+            font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+            font-size: 1em;
+        }
+
+
+        html {
+
+            height: 100%;
+
+        }
+
+
+        body {
+
+            height: 100%;
+
+            background: url('assets/img/thank_you.png');
+            background-size: 100% 100%;
+
+
+        }
+
+        .center_div {
+
+
+            position: absolute;
+            left: 60%;
+            top: 50%;
+
+            /*
+  Nope =(
+  margin-left: -25%;
+  margin-top: -25%;
+  */
+
+            /* 
+  Yep!
+  */
+            transform: translate(-50%, -50%);
+
+
+
+        }
+
+        .logo-pc {
+            margin-top: 5%;
+        }
+
+        .logo-cel {
+            display: none;
+        }
+
+        @media(max-width: 1366px) {
+            .logo-pc {
+                margin-top: 2%;
+                width: 100%;
+            }
+        }
+
+        @media(max-width: 1024px) {
+            .logo-pc {
+                margin-top: 5%;
+            }
+        }
+
+        @media(max-width: 768px) {
+
+
+            #text-gracias {
+
+                font: 700 0.9rem/1.75rem "Open Sans", sans-serif;
+                font-size: 1em;
+                margin-top: 25%;
+
+
+            }
+
+            .logo-pc {
+                display: none;
+            }
+
+            .logo-cel {
+                display: block;
+                margin-top: 15%;
+            }
+
+            body {
+
+                background: url('assets/img/thank_you_movil.png');
+                background-size: 100% 100%;
+
+            }
+
+
+            .center_div {
+
+
+                position: absolute;
+                left: 50%;
+                top: 15%;
+
+
+
+
+            }
+
+        }
+
+        @media(max-width: 640px) {
+            .logo-cel {
+                margin-top: 20%;
+            }
+        }
+
+        @media(max-width: 480px) {
+            .logo-cel {
+                margin-top: 13%;
+                width: 100%;
+            }
+        }
+
+        @media(max-width: 320px) {
+            .logo-cel {
+                margin-top: 0%;
+                width: 100%;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 center_div" id="text-gracias" style="text-align: left; color: white;">
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/env.js"></script>
+    <script>
+        /*
+        Validacion manual
+        */
+        let html1 =/*html*/`<label>Listo!</br>
+                    Te llamaremos a la brevedad para validar los documentos que nos enviaste.
+                    <br>O podés llamarnos al <i class="fa fa-phone" aria-hidden="true">
+                        <a id="text-gracias" href="tel:25215781" style="color: yellow"> 2521 5781</a></i> o escribirnos
+                    a nuestro WhatsApp <i class="fa fa-whatsapp" aria-hidden="true">
+                        <a id="text-gracias" style="color:yellow" href="//api.whatsapp.com/send?phone=50660547961&text=Su consulta aquí">
+                            6054 7961</a>.</i><br>Gracias por confiar en nosotros.</label>`;
+        let html2 = `<label>Ya estamos! </br>
+                    En las próximas horas te depositaremos el dinero del préstamo a tu cuenta bancaria.
+                    <br>Si tenés dudas o consultas, llamanos al <i class="fa fa-phone" aria-hidden="true">
+                        <a id="text-gracias" href="tel:25215781" style="color: yellow"> 2521 5781</a></i> o escribinos
+                    un mensaje a nuestro WhatsApp <i class="fa fa-whatsapp" aria-hidden="true">
+                        <a id="text-gracias" style="color:yellow" href="//api.whatsapp.com/send?phone=50660547961&text=Su consulta aquí">
+                        6054 7961</a>.</i><br>Gracias por confiar en nosotros.</label>`;
+        if (utils.getUrlVar('validacion-manual')) {
+            document.querySelector('#text-gracias').innerHTML = html1;
+            console.log('Validación manual');
+        } else {
+            document.querySelector('#text-gracias').innerHTML = html2;
+        }
+    </script>
+    <!--Google analitycs-->
+    <script>
+        'use strict';
+        if (env == 'prd') {
+            utils.loadJS({
+                url: 'https://www.googletagmanager.com/gtag/js?id=UA-131836164-1', callback: () => {
+                    console.info('Codigo de google analytics leido')
+                    window.dataLayer = window.dataLayer || [];
+
+                    function gtag() {
+                        dataLayer.push(arguments);
+                    }
+                    gtag('js', new Date());
+
+                    gtag('config', 'UA-131836164-1');
+                }
+            });
+        }
+    </script>
+    <!--Facebook pixel-->
+    <script>
+        if (env == 'prd') {
+            ! function (f, b, e, v, n, t, s) {
+                if (f.fbq)
+                    return;
+                n = f.fbq = function () {
+                    n.callMethod ?
+                        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                };
+                if (!f._fbq)
+                    f._fbq = n;
+                n.push = n;
+                n.loaded = !0;
+                n.version = '2.0';
+                n.queue = [];
+                t = b.createElement(e);
+                t.async = !0;
+                t.src = v;
+                s = b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t, s)
+            }(window, document, 'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '1961337630863600');
+            fbq('track', 'PageView');
+            fbq('track', 'CompleteRegistration');
+        }
+    </script>
+</body>
+
+</html>

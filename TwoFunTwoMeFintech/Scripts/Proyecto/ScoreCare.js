@@ -2,7 +2,10 @@
 $(document).ready(function () {
     loadData();
     buscarGrid();
+<<<<<<< HEAD
     $('body').css("background-image", "none");
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
    // $("#dtBasicExample").DataTable();
 });
 
@@ -58,6 +61,10 @@ function loadData() {
                 html += '</tr>';
             });
 			$('.tbody').html(html);
+<<<<<<< HEAD
+=======
+			$.noConflict();		
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 	        $('#dtBasicExample').DataTable();
         },
         error: function (errormessage) {

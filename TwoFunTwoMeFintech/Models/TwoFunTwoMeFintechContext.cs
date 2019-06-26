@@ -37,6 +37,7 @@ namespace TwoFunTwoMeFintech.Models
 		public DbSet<Rules> Rules { get; set; }
 
 		public DbSet<clsSUBMENU> clsSUBMENUs { get; set; }
+<<<<<<< HEAD
 
 		public DbSet<clsMAINMENU> clsMAINMENUs { get; set; }
 
@@ -44,5 +45,7 @@ namespace TwoFunTwoMeFintech.Models
 
 		public DbSet<GestionGeneral> GestionGenerals { get; set; }
 
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 	}
 }

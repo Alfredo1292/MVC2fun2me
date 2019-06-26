@@ -51,12 +51,21 @@ namespace TwoFunTwoMeFintech.Controllers
                 if (dto_retorno.Any())
                 {
 
+<<<<<<< HEAD
                     if (dto_retorno.FirstOrDefault().esTemporal)
                     {
                         return RedirectToAction("CambioPassword", "Login");
                     }
 
                     var dto_ret = mang.mostrarMenu(_login.Cedula);
+=======
+                    //if (dto_retorno.FirstOrDefault().esTemporal)
+                    //{
+                    //    return RedirectToAction("CambioPassword", "Login");
+                    //}
+
+                    var dto_ret = mang.mostrarMenu( _login.Cedula);
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 
                     Session["LoginCredentials"] = dto_retorno;
                     Session["MenuMaster"] = dto_ret; //Bind the _menus list to MenuMaster session
@@ -80,6 +89,7 @@ namespace TwoFunTwoMeFintech.Controllers
 
         public ActionResult CambioPassword(LoginModels _login)
         {
+<<<<<<< HEAD
             if(_login.Password==null) return View();
             ManagerUser mang = new ManagerUser();
             try
@@ -92,6 +102,9 @@ namespace TwoFunTwoMeFintech.Controllers
                 return View();
             }
             return RedirectToAction("Login", "Login"); ;
+=======
+            return View();
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
         }
 
         public ActionResult LogOff()

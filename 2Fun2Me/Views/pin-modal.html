@@ -1,0 +1,19 @@
+<div class="modal fade" id="modal-pin" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="color:black">Verificación</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col form-group">
+                    <label id="modal-verificacion-text">Digite el pin enviado a tu celular</label>
+                    <input type="number" pattern="\d*" class="form-control" id="celu-pin" placeholder="digitos del pin">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="modalPinReenviarClick()" type="button"  class="btn-default modal-pin-reenviar hide">Reenviar pin</button>
+                <button onclick="modalPinSiguienteClick(this)" type="button" class="btn-default modal-pin-siguiente">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>

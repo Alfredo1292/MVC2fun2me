@@ -1577,6 +1577,7 @@ namespace TwoFunTwoMe.Models.Manager
         }
         #endregion
 
+<<<<<<< HEAD
         #region cambio pass
         public void cambioPass(LoginModels login)
         {
@@ -1606,5 +1607,8 @@ namespace TwoFunTwoMe.Models.Manager
             }
         }
         #endregion
+=======
+
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     }
 }

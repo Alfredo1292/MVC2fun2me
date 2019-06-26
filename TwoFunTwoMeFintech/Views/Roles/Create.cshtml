@@ -1,4 +1,5 @@
 ﻿@model TwoFunTwoMeFintech.Models.DTO.Roles
+<<<<<<< HEAD
 @{
     ViewBag.Title = "Details";
     Layout = null;
@@ -40,10 +41,54 @@
             </div>
         </form>
     </fieldset>
+=======
+
+<h2>Crear</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+<fieldset>
+	<head>
+		@*<meta charset="utf-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+			<meta name="description" content="">
+			<meta name="author" content="">
+			<link rel="icon" href="../../../../favicon.ico">
+
+			<title>Signin Template for Bootstrap</title>*@
+		<!-- Bootstrap core CSS -->
+		@*<link href="~/Content/bootstrap-4.0.0/dist/css/bootstrap.min.css" rel="stylesheet">*@
+	</head>
+	<form>
+
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$('input[type="text"]').val('');
+			});
+		</script>
+
+		<div class="form-group row">
+			<div class="form-group col-md-4">
+				@Html.LabelFor(model => model.ROLES)
+				@Html.TextBox("ROLESNOMBRE", "", new { @class = "form-control", @placeholder = "ROLESNOMBRE", required = "required" })
+			</div>
+		</div>
+		<div class="form-label-group">
+			<div class="form-group col-md-2">
+				<input type="submit" class="btn btn-lg btn-primary btn-block" value="Crear" />
+
+			</div>
+		</div>
+	</form>
+</fieldset>
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+<<<<<<< HEAD
     <script type="text/javascript">
             @if (!User.Identity.IsAuthenticated)
             {
@@ -54,3 +99,5 @@
             }
 
     </script>
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851

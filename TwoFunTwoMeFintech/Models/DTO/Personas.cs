@@ -72,6 +72,7 @@ namespace TwoFunTwoMeFintech.Models.DTO
 
         public int? IdStatusOrden { get; set; }
         public string CapitalPendiente { get; set; }
+<<<<<<< HEAD
 
 
         //icortes nuevos datos para la persona
@@ -88,5 +89,7 @@ namespace TwoFunTwoMeFintech.Models.DTO
         public string SupervisorDirecto { get; set; }
         public string NombreCompletoPersonal { get; set; }
         public string TelefonoPersonal { get; set; }
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     }
 }

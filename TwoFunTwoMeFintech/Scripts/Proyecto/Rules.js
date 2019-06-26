@@ -1,7 +1,11 @@
 ﻿//Load Data in Table when documents is ready
 $(document).ready(function () {
+<<<<<<< HEAD
     loadData();
     $('body').css("background-image", "none");
+=======
+	loadData();
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 	//$('#example').dataTable();
 });
 
@@ -28,7 +32,11 @@ function loadData() {
 				html += '<td>' + item.Condicion + '</td>';
 				html += '<td>' + item.Tipo + '</td>';
 				html += '<td>' + item.ActivoString + '</td>';
+<<<<<<< HEAD
                 html += '<td><a href="#" class="btn btn-primary btn-primary-editar" onclick="return getbyID(' + item.IdRule + ')"> Editar </a></td>';
+=======
+				html += '<td><a href="#" class="btn btn-primary" onclick="return getbyID(' + item.IdRule + ')"> Editar </a></td>';
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 				html += '</tr>';
 			});
 

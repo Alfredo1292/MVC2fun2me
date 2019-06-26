@@ -468,6 +468,7 @@
     <Compile Include="Controllers\AsignacionVentasController.cs" />
     <Compile Include="Controllers\BucketsController.cs" />
     <Compile Include="Controllers\CobrosController.cs" />
+<<<<<<< HEAD
     <Compile Include="Controllers\Colocacion\ColocacionController.cs" />
     <Compile Include="Controllers\ComprobantePagoController.cs" />
     <Compile Include="Controllers\CuentaBancariaController.cs" />
@@ -476,20 +477,29 @@
     <Compile Include="Controllers\GestionesCartera\GestionesCarteraController.cs" />
     <Compile Include="Controllers\GestionGeneralController.cs" />
     <Compile Include="Controllers\HistorialCobros\HistorialCobrosController.cs" />
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ListaNegra\ListaNegraController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+<<<<<<< HEAD
     <Compile Include="Controllers\MAINMENUController.cs" />
     <Compile Include="Controllers\Producto\ProductoController.cs" />
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\RulesController.cs" />
     <Compile Include="Controllers\ScoreCardExpertoController.cs" />
     <Compile Include="Controllers\SolicitudesController.cs" />
+<<<<<<< HEAD
     <Compile Include="Controllers\SolicitudesVentasController.cs" />
     <Compile Include="Controllers\SUBMENUController.cs" />
     <Compile Include="Controllers\TesoreriaPendienteTranferenciaController.cs" />
     <Compile Include="Controllers\TranferenciasFinanzasController.cs" />
     <Compile Include="Controllers\TransferenciasController.cs" />
+=======
+    <Compile Include="Controllers\SUBMENUController.cs" />
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -507,6 +517,7 @@
     <Compile Include="Models\DTO\ApicarCobros\CuentasCobros.cs" />
     <Compile Include="Models\DTO\AprobadoVerificacionTesoreria.cs" />
     <Compile Include="Models\DTO\AsignacionBuckets.cs" />
+<<<<<<< HEAD
     <Compile Include="Models\DTO\AWSAccess.cs" />
     <Compile Include="Models\DTO\Bancos.cs" />
     <Compile Include="Models\DTO\BucketCobros.cs" />
@@ -539,6 +550,12 @@
     <Compile Include="Models\DTO\comprobantepago.cs" />
     <Compile Include="Models\DTO\ConfiguracionReportes.cs" />
     <Compile Include="Models\DTO\ConsultaEstadoSolicitud.cs" />
+=======
+    <Compile Include="Models\DTO\BucketCobros.cs" />
+    <Compile Include="Models\DTO\BurosXml.cs" />
+    <Compile Include="Models\DTO\clsMAINMENU.cs" />
+    <Compile Include="Models\DTO\clsSUBMENU.cs" />
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     <Compile Include="Models\DTO\ConsultarCreditos.cs" />
     <Compile Include="Models\DTO\contacto.cs" />
     <Compile Include="Models\DTO\CreditXml.cs" />
@@ -550,6 +567,7 @@
     <Compile Include="Models\DTO\DTOHistorialCobros.cs" />
     <Compile Include="Models\DTO\dto_conectividadBAC.cs" />
     <Compile Include="Models\DTO\dto_login.cs" />
+<<<<<<< HEAD
     <Compile Include="Models\DTO\Dto_Sinpe.cs" />
     <Compile Include="Models\DTO\DTO_SOLICITUD_VENTAS.cs" />
     <Compile Include="Models\DTO\GestionCobro.cs" />
@@ -576,13 +594,22 @@
     <Compile Include="Models\DTO\InsertaSolicitud\DtoSubOrigen.cs" />
     <Compile Include="Models\DTO\InsertaSolicitud\InsertPersonasWeb.cs" />
     <Compile Include="Models\DTO\ListaNegra\dto_ListaNegra.cs" />
+=======
+    <Compile Include="Models\DTO\GestionCobro.cs" />
+    <Compile Include="Models\DTO\GlobalClass.cs" />
+    <Compile Include="Models\DTO\InformacionCuenta.cs" />
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     <Compile Include="Models\DTO\Manager.cs" />
     <Compile Include="Models\DTO\Origenes.cs" />
     <Compile Include="Models\DTO\PagareContrato.cs" />
     <Compile Include="Models\DTO\Personas.cs" />
+<<<<<<< HEAD
     <Compile Include="Models\DTO\PlanPlagos.cs" />
     <Compile Include="Models\DTO\Prestamos.cs" />
     <Compile Include="Models\DTO\ProductoNuevo.cs" />
+=======
+    <Compile Include="Models\DTO\Prestamos.cs" />
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     <Compile Include="Models\DTO\productos.cs" />
     <Compile Include="Models\DTO\Producto\Productos.cs" />
     <Compile Include="Models\DTO\reprogramaciones.cs" />
@@ -593,7 +620,10 @@
     <Compile Include="Models\DTO\Solicitudes.cs" />
     <Compile Include="Models\DTO\Tabla_Accion.cs" />
     <Compile Include="Models\DTO\Tabla_RespuestaGestion.cs" />
+<<<<<<< HEAD
     <Compile Include="Models\DTO\TesoreriaPendianteTranferencia.cs" />
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     <Compile Include="Models\DTO\Tipos.cs" />
     <Compile Include="Models\DTO\Transferencias.cs" />
     <Compile Include="Models\DTO\TransferenciasFinanzas.cs" />
@@ -1550,6 +1580,7 @@
     <Content Include="Content\css\jquery.dataTables_themeroller.css" />
     <Content Include="Content\dataTables.bootstrap4.min.js" />
     <Content Include="Content\dataTables.buttons.min.js" />
+<<<<<<< HEAD
     <Content Include="Content\datatables.extensions\AutoFill\css\dataTables.autoFill.css" />
     <Content Include="Content\datatables.extensions\AutoFill\css\dataTables.autoFill.min.css" />
     <Content Include="Content\datatables.extensions\AutoFill\images\filler.png" />
@@ -1597,6 +1628,8 @@
     <Content Include="Content\images\sort_both.png" />
     <Content Include="Content\images\sort_desc.png" />
     <Content Include="Content\images\sort_desc_disabled.png" />
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     <Content Include="Content\jquery.dataTables.min.css" />
     <Content Include="Content\jquery.dataTables.min.js" />
     <Content Include="Content\menu\estilos-menu.css" />
@@ -1679,6 +1712,7 @@
     <Content Include="ddl\TwoFunTwoMe_DataAccess.dll" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+<<<<<<< HEAD
     <Content Include="Images\campana.png" />
     <Content Include="Images\descarga-exel-icono.png" />
     <Content Include="Images\dialogo-guion.png" />
@@ -1690,10 +1724,14 @@
     <Content Include="Images\pasos-agente.png" />
     <Content Include="Images\user.png" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+=======
+    <Content Include="Images\noImage.jpg" />
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+<<<<<<< HEAD
     <Content Include="Scripts\datatables.extensions\AutoFill\js\dataTables.autoFill.js" />
     <Content Include="Scripts\datatables.extensions\AutoFill\js\dataTables.autoFill.min.js" />
     <Content Include="Scripts\datatables.extensions\AutoFill\Readme.txt" />
@@ -1760,6 +1798,15 @@
     <Content Include="Scripts\Proyecto\cambioPass.js" />
     <Content Include="Scripts\Proyecto\GestionGeneral.js" />
     <Content Include="Scripts\Proyecto\JsMAINMENU.js" />
+=======
+    <Content Include="Scripts\jquery-1.12.4.js" />
+    <Content Include="Scripts\jquery.dataTables.min.css" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\Proyecto\DataTable Bootstrap.js" />
+    <Content Include="Scripts\Proyecto\DataTables 1.10.15.js" />
+    <Content Include="Scripts\Proyecto\cambioPass.js" />
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     <Content Include="Scripts\Proyecto\JSSUBMENU.js" />
     <Content Include="Scripts\Proyecto\Roles.js" />
     <Content Include="Scripts\Proyecto\ColaCobros.js" />
@@ -2032,6 +2079,7 @@
     <Content Include="Content\awesome-bootstrap-checkbox.scss" />
     <Content Include="Content\awesome-bootstrap-checkbox.less" />
     <Content Include="Content\bootstrap-4.0.0\fonts\glyphicons-halflings-regular.woff2" />
+<<<<<<< HEAD
     <Content Include="Content\bootstrap-4.0.0\jquery-ui-1.10.3\MANIFEST" />
     <Content Include="Content\bootstrap-4.0.0\jquery-ui-1.10.3\package.json" />
     <Content Include="Content\bootstrap-4.0.0\jquery-ui-1.10.3\README.md" />
@@ -2086,6 +2134,8 @@
     <Content Include="Content\datatables.extensions\TableTools\images\psd\copy document.psd" />
     <Content Include="Content\datatables.extensions\TableTools\images\psd\collection.psd" />
     <Content Include="Content\datatables.extensions\Responsive\css\dataTables.responsive.scss" />
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Scripts\datatables.extensions\Responsive\Readme.md" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
@@ -2200,9 +2250,13 @@
     <Content Include="Views\Roles\Delete.cshtml" />
     <Content Include="Views\Cobros\Index.cshtml" />
     <Content Include="Views\Cobros\Details.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
+=======
+    <Content Include="Views\Web.config" />
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     <Content Include="Views\Cobros\Contactos.cshtml" />
     <Content Include="Views\Cobros\HistoricoGestiones.cshtml" />
     <Content Include="Views\Cobros\HistoricoPromesasPagos.cshtml" />
@@ -2221,6 +2275,7 @@
     <Content Include="Views\SUBMENU\Details.cshtml" />
     <Content Include="Views\SUBMENU\Edit.cshtml" />
     <Content Include="Views\SUBMENU\Index.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Cobros\ReferenciasPersonales.cshtml" />
     <Content Include="Views\Cobros\CorreoPersona.cshtml" />
     <Content Include="Views\MAINMENU\Create.cshtml" />
@@ -2277,6 +2332,8 @@
     <Content Include="Views\GestionesCartera\ReferenciasPersonales.cshtml" />
     <Content Include="Views\GestionesCartera\AdministrarDocumentos.cshtml" />
     <Content Include="Views\Cobros\HistoricoGestionesAutomaticas.cshtml" />
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,4 +1,13 @@
+<<<<<<< HEAD
 ﻿namespace TwoFunTwoMeFintech.Models.DTO
+=======
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace TwoFunTwoMeFintech.Models.DTO
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 {
     public class ConsultarCreditos
     {
@@ -30,8 +39,12 @@
         public string TrabajoNombre { get; set; }
         public string Conyugue { get; set; }
         public string IdCredito { get; set; }
+<<<<<<< HEAD
         public string Mensaje { get; set; }
         public string Usuario { get; set; }
         public string NotaPermanente { get; set; }
+=======
+
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     }
 }

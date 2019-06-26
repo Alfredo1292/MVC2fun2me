@@ -1,8 +1,12 @@
 ﻿
 //Load Data in Table when documents is ready
 $(document).ready(function () {
+<<<<<<< HEAD
     loadData();
     $('body').css("background-image", "none");
+=======
+	loadData();
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 	//$('#example').dataTable();
 });
 
@@ -28,11 +32,19 @@ function loadData() {
 				html += '<td>' + item.descMAINMENUID + '</td>';
 				html += '<td>' + item.descROLEID + '</td>';
 				html += '<td>' + item.ACTION + '</td>';
+<<<<<<< HEAD
                 html += '<td><a href="#" class="btn btn-primary btn-primary-editar" onclick="return getbyID(' + item.ID + ')"> Editar </a> | <a class="btn btn-primary btn-primary-eliminar"  href="#" onclick="Delele(' + item.ID + ')">Eliminar</a></td>';
+=======
+				html += '<td><a href="#" class="btn btn-primary" onclick="return getbyID(' + item.ID + ')"> Editar </a> | <a class="btn btn-primary"  href="#" onclick="Delele(' + item.ID + ')">Eliminar</a></td>';
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 				html += '</tr>';
 			});
 
 			$('.tbody').html(html);
+<<<<<<< HEAD
+=======
+			$.noConflict();
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 			$('#SUBMENUTable').DataTable();
 
 		},

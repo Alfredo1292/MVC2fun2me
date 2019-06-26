@@ -12,13 +12,19 @@
 //Load Data in Table when documents is ready
 $(document).ready(function () {
     loadData();
+<<<<<<< HEAD
     $('body').css("background-image", "none");
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     //$('#example').dataTable();
 });
 
 //Load Data function
 function loadData() {
+<<<<<<< HEAD
 	$('#UserTable').html();
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     processing: true; // for show progress bar  
     serverSide: true; // for process server side  
     filter: true; // this is for disable filter (search box)  
@@ -42,9 +48,12 @@ function loadData() {
                 html += '</tr>';
             });
 
+<<<<<<< HEAD
 			$('#UserTable').dataTable().fnClearTable();
 			$('#UserTable').dataTable().fnDestroy();
 
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
             $('.tbody').html(html);
 
             $("#UserTable").DataTable();
@@ -65,8 +74,12 @@ function getbyID(id) {
     $('#nombre').css('border-color', 'lightgrey');
     $('#correo').css('border-color', 'lightgrey');
     $('#estado').css('border-color', 'lightgrey');
+<<<<<<< HEAD
     $('#ddlRolId').css('border-color', 'lightgrey');
     $('#idEditarAgente strong').text("Editar Agente: " + id);
+=======
+	$('#ddlRolId').css('border-color', 'lightgrey');
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     $.ajax({
         url: "/User/Edit/" + id,
         typr: "GET",
@@ -74,9 +87,13 @@ function getbyID(id) {
         dataType: "json",
         success: function (result) {
             var html = '';           
+<<<<<<< HEAD
 			$("#ddlRolId").html('');
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
             $.each(result.ListRoles, function (key, item) {
                 $("#ddlRolId").append(new Option(item.ROLES, item.ID));
+<<<<<<< HEAD
             });
             $("#ddlAgencia").html('');
             $.each(result.ListaAgencias, function (key, item) {
@@ -89,14 +106,21 @@ function getbyID(id) {
             $("#ddAsignacion").append(new Option('Ventas', 2));
             $("#ddAsignacion").append(new Option('Cobros', 3));
 
+=======
+			});
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 			$.each(result.listadoDto_login, function (key, item) {
 				$('#cod_agente').val(item.cod_agente);
 				$('#nombre').val(item.nombre);
 				$('#correo').val(item.correo);
 				$('#estado').val(item.estado);
+<<<<<<< HEAD
                 $('#ddlRolId').val(item.ROLID);
                 $('#ddlAgencia').val(item.IdAgencia);
                 $('#ddAsignacion').val(item.TipoCola);
+=======
+				$('#ddlRolId').val(item.ROLID);
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 				$('#myModal').modal('show');
 				$('#btnUpdate').show();
 				$('#btnAdd').hide();
@@ -138,7 +162,10 @@ function Update() {
             $('#nombre').val("");
             $('#correo').val("");
 			$('#ROLID').val("");
+<<<<<<< HEAD
 
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 			alertify.alert("Id: " + $('#cod_agente').val() + " Se actualizo", function () {
 				var searchTerm = $(".search").val();
 				var listItem = $('.results tbody').children('tr');
@@ -154,7 +181,11 @@ function Update() {
 				if (jobCount == '0') { $('.no-result').show(); }
 				else { $('.no-result').hide(); }
 				$('#IdRule').val("");
+<<<<<<< HEAD
 				loadData();
+=======
+				location.reload();
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 			});
         },
         error: function (errormessage) {
@@ -173,11 +204,18 @@ function Crear() {
 		cod_agente: $('#txtcod_agente').val(),
 		nombre: $('#txtnombre').val(),
 		correo: $('#txtCorreo').val(),
+<<<<<<< HEAD
         ROLID: $('#ddlRoles option:selected').val(),
         TipoCola: $('#ddlAsignacion option:selected').val(),
 		pass: $('#txtpass').val(),
 		ConfirmPassword: $('#txtConfirmPassword').val(),
         IdAgencia: $('#ddlAgenciasExternas').val()
+=======
+		ROLID: $('#ddlRoles option:selected').val(),
+		pass: $('#txtpass').val(),
+		ConfirmPassword: $('#txtConfirmPassword').val(),
+
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 	};
 	$.ajax({
 		url: "/User/Crear",
@@ -186,6 +224,7 @@ function Crear() {
 		contentType: "application/json;charset=utf-8",
 		dataType: "json",
 		success: function (result) {
+<<<<<<< HEAD
 		
 			$('#myModal').modal('hide');
 			$('#txtcod_agente').val('');
@@ -195,6 +234,16 @@ function Crear() {
             $('#ddlAgenciasExternas').val();
 			$('#txtpass').val('');
 			$('#txtConfirmPassword').val('');
+=======
+			//loadData();
+			$('#myModal').modal('hide');
+			$('#txtcod_agente').val();
+			$('#txtnombre').val();
+			$('#txtCorreo').val();
+			$('#ddlRoles option:selected').val();
+			$('#txtpass').val();
+			$('#txtConfirmPassword').val();
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 			alertify.alert("Se ha creado el usuario" + $('#txtnombre').val(), function () {
 				var searchTerm = $(".search").val();
 				var listItem = $('.results tbody').children('tr');
@@ -210,7 +259,11 @@ function Crear() {
 				if (jobCount == '0') { $('.no-result').show(); }
 				else { $('.no-result').hide(); }
 				$('#txtnombre').val("");
+<<<<<<< HEAD
 				loadData();
+=======
+				location.reload();
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 			});
 		},
 		error: function (errormessage) {
@@ -234,8 +287,13 @@ function Delele(ID) {
                     success: function (result) {
                         alertify
                             .alert(result.Mensaje);
+<<<<<<< HEAD
 						$('#UserTable').html();
 						loadData();
+=======
+
+						location.reload();
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
                     },
                     error: function (xhr, status, p3, p4) {
                         var err = p3;
@@ -346,6 +404,7 @@ function validateCreate() {
 		$('#txtConfirmPassword').css('border-color', 'lightgrey');
 	}
 	return isValid;
+<<<<<<< HEAD
 }
 
 function getbyIDAsignarMenu(id) {
@@ -549,3 +608,6 @@ function clearMODAL2() {
 	$('#btnAdd').show();
 	//location.reload();
 }
+=======
+}
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851

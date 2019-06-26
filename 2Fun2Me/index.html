@@ -1,0 +1,1199 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- SEO Meta Tags -->
+	<meta name="description" content="Somos un Grupo Financiero Centroamericano, con base en Costa Rica, que tenemos como objetivo ayudar a todas las familias de Centroamérica en solucionar urgencias o imprevistos financieros.">
+	<meta name="author" content="Efectivo-Ya!">
+	<meta name="keywords" content="creditos rapidos, prestamos pequeños, prestamos Costa Rica">
+	<meta property="og:url" content="http://efectivo-ya.net" />
+	<meta property="og:title" content="Efectivo ya!" />
+	<meta property="og:description" content="Somos un Grupo Financiero Centroamericano, con base en Costa Rica, que tenemos como objetivo ayudar a todas las familias de Centroamérica en solucionar urgencias o imprevistos financieros." />
+	<meta property="og:image" content="http://efectivo-ya.net/assets/images/logo.jpg" />
+	<title>Efectivo-Ya</title>
+	<link rel="icon" type="image/png" href="assets/img/favicon2.png" sizes="64x64">
+	<!-- Styles -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
+	<!-- <link href="assets/css/bootstrap.css" rel="stylesheet">-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+		  crossorigin="anonymous">
+	<link href="assets/css/font-awesome.css" rel="stylesheet">
+	<link href="assets/css/swiper.css" rel="stylesheet">
+	<link href="assets/css/magnific-popup.css" rel="stylesheet">
+	<link href="assets/css/styles.css" rel="stylesheet">
+	<link href="assets/css/bootstrap-slider.css?v=1" rel="stylesheet">
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+	<style>
+		@import "assets/css/css.css?v=12";
+		@import "assets/css/steps.css?v=12";
+	</style>
+	<script src="assets/js/utils.js?v=12"></script>
+	<script src="assets/js/user-public-ip.js?v=12"></script>
+	<script src="assets/js/env.js?v=12"></script>
+	<!-- Favicon  -->
+	<!-- Favicon pendiente-->
+</head>
+
+<body>
+	<section id="top-section">
+		<div class="logo-efectivo">
+			<img id="logo_efectivo" class="img-responsive" src="assets/img/logo.png">
+		</div>
+		<!--boton back-->
+		<div class="back_button hide">
+			<div class="form-group">
+				<img id="back-button" class="img-responsive paso-anterior" src="assets/img/back-movil.png">
+				<!-- <button id="back" type="button" class="form-control paso-anterior"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>-->
+			</div>
+		</div>
+	</section>
+	<main id="wrap" class="container">
+		<div class="row">
+			<div id="steps-wrap">
+				<div class="col-md-6 center_div landscape" id="paso1">
+					<form id="solicitud-paso1" name="solicitud-paso1">
+						<div class="form-group">
+							<div class="calculadora">
+								<div class="range-slider">
+									<div class="form-group monto_credito" id="money1">
+										<!-- aca plazo a pagarlo-->
+										<h5>Monto crédito</h5>
+										<input id="ex28" type="text" class="monto_credit" onchange="calcularCuota()" data-provide="slider"
+											   data-slider-ticks="[1, 2, 3]" data-slider-ticks-labels='["₡50.000", "₡100.000", "₡150.000"]'
+											   data-slider-min="1" data-slider-max="3" data-slider-step="1" data-slider-value="1"
+											   data-slider-tooltip="hide" />
+									</div>
+								</div>
+								<!--plazo para 100 - 50 (hasta 3 meses)-->
+
+								<div class="form-group tres_meses" id="plazo2">
+									<!-- aca plazo a pagarlo-->
+									<h5>Plazo a pagarlo</h5>
+									<input id="ex21" type="text" class="plazo" onchange="calcularCuota()" data-provide="slider"
+										   data-slider-ticks="[3, 4, 5]" data-slider-ticks-labels='["1 mes", "2 meses", "3 meses"]'
+										   data-slider-min="1" data-slider-max="3" data-slider-step="1" data-slider-value="1"
+										   data-slider-tooltip="hide" />
+								</div>
+								<!--plazo para 150 (hasta 5 meses) -->
+								<div class="form-group cinco_meses" id="plazo3" style="display: none;">
+									<!-- aca plazo a pagarlo -->
+									<h5>Plazo a pagarlo</h5>
+									<input id="ex23" type="text" style="width: 100% !important;" class="plazo5meses" onchange="calcularCuota()"
+										   data-provide="slider" data-slider-ticks="[3, 4, 5, 6, 7]" data-slider-ticks-labels='["1 mes", "2 meses", "3 meses", "4 meses", "5 meses"]'
+										   data-slider-min="1" data-slider-max="5" data-slider-step="1" data-slider-value="1"
+										   data-slider-tooltip="hide" />
+								</div>
+								<div id="frecu">
+									<h5>Forma de pago</h5> <!-- aca frecuecnia pago-->
+									<input id="ex24" type="text" class="frecuencia" onchange="calcularCuota()" data-provide="slider"
+										   data-slider-ticks="[2, 3]" data-slider-ticks-labels='["quincenal", "mensual"]' data-slider-min="1"
+										   data-slider-max="2" data-slider-step="1" data-slider-value="1" data-slider-tooltip="hide" />
+								</div>
+								<div class="cuota">
+									<br>
+									<h4>Cuota: <span id="mont"></span></h4>
+								</div>
+								<div class="form-group btn-solicitar">
+									<button type="button" id="solicitar-btn" onClick="solicitarBtnClick()">Solicitar</button>
+								</div>
+							</div>
+						</div>
+					</form>
+					<p class="legal-txt" style="text-align: justify;">
+						Cuota total por todo concepto de acuerdo a la frecuencia de pago
+						seleccionada: incluye gastos de formalización e intereses corrientes. Ejemplo de crédito de c100.000, plazo 3
+						meses, pago mensual: gastos de formalización 15%, intereses corrientes 0,323% diario. Cancelación anticipada no
+						tiene penalización. Las condiciones son sujetas a políticas internas de la empresa y pueden variar.
+					</p>
+				</div>
+				<div id="tipo_ident" class="center_div_ced_btns hide landscape" style="text-align: center; z-index: 1">
+					<span class="title1">Por favor selecciona tu tipo de identificación: </span>
+					<div class="form-row" style="margin-top: 10px;">
+						<div class="col form-group">
+							<button onclick="btnCedulaNacionalClick(this)" type="button" class="btn btn-yellow">Nacional</button>
+						</div>
+						<div class="col form-group">
+							<button onclick="bntCedulaDimexClick()" type="button" class="btn btn-yellow">Dimex</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-5 hide center_div landscape" id="paso2">
+					<!--Cedula tipo nacional parte 1 (cedula que muestra nombre)-->
+					<form id="solicitud-identificacion" name="solicitud" class="hide form-credito-nacional">
+						<!--se desoculta cuando el usuario selecciono su tipo de cedula-->
+						<div>
+							<div class="form-row">
+								<div class="col form-group">
+									<label>Cédula</label>
+									<input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+										   type="number" onkeyup="cedulaNacionalSolicitudKeyup(event)" onkeydown="cedulaSolicitudKeyDown(event,this);"
+										   class="form-control" id="cedula_solicitud" autocomplete="off" maxlength="9">
+									<small class="form-text">*Recuerda que la cedula debe de ser de 9 digitos</small>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="col form-group" id="label-bienvenida">
+									<div class="center-button">
+										<label class="label-bienvenida-nacional" style="text-align: left; font-size: 1.1em;"></label>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-row" style="margin-left: 1rem">
+								<div class="col-md-4">
+									<input type="checkbox" class="form-check-input" id="check" checked>
+								</div>
+								<div class="col-md-8" style="position:relative;bottom:0.3rem">
+									<small onclick="mostrarConsentimientoInformado()">
+										Acepto
+										<a>
+											<u style="cursor: pointer;">los términos y condiciones</u>
+										</a>
+									</small>
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="col form-group">
+									<button id="continuar-identificacion" type="button" class="form-control corregir-ced-nacional hide">
+										<i class="fa fa-undo" aria-hidden="true"></i> Corregir
+									</button>
+								</div>
+								<div class="col form-group">
+									<button onclick="solicitudCedulaNacionalClick(this)" id="continuar-identificacion" type="button"
+											class="form-control solicitud-cedula-nacional hide">
+										<i class="fa fa-arrow-right" aria-hidden="true"></i>
+										Aceptar
+									</button>
+								</div>
+							</div>
+						</div>
+					</form>
+					<!--Cedula tipo nacional parte 2 CONTACTO (cedula que muestra pantalla contacto telefono celular y correo)-->
+					<form id="frm-solicitud" name="solicitud" class="hide form-credito-nacional-contacto">
+						<div>
+							<div class="form-row">
+								<div class="col form-group">
+									<label>Télefono celular</label>
+									<input type="number" pattern="\d*" class="form-control" id="telefono_solicitud" autocomplete="off">
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="col form-group">
+									<label>Correo</label>
+									<input type="email" class="form-control" id="correo_solicitud">
+								</div>
+							</div>
+							<div class="form-group">
+								<button type="button" class="btn btn-yellow" onclick="solicitudAprobacionContactoClick()">Continuar</button>
+							</div>
+						</div>
+						<div class="porfavor_espere espere-formulario hide col-md-12">
+							<i class="fa fa-spinner fa-spin" style="font-size:2em"></i>
+							<p>Por favor espere....</p>
+						</div>
+					</form>
+					<!--Cedula tipo dimex-->
+					<form id="solicitud" name="solicitud" class="hide form-credito-dimex solicitud-dimex">
+						<!--se desoculta cuando el usuario selecciono su tipo de cedula-->
+						<div>
+							<div class="form-row">
+								<div class="col-sm-12 form-group">
+									<p>Cédula</p>
+									<input type="number" pattern="\d*" class="form-control" id="cedula_solicitud-dimex" autocomplete="off">
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="col-sm-12 form-group">
+									<p>Primer nombre</p>
+									<input type="text" class="form-control" id="nombre-dimex">
+								</div>
+								<div class="col-sm-12 form-group">
+									<p>Segundo nombre</p>
+									<input type="text" class="form-control" id="nombre2-dimex">
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="col-sm-12 form-group">
+									<p>Primer apellido</p>
+									<input type="text" class="form-control" id="apellido-dimex">
+								</div>
+								<div class="col-sm-12 form-group">
+									<p>Segundo apellido</p>
+									<input type="text" class="form-control" id="apellido2-dimex">
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="col-sm-12 form-group">
+									<p>Teléfono celular</p>
+									<input type="number" pattern="\d*" class="form-control" id="telefono_solicitud-dimex" autocomplete="off">
+								</div>
+								<div class="col-sm-12 form-group">
+									<p>Correo Electrónico</p>
+									<input type="email" class="form-control" id="correo_solicitud-dimex">
+								</div>
+							</div>
+							<div class="form-group">
+								<button id="continuar" type="button" class="form-control solicitud-aprobacion-dimex">Continuar</button>
+							</div>
+						</div>
+						<div class="porfavor_espere espere-formulario-dimex hide col-md-12">
+							<i class="fa fa-spinner fa-spin" style="font-size:2em"></i>
+							<p>Por favor espere....</p>
+						</div>
+					</form>
+				</div>
+				<div class="col-md-5 center_div landscape hide" id="paso3">
+					<form id="solicitud-paso3" name="solicitud-paso3">
+						<div>
+							<div class="form-row">
+								<div class="col form-group">
+									<video controls="true" id="video" width="100%" controls webkit-playsinline="true" playsinline="true"
+										   src="assets/img/video_final.mp4">
+										Su navegador no soporta los videos, por favor eliga otro navegador para poder continuar.
+									</video>
+
+									<div class="center-button">
+										<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+										<label style="text-align: center; margin-top: 1em">
+											Estamos procesando tu solicitud. Cuando el video acabe podrás continuar con el siguiente
+											paso
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<button id="continuar" type="button" class="form-control btn-continuar-gif hide">Continuar</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="col-md-5 center_div landscape hide" id="paso4">
+					<form id="solicitud-paso4" name="solicitud-paso4">
+						<!--Credito aprobado-->
+						<div class="aprobado_credito">
+							<div class="form-row">
+								<label class="txt_aprobado_gracias">
+									Felicidades, tu crédito ha sido aprobado!
+								</label>
+								<div class="col form-group">
+									<div class="center-button">
+										<img class="img_aceptado" class="img-responsive" src="assets/img/wila_aceptado.png">
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<button id="continuar" type="button" class="aprobado_credito btn btn-yellow">Continuar</button>
+							</div>
+						</div>
+						<!--Credito rechazado-->
+						<div class="rechazado_credito hide">
+							<div class="form-row">
+								<div class="form-row" style="margin: auto;">
+									<div class="col form-group">
+										<div class="center-button">
+											<img class="img_rechazado" class="img-responsive" src="assets/img/botones/x_rechazado.png">
+										</div>
+									</div>
+								</div>
+								<div class="col form-group">
+									<div class="center-button">
+										<img class="img-responsive" src="assets/img/botones/txt_rechazado.png">
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="col-md-5 center_div landscape hide" id="paso5">
+					<form id="solicitud" name="solicitud">
+						<div id="cedula-form">
+							<div class="form-row">
+								<div class="col form-group">
+									<div class="center-button">
+										<label class="label-ced-frontal" style="text-align: left;">
+											Necesitamos una fotografía de tu cédula
+											por el frente
+										</label>
+									</div>
+									<div class="img-ced-frente">
+										<img id="preview-ced-img" class="img-responsive" style="width:100%; max-height: 200px;" src="assets/img/cedula_frente.png" />
+									</div>
+								</div>
+							</div>
+							<div id="cedula-foto-mobile" class="form-row">
+								<!--mobile y desktop-->
+								<div class="col form-group">
+									<div class="center-button">
+										<div class="upload-btn-wrapper">
+											<button id="button-upload-cedula-mobiles" type="button" class="btn btn-yellow">
+												<i class="fa fa-camera"
+												   aria-hidden="true"></i> Tomar foto
+											</button>
+											<input id="button-upload-cedula-mobile" type="file" accept="image/*" capture />
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="cedula-foto-desktop" class="form-row hide">
+								<!--Desktop solo-->
+								<div class="col form-group">
+									<div class="center-button">
+										<div class="upload-btn-wrapper">
+											<button id="button-upload-cedula-desktops" type="button" class="btn">
+												<i class="fa fa-paperclip"
+												   aria-hidden="true"></i> Subir archivo
+											</button>
+											<input id="button-upload-cedula-desktop" type="file" accept="image/x-png,image/jpeg" name="myfile" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--mostrar cedula-->
+						<div id="cedula-preview-now" class="form-row hide">
+							<div class="col form-group">
+								<div class="center-button" id="ced-prev">
+									<!-- <img id="ced-prev" style="width: 100%" class="img-responsive"> -->
+								</div>
+							</div>
+							<div class="form-group">
+								<button id="continuar" type="button" class="form-control cedula-aceptar">Aceptar</button>
+							</div>
+							<div class="form-group">
+								<div class="center-button">
+									<div class="upload-btn-wrapper">
+										<button id="button-upload-cedula-mobiles" type="button" class="btn btn-yellow">
+											<i class="fa fa-camera"
+											   aria-hidden="true"></i> Otra
+										</button>
+										<input id="button-upload-cedula-otravez" type="file" accept="image/*" capture />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="porfavor_espere espere-frontal hide col-md-12">
+							<i class="fa fa-spinner fa-spin" style="font-size:2em"></i>
+							<p>Por favor espere....</p>
+						</div>
+					</form>
+				</div>
+				<div class="col-md-5 center_div hide landscape" id="paso6">
+					<form id="solicitud" name="solicitud">
+						<div id="cedula-form-dorso">
+							<div class="form-row">
+								<div class="col form-group">
+									<div class="center-button">
+										<label class="label-ced-dorso" style="text-align: left;">
+											Necesitamos una fotografía de tu cédula por
+											el dorso
+										</label>
+										<div class="img-ced-dorso">
+											<img id="preview-ced-img-dorso" class="img-responsive" style="width:100%; max-height: 200px;" src="assets/img/cedula_dorso.png" />
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="cedula-foto-mobile-dorso" class="form-row">
+								<!--mobile y desktop-->
+								<div class="col form-group">
+									<div class="center-button">
+										<div class="upload-btn-wrapper">
+											<button id="button-upload-cedula-mobiles-dorso" type="button" class="btn btn-yellow">
+												<i class="fa fa-camera"
+												   aria-hidden="true"></i> Tomar foto
+											</button>
+											<input id="button-upload-cedula-mobile-dorso" type="file" accept="image/*" capture />
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="cedula-foto-desktop-dorso" class="form-row hide">
+								<!--Desktop solo-->
+								<div class="col form-group">
+									<div class="center-button">
+										<div class="upload-btn-wrapper">
+											<button id="button-upload-cedula-desktops-dorso" type="button" class="btn">
+												<i class="fa fa-paperclip"
+												   aria-hidden="true"></i> Subir archivo
+											</button>
+											<input id="button-upload-cedula-desktop-dorso" type="file" accept="image/x-png,image/jpeg" name="myfile" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--mostrar cedula dorso-->
+						<div id="cedula-preview-dorso" class="form-row hide">
+							<div class="col form-group">
+								<div class="center-button" id="ced-prev-dorso">
+									<!-- <img id="ced-prev" style="width: 100%" class="img-responsive"> -->
+								</div>
+							</div>
+							<div class="form-group">
+								<button id="continuar" type="button" class="form-control cedula-aceptar-dorso">Aceptar</button>
+							</div>
+							<div class="form-group">
+								<div class="center-button">
+									<div class="upload-btn-wrapper">
+										<button id="button-upload-cedula-mobiles-dorso" type="button" class="btn">
+											<i class="fa fa-camera"
+											   aria-hidden="true"></i> Otra
+										</button>
+										<input id="button-upload-cedula-otravez-dorso" type="file" accept="image/*" capture />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="porfavor_espere espere-dorso hide col-md-12">
+							<i class="fa fa-spinner fa-spin" style="font-size:2em"></i>
+							<p>Por favor espere....</p>
+						</div>
+					</form>
+				</div>
+				<div class="col-md-5 center_div landscape hide" id="paso7">
+					<form id="solicitud" name="solicitud" class='frm-solicitud'>
+						<div id="cedula-form-selfie">
+							<div class="form-row">
+								<div class="col form-group">
+									<div class="center-button">
+										<label class="label-ced-selfie" style="text-align: left;">Envianos una foto tuya como el ejemplo:</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="col form-group">
+									<div class="img-ced-selfie">
+										<img id="preview-ced-img-selfie" class="img-responsive" style="width:100%; max-height: 200px;" src="" />
+									</div>
+								</div>
+							</div>
+							<div id="cedula-foto-mobile" class="form-row">
+								<!--mobile y desktop-->
+								<div class="col form-group">
+									<div class="center-button">
+										<div class="upload-btn-wrapper">
+											<button id="button-upload-cedula-mobiles-selfie" type="button" class="btn btn-yellow"><i class="fa fa-camera" aria-hidden="true"></i> Tomar selfie</button>
+											<input id="button-upload-cedula-mobile-selfie" type="file" accept="image/*" capture />
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="cedula-foto-desktop-selfie" class="form-row hide">
+								<!--Desktop solo-->
+								<div class="col form-group">
+									<div class="center-button">
+										<div class="upload-btn-wrapper">
+											<button id="button-upload-cedula-desktops" type="button" class="btn btn-yellow"><i class="fa fa-paperclip" aria-hidden="true"></i> Subir archivo</button>
+											<input id="button-upload-cedula-desktop-selfie" type="file" accept="image/x-png,image/jpeg" name="myfile" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--mostrar cedula-->
+						<div id="cedula-preview-selfie" class="form-row hide">
+							<div class="col form-group">
+								<div class="center-button" id="ced-prev-selfie">
+								</div>
+							</div>
+							<div class="form-group">
+								<button id="continuar" type="button" class="form-control aceptar-selfie">Aceptar</button>
+							</div>
+							<div class="form-group">
+								<div class="center-button">
+									<div class="upload-btn-wrapper">
+										<button id="button-upload-cedula-mobiles" class="btn btn-yellow" type="button"><i class="fa fa-camera" aria-hidden="true"></i> Otra</button>
+										<input id="button-upload-cedula-otravez-selfie" type="file" accept="image/*" capture />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="porfavor_espere espere-selfie hide col-md-12">
+							<i class="fa fa-spinner fa-spin" style="font-size:2em"></i>
+							<p>Por favor espere....</p>
+						</div>
+					</form>
+				</div>
+				<div class="col-md-5 center_div landscape hide" id="paso8">
+					<form id="solicitud" name="solicitud">
+						<div>
+							<div class="form-row">
+								<div class="col form-group">
+									<div class="center-button">
+										<label class="label-cuenta" style="text-align: left !important;">
+											Indicanos en qué cuenta te tenemos
+											que depositar. Recordá que tenés que ser el titular, no depositamos en cuentas de otras personas.
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="col form-group">
+									<label>Banco</label>
+									<select class="form-control-select" onchange="bancoSelectChange($(this).val())" data-dropup-auto="false" id="banco-select" onchange="">
+										<option class="select-option" value="" disabled selected>Selecciona</option>
+										<option value="1">Banco Nacional</option>
+										<!--15 digitos..pero con guiones son 19-->
+										<option value="2">BCR</option>
+										<!--7 digitos -->
+										<option value="4">BAC San Jos&eacute;</option>
+										<!--7 digitos -->
+										<option value="10">Otro</option>
+										<!--17 digitos SINPE -->
+									</select>
+								</div>
+							</div>
+							<!-- Tipo de cuenta, corriente o de ahorros-->
+							<div class="form-row hide" id="tipo-cuenta-row">
+								<div class="col form-group ">
+									<label>Tipo de cuenta</label>
+									<select class="form-control-select" data-dropup-auto="false" id="cbo-tipo-cuenta" onchange="tipoCuentaChange()">
+										<option class="select-option" value="" disabled selected>Selecciona</option>
+										<option value="1">Cuenta corriente</option>
+										<option value="2">Cuenta de ahorros</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-row hide" id="cuenta-row">
+								<div class="col form-group ">
+									<label>Número de cuenta</label>
+									<!---
+									<input type="text" pattern="\d*" class="form-control" id="cuenta_cliente" autocomplete="off">
+									-->
+									<input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+										   type="text"
+										   class="form-control"
+										   id="cuenta_cliente"
+										   autocomplete="off"
+										   maxlength="20"
+										   onkeypress='return validaNumericos(event)'>
+								</div>
+							</div>
+							<div class="form-row hide" id="cuenta-simpe-row">
+								<div class="col form-group ">
+									<label>Cuenta Simpe</label>
+									<input maxlength="17" onkeydown="utils.validateNumberOnType(event)" type="text" class="form-control" id="cuenta-simpe" autocomplete="off">
+								</div>
+							</div>
+							<div class="form-group">
+								<button id="continuar" onclick="cuentaBancariaContinuar()" type="button" class="btn btn-yellow cuenta-bancaria-continuar">Continuar</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="col-md-5 center_div landscape hide" id="paso9">
+					<form id="solicitud-condiciones" name="solicitud">
+						<h1>Términos y Condiciones</h1>
+						<div class="form-row terminos-condiciones">
+							<p>
+								Entre PLATAFORMA DE ENTRETENIMIENTO TWO FTV SOCIEDAD DE RESPONSABILIDAD LIMITADA,
+								con cedula jurídica 3-102-737931, en adelante LA ACREEDORA; y ${Nombre},
+								cédula de identidad ${Identificacion}, en adelante el DEUDOR y
+								actuando en conjunto denominados como LAS PARTES, convenimos en celebrar el presente
+								contrato de préstamo
+								de línea de crédito abierta.
+							</p>
+							<ul id="contract-list">
+								<!--1-->
+								<li>
+									Las Partes, reconocen y aceptan que acorde el principio de autonomía de la voluntad, por el
+									presente convenio se establecen las disposiciones de un
+									contrato bilateral que se regirá por el artículo 495 y concordantes del Código de Comercio y lo
+									dispuesto por la <span class="bold">
+										LEY DE CERTIFICADOS,
+										FIRMAS DIGITALES, Y DOCUMENTOS ELECTRONICOS
+									</span>, N* 8454, que se podrá concertar
+									mediante
+									manifestaciones expresadas y/o transmitidas por medios
+									electrónicos o informáticos, siendo que las comunicaciones y mensajes recíprocos que las partes
+									se cursen a través de herramientas de comunicación electrónicos, como ser, pero no limitado a,
+									transmisión y recepción de correo electrónico, mensajes cortos SMS, whatsapp,
+									llamadas telefónicas y/o cualquier otro medio utilizado por las partes, se reputaran como
+									válidas y eficaces; quedando a todo efecto probatorio
+									constancia de las mismas, y por ende perfeccionado el contrato de préstamo, pudiéndose
+									almacenar la información que se dirijan las partes,
+									mediante cualquier instrumento que permita ser recuperada durante un período de tiempo
+									adecuado, permitiendo la reproducción sin
+									cambios de la información almacenada.
+								</li>
+								<!--2-->
+								<li>
+									Con la aceptación y firma del presente contrato, la ACREEDORA, otorgará una línea de crédito
+									abierta a favor del DEUDOR, por un límite de
+									crédito de ${MontoProductoLetras} ${Moneda} (${MontoProducto}),
+									según los términos y condiciones estipulados en el presente contrato. Una vez
+									activada la línea de crédito, El DEUDOR podrá solicitar dentro de su límite, los desembolsos
+									que requiera, siendo que EL ACREEDOR desembolsará
+									los valores que a su exclusivo arbitrio y sin necesidad de motivar causa, le apruebe a EL
+									DEUDOR y este acepta y se obliga a pagar en tiempo y
+									forma la totalidad de las sumas que se le giren, así como sus respectivos intereses corriente,
+									moratorios y gastos administrativos, conforme a
+									lo estipulado. Toda suma de dinero solicitada por el DEUDOR por cualquier medio, (mensaje de
+									texto, correo electrónico, whatsapp, etc.
+									y que la ACREEDORA, le transfiera a su cuenta Bancaria, formará parte del crédito.
+								</li>
+								<!--3-->
+								<li>
+									PAGARE.- EL DEUDOR se compromete a suscribir conjuntamente con el presente contrato de
+									préstamo, uno o varios pagarés a favor de EL ACREEDOR,
+									por el total de la línea de crédito, los cuales estarán dispensados del protesto por falta de
+									pago.
+								</li>
+								<!--4-->
+								<li>
+									DEL INTERÉS: El saldo lo pagará LA DEUDORA, en un plazo de ${CantidadCuotas}
+									${Frecuencia}, a partir de hoy, en ${CantidadCuotas}
+									cuota(as) ${Frecuencia2},
+									fijas y consecutivas de ${Cuota}
+									${Moneda} cada una, que comprenden abono a capital e intereses sobre los
+									saldos, debiendo hacer el primer pago
+									${Frecuencia} el día ${FechaPrimerPagoLetras}, hasta cancelar cualquier
+									saldo el día ${FechaUltimoPagoLetras}. La presente obligación
+									devenga a partir
+									de la fecha de la firma del presente contrato, y hasta su
+									efectivo pago, intereses corrientes vencidos calculados
+									sobre saldos de capital adeudado,
+									a una tasa del ${InteresLetras} por ciento diario, (${Interes}%).
+									Los intereses se acumularán día a día y se calcularán sobre la base de
+									un año de trescientos sesenta y cinco días. En
+									cuanto a los INTERESES MORATORIOS, se fijan al
+									treinta por ciento por encima de los intereses
+									corrientes arriba fijados, sobre saldos impagos de
+									capital, hasta cancelar el total de la obligación.
+								</li>
+								<!-- 5 -->
+								<li>
+									GASTOS DE COBRO ADMINISTRATIVO.- En caso de que EL DEUDOR no pague dentro del plazo
+									acordado, deberá pagar además el costo que represente para la Acreedora la gestión de
+									cobro, los cuales serán de cinco mil ${Moneda} (C 5.000) por mes.
+								</li>
+								<!-- 6 -->
+								<li>
+									REEMBOLSOS.- Esta facilidad crediticia es revolutiva, o sea, es posible realizar
+									reembolsos al saldo del crédito, reponiéndose así el disponible del crédito a utilizar.
+									El DEUDOR deberá hacer todos los pagos a la ACREEDORA en forma directa en SAN JOSE- SAN JOSE,
+									CALLE TREINTA Y OCHO, EDIFICIO CENTRO COLON, TERCER PISO, MEZZANINE, o por medio de los
+									agentes que nombre para tal efecto la ACREEDORA, en el lugar o lugares que la ACREEDORA
+									le indique al DEUDOR, o bien en las cuentas bancarias de la Acreedora, que se indican
+									más abajo. Los pagos efectuados con cheque se entenderán realizados hasta la fecha
+									de recepción de los fondos por parte del banco en que se depositen. Los reintegros
+									de cada desembolso se realizarán de acuerdo a la forma pactada con el cliente.
+									El no pago de uno o todos los créditos, desembolsos o de los intereses de
+									la forma pactada se considerará un incumplimiento del presente contrato y el
+									vencimiento anticipado de su plazo sin necesidad de previa declaración
+									judicial o arbitral, con las consecuencias legales correspondientes.
+									<p>
+										PLATAFORMA DE ENTRETENIMIENTO TWO FTV SOCIEDAD DE RESPONSABILIDAD LIMITADA
+									</p>
+									<p>
+										Cédula jurídica 3-102-737931
+									</p>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="row">
+												<div class="col-sm-12">Cuenta Banco Nacional: 200-01-060-042647-8</div>
+												<div class="col-sm-12">Cuenta Cliente: 1510602001042647</div>
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="row">
+												<div class="col-sm-12">Cuenta BCR: 001-0468535-0</div>
+												<div class="col-sm-12">Cuenta Cliente: 15201001046853503</div>
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="row">
+												<div class="col-sm-12">Cuenta BAC San José: 936055474</div>
+												<div class="col-sm-12">Cuenta Cliente: 10200009360554746</div>
+											</div>
+										</div>
+									</div>
+								</li>
+								<!------------  7 ------------------->
+								<li>
+									ESTIPULACIONES SOBRE El PAGO.- Todos y cada uno de los giros o desembolsos parciales
+									que se formalicen al amparo de este crédito, se contabilizarán o registrarán como
+									operaciones derivadas de un mismo crédito y además deberán ser pagadas por el DEUDOR
+									según lo establecido para estos contratos, sea, mediante abonos mensuales consecutivos,
+									imputables capital e Intereses, proporcionales al monto y plazo de cada giro.
+									El DEUDOR se compromete a pagar a la ACREEDORA el monto total de las sumas recibidas y
+									que forman parte del crédito revolutivo, los cargos administrativos en que incurra la
+									ACREEDORA, para la gestión y cobro del crédito, intereses corrientes y eventualmente
+									moratorios, los costos en que incurra la ACREEDORA, por las gestiones de cobro
+									administrativo, judicial o por causa de morosidad del DEUDOR, así como cualquier cargo
+									originado por los productos adicionales que ofrece la ACREEDORA y que hayan sido
+									solicitados por el DEUDOR mediante las vías autorizadas para tal efecto. El DEUDOR podrá
+									en cualquier momento cancelar o pagar la totalidad de la deuda o desembolsos recibidos,
+									así como realizar abonos extraordinarios al saldo, sin que por ello sufra penalización
+									alguna. El DEUDOR conviene y acepta que la ACREEDORA se reserve el derecho de la
+									imputación de todos los pagos realizados en cualquier momento por el DEUDOR. Para efectos
+									de la deducción automática de cuotas o saldos vencidos, el DEUDOR autoriza en este acto
+									a que se debiten los montos indicados
+									de la cuenta cliente en ${Moneda}
+									${CtaCliente} en cualquier momento en que la cuenta tenga
+									fondos disponibles.
+								</li>
+								<!------------  8 ------------------->
+								<li>
+									El DEUDOR consiente en suministrar a EL ACREEDOR la información que se le solicite la cual
+									tiene carácter facultativo. A su vez consiente que la misma será recopilada, a efectos de
+									evaluar la solicitud y manifiesta que conoce y que ha sido informado de lo dispuesto por la Ley
+									de Protección de la Persona frente al tratamiento de sus datos personales No 8968 y en tal
+									sentido de la existencia de una base de datos de carácter personal. Que sus datos personales se
+									solicitan y recolectan para los efectos de evaluar las condiciones del presente contrato de
+									préstamo; que los destinatarios de los datos personales compilados son la Acreedora y sus
+									funcionarios, así como los burós de crédito con los cuales trabaja la ACREEDORA; los datos
+									personales serán procesados y analizados para efectos del objeto del presente Contrato, por
+									medios informáticos y que no otorgar o revocar dicha autorización podría conllevar a que la
+									ACREEDORA no otorgue el préstamo solicitado, todo lo cual entiende y acepta el DEUDOR. El
+									DEUDOR autoriza a su vez a los burós de crédito, a compartir la información a terceras personas
+									de conformidad con la ley. Por último, se le informa al DEUDOR de sus derechos acordes el
+									artículo 7 de la citada ley, en cuanto su derecho el acceso de sus datos personales,
+									rectificación o supresión de éstos, como que el responsable de la base de datos, es la
+									ACREEDORA. A su vez, el DEUDOR presta su expreso consentimiento y aceptación, a que se utilicen
+									y/o cedan sus datos para las gestiones de sistemas de llamada automática por voz, correo
+									electrónico, sin intervención humana, o cualquier otro dispositivo para brindar información,
+									así también como cursar invitaciones acerca de servicios con características similares, a
+									través de cualquier medio, incluyendo el envío de mensajes de texto SMS, mensajes de voz IVR,
+									whatsapp, correo electrónico, etc.. El DEUDOR conoce que podrá revocar su consentimiento al
+									tratamiento de sus datos personales en cualquier momento.
+								</li>
+								<!------------  9 ------------------->
+								<li>
+									GARANTÍA DE PAGO. En caso de incumplimiento por parte del deudor responderá por el capital
+									adeudado, los intereses corrientes, cargos, costas personales y procesales de la eventual
+									ejecución
+									y demás responsabilidades pecuniarias, el patrimonio del DEUDOR.
+								</li>
+								<!------------  10 ------------------->
+								<li>
+									IMPUESTOS Y OTROS.- Todos los impuestos, tasas, derechos, gravámenes, retenciones o
+									contribuciones fiscales, que existan o que llegare a imponer en un futuro cualquier autoridad
+									política, administrativa o jurisdiccional de la República de Costa Rica, y que sean derivados
+									del presente contrato, serán asumidos íntegramente por el DEUDOR, quien se obliga a
+									reembolsarlos a la ACREEDORA. En consecuencia, todos los pagos que el DEUDOR debe hacer a la
+									ACREEDORA según esta cláusula, deberé hacerlos pura, simple e incondicionalmente, sin
+									compensación ni reclamación alguna.
+								</li>
+								<!------------  11 ------------------->
+								<li>
+									LA VIGENCIA. La vigencia del presente contrato es un plazo de tres meses,
+									contados a partir del día de hoy, prorrogable automáticamente por periodos iguales salvo que
+									alguna de las partes decida no renovarlo, para lo cual deberá notificar a la contraparte, con
+									al menos treinta (30) días naturales de antelación al vencimiento. El DEUDOR entiende y acepta
+									que deberá de haber cancelado a la ACREEDORA todos los montos adeudados bajo este contrato, al
+									momento de su terminación.
+								</li>
+								<!------------  12 ------------------->
+								<li>
+									EXIGIBILIDAD DE LO ADEUDADO Y RENUNCIAS. La falta oportuna de pago de un solo
+									abono, de los abonos imputables a capital o de una sola de las cuotas mensuales de interés en
+									cualquiera de los giros, o el incumplimiento de cualquiera de las obligaciones aquí contraídas,
+									facultará a la ACREEDORA para tener por vencidas y exigibles en su totalidad las sumas
+									adeudadas y para cobrar coercitivamente en la sede respectiva lo adeudado con motivo de esta
+									facilidad crediticia, representada por todos y cada uno de los giros efectuados, mediante notas
+									de débito al amparo de la misma, intereses, comisiones y penalidades que se hubieren generado.
+									El suscrito DEUDOR autoriza de forma irrevocable, a la ACREEDORA, para reportar su morosidad a
+									las empresas protectoras de créditos, burós de créditos o cualquier entidad que se dedique a
+									supervisar el historial crediticio de las personas, con las que la ACREEDORA tenga convenios,
+									en caso de incumplimiento de sus obligaciones derivadas del presente contrato.
+								</li>
+								<!------------  13 ------------------->
+								<li>
+									RESOLUCIÓN DE CONTROVERSIAS Y LEY APLICABLE. Todas las controversias, diferencias, disputas o
+									reclamos que pudieran derivarse del presente contrato, de su ejecución, incumplimiento,
+									liquidación, interpretación o validez, incluyendo pero sin limitarse al incumplimiento del
+									DEUDOR, se resolverán en la jurisdicción ordinaria; el conflicto se dilucidará con la ley
+									sustantiva de Costa Rica.
+								</li>
+								<!------------  14 ------------------->
+								<li>
+									CESIÓN DEL CRÉDITO. El DEUDOR acepta expresamente que el derecho de crédito que
+									tiene la ACREEDORA sobre este préstamo podrá ser negociado y cedido a una tercera persona,
+									física y/o jurídica, sin que para ello se requiera de su autorización. El DEUDOR no podrá ceder
+									el presente contrato de préstamo ni los derechos y obligaciones bajo el mismo, a favor de
+									terceras personas físicas y/o jurídicas, sin el consentimiento previo y por escrito de la
+									acreedora.
+								</li>
+								<!------------  15 ------------------->
+								<li>
+									DE LA CONSERVACIÓN DEL CONTRATO. Las partes acuerdan que la declaratoria de
+									nulidad de alguna cláusula del presente contrato, no anulará la totalidad del mismo, siendo
+									posible la aplicación del resto de las disposiciones contractuales.
+									<p>
+										En fe de lo anterior firmamos en la ciudad de San José, en dos tantos del mismo tenor, el
+										${FechaHoy}.
+									</p>
+								</li>
+							</ul>
+							<ul style="list-style-type:none;">
+								<li>
+									<p>
+										El Deudor ……………………………………………
+									</p>
+								</li>
+								<li>
+									<p>
+										La Acreedora ……………………………………………
+									</p>
+								</li>
+								<li>
+									<p>
+										Cédula ……………………………………………
+									</p>
+								</li>
+							</ul>
+
+							<div id="pagare">
+								<h5 class="text-center">Pagaré</h5>
+								<div>
+									<p>
+										Mediante el presente PAGARE NO A LA ORDEN, se hace constar que ${Nombre}, cédula número
+										${Identificacion} (EL DEUDOR); promete pagar pura, simple e incondicionalmente a favor de
+										PLATAFORMA DE ENTRETENIMIENTO TWO FTV LTDA., con cédula jurídica número 3-102-737931 (LA
+										ACREEDORA) la suma de (${MontoProductoPagare}) ${MontoProductoLetrasPagare} ${Moneda},
+										mediante (${CantidadCuotas}) ${CantidadCuotasLetras} cuotas ${Frecuencia2}, fijas y
+										consecutivas de ${Moneda} ${CuotaenLetras} (¢${Cuota}) cada una, las cuales cubren
+										amortización a capital e intereses corrientes, debiendo pagar la primera cuota el día
+										${FechaPrimerPagoLetras} ${PagoProximasCuotas}. Los pagos deberán realizarse en SAN JOSE-
+										SAN JOSE, HOSPITAL, CALLE TREINTA Y OCHO, EDIFICIO CENTRO COLON, TERCER PISO, MEZZANINE, o
+										por lo medios que la Acreedora indique. El no pago en tiempo y forma de cualquiera de las
+										cuotas, hará vencida y exigible toda la obligación, sin trámite previo. La presente
+										obligación genera intereses corrientes del ${InteresLetras} por ciento diario
+										(${Interes}%) sobre el saldo de capital adeudado. Los intereses se acumularán día a día y
+										se calcularán sobre la base de un año de trescientos sesenta y cinco días. En caso de mora,
+										la obligación devengará intereses moratorios al treinta por ciento sobre la tasa pactada
+										para los intereses Corrientes. El Deudor renuncia a su domicilio y a los requerimientos de
+										pago. Este título se rige por el Código de Comercio de la República de Costa Rica y se
+										suscribe en San José, el día ${FechaHoy}.
+
+										Firma Deudor:
+
+										Nombre Completo:
+
+										Número de Cédula:
+
+
+										ORDEN DE AUTORIZACIÓN DE DÉBITO PERSONAS FÍSICAS
+										Escriba en cada casilla, utilizando letra imprenta según la muestra. Para facilitar el
+										proceso de
+										captura automatizada de la información, no tocar los bordes de las casillas Formulario No:
+										Código del Cliente: ______________________ YO ${Nombre} Con el
+										número de identificación: ${Identificacion} autorizo a PLATAFORMA DE ENTRETENIMIENTO TWO
+										FTV SOCIEDAD DE RESPONSABILIDAD LIMITADA Número de Cédula: 3 - 102 – 737931 A debitar de mi
+										cuenta cliente o IBAN número: ${CtaCliente}
+
+
+										Cuenta que se encuentra en la siguiente moneda X CRC USD, hasta un monto máximo de
+										${MontoProductoPagare} colones al mes por "CÓDIGO"
+										Además solicito se me notifique al email: ${Correo}.es
+										También se me puede contactar al teléfono: ${TelefonoCel}
+									</p>
+
+									<div class="line"></div>
+									<p>
+										Firma y Número de Cédula, Fecha
+									</p>
+									<p>
+										El suscrito, declara bajo la fe de juramento que, toda la información que a proporcionado
+										en el presente formulario es cierta, exacta, verdadera, no contiene ningunafalsedad o
+										inexactitud y entiendo y acepto los propósitos para los cuales ha sido proporcionada.
+										Asimismo, entiendo y acepto que desde el sistema PAYBAC de BancoBAC San José, S.A., puedo
+										consultar todos los débitos que se realizarán con base en la presente autorización.
+
+									</p>
+
+								</div>
+
+							</div>
+						</div><!-- .terminos-condiciones -->
+						<div class="form-row">
+							<div class="col form-group">
+								<button id="continuar-terminos" type="button" class="form-control terminos-continuar-declino">
+									<i class="fa fa-times"
+									   aria-hidden="true"></i> Declino
+								</button>
+							</div>
+							<div class="col form-group">
+								<button onclick="aceptarTerminosClick()" id="continuar-terminos" type="button" class="form-control terminos-continuar-acepto">
+									<i class="fa fa-check"
+									   aria-hidden="true"></i> Acepto
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="col-md-5 center_div landscape hide" id="paso10">
+					<small>
+						Podés girar la pantalla para tener una mayor superficie de firma
+					</small>
+					<form id="solicitud-firma" name="solicitud">
+						<div class="form-row">
+							<div class="col form-group">
+								<label class="label-firma" style="text-align: left;">
+									Favor ingresar tu firma como aparece en tu
+									cédula
+								</label>
+								<canvas id="signature-pad" class="form-control firma"></canvas>
+								<div class="buttons-wrap">
+									<div>
+										<button type="button" class="btn sign-button" id="clear">
+											<i class="fa fa-undo" style="color:#ab1f20"></i>
+											Corregir
+										</button>
+									</div>
+									<div>
+										<button onclick="firmaTerminarClick();" id='btn-firma-continuar' type="button" class="btn sign-button">Continuar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="porfavor_espere espere-firma hide col-md-12">
+							<i class="fa fa-spinner fa-spin" style="font-size:2em"></i>
+							<p>Por favor espere....</p>
+						</div>
+					</form>
+				</div>
+				<div class="col-md-5 center_div landscape hide" id="paso10">
+					<small>
+						Podés girar la pantalla para tener una mayor superficie de firma
+					</small>
+					<form id="solicitud-firma" name="solicitud">
+						<div class="form-row">
+							<div class="col form-group">
+								<label class="label-firma" style="text-align: left;">
+									Favor ingresar tu firma como aparece en tu
+									cédula
+								</label>
+								<canvas id="signature-pad" class="form-control firma"></canvas>
+								<div class="buttons-wrap">
+									<div>
+										<button type="button" class="btn sign-button" id="clear">
+											<i class="fa fa-undo" style="color:#ab1f20"></i>
+											Corregir
+										</button>
+									</div>
+									<div>
+										<button onclick="firmaTerminarClick();" id='btn-firma-continuar' type="button" class="btn sign-button">Continuar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="porfavor_espere espere-firma hide col-md-12">
+							<i class="fa fa-spinner fa-spin" style="font-size:2em"></i>
+							<p>Por favor espere....</p>
+						</div>
+					</form>
+				</div>
+			</div><!-- #steps-wrap -->
+		</div>
+	</main>
+	<!-- Modal -->
+	<div class="modal fade" id="modal-consentimiento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		 aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel" style="color:black;">
+						Términos y condiciones
+					</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span style="font-size: 1.5rem" aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<h4>
+						CONSENTIMIENTO INFORMADO (LEYN* 8968)
+					</h4>
+					<div class="pb-3">
+						Quien suscribe el presente consentimiento Informado, (<span class='span-nombre-completo'></span>),
+						portador de la cédula de identidad número (<span class="span-cedula"></span>), mayor de edad y
+						capaz, expresamente autorizo a la
+						entidad PLATAFORMA DE ENTRETENIMIENTO TWO FTV LIMITAD , cédula de persona Jurídica N* 3-102-737931,
+						(en
+						adelante LA EMPRESA) a que recopile, procese, transfiera, comparta y de tratamiento a la
+						información de
+						datos personales de acceso irrestricto y/o de acceso restringido, incluido mi historial crediticio
+						y la
+						mora del pago de todo y cualquier servicio, para análisis presentes y futuros, para lo cual acepto
+						y
+						manifiesto tener pleno conocimiento que los datos brindados serán incluidos en una base de datos
+						cuyo
+						titular y/o administrador es LA EMPRESA, ello por ser un requisito para continuar con el proceso de
+						solicitud de crédito con LA EMPRESA.
+					</div>
+
+					<div class="pb-3">
+						Esta base de datos podrá ser usada por LA EMPRESA, sus colaboradores, subsidiarias, y empresas
+						relacionadas, adicionalmente, LA EMPRESA queda autorizado para transferir dicha información, sin
+						requerir ningún consentimiento adicional, así como para almacenarla.
+					</div>
+
+					<div class="pb-3">
+						Asi mismo doy mi expreso consentimiento y aceptación, a que se cedan a terceros socios comerciales
+						de
+						la Empresa, los derechos de las base de datos generadas, para las gestiones de sistemas de llamada
+						automática por voz, fax, correo electrónico, con o sin intervención humana, o cualquier otro
+						dispositivo para brindar información para la venta directa de productos o servicios con
+						características
+						similares, sin necesidad de notificación previa.
+					</div>
+					<div class="pb-3">
+						Para ejercer los derechos de acceso, rectificación, supresión y revocación, así como cualquier otro
+						derecho establecido en la Ley No. 8968, Ley Protección de la Persona frente al Tratamiento de sus
+						Datos
+						Personales, se puede realizar en SAN JOSE- SAN JOSE CALLE TREINTA Y OCHO, EDIFICIO CENTRO COLON,
+						TERCER
+						PISO, MEZZANINE.
+					</div>
+					<div class="pb-3">
+						Por todo ello doy fe que conozco y acepto según el art. 5 de la Ley N* 8968: de la existencia de
+						una
+						base de datos manejada por la Empresa; de los destinatarios de la información brindada, así como de
+						quienes podrán consultarla; del carácter obligatorio o facultativa de sus respuestas a las
+						preguntas
+						que se le formulen durante la recolección de los datos; del tratamiento que se dará a los datos
+						solicitados; de la posibilidad de ejercer los derechos que la ley N* 8968 me asisten; De la
+						identidad y
+						dirección del responsable de la administración de la base de datos.
+					</div>
+					<p>
+						San José,<span id="fecha-consentimiento"></span>
+					</p>
+
+					<p>
+						Firma
+					</p>
+
+					<p>
+						Nombre: <span class='span-nombre-completo'></span>
+
+					</p>
+
+					<p>
+						Cedula: <span class='span-cedula'></span>
+					</p>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modal-pin" role="dialog">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" style="color:black">Verificación</h4>
+				</div>
+				<div class="modal-body">
+					<div class="col form-group">
+						<label id="modal-verificacion-text">Digite el pin enviado a tu celular</label>
+						<input type="number" pattern="\d*" class="form-control" id="celu-pin" placeholder="digitos del pin">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button onclick="modalPinReenviarClick()" type="button" class="btn-default modal-pin-reenviar hide">Reenviar pin</button>
+					<button onclick="modalPinSiguienteClick(this)" type="button" class="btn-default modal-pin-siguiente">Confirmar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="display: none">
+		<div class="center_div landscape hide">
+			<h1>
+				Solicitud activa
+			</h1>
+		</div>
+		<div id='solicitud-activa-img-wrap'>
+			<img src='assets/img/solicitud-aprobada-activa.png'>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+			crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+			crossorigin="anonymous"></script>
+
+	<script src="assets/js/jquery.easing.min.js"></script>
+	<script src="assets/js/mobile-detect.min.js"></script>
+	<script src="assets/js/sign_pad.js" async></script> <!-- firma -->
+	<script src="assets/js/bootstrap-slider.js?v=1" async></script>
+	<script src="assets/js/jquery.inputmask.bundle.js" async></script> <!-- mascaras para los bancos -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" async></script>
+	<script src="assets/js/message.js"></script>
+	<script>
+		(async () => {
+			let randVal = 1;// return the same in production
+			if (env == 'dev') {
+				console.log('Ambiente de desarrollo');
+				randVal = Math.floor(Math.random() * 10000000);
+			}
+			for await (let url of [
+				`assets/js/calcu.js?v=${randVal}`,
+				`assets/js/metodos_api.js?v=${randVal}`,
+				`assets/js/validar.js?v=${randVal}`]) {
+				utils.loadJS({
+					url, callback: (val) => {
+						console.log(url + ' cargado');
+					}
+				});
+			}
+		})();
+	</script>
+	<!--Google analitycs-->
+	<script>
+		'use strict';
+		if (env == 'prd') {
+			utils.loadJS({
+				url: 'https://www.googletagmanager.com/gtag/js?id=UA-131836164-1', callback: () => {
+					console.info('Codigo de google analytics leido')
+					window.dataLayer = window.dataLayer || [];
+
+					function gtag() {
+						dataLayer.push(arguments);
+					}
+					gtag('js', new Date());
+
+					gtag('config', 'UA-131836164-1');
+				}
+			});
+		}
+	</script>
+	<!--Facebook pixel-->
+	<script>
+		if (env == 'prd') {
+			! function (f, b, e, v, n, t, s) {
+				if (f.fbq)
+					return;
+				n = f.fbq = function () {
+					n.callMethod ?
+						n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+				};
+				if (!f._fbq)
+					f._fbq = n;
+				n.push = n;
+				n.loaded = !0;
+				n.version = '2.0';
+				n.queue = [];
+				t = b.createElement(e);
+				t.async = !0;
+				t.src = v;
+				s = b.getElementsByTagName(e)[0];
+				s.parentNode.insertBefore(t, s)
+			}(window, document, 'script',
+				'https://connect.facebook.net/en_US/fbevents.js');
+			fbq('init', '1961337630863600');
+			fbq('track', 'PageView');
+			fbq('track', 'CompleteRegistration');
+		}
+	</script>
+</body>
+
+</html>

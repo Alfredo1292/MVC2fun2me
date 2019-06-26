@@ -16,12 +16,26 @@
                 });
             </script>
 
+<<<<<<< HEAD
+=======
+                <title>Signin Template for Bootstrap</title>*@
+            <!-- Bootstrap core CSS -->
+            @*<link href="~/Content/bootstrap-4.0.0/dist/css/bootstrap.min.css" rel="stylesheet">*@
+        </head>
+		<form>
+			<script type="text/javascript">
+				$(document).ready(function () {
+					$('input[type="text"]').val('');
+				});
+			</script>
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 
             <div class="input-group">
                 @*@Html.LabelFor(model => model.nombre)*@
                 @Html.LabelFor(model => model.nombre, new { @class = "input-group-addon" })
                 @Html.TextBox("txtnombre", "", new { @class = "form-control input-user", @placeholder = "nombre", required = "required" })
 
+<<<<<<< HEAD
             </div>
             <div style="height:5px">
             </div>
@@ -79,6 +93,56 @@
                 <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="Crear();">Crear</button>
             </div>
         </form>
+=======
+			<div class="input-group">
+				@*@Html.LabelFor(model => model.nombre)*@
+				@Html.LabelFor(model => model.nombre, new { @class = "input-group-addon", style = "width: 135px;" })
+				@Html.TextBox("txtnombre", "", new { @class = "form-control", @placeholder = "nombre", required = "required", style = "width: 300px;" })
+
+			</div>
+			<div style="height:5px">
+			</div>
+			<div class="input-group">
+				@Html.LabelFor(model => model.cod_agente, new { @class = "input-group-addon", style = "width: 135px;" })
+				@Html.TextBox("txtcod_agente", "", new { @class = "form-control", @placeholder = "Cédula", required = "required", style = "width: 300px;" })
+			</div>
+			<div style="height:5px">
+			</div>
+			<div class="input-group">
+				@Html.LabelFor(model => model.correo, new { @class = "input-group-addon", style = "width: 135px;" })
+				@Html.TextBox("txtCorreo", "", new { @class = "form-control", @placeholder = "name@example.com", required = "required", style = "width: 300px;" })
+				@*	<label for="exampleFormControlInput1">Email address</label>
+			<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">*@
+			</div>
+			<div style="height:5px">
+			</div>
+			<div class="input-group">
+				@Html.LabelFor(model => model.ROLID, new { @class = "input-group-addon", style = "width: 135px;" })
+				@Html.DropDownListFor(model => model.ROLID, new SelectList(Model.ListRoles, "ID", "ROLES"), "-- Seleccione --", htmlAttributes: new { @class = "form-control", id = "ddlRoles", style = "width: 300px;" })
+				@Html.ValidationMessageFor(model => model.ROLID, "", new { @class = "text-danger" })
+				@*@Html.TextBox("ROLID", "", new { @class = "form-control", @placeholder = "ROLID", required = "required" })*@
+			</div>
+			<div style="height:5px">
+			</div>
+			<div class="input-group">
+				@Html.LabelFor(model => model.pass, new { @class = "input-group-addon", style = "width: 135px;" })
+				@Html.TextBox("txtpass", "", new { @class = "form-control", @placeholder = "Password", required = "required", style = "width: 300px;" })
+			</div>
+			<div style="height:5px">
+			</div>
+			<div class="input-group">
+				@Html.LabelFor(model => model.ConfirmPassword, new { @class = "input-group-addon" })
+				@Html.TextBox("txtConfirmPassword", "", new { @class = "form-control", @placeholder = "ConfirmPassword", required = "required" })
+			</div>
+			<div style="height:5px">
+			</div>
+			<div class="form-label-group">
+				<div class="form-group col-md-2">
+					<button type="button" class="btn btn-lg btn-primary btn-block" data-dismiss="modal" onclick="Crear();">Crear</button>
+				</div>
+			</div>
+		</form>
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     </fieldset>
 }
 @section Scripts {

@@ -132,6 +132,7 @@ namespace TwoFunTwoMeFintech.Controllers
 
 				ManagerUser mang = new ManagerUser();
 				dto_login.ListRoles = new List<Roles>();
+<<<<<<< HEAD
                 dto_login.ListaAgencias = new List<UserAgencias>();
 				dto_login.pass = TwoFunTwoMe_DataAccess.Utility.Encrypt(dto_login.pass);
 
@@ -151,6 +152,24 @@ namespace TwoFunTwoMeFintech.Controllers
 		//
 		// GET: /User/Edit/5
 
+=======
+				dto_login.pass = Cryption.Encrypt(dto_login.pass, ConfigurationManager.AppSettings["claveEncriptacion"]);
+
+				mang.Registrar(dto_login);
+				dto_login = Limpiar();
+
+				var ret = mang.GetUserRoles();
+				if (ret.Any())
+				{
+					dto_login.ListRoles = ret;
+				}
+			}
+			return Json(dto_login);
+		}
+		//
+		// GET: /User/Edit/5
+
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 		public ActionResult Edit(string id)
         {
             ManagerUser mang = new ManagerUser();

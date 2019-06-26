@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using _2Fun2MeDAO;
 using Microsoft.Office.Interop.Word;
 using System;
@@ -17,6 +18,17 @@ using TwoFunTwoMeFintech.Models.DTO;
 namespace TwoFunTwoMeFintech.Controllers
 {
     [Authorize]
+=======
+﻿using System.Data;
+using System.Web.Mvc;
+using TwoFunTwoMe.Models.Manager;
+using TwoFunTwoMeFintech.Models;
+using TwoFunTwoMeFintech.Models.DTO;
+using System.Linq;
+
+namespace TwoFunTwoMeFintech.Controllers
+{
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     public class CobrosController : Controller
     {
         private TwoFunTwoMeFintechContext db = new TwoFunTwoMeFintechContext();
@@ -28,10 +40,13 @@ namespace TwoFunTwoMeFintech.Controllers
         {
             return View();
         }
+<<<<<<< HEAD
         public ActionResult ConsultaCobros()
         {
             return View();
         }
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 
 
         public ActionResult BuscarCola()
@@ -64,6 +79,7 @@ namespace TwoFunTwoMeFintech.Controllers
 
         public ActionResult BuscarCliente(BucketCobros bucketCobros)
         {
+<<<<<<< HEAD
             bool? resultado = null;
             string temp = "";
 
@@ -94,6 +110,14 @@ namespace TwoFunTwoMeFintech.Controllers
             }
             bucketCobros.cod_agente = Session["agente"].ToString();
             var dto_ret = manage.ObtenerEncabezado(bucketCobros);
+=======
+            ManagerUser manage = new ManagerUser();
+
+            if (Session["agente"] == null)
+                return RedirectToAction("LogOff", "Login");
+
+            var dto_ret = manage.ObtenerEncabezado(bucketCobros).FirstOrDefault();
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
             return Json(dto_ret);
         }
 
@@ -106,6 +130,7 @@ namespace TwoFunTwoMeFintech.Controllers
                 return RedirectToAction("LogOff", "Login");
 
             bucketCobros.AgenteAsignado = Session["agente"].ToString();
+<<<<<<< HEAD
             var ret = manage.ActualizaColaAutomaticaCobros(bucketCobros);
 
             return Json(ret);
@@ -122,6 +147,11 @@ namespace TwoFunTwoMeFintech.Controllers
             var ret = manage.ActualizaReprogramacion(reprog);
 
             return Json(ret);
+=======
+            manage.ActualizaColaAutomaticaCobros(bucketCobros);
+
+            return Json(new { Resultado = true });
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
         }
 
 
@@ -152,6 +182,7 @@ namespace TwoFunTwoMeFintech.Controllers
 
         public ActionResult GuardarGestionCobro(GestionCobro cobro)
         {
+<<<<<<< HEAD
             Tab_ConfigSys dto_Config = new Tab_ConfigSys();
             ManagerUser manage = new ManagerUser();
             List<Tab_ConfigSys> CONF = new List<Tab_ConfigSys>();
@@ -161,10 +192,15 @@ namespace TwoFunTwoMeFintech.Controllers
             dto_Config.llave_Config3 = "COBROS";
             dto_Config.llave_Config4 = "MONTO";
             var dto_interval = manage.ConsultaConfMontoPP(dto_Config);
+=======
+            ManagerUser manage = new ManagerUser();
+
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
             if (Session["agente"] == null)
                 return RedirectToAction("LogOff", "Login");
 
             cobro.UsrModifica = Session["agente"].ToString();
+<<<<<<< HEAD
             int DifDias = 0;
             try
             {
@@ -209,6 +245,20 @@ namespace TwoFunTwoMeFintech.Controllers
         }
 
         #region Mantenimiento de Contactos
+=======
+            try
+            {
+                manage.GuardaCobro(cobro);
+                return Json(new { Resultado = true });
+            }
+            catch
+            {
+                return Json(new { Resultado = false });
+            }
+        }
+
+
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 
         public ActionResult Contactos(contacto contac)
 
@@ -217,7 +267,10 @@ namespace TwoFunTwoMeFintech.Controllers
 
             ManagerUser manage = new ManagerUser();
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
             if (Session["agente"] == null)
                 return RedirectToAction("LogOff", "Login");
 
@@ -225,6 +278,7 @@ namespace TwoFunTwoMeFintech.Controllers
 
             return Json(ret);
         }
+<<<<<<< HEAD
         public ActionResult actualizarCalificacion(contacto data) {
             try
             {
@@ -320,6 +374,8 @@ namespace TwoFunTwoMeFintech.Controllers
 
             return Json(ret);
         }
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 
         public ActionResult HistoricoGestiones(Tabla_Accion tabla_Accion)
 
@@ -363,6 +419,7 @@ namespace TwoFunTwoMeFintech.Controllers
 
             return Json(ret);
         }
+<<<<<<< HEAD
         public ActionResult HistoricoPlanPagos(PlanPlagos tabla_Accion)
         {
             if (tabla_Accion.IdCredito == null) return View();
@@ -376,6 +433,8 @@ namespace TwoFunTwoMeFintech.Controllers
 
             return Json(ret);
         }
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 
         public ActionResult conultar_saldo_monto_pendiente(Tabla_Accion tabla_Accion)
         {
@@ -461,6 +520,7 @@ namespace TwoFunTwoMeFintech.Controllers
 
             return Json(ret);
         }
+<<<<<<< HEAD
 
         public ActionResult calculaCuota(Tabla_Accion mora)
         {
@@ -503,6 +563,8 @@ namespace TwoFunTwoMeFintech.Controllers
             return Json(ret);
         }
 
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
         //usp_actualiza_cola_cobros_automaticos
 
         //
@@ -603,6 +665,7 @@ namespace TwoFunTwoMeFintech.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+<<<<<<< HEAD
 
         public ActionResult LlamadaAutomaticaIniciar(agente agente)
         {
@@ -1084,4 +1147,7 @@ namespace TwoFunTwoMeFintech.Controllers
         }
     }
 
+=======
+    }
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 }

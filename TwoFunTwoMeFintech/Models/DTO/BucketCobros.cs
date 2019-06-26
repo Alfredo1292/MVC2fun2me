@@ -9,9 +9,13 @@ namespace TwoFunTwoMeFintech.Models.DTO
 
         public int? DiasMora { get; set; }
 
+<<<<<<< HEAD
 		public string Nombre { get; set; }
 		
 		public decimal? TotalMora { get; set; }
+=======
+        public decimal? TotalMora { get; set; }
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 
         public int? IdPersona { get; set; }
 
@@ -33,6 +37,7 @@ namespace TwoFunTwoMeFintech.Models.DTO
 
         public int? Estado { get; set; }
 
+<<<<<<< HEAD
         public int? Bandera { get; set; }
 
 
@@ -40,6 +45,11 @@ namespace TwoFunTwoMeFintech.Models.DTO
 
         public string AgenteAsignado { get; set; }
         public string ResultadoSig { get; set; }
+=======
+        public int? BucketNuevo { get; set; }
+
+        public string AgenteAsignado { get; set; }
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
 
         public int? Asignado { get; set; }
 
@@ -49,6 +59,7 @@ namespace TwoFunTwoMeFintech.Models.DTO
 
         public string Identificacion { get; set; }
        
+<<<<<<< HEAD
         public string TipoConsulta { get; set; }
     }
 
@@ -63,6 +74,8 @@ namespace TwoFunTwoMeFintech.Models.DTO
         public string AgenteAsignado { get; set; }
  
 
+=======
+>>>>>>> 02077533187183e7a76adbfd15db5d101424f851
     }
 
 }
